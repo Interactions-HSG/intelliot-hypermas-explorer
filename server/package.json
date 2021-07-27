@@ -1,0 +1,15 @@
+{
+  "name": "C-AVL-Explorer",
+  "version": "1.0.0",
+  "description": "AVL Modules Explorer Web Frontend",
+  "author": "Simon Mayer <simon.mayer@pro2future.at>",
+  "private": true,
+  "dependencies": {
+    "body-parser": "*",
+    "connect": "^3.2.0",
+    "express": "^4.15.3",
+    "handlebars": "^4.7.7",
+    "less": "*",
+    "request": "*"
+  }
+}

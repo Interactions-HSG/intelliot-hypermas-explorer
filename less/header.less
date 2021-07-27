@@ -1,0 +1,184 @@
+// Menu layouts and styles
+// (c) Ralf Mosshammer, Siemens AG, 2015
+// (c) Samuel Zweifel / ETH Zurich
+// (c) Simon Mayer / Pro2Future GmbH, 2016
+
+@import "base";
+@import "color";
+
+@header_height: 80px;
+@impressum_height: 40px;
+@logo-area-height: 80px;
+
+#header {
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  width: 100%;
+  height: @header_height * 1px;
+  font-size: 14pt;
+  color: @c_interactions_snow;
+  background: @c_interactions_blue;
+  z-index: 9998;
+  box-shadow: 0px 4px 40px -0px rgba(0, 0, 0, 0.5);
+  .debug-border();
+  .debug-background();
+}
+
+#container {
+  position: absolute;
+  overflow: auto;
+  overflow-y: visible;
+  padding: 20px;
+  top: @header_height;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  display: flex;
+  flex-flow: column;
+  height: calc(~"100vh - @header_height");
+  background: @c_interactions_snow;
+}
+
+#loading {
+  position: absolute;
+  top: @header_height + 100px;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  width: 400px;
+  margin: auto;
+  display: relative;
+  align: center;
+  vertical-align: middle;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  animation: pulse-logo 1s ease-in-out infinite alternate;
+  @keyframes pulse-logo {
+    from {
+      opacity: 0.3;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+}
+
+#loading p {
+  color: @c_interactions_blue;
+  align: center;
+}
+
+#loading-logo {
+  position: relative;
+  width: 100%;
+}
+
+#impressum {
+  display: inline-block;
+  position: absolute;
+  text-align: right;
+  top: ((@header_height - @impressum_height) / 2);
+  height: @impressum_height;
+  right: 280px;
+  font-size: @font-size--impressum;
+  font-weight: normal;
+  color: @c_interactions_snow;
+  overflow: hidden;
+  margin: auto;
+}
+
+#spacer {
+  display: inline-block;
+  position: relative;
+  width: 40px;
+  overflow: hidden;
+  margin: auto;
+}
+
+div.logo {
+  display: inline-block;
+  position: absolute;
+  top: 10px;
+  left: 30px;
+  height: @header_height - 20px;
+  color: @c_interactions_blue;
+}
+
+div.logo img {
+  height: @logo-area-height - 10px;
+}
+
+div.logo-right {
+  display: block;
+  position: absolute;
+  top: 20px;
+  right: 30px;
+  height: @header_height - 20px;
+  color: @c_interactions_blue;
+}
+
+div.logo-right img {
+  height: @logo-area-height - 40px;
+}
+
+div.back-button {
+  display: inline-block;
+  position: absolute;
+  padding: 10px;
+  left: 0px;
+  top: 0px;
+  height: 40px;
+  width: 50px;
+  color: @c_interactions_blue;
+}
+
+div.button-active {
+  color: @c_interactions_snow;
+  cursor: pointer;
+}
+
+div.button-active:hover {
+  color: @c_interactions_gray;
+}
+
+i.material-icons {
+  font-size: (@header_height - 20px);
+}
+
+#settings {
+  position: relative;
+  top: ((@header_height - (@font-size--impressum)) / 2);
+  font-size: @font-size--impressum;
+  height: @impressum_height + 20px;
+  left: 350px;
+  width: auto;
+  margin: auto;
+  outline: 0px;
+}
+
+#settings select {
+  background: transparent;
+  color: @c_interactions_snow;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+#settings select option {
+  background-color: @c_interactions_blue;
+}
+
+#fetch-artifacts-text {
+   position: absolute;
+   background: transparent;
+   top: -20px;
+   color: @c_interactions_snow;
+   cursor: pointer;
+}
+
+#header-options-container {
+  position: absolute;
+  height: 100%;
+  right: 150px;
+}

@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+
+  <title>Hypermedia MAS Explorer | IntellIoT</title>
+
+  <link rel="stylesheet" type="text/css" href="./css/header.css">
+  <link rel="stylesheet" type="text/css" href="./css/dashboard.css">
+  <link rel="stylesheet" type="text/css" href="./css/material.min.css">
+</head>
+
+<body style='overflow: auto;'>
+
+  <!-- This is the loader -->
+  <div id="loading">
+    <img id="loading-logo" src="./img/interactions-logo-reduced.png" alt="Interactions Research Group, University of St.Gallen"/>
+    <br/>
+    <p>Loading...</p>
+  </div>
+
+  <!-- This is the top bar -->
+  <div id="header">
+    <div class="logo"><img src="./img/interactions-logo-pure-white.png" alt="Interactions Research Group, University of St.Gallen" class="logo"/></div>
+    <div class="logo-right"><img src="./img/IntellIoT-Logo.png" alt="IntellIoT Research Project" class="logo"/></div>
+
+    <div id="settings">
+      <div id="fetch-artifacts-text">Fetch Artifacts from</div>
+      <select id="workspace-chooser"><option value="simulation">infrastructure-running-?</option></select>
+      <!-- <div id="back-button" class="back-button"><i class="material-icons">skip_previous</i></div> -->
+    </div>
+
+    <div id="header-options-container" class="hidden">
+
+    </div>
+    <div id="spacer"></div>
+    <div id="impressum">
+      <a href="https://interactions.ics.unisg.ch" target="_new">Interactions Research Group, University of St.Gallen</a><br/>
+      <a href="http://intelliot.eu/" target="_new">IntellIoT Project (EU H2020 #957218)</a></div>
+  </div>
+
+  <!-- This is the container that hosts all other interface elements -->
+  <div id="container">
+    <div id="artifacts-scroll-container" class="cards-scroll-container-level-1">
+      <!-- Artifacts Placeholder -->
+    </div>
+
+    <div id="affordances-scroll-container" class="cards-scroll-container-level-2">
+      <!-- Affordances Placeholder -->
+    </div>
+
+    <div id="responses-container">
+      <!-- Responses Placeholder -->
+    </div>
+  </div>
+
+  <!-- Script imports and startup call -->
+
+  <!-- Libraries/self-hosted -->
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/handlebars@latest/dist/handlebars.runtime.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@node-wot/browser-bundle@latest/dist/wot-bundle.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/socket.io@3.1.2/client-dist/socket.io.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/rdflib@2.2.6/dist/rdflib.min.js"></script>
+
+  <!-- Precompiled handlebars templates -->
+  <script src='./templates/templates.js'></script>
+
+  <!-- Custom scripts -->
+  <script src="js/log.js"></script>
+  <script src="js/yggdrasilInterface.js"></script>
+  <script src="js/thingDescriptionLib.js"></script>
+  <script src="js/dashboardContent.js"></script>
+  <script src="js/dashboard.js"></script>
+
+  <!-- run initialization as soon as the pages become safe to to manipulate -->
+  <script type="text/javascript">
+  $(document).ready(dashboard.init);
+  </script>
+</body>
+
+</html>

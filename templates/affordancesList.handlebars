@@ -1,0 +1,41 @@
+{{#if currentAffordances}}
+<div class="scroll-container-spacer"><div class="dashcard-spacer">
+  <div class="dashcard-header variable_style">Affordances</div>
+</div></div>
+
+<div class="inside-tasks-scroller">
+
+{{#each currentAffordances}}
+{{#if ../animate}}
+<div id="{{@key}}" element="artifactInstance" class="dashcard" style="visibility: hidden; animation: slideFromTop 0.5s forwards; -webkit-animation: slideFromTop 0.5s forwards; animation-delay: {{half @index}}s; -webkit-animation-delay: {{half @index}}s;">
+{{else}}
+<div id="{{@key}}" element="artifactInstance" class="dashcard" style="left: 0px;">
+{{/if}}
+
+  <div id="tasks-header" class="dashcard-header variable_style">{{affordanceTitle}}
+    <div id="follow-affordance-button" class="inlineButton">Go!</div>
+  </div>
+
+  <div class="tooltiptext">{{affordanceDescription}}</div>
+
+    {{#if hasInputSchema}}
+    <div id="tasks-content" class="dashcard-scroll-container">
+
+      {{#each inputSchema.properties}}
+        <input class="event-information-small" type="text" id="{{../affordanceNode/value}}" placeholder="{{propertyName}} ({{schemaType}})"/>
+      {{/each}}
+
+      <!--
+      {{#if inputSchema.requiredProperties}}
+      <span class="event-information-small">Required: <b>{{inputSchema.requiredProperties}}</b></span>
+      {{/if}}
+      -->
+    </div>
+    {{/if}}
+  </div>
+{{/each}}
+</div>
+
+{{else}}
+<div class="scroll-container-spacer"><div class="dashcard-spacer"><div class="dashcard-header variable_style">No Affordances</div></div></div>
+{{/if}}

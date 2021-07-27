@@ -1,0 +1,107 @@
+// Basic definitions to be imported in all main less files
+// Interactions Research Group, based on work by Simon Mayer, Ralf Mosshammer, Samuel Zweifel
+
+// Stuff for debugging
+
+@debug: false;
+
+@font-size--descriptive-text: 12px;
+@font-size--badge-headers   : 14px;
+@font-size--impressum : 12px;
+@font-size--scrollelement-name : 14px;
+@font-size--inspector-text-fullsize : 14px;
+@font-size--inspector-text-small : 10px;
+
+p {
+    font-size: @font-size--descriptive-text;
+}
+
+#debug-text {
+    position: fixed;
+    top: 10px;
+    left: 10px;
+    z-index: 9999;
+    width: 300px;
+    height: 100px;
+    border: 1px solid #ccc;
+    background: rgba(255, 255, 255, 0.8);
+    color: #000;
+    padding: 10px;
+}
+
+#debug-control {
+    position: fixed;
+    top: 10px;
+    left: 400px;
+    z-index: 9999;
+    width: 300px;
+    height: 100px;
+    border: 1px solid #ccc;
+    background: rgba(255, 255, 255, 0.8);
+    color: #000;
+    padding: 10px;
+}
+
+.debug-border when (@debug = true) {
+    border: 1px dashed #ccc;
+}
+
+.debug-background when (@debug = true) {
+    background: rgba(0, 0, 0, 1)
+}
+
+// Effects
+
+.keyframes(@name; @arguments) {
+    @-moz-keyframes @name { @arguments(); }
+    @-webkit-keyframes @name { @arguments(); }
+    @keyframes @name { @arguments(); }
+}
+
+.animation(@arguments) {
+    -webkit-animation: @arguments;
+    -moz-animation: @arguments;
+    animation: @arguments;
+}
+
+.transition(@arguments) {
+    -webkit-transition: @arguments;
+    -moz-transition: @arguments;
+    transition: @arguments;
+}
+
+.pulse-gray {
+
+    .keyframes(pulse-gray; {
+        0%      { background-color: none; }
+        50%     { background-color: @c_interactions_blue_dark; }
+        100%    { background-color: none; }
+    });
+
+    .animation(pulse-gray 2s infinite)
+
+}
+
+.pulse-blue {
+
+    .keyframes(pulse-blue; {
+        0%      { background-color: none; }
+        50%     { background-color: lighten(@c_interactions_accent_two, 20%); }
+        100%    { background-color: none; }
+    });
+
+    .animation(pulse-blue 4s infinite)
+
+}
+
+.pulse-red {
+
+    .keyframes(pulse-red; {
+        0%      { background-color: none; }
+        50%     { background-color: lighten(@c_interactions_accent_one, 20%); }
+        100%    { background-color: none; }
+    });
+
+    .animation(pulse-red 4s infinite)
+
+}
