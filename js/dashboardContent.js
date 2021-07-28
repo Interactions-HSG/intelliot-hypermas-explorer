@@ -15,6 +15,7 @@ var content = {
   $artifactsScrollContainer: $('#artifacts-scroll-container'),
   $affordancesScrollContainer: $('#affordances-scroll-container'),
   $workspaceChooser: $('#workspace-chooser'),
+  $responsesContainer: $('#responses-container'),
 
   clickHandlerTypes: {
     'selectArtifact' : 'selectArtifact',
@@ -37,6 +38,7 @@ var content = {
       // Re-Initialize Dashboard
       content.hideAffordancesBar();
       content.hideArtifactsBar();
+      content.hideContentContainer();
       content.currentArtifacts = {};
 
       yggdrasilInterface.fetchArtifactsInWorkspace(event.data.name, content.fetchArtifactsCallback);
@@ -116,7 +118,7 @@ var content = {
 
       if (affordanceHasInputSchema) {
         affordanceInputSchema = td.getInputSchema(affordanceNode, artifactRdfStore);
-        log.debugSeparate(affordanceTitle, affordanceHasInputSchema);
+        log.fineSeparate(affordanceTitle, affordanceHasInputSchema);
         artifactAffordances[affordanceNode.value]['inputSchema'] = affordanceInputSchema;
       }
     }
@@ -149,19 +151,33 @@ var content = {
       inputData = {};
 
       $("div[id='" + affordanceId + "']").find("input").each(function(index) {
-        log.fine( index + ": " + $(this).attr('id') + ' --- ' + $(this).val() );
+        log.debug( index + ": " + $(this).attr('id') + ' --- ' + $(this).val() );
         inputData[$(this).attr('id')] = $(this).val();
       })
 
-      log.fine(inputData);
+      log.debugSeparate('Input', inputData);
 
-      affordanceResponse = td.followAffordance(affordanceInformation['affordanceNode'], artifactInformation.rdfStore, inputData);
+      affordanceResponse = td.followAffordance(affordanceInformation['affordanceNode'], artifactInformation.rdfStore, inputData, content.actOnAffordanceResultCallback);
       log.debugSeparate('Received Response', affordanceResponse);
     } else {
-      inputData = undefined;
-      affordanceResponse = td.followAffordance(affordanceInformation['affordanceNode'], artifactInformation.rdfStore, inputData);
+      inputData = null;
+
+      log.debugSeparate('Input', inputData);
+      log.debugSeparate('Callback', content.actOnAffordanceResultCallback);
+
+      affordanceResponse = td.followAffordance(affordanceInformation['affordanceNode'], artifactInformation.rdfStore, inputData, content.actOnAffordanceResultCallback);
       log.debugSeparate('Received Response', affordanceResponse);
     }
+  },
+
+  actOnAffordanceResultCallback: function (message) {
+    log.debugSeparate('Response to Handlebars', message);
+    var $responseContent = Handlebars.templates.responseContent({ responseString: JSON.stringify(message), animate: true });
+    content.$responsesContainer.empty().show().append($responseContent);
+  },
+
+  hideContentContainer: function () {
+    content.$responsesContainer.hide();
   },
 
   /* Yggdrasil Interface Callbacks */
@@ -239,11 +255,11 @@ var content = {
 
   revealDashboard: function () {
     window.setTimeout(function () {
-      dashboard.$loading.fadeOut(300);
-      dashboard.$container.fadeIn(300);
+      dashboard.$loading.fadeOut(200);
+      dashboard.$container.fadeIn(200);
       content.$headerOptionsContainer.removeClass("hidden");
       content.$headerOptionsContainer.addClass("centered-element");
-    }, 500);
+    }, 2000);
   },
 
   addClickHandlersToCurrentArtifacts: function (currentArtifacts) {

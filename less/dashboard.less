@@ -62,6 +62,14 @@
   position: absolute;
 }
 
+.center-container {
+  left: (2 * (@cardstack_width + 40px));
+  width: 100%;
+  height: @inspector_height;
+  display: float;
+  position: absolute;
+}
+
 .inspector {
   display: block;
   float: left;
@@ -109,6 +117,26 @@ div.inspector-header {
   cursor: pointer;
 }
 
+
+.contentcard {
+  display: flex;
+  float: left;
+  flex-direction: column;
+  vertical-align: top;
+  margin: @card_margin;
+  position: relative;
+  left: -@cardstack_width;
+  width: 100%;
+  height: auto;
+  overflow-x: hidden;
+  overflow-y: hidden;
+  transition: box-shadow 0.2s, background 0.2s;
+  box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.75);
+
+  z-index: 9999;
+  cursor: pointer;
+}
+
 .dashcard-spacer {
   display: flex;
   float: left;
@@ -124,6 +152,21 @@ div.inspector-header {
   transition: box-shadow 0.2s, background 0.2s;
 }
 
+.content-spacer {
+  display: flex;
+  float: left;
+  flex-direction: column;
+  vertical-align: top;
+  margin: @card_margin;
+  position: relative;
+  left: 0px;
+  width: 100%;
+  height: auto;
+  overflow-x: hidden;
+  overflow-y: auto;
+  transition: box-shadow 0.2s, background 0.2s;
+}
+
 .scroll-container-spacer {
   display: flex;
   float: left;
@@ -133,6 +176,23 @@ div.inspector-header {
   position: relative;
   left: 0px;
   width: @card_width * 1px;
+  height: auto;
+  overflow-x: hidden;
+  overflow-y: auto;
+  transition: box-shadow 0.2s, background 0.2s;
+
+  cursor: pointer;
+}
+
+.content-container-spacer {
+  display: flex;
+  float: left;
+  flex-direction: column;
+  vertical-align: top;
+  margin: @card_margin;
+  position: relative;
+  left: 0px;
+  width: 100%;
   height: auto;
   overflow-x: hidden;
   overflow-y: auto;
@@ -457,7 +517,7 @@ span.unsatisfied-link {
 }
 
 .variable_style {
-  background: @c_interactions_blue_dark
+  background: @c_interactions_accent_two
 }
 
 .command_style {

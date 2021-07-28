@@ -38,24 +38,27 @@ var td = {
 
 	getAffordances: function(artifactUri, affordanceRelation, artifactRdfStore, affordancesMetadata) {
 		artifactRdfStore.each($rdf.sym(artifactUri), affordanceRelation).forEach((affordanceBlankNode) => {
-			title = artifactRdfStore.any((affordanceBlankNode), TD('name'));
 
-			if (title == null) {
+			titleValue = "No name given";
+			title = artifactRdfStore.any((affordanceBlankNode), TD('name'));
+			if (title != null) {
+				titleValue = title.value;
+			} else {
 				title = artifactRdfStore.any((affordanceBlankNode), DCT('title'));
+				if (title != null) {
+					titleValue = title.value;
+				}
 			}
 
 			descriptionValue = "No description given";
 			description = artifactRdfStore.any((affordanceBlankNode), DCT('description'));
-
-			if (description != null) {
-				descriptionValue = description.value;
-			}
+			if (description != null) descriptionValue = description.value;
 
 			log.debug('Found affordance: ' + title);
 
 			affordancesMetadata[affordanceBlankNode.value] = {
 				affordanceNode: affordanceBlankNode,
-				affordanceTitle: title.value,
+				affordanceTitle: titleValue,
 				affordanceDescription: descriptionValue,
 				affordanceArtifact: artifactUri
 			};
@@ -125,7 +128,7 @@ var td = {
 		return inputSchema;
 	},
 
-	followAffordance: function(affordanceBlankNode, rdfStore) {
+	followAffordance: function(affordanceBlankNode, rdfStore, inputData, callback) {
 
 		log.fineSeparate('Affordance Blank Node', affordanceBlankNode);
 
@@ -136,7 +139,7 @@ var td = {
 		// TODO: Most of this is not required but kept for reference.
 		methodName = "GET"
 		if (rdfStore.any(formBlankNode,  HTTP("methodName")) != null) {
-				methodName = rdfStore.any(formBlankNode,  HTTP("methodName")).value;
+			methodName = rdfStore.any(formBlankNode,  HTTP("methodName")).value;
 		}
 		log.debug(`${HTTP("methodName")} : ${methodName}`);
 
@@ -152,48 +155,107 @@ var td = {
 		target = rdfStore.any(formBlankNode,  HCTL("hasTarget")).value;
 		log.debug(`${HCTL("hasTarget")} : ${target}`);
 
-		td.doRequest(target, methodName, contentType);
+		// TODO This should obviously not be static numbers
+		td.doRequest(target, methodName, contentType, inputData, callback);
 	},
 
-	doRequest: function (requestUri, requestMethod, contentType, payload) {
-		log.debug('Doing HTTP request...');
+	doRequest: function (requestUri, requestMethod, contentType, payload, callback) {
 
-		$.ajax({
-			url: requestUri,
-			type: requestMethod,
-			data: JSON.stringify(payload),
-		//	dataType: contentType,
-			success: function(data) {
-				log.debug('Request was successful.');
-				log.debug(data)
-			},
-			error: function(jqXHR, textStatus, errorThrown) {
-				log.debug('Request failed.');
-				log.error(jqXHR);
+		log.debug(payload);
+
+		if (requestMethod == 'GET') {
+			log.debug('Doing GET request...');
+
+			ajaxObject = {
+				type: requestMethod,
+				url: requestUri,
+				success: function (msg) {
+					callback(msg);
+				}
+			};
+
+			log.debug(ajaxObject);
+			$.ajax(ajaxObject);
+		} else if (requestMethod == 'PUT' || requestMethod == 'POST') {
+			log.debug('Doing PUT/POST request...');
+
+			if (requestUri.includes('leubot1')) {
+				log.debug(requestUri)
+				requestUri = requestUri.replace('https://api.interactions.ics.unisg.ch/leubot1/v1.2/', 'http://10.2.1.13:6789/leubot1/v1.2/');
+				log.debug(requestUri)
 			}
-		})
+
+			ajaxObject = {
+				type: requestMethod,
+				url: requestUri,
+				success: function (msg) {
+					callback(msg);
+				},
+				error: function(jqXHR, textStatus, errorThrown) {
+					log.debug('Request failed');
+					log.debug(textStatus);
+					log.debug(errorThrown);
+					log.error(jqXHR);
+				}
+			};
+
+			if (payload != null) {
+				ajaxObject['data'] = JSON.stringify(payload);
+				ajaxObject['contentType'] = 'application/json';
+				ajaxObject['dataType'] = 'json';
+			}
+
+			if (requestUri.includes('leubot1')) {
+				ajaxObject['headers'] = { 'Content-Type': 'application/json', 'X-API-Key': 'opensesame' };
+			} else {
+				ajaxObject['headers'] = { 'Content-Type': 'application/json' };
+			}
+
+			log.debug(ajaxObject);
+			$.ajax(ajaxObject);
+		} else {
+			log.debug(requestMethod + ' not implemented');
+		}
+
+		/*
+		$.ajax({
+		url: requestUri,
+		type: requestMethod,
+		data: JSON.stringify(payload),
+		//dataType: contentType,
+		success: function(data) {
+		log.debug('Request was successful.');
+		log.debug(data)
 	},
+	error: function(jqXHR, textStatus, errorThrown) {
+	log.debug('Request failed');
+	log.debug(textStatus);
+	log.debug(errorThrown);
+	log.error(jqXHR);
+}
+})*/
+},
 
-	// Incomplete, but shows bridge to thingweb
-	fetchWoTThing: function (thingUri) {
-		var servient = new Wot.Core.Servient();
-		var helpers = new Wot.Core.Helpers(servient);
+// Incomplete, but shows bridge to thingweb
+fetchWoTThing: function (thingUri) {
+	var servient = new Wot.Core.Servient();
+	var helpers = new Wot.Core.Helpers(servient);
 
-		servient.start().then((thingFactory) => {
-			helpers.fetch(thingUri).then((td) => {
-				thingFactory.consume(td)
-				.then((thing) => {
-					let td = thing.getThingDescription();
+	servient.start().then((thingFactory) => {
+		helpers.fetch(thingUri).then((td) => {
+			thingFactory.consume(td)
+			.then((thing) => {
+				let td = thing.getThingDescription();
 
-					log.debugSeparate('Thing', td);
+				log.debugSeparate('Thing', td);
 
-					for ( let property in td.properties ) {
-						log.debug(property)
-					};
-				});
-			}).catch((error) => {
-				log.error("Could not fetch TD.\n" + error)
-			})
+				for ( let property in td.properties ) {
+					log.debug(property)
+				};
+			});
+		}).catch((error) => {
+			log.error("Could not fetch TD.\n" + error)
 		})
-	},
+	})
+},
 }
