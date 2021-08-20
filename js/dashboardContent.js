@@ -108,6 +108,9 @@ var content = {
     artifactAffordances = content.currentArtifacts[currentArtifactUri].affordances;
     log.fine('Updating inspector with information on ' + Object.keys(artifactAffordances).length + ' affordances of ' + content.currentArtifacts[currentArtifactUri].title);
 
+    // Empty affordances in blockly
+    blocklyManager.resetAffordancesCategory();
+
     // Extend affordances descriptor with input schema. Do the graph walking here to simplify the templates
     for (const affordanceTitle in artifactAffordances) {
       affordanceNode = artifactAffordances[affordanceTitle].affordanceNode;
@@ -121,6 +124,9 @@ var content = {
         log.fineSeparate(affordanceTitle, affordanceHasInputSchema);
         artifactAffordances[affordanceNode.value]['inputSchema'] = affordanceInputSchema;
       }
+
+      // Generate Blockly Block for Affordance
+      blocklyManager.generateAndAddAffordanceBlock(artifactAffordances[affordanceTitle]);
     }
 
     // Update global affordances information
@@ -259,6 +265,9 @@ var content = {
       dashboard.$container.fadeIn(200);
       content.$headerOptionsContainer.removeClass("hidden");
       content.$headerOptionsContainer.addClass("centered-element");
+
+      blocklyManager.init();
+
     }, 2000);
   },
 

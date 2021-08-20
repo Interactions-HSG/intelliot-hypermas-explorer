@@ -44,15 +44,19 @@
   <!-- This is the container that hosts all other interface elements -->
   <div id="container">
     <div id="artifacts-scroll-container" class="cards-scroll-container-level-1">
-      <!-- Artifacts Placeholder -->
+      <!-- Placeholder for Discovered Artifacts Stack -->
     </div>
 
     <div id="affordances-scroll-container" class="cards-scroll-container-level-2">
-      <!-- Affordances Placeholder -->
+      <!-- Placeholder for Discovered Affordances Stack -->
+    </div>
+
+    <div id="blockly-container" class="eup-container">
+      <!-- Placeholder for End-User Programming Environment -->
     </div>
 
     <div id="responses-container" class="center-container">
-      <!-- Responses Placeholder -->
+      <!-- Placeholder for Affordances Responses -->
     </div>
   </div>
 
@@ -65,15 +69,22 @@
   <script src="https://cdn.jsdelivr.net/npm/socket.io@3.1.2/client-dist/socket.io.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/rdflib@2.2.6/dist/rdflib.min.js"></script>
 
+  <script src="https://cdn.jsdelivr.net/npm/blockly@6.20210701.0/blockly_compressed.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/blockly@6.20210701.0/blocks_compressed.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/blockly@6.20210701.0/msg/en.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/blockly@6.20210701.0/javascript_compressed.js"></script>
+
   <!-- Precompiled handlebars templates -->
   <script src='./templates/templates.js'></script>
 
   <!-- Custom scripts -->
   <script src="js/log.js"></script>
+  <script src="js/blocklyManager.js"></script>
   <script src="js/yggdrasilInterface.js"></script>
   <script src="js/thingDescriptionLib.js"></script>
   <script src="js/dashboardContent.js"></script>
   <script src="js/dashboard.js"></script>
+
 
   <!-- run initialization as soon as the pages become safe to to manipulate -->
   <script type="text/javascript">

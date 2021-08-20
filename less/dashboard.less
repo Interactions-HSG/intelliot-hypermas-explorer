@@ -5,8 +5,8 @@
 @import "base";
 @import "color";
 
-@cardstack_width: 230px;
-@card_width: 230px;
+@cardstack_width: 250px;
+@card_width: 200px;
 @variablebox_width: 300px;
 
 @inspector_width: auto;
@@ -52,6 +52,7 @@
   width: @cardstack_width;
   height: @inspector_height;
   display: float;
+  overflow-y: auto;
 }
 
 .cards-scroll-container-level-2 {
@@ -60,9 +61,18 @@
   height: @inspector_height;
   display: float;
   position: absolute;
+  overflow-y: auto;
 }
 
 .center-container {
+  left: (2 * (@cardstack_width + 40px));
+  width: 100%;
+  height: @inspector_height;
+  display: float;
+  position: absolute;
+}
+
+.eup-container {
   left: (2 * (@cardstack_width + 40px));
   width: 100%;
   height: @inspector_height;
@@ -199,6 +209,16 @@ div.inspector-header {
   transition: box-shadow 0.2s, background 0.2s;
 
   cursor: pointer;
+}
+
+@-webkit-keyframes slideFromRight {
+  from { left: 5000px; visibility: hidden; }
+  to { top: 0px; left: 0px; visibility: visible; }
+}
+
+@keyframes slideFromRight {
+  from { left: 5000px; visibility: hidden; }
+  to { top: 0px; left: 0px; visibility: visible; }
 }
 
 @-webkit-keyframes slideFromLeft {

@@ -38,5 +38,12 @@ var log = {
 		}
 	},
 
+	errorSeparate : function(label, content) {
+		if(typeof console !== 'undefined')  {
+			console.error('---- ' + label + ' start ----');
+			console.error(content);
+			console.error('---- ' + label + ' end ----');
+		}
+	},
 
 }
