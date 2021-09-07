@@ -69,7 +69,8 @@ var yggdrasilInterface = {
         } else {
           var fetchedArtifacts = yggdrasilInterface.getArtifactsFromWorkspace(workspaceUri, store)
           this.artifactsInformation = [];
-          // TODO: This currently just unpacks the artifact information, it's unnecessary. Clean up when functional.
+          // TODO: This currently just unpacks the artifact information, it's unnecessary. 
+          // Clean up when functional. ?????
           for (var i = 0; i < fetchedArtifacts.length;i++) {
           var artifactUri = fetchedArtifacts[i].uri;
           var artifactInformation = {
@@ -88,38 +89,15 @@ var yggdrasilInterface = {
     })
   },
 
-  resolveArtifactsAffordances: function (artifactsInformation, callback) {
-    log.fineSeparate("Fetching artifacts information from Yggdrasil", artifactsInformation);
-
-    for (var i = 0; i < artifactsInformation.length; i++) {
-      if (artifactsInformation[i].includes('-3d') || artifactsInformation[i].includes('cherrybot')) {
-        log.error('Ignoring: ' + artifactsInformation[i]);
-      } else {
-        artifactAffordances = yggdrasilInterface.resolveArtifactAffordances(artifactsInformation[i]);
-
-        artifactAffordances.then(
-          function (artifactInformationWithAffordances) {
-            log.debug(artifactInformationWithAffordances);
-            callback(artifactInformationWithAffordances);
-          },
-          function (error) {
-            log.error('Error resolving the promise!')
-          }
-        );
-      }
-    }
-  },
-
   resolveArtifactAffordances: function (artifactUri) {
-    log.fineSeparate('Fetching individual artifact information from Yggdrasil', artifactUri);
-
     var store = $rdf.graph();
     var fetcher = new $rdf.Fetcher(store, fetcherTimeout);
 
-    return new Promise(function (resolve, reject) {
+    return new Promise((resolve, reject) => {
+      console.log(artifactUri)
       fetcher.nowOrWhenFetched(artifactUri, function (ok) {
         if (!ok) {
-          log.error("Unable to fetch artifact data!");
+          reject(`Unable to fetch data from artifact: ${artifactUri}`)
         } else {
           affordancesMetadata = td.getAffordancesFromTD(artifactUri, store);
           currentArtifactTitle = td.resolveArtifactTitle(artifactUri, store);
@@ -131,7 +109,7 @@ var yggdrasilInterface = {
             rdfStore: store
           }
 
-          log.fineSeparate('Artifact ' + $rdf.sym(artifactUri) + ' Information', artifactInformation);
+          log.debugSeparate('Artifact ' + $rdf.sym(artifactUri) + ' Information', artifactInformation);
           resolve(artifactInformation);
         }
       });

@@ -41,7 +41,7 @@ var dashboard = {
   handleSelectWorkspaceEvent:async function (workspaceData){
     // Re-Initialize Dashboard
     this.artifactsController.clearArtifactsBar();
-    this.artifactsController.affordancesController.clearAffordancesBar();
+    this.artifactsController.clearAffordancesBar();
     if(workspaceData.uri != "empty"){
       try{
         await this.artifactsController.reloadArtifactsFromWorkspace(workspaceData);
@@ -53,6 +53,7 @@ var dashboard = {
 
   showError: function (message) {
     //TODO show an alert box or something
+    log.error(message)
     alert("ERROR: " + message)
   },
 

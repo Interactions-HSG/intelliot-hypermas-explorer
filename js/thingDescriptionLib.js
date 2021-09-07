@@ -31,8 +31,6 @@ var td = {
 		td.getAffordances(artifactUri, TD("hasActionAffordance"), artifactRdfStore, affordancesMetadata);
 		td.getAffordances(artifactUri, TD("hasEventAffordance"), artifactRdfStore, affordancesMetadata);
 
-		log.debugSeparate('Found these affordances', affordancesMetadata);
-
 		return affordancesMetadata;
 	},
 
