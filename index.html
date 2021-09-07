@@ -25,7 +25,7 @@
   <div id="header">
     <div class="logo-left"><img src="./img/interactions-logo-pure-white.png" alt="Interactions Research Group, University of St.Gallen"/></div>
 
-    <div id="settings">
+    <div id="settings" style="display: none">
       <div id="workspace">
         <div>Fetch Artifacts from</div>
         <select id="workspace-chooser"><option value="simulation">infrastructure-running-?</option></select>
@@ -45,19 +45,19 @@
 
   <!-- This is the container that hosts all other interface elements -->
   <div id="container">
-    <div id="artifacts-scroll-container" class="cards-scroll-container-level-1">
+    <div id="artifacts-scroll-container">
       <!-- Placeholder for Discovered Artifacts Stack -->
     </div>
 
-    <div id="affordances-scroll-container" class="cards-scroll-container-level-2">
+    <div id="affordances-scroll-container">
       <!-- Placeholder for Discovered Affordances Stack -->
     </div>
 
-    <div id="blockly-container" class="eup-container">
+    <div id="blockly-container">
       <!-- Placeholder for End-User Programming Environment -->
     </div>
 
-    <div id="responses-container" class="center-container">
+    <div id="responses-container">
       <!-- Placeholder for Affordances Responses -->
     </div>
   </div>
@@ -80,18 +80,20 @@
   <script src='./templates/templates.js'></script>
 
   <!-- Custom scripts -->
+  <!-- libs -->
   <script src="js/log.js"></script>
-  <script src="js/blocklyManager.js"></script>
   <script src="js/yggdrasilInterface.js"></script>
   <script src="js/thingDescriptionLib.js"></script>
-  <script src="js/dashboardContent.js"></script>
-  <script src="js/dashboard.js"></script>
 
+  <script src="js/blocklyManager.js"></script>
 
-  <!-- run initialization as soon as the pages become safe to to manipulate -->
-  <script type="text/javascript">
-  $(document).ready(dashboard.init);
-  </script>
+  <!-- Controllers -->
+  <script src="js/controllers/environment.js"></script>
+  <script src="js/controllers/artifacts.js"></script>
+  <script src="js/controllers/affordances.js"></script> 
+  
+  <script src="js/controllers/dashboard.js"></script>
+  <script src="js/controllers/main.js"></script>
 </body>
 
 </html>

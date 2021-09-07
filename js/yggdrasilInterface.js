@@ -31,24 +31,20 @@ var yggdrasilInterface = {
     })
   },
 
-  fetchWorkspacesInEnvironment: function (environmentSlug, callback) {
-    log.fine("Fetching Yggdrasil workspaces in environment " + environmentSlug);
-
+  fetchWorkspacesInEnvironment: function (environmentSlug) {
     var store = $rdf.graph();
     var fetcher = new $rdf.Fetcher(store, fetcherTimeout);
     var url = yggdrasilUrl + '/environments/' + environmentSlug;
 
-    fetcher.nowOrWhenFetched(url, function(ok, body, xhr) {
-      if (!ok) {
-        log.error("Unable to fetch data!");
-      } else {
-        log.fine("Workspaces retrieved.")
-
-        containedWorkspaces = yggdrasilInterface.getWorkspacesFromEnvironment(url, store);
-
-        log.fine('Environment ' + environmentSlug + ' contains ' + containedWorkspaces.length + ' workspace(s)!');
-        callback(containedWorkspaces, true);
-      }
+    return new Promise((resolve, reject) => {
+      fetcher.nowOrWhenFetched(url, function (ok, body, xhr) {
+        if (!ok) {
+          reject("Unable to fetch data!")
+        } else {
+          containedWorkspaces = yggdrasilInterface.getWorkspacesFromEnvironment(url, store);
+          resolve(containedWorkspaces);
+        }
+      })
     })
   },
 
@@ -58,7 +54,7 @@ var yggdrasilInterface = {
     var store = $rdf.graph();
     var fetcher = new $rdf.Fetcher(store, fetcherTimeout);
 
-    fetcher.nowOrWhenFetched(workspaceUri, function(ok, body, xhr) {
+    fetcher.nowOrWhenFetched(workspaceUri, function (ok, body, xhr) {
       if (!ok) {
         log.error("Unable to fetch data!");
       } else {
@@ -84,11 +80,13 @@ var yggdrasilInterface = {
         artifactAffordances = yggdrasilInterface.resolveArtifactAffordances(artifactsInformation[i]);
 
         artifactAffordances.then(
-          function(artifactInformationWithAffordances) {
+          function (artifactInformationWithAffordances) {
             log.debug(artifactInformationWithAffordances);
             callback(artifactInformationWithAffordances);
           },
-          function(error) { log.error('Error resolving the promise!') }
+          function (error) {
+            log.error('Error resolving the promise!')
+          }
         );
       }
     }
@@ -100,8 +98,8 @@ var yggdrasilInterface = {
     var store = $rdf.graph();
     var fetcher = new $rdf.Fetcher(store, fetcherTimeout);
 
-    return new Promise(function(resolve, reject) {
-      fetcher.nowOrWhenFetched(artifactUri, function(ok) {
+    return new Promise(function (resolve, reject) {
+      fetcher.nowOrWhenFetched(artifactUri, function (ok) {
         if (!ok) {
           log.error("Unable to fetch artifact data!");
         } else {

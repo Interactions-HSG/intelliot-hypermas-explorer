@@ -1,21 +1,5 @@
-// Hypermedia MAS Explorer
-// Interactions Research Group, University of St.Gallen
-// Based on work by Ralf Mosshammer / Siemens AG (2015) and Simon Mayer / Pro2Future AG (2017)
-//
-// Main UI controls and handlers, talks to Yggdrasil via yggdrasilInterface.js
 
-var content = {
 
-  currentEnvironment: "",
-  currentArtifacts: {},
-  currentAffordances: {},
-
-  // jquery shortcuts
-  $headerOptionsContainer: $('#header-options-container'),
-  $artifactsScrollContainer: $('#artifacts-scroll-container'),
-  $affordancesScrollContainer: $('#affordances-scroll-container'),
-  $workspaceChooser: $('#workspace-chooser'),
-  $responsesContainer: $('#responses-container'),
 
   clickHandlerTypes: {
     'selectArtifact' : 'selectArtifact',
@@ -23,66 +7,58 @@ var content = {
     'selectWorkspace' : 'selectWorkspace',
   },
 
-  init: function () {
-    log.fine('Initializing the dashboard and loading data from Yggdrasil...');
-
-    // Load Environment
-    content.currentEnvironment = "intelliot";
-    yggdrasilInterface.fetchWorkspacesInEnvironment(content.currentEnvironment, content.fetchWorkspacesCallback);
-  },
-
   clickHandler: function (event) {
     log.fine("User selected '" + event.data.name + " / " + event.data.type + "'");
 
-    if (event.data.type == content.clickHandlerTypes.selectWorkspace) {
+    if (event.data.type == dashboard.clickHandlerTypes.selectWorkspace) {
       // Re-Initialize Dashboard
-      content.hideAffordancesBar();
-      content.hideArtifactsBar();
-      content.hideContentContainer();
-      content.currentArtifacts = {};
+      dashboard.hideAffordancesBar();
+      dashboard.hideArtifactsBar();
+      dashboard.hideContentContainer();
+      dashboard.currentArtifacts = {};
 
-      yggdrasilInterface.fetchArtifactsInWorkspace(event.data.name, content.fetchArtifactsCallback);
-    } else if (event.data.type == content.clickHandlerTypes.selectArtifact) {
+      yggdrasilInterface.fetchArtifactsInWorkspace(event.data.name, dashboard.fetchArtifactsCallback);
+    } else if (event.data.type == dashboard.clickHandlerTypes.selectArtifact) {
       currentArtifactUri = event.data.name;
-      content.updateAffordancesBar(event.data.name);
-    } else if (event.data.type == content.clickHandlerTypes.followAffordance) {
+      dashboard.updateAffordancesBar(event.data.name);
+    } else if (event.data.type == dashboard.clickHandlerTypes.followAffordance) {
       currentAffordanceId = event.data.name;
-      content.followAffordance(currentAffordanceId);
+      dashboard.followAffordance(currentAffordanceId);
     } else {
       log.error("##### UNHANDLED EVENT: " + event.data.type);
     }
   },
 
   updateAssetInspector: function (doAnimate) {
-    var workspacesInformation = content.workspacesInformation;
+    var workspacesInformation = dashboard.workspacesInformation;
 
     log.fineSeparate('Updating inspector...', workspacesInformation);
 
     // Remove all options in workspace-chooser
     if (workspacesInformation.length > 0) {
-      content.$workspaceChooser.find('option').remove();
-      content.$workspaceChooser.append(new Option("Select Workspace...", "empty"));
+      dashboard.$workspaceChooser.find('option').remove();
+      dashboard.$workspaceChooser.append(new Option("Select Workspace...", "empty"));
     }
 
     // Add workspaces to workspace-chooser
     for (workspaceIndex in workspacesInformation) {
       workspaceInformation = workspacesInformation[workspaceIndex];
-      content.$workspaceChooser.append(new Option(workspaceInformation.title, workspaceInformation.uri));
+      dashboard.$workspaceChooser.append(new Option(workspaceInformation.title, workspaceInformation.uri));
     }
 
     // Set change handler for workspaces chooser
-    content.$workspaceChooser.change( function () {
-      var mockedClickEvent = { "data": { name: this.options[this.selectedIndex].value, type: content.clickHandlerTypes.selectWorkspace } };
-      content.clickHandler(mockedClickEvent);
+    dashboard.$workspaceChooser.change( function () {
+      var mockedClickEvent = { "data": { name: this.options[this.selectedIndex].value, type: dashboard.clickHandlerTypes.selectWorkspace } };
+      dashboard.clickHandler(mockedClickEvent);
     });
   },
 
   hideArtifactsBar: function () {
-    content.$artifactsScrollContainer.hide();
+    dashboard.$artifactsScrollContainer.hide();
   },
 
   updateArtifactsBar: function (doAnimate) {
-    var currentArtifacts = content.currentArtifacts;
+    var currentArtifacts = dashboard.currentArtifacts;
 
     log.fine('Updating inspector with information on all ' + Object.keys(currentArtifacts).length + ' artifacts.');
 
@@ -94,19 +70,19 @@ var content = {
     // Hand over to handlebars
     log.fineSeparate('All Artifacts To Handlebars', currentArtifacts);
     var $artifactsContent = Handlebars.templates.artifactsList({ currentArtifacts: currentArtifacts, animate: true });
-    content.$artifactsScrollContainer.empty().show().append($artifactsContent);
+    dashboard.$artifactsScrollContainer.empty().show().append($artifactsContent);
 
-    content.addClickHandlersToCurrentArtifacts(currentArtifacts);
+    dashboard.addClickHandlersToCurrentArtifacts(currentArtifacts);
   },
 
   hideAffordancesBar: function () {
-    content.$affordancesScrollContainer.hide();
+    dashboard.$affordancesScrollContainer.hide();
   },
 
   updateAffordancesBar: function (currentArtifactUri) {
-    artifactRdfStore = content.currentArtifacts[currentArtifactUri].rdfStore;
-    artifactAffordances = content.currentArtifacts[currentArtifactUri].affordances;
-    log.fine('Updating inspector with information on ' + Object.keys(artifactAffordances).length + ' affordances of ' + content.currentArtifacts[currentArtifactUri].title);
+    artifactRdfStore = dashboard.currentArtifacts[currentArtifactUri].rdfStore;
+    artifactAffordances = dashboard.currentArtifacts[currentArtifactUri].affordances;
+    log.fine('Updating inspector with information on ' + Object.keys(artifactAffordances).length + ' affordances of ' + dashboard.currentArtifacts[currentArtifactUri].title);
 
     // Empty affordances in blockly
     blocklyManager.resetAffordancesCategory();
@@ -130,21 +106,21 @@ var content = {
     }
 
     // Update global affordances information
-    content.currentAffordances = artifactAffordances;
+    dashboard.currentAffordances = artifactAffordances;
     currentAffordanceIds = Object.keys(artifactAffordances);
 
     // Hand over to handlebars
     log.debugSeparate('All Affordances to Handlebars', artifactAffordances);
     var $affordancesContent = Handlebars.templates.affordancesList({ currentAffordances: artifactAffordances, animate: true });
-    content.$affordancesScrollContainer.empty().show().append($affordancesContent);
+    dashboard.$affordancesScrollContainer.empty().show().append($affordancesContent);
 
-    content.addClickHandlersToCurrentAffordances(currentAffordanceIds);
+    dashboard.addClickHandlersToCurrentAffordances(currentAffordanceIds);
   },
 
   followAffordance: function (affordanceId) {
     log.fine('Following ' + affordanceId);
-    affordanceInformation = content.currentAffordances[affordanceId]
-    artifactInformation = content.currentArtifacts[affordanceInformation['affordanceArtifact']]
+    affordanceInformation = dashboard.currentAffordances[affordanceId]
+    artifactInformation = dashboard.currentArtifacts[affordanceInformation['affordanceArtifact']]
 
     log.fineSeparate('Affordance Information', affordanceInformation);
     log.fineSeparate('Artifact Information', artifactInformation);
@@ -163,15 +139,15 @@ var content = {
 
       log.debugSeparate('Input', inputData);
 
-      affordanceResponse = td.followAffordance(affordanceInformation['affordanceNode'], artifactInformation.rdfStore, inputData, content.actOnAffordanceResultCallback);
+      affordanceResponse = td.followAffordance(affordanceInformation['affordanceNode'], artifactInformation.rdfStore, inputData, dashboard.actOnAffordanceResultCallback);
       log.debugSeparate('Received Response', affordanceResponse);
     } else {
       inputData = null;
 
       log.debugSeparate('Input', inputData);
-      log.debugSeparate('Callback', content.actOnAffordanceResultCallback);
+      log.debugSeparate('Callback', dashboard.actOnAffordanceResultCallback);
 
-      affordanceResponse = td.followAffordance(affordanceInformation['affordanceNode'], artifactInformation.rdfStore, inputData, content.actOnAffordanceResultCallback);
+      affordanceResponse = td.followAffordance(affordanceInformation['affordanceNode'], artifactInformation.rdfStore, inputData, dashboard.actOnAffordanceResultCallback);
       log.debugSeparate('Received Response', affordanceResponse);
     }
   },
@@ -179,42 +155,20 @@ var content = {
   actOnAffordanceResultCallback: function (message) {
     log.debugSeparate('Response to Handlebars', message);
     var $responseContent = Handlebars.templates.responseContent({ responseString: JSON.stringify(message), animate: true });
-    content.$responsesContainer.empty().show().append($responseContent);
+    dashboard.$responsesContainer.empty().show().append($responseContent);
   },
 
   hideContentContainer: function () {
-    content.$responsesContainer.hide();
+    dashboard.$responsesContainer.hide();
   },
 
   /* Yggdrasil Interface Callbacks */
 
-  fetchWorkspacesCallback: function (workspacesInformation, animateWorkspaces) {
-    log.fine(workspacesInformation);
-
-    content.workspacesInformation = [];
-
-    for (var i = 0; i < workspacesInformation.length;i++) {
-      workspaceUri = workspacesInformation[i].uri;
-      workspaceTitle = workspaceUri.split(/[\/]+/).pop();  // Find last URI path fragment
-
-      var thisWorkspace = {
-        title : workspaceTitle,
-        uri : workspaceUri
-      };
-
-      content.workspacesInformation.push(thisWorkspace);
-    }
-
-    log.fine(content.workspacesInformation);
-
-    content.updateAssetInspector(animateWorkspaces);
-    content.revealDashboard();
-  },
 
   fetchArtifactsCallback: function (artifactsInformation, animateArtifacts) {
     log.fine(artifactsInformation);
 
-    content.artifactsInformation = [];
+    dashboard.artifactsInformation = [];
 
     // TODO: This currently just unpacks the artifact information, it's unnecessary. Clean up when functional.
     for (var i = 0; i < artifactsInformation.length;i++) {
@@ -225,13 +179,13 @@ var content = {
       };
 
       log.fine('Resolving artifact ' + artifactUri);
-      content.artifactsInformation.push(artifactUri);
+      dashboard.artifactsInformation.push(artifactUri);
     }
 
-    log.fine(content.artifactsInformation);
+    log.fine(dashboard.artifactsInformation);
 
     // Fetch artifact affordances
-    yggdrasilInterface.resolveArtifactsAffordances(content.artifactsInformation, content.fetchAffordancesCallback);
+    yggdrasilInterface.resolveArtifactsAffordances(dashboard.artifactsInformation, dashboard.fetchAffordancesCallback);
   },
 
   fetchAffordancesCallback: function (artifactsInformation, animateArtifacts) {
@@ -245,16 +199,16 @@ var content = {
     artifactUri = artifactsInformation.uri;
 
     // Update global artifacts/affordances list
-    if (content.currentArtifacts.hasOwnProperty(artifactUri)) {
+    if (dashboard.currentArtifacts.hasOwnProperty(artifactUri)) {
       log.debug('Artifact ' + artifactUri + ' already exists - updating affordances!');
     }
 
-    content.currentArtifacts[artifactUri] = artifactsInformation;
+    dashboard.currentArtifacts[artifactUri] = artifactsInformation;
 
     log.fine('Current Artifacts Map');
-    log.fine(content.currentArtifacts);
+    log.fine(dashboard.currentArtifacts);
 
-    content.updateArtifactsBar(animateArtifacts);
+    dashboard.updateArtifactsBar(animateArtifacts);
   },
 
   /** Utilities **/
@@ -263,8 +217,8 @@ var content = {
     window.setTimeout(function () {
       dashboard.$loading.fadeOut(200);
       dashboard.$container.fadeIn(200);
-      content.$headerOptionsContainer.removeClass("hidden");
-      content.$headerOptionsContainer.addClass("centered-element");
+      dashboard.$headerOptionsContainer.removeClass("hidden");
+      dashboard.$headerOptionsContainer.addClass("centered-element");
 
       blocklyManager.init();
 
@@ -279,7 +233,7 @@ var content = {
     for (var i = 0; i < numArtifacts; i++) {
       currentArtifact = currentArtifactUris[i];
       log.debug("Attaching click handler to " + currentArtifact);
-      $("div[id='" + currentArtifact + "']").click({ name: currentArtifact, type: content.clickHandlerTypes.selectArtifact }, content.clickHandler);
+      $("div[id='" + currentArtifact + "']").click({ name: currentArtifact, type: dashboard.clickHandlerTypes.selectArtifact }, dashboard.clickHandler);
     }
   },
 
@@ -290,14 +244,14 @@ var content = {
     for (var i = 0; i < numAffordances; i++) {
       var currentAffordance = currentAffordanceIds[i]
       log.debug("Attaching click handler to " + currentAffordance)
-      $("div[id='" + currentAffordance + "']").find("div[id=follow-affordance-button]").click({ name: currentAffordance, type: content.clickHandlerTypes.followAffordance }, content.clickHandler);
+      $("div[id='" + currentAffordance + "']").find("div[id=follow-affordance-button]").click({ name: currentAffordance, type: dashboard.clickHandlerTypes.followAffordance }, dashboard.clickHandler);
     }
   },
 
   highlightSelected: function () {
-    log.debug("Trigger: " + content.currentTestModuleType)
+    log.debug("Trigger: " + dashboard.currentTestModuleType)
     $("[element=testingModuleType]").each(function() {
-      if ($(this).attr('id') === content.currentTestModuleType) $(this).addClass("highlightBold")
+      if ($(this).attr('id') === dashboard.currentTestModuleType) $(this).addClass("highlightBold")
       else $(this).removeClass("highlightBold")
     })
   },
