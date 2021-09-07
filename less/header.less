@@ -52,8 +52,11 @@
   color: @c_interactions_snow;
   overflow: hidden;
   padding-right: 20px;
+  a {
+    white-space: nowrap;
+    text-overflow: ellipsis;
+  }
 }
-
 #settings {
   flex-grow: 1;
 }
@@ -72,7 +75,6 @@
     }
   }
 }
-
 
 #container {
   position: absolute;
