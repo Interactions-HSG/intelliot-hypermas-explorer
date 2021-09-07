@@ -3,11 +3,6 @@
 // Based on work by Simon Mayer / Pro2Future AG (2017)
 
 var main = {
-
-  $container: $('#container'),
-  $settings: $('#settings'),
-  $loading: $('#loading'),
-
   init: function () {
     log.debug('init dashboard');
 
@@ -31,9 +26,6 @@ var main = {
       var num = parseFloat(value);
       return num.toFixed(2);
     });
-
-    main.$container.hide();
-    main.$settings.hide();
     dashboard.init();
   }
 }

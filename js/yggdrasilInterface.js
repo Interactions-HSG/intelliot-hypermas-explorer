@@ -41,32 +41,50 @@ var yggdrasilInterface = {
         if (!ok) {
           reject("Unable to fetch data!")
         } else {
-          containedWorkspaces = yggdrasilInterface.getWorkspacesFromEnvironment(url, store);
-          resolve(containedWorkspaces);
+          var fetchedWorkspaces = yggdrasilInterface.getWorkspacesFromEnvironment(url, store);
+          var workspacesInformation = [];
+          for (var i = 0; i < fetchedWorkspaces.length; i++) {
+            var workspaceUri = fetchedWorkspaces[i].uri;
+            var workspaceTitle = workspaceUri.split(/[\/]+/).pop(); // Find last URI path fragment
+            var currentWorkspace = {
+              name: workspaceTitle,
+              uri: workspaceUri
+            };
+            workspacesInformation.push(currentWorkspace);
+          }
+          resolve(workspacesInformation);
         }
       })
     })
   },
 
-  fetchArtifactsInWorkspace: function (workspaceUri, callback) {
-    log.fineSeparate("Fetching artifacts from Yggdrasil workspace ", workspaceUri);
-
+  fetchArtifactsInWorkspace: function (workspaceUri) {
     var store = $rdf.graph();
     var fetcher = new $rdf.Fetcher(store, fetcherTimeout);
 
-    fetcher.nowOrWhenFetched(workspaceUri, function (ok, body, xhr) {
-      if (!ok) {
-        log.error("Unable to fetch data!");
-      } else {
-        var containedArtifacts = yggdrasilInterface.getArtifactsFromWorkspace(workspaceUri, store)
-        log.fine($rdf.sym(workspaceUri) + ' contains ' + containedArtifacts.length + ' artifacts(s)!');
-
-        // TODO If the TD is available as JSON-LD, we can directly use nodewot
-        // log.debugSeparate('Artifact Information', containedArtifacts[0])
-        // td.fetchWoTThing(containedArtifacts[0].value)
-
-        callback(containedArtifacts, true);
-      }
+    return new Promise((resolve, reject) => {
+      fetcher.nowOrWhenFetched(workspaceUri, function (ok, body, xhr) {
+        if (!ok) {
+          reject("Unable to retrieve artifacts from ")
+        } else {
+          var fetchedArtifacts = yggdrasilInterface.getArtifactsFromWorkspace(workspaceUri, store)
+          this.artifactsInformation = [];
+          // TODO: This currently just unpacks the artifact information, it's unnecessary. Clean up when functional.
+          for (var i = 0; i < fetchedArtifacts.length;i++) {
+          var artifactUri = fetchedArtifacts[i].uri;
+          var artifactInformation = {
+            uri: artifactUri,
+            affordances: []
+            };
+          this.artifactsInformation.push(artifactInformation);
+          }   
+          // TODO If the TD is available as JSON-LD, we can directly use nodewot
+          // log.debugSeparate('Artifact Information', containedArtifacts[0])
+          // td.fetchWoTThing(containedArtifacts[0].value)
+  
+          resolve(artifactsInformation)
+        }
+      })
     })
   },
 

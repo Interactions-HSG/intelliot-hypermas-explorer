@@ -1,12 +1,5 @@
 
 
-
-  clickHandlerTypes: {
-    'selectArtifact' : 'selectArtifact',
-    'followAffordance' : 'followAffordance',
-    'selectWorkspace' : 'selectWorkspace',
-  },
-
   clickHandler: function (event) {
     log.fine("User selected '" + event.data.name + " / " + event.data.type + "'");
 
@@ -29,29 +22,6 @@
     }
   },
 
-  updateAssetInspector: function (doAnimate) {
-    var workspacesInformation = dashboard.workspacesInformation;
-
-    log.fineSeparate('Updating inspector...', workspacesInformation);
-
-    // Remove all options in workspace-chooser
-    if (workspacesInformation.length > 0) {
-      dashboard.$workspaceChooser.find('option').remove();
-      dashboard.$workspaceChooser.append(new Option("Select Workspace...", "empty"));
-    }
-
-    // Add workspaces to workspace-chooser
-    for (workspaceIndex in workspacesInformation) {
-      workspaceInformation = workspacesInformation[workspaceIndex];
-      dashboard.$workspaceChooser.append(new Option(workspaceInformation.title, workspaceInformation.uri));
-    }
-
-    // Set change handler for workspaces chooser
-    dashboard.$workspaceChooser.change( function () {
-      var mockedClickEvent = { "data": { name: this.options[this.selectedIndex].value, type: dashboard.clickHandlerTypes.selectWorkspace } };
-      dashboard.clickHandler(mockedClickEvent);
-    });
-  },
 
   hideArtifactsBar: function () {
     dashboard.$artifactsScrollContainer.hide();

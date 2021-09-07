@@ -5,42 +5,67 @@
 // Main UI controls and handlers, talks with component logic controllers to retrieve data
 
 var dashboard = {
-  
-  // jquery shortcuts
-  $artifactsScrollContainer: $('#artifacts-scroll-container'),
-  $affordancesScrollContainer: $('#affordances-scroll-container'),
-  $workspaceChooser: $('#workspace-chooser'),
-  $responsesContainer: $('#responses-container'),
 
-  clickHandlerTypes: {
-    'selectWorkspace' : 'selectWorkspace',
-    'selectArtifact' : 'selectArtifact',
-    'followAffordance' : 'followAffordance',
-  },
+  // jquery shortcuts
+  $container: $('#container'),
+  $settings: $('#settings'),
+  $loading: $('#loading'),
+
+  //component controllers
+  environmentController: new EnvironmentController("intelliot"),
+  artifactsController: new ArtifactsController(),
 
   init: async function () {
     log.fine('Initializing the dashboard and loading data');
+    this.$container.hide();
     // Load Environment
-    var workspaces = null
     try {
-      workspaces = await EnvironmentController.fetchWorkspaces();
-      this.revealDashboard()
-    } catch (error){
+      await this.environmentController.fetchWorkspaces();
+      this.revealDashboard();
+    } catch (error) {
       this.showError(error)
     }
   },
 
-  showError: function(message){
+  handleEvent: function (event) {
+    switch (event.type) {
+      case EnvironmentController.selectWorkspaceEvent:
+        this.handleSelectWorkspaceEvent(event.data)
+        break;
+      default:
+        log.error(`Unrecognized event of type ${event.type}`)
+        break;
+    }
+  },
+
+  handleSelectWorkspaceEvent:async function (workspaceData){
+    // Re-Initialize Dashboard
+    this.artifactsController.clearArtifactsBar();
+    this.artifactsController.affordancesController.clearAffordancesBar();
+    if(workspaceData.uri != "empty"){
+      try{
+        await this.artifactsController.reloadArtifactsFromWorkspace(workspaceData);
+      } catch (error){
+        this.showError(error)
+      }
+    }
+  },
+
+  showError: function (message) {
     //TODO show an alert box or something
-    alert("ERROR: "+message)
+    alert("ERROR: " + message)
+  },
+
+  reloadDashboard: function () {
+    return false
   },
 
   revealDashboard: function () {
     window.setTimeout(function () {
-      main.$loading.fadeOut(200);
-      main.$container.fadeIn(200);
-      main.$settings.fadeIn(200);
-    }, 2000);
-  },
+      dashboard.$loading.fadeOut(200);
+      dashboard.$container.fadeIn(200);
+      dashboard.$settings.fadeIn(150);
+    }, 1000);
+  }
 
 }
