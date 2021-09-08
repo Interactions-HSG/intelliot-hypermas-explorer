@@ -1,18 +1,15 @@
 {{#if currentAffordances}}
-<div class="scroll-container-spacer"><div class="dashcard-spacer">
-  <div class="dashcard-header variable_style">Affordances</div>
-</div></div>
+<div class="dashcard-header variable_style">Affordances</div>
 
-<div class="inside-tasks-scroller">
-
+<div>
 {{#each currentAffordances}}
 {{#if ../animate}}
-<div id="{{@key}}" element="artifactInstance" class="dashcard" style="visibility: hidden; animation: slideFromTop 0.5s forwards; -webkit-animation: slideFromTop 0.5s forwards; animation-delay: {{half @index}}s; -webkit-animation-delay: {{half @index}}s;">
+<div id="{{@key}}"  class="card dashcard slide-left" style="animation-delay:{{delay @index}}s -webkit-animation-delay:{{delay @index}}">
 {{else}}
-<div id="{{@key}}" element="artifactInstance" class="dashcard" style="left: 0px;">
+<div id="{{@key}}"  class="card dashcard">
 {{/if}}
 
-  <div id="tasks-header" class="dashcard-header variable_style">{{affordanceTitle}}
+  <div class="">{{affordanceTitle}}
     <div id="follow-affordance-button" class="inlineButton">Go!</div>
   </div>
 

@@ -75,18 +75,18 @@ var yggdrasilInterface = {
           this.artifactsInformation = [];
           // TODO: This currently just unpacks the artifact information, it's unnecessary. 
           // Clean up when functional. ?????
-          for (var i = 0; i < fetchedArtifacts.length;i++) {
-          var artifactUri = fetchedArtifacts[i].uri;
-          var artifactInformation = {
-            uri: artifactUri,
-            affordances: []
+          for (var i = 0; i < fetchedArtifacts.length; i++) {
+            var artifactUri = fetchedArtifacts[i].uri;
+            var artifactInformation = {
+              uri: artifactUri,
+              affordances: []
             };
-          this.artifactsInformation.push(artifactInformation);
-          }   
+            this.artifactsInformation.push(artifactInformation);
+          }
           // TODO If the TD is available as JSON-LD, we can directly use nodewot
           // log.debugSeparate('Artifact Information', containedArtifacts[0])
           // td.fetchWoTThing(containedArtifacts[0].value)
-  
+
           resolve(artifactsInformation)
         }
       })
@@ -106,10 +106,19 @@ var yggdrasilInterface = {
         } else {
           affordancesMetadata = td.getAffordancesFromTD(artifactUri, store);
           currentArtifactTitle = td.resolveArtifactTitle(artifactUri, store);
+          var affordances = []
+          for (var affordance of Object.values(affordancesMetadata)) {
+            affordances.push({
+              title: affordance.affordanceTitle,
+              description: affordance.affordanceDescription,
+              artifact: affordance.affordanceArtifact,
+              node: affordance.affordanceNode
+            })
+          }
           artifactInformation = {
             uri: artifactUri,
             title: currentArtifactTitle,
-            affordances: Object.values(affordancesMetadata),
+            affordances: affordances,
             rdfStore: store
           }
           resolve(artifactInformation);
@@ -119,6 +128,15 @@ var yggdrasilInterface = {
   },
 
   /* Helper Functions */
+
+  //Returns the affordance object with its inputSchema if it has one
+  parseInputSchema: function (affordance, artifactRdfStore) {
+    affordance.hasInputSchema = td.hasInputSchema(affordance.node, artifactRdfStore)
+    if(affordance.hasInputSchema) {
+      affordance.inputSchema = td.getInputSchema(affordance.node, artifactRdfStore);
+    }
+    return affordance
+  },
 
   getWorkspacesFromEnvironment: function (environmentUrl, rdfStore) {
     var thisEnvironment = $rdf.sym(environmentUrl);

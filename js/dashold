@@ -22,40 +22,13 @@
     }
   },
 
-
-  hideArtifactsBar: function () {
-    dashboard.$artifactsScrollContainer.hide();
-  },
-
-  updateArtifactsBar: function (doAnimate) {
-    var currentArtifacts = dashboard.currentArtifacts;
-
-    log.fine('Updating inspector with information on all ' + Object.keys(currentArtifacts).length + ' artifacts.');
-
-    // Count affordances to simplify handlebar's life
-    for (const [currentArtifactUri, currentArtifactInformation] of Object.entries(currentArtifacts)) {
-      currentArtifacts[currentArtifactUri]['numAffordances'] = Object.keys(currentArtifacts[currentArtifactUri].affordances).length;
-    }
-
-    // Hand over to handlebars
-    log.fineSeparate('All Artifacts To Handlebars', currentArtifacts);
-    var $artifactsContent = Handlebars.templates.artifactsList({ currentArtifacts: currentArtifacts, animate: true });
-    dashboard.$artifactsScrollContainer.empty().show().append($artifactsContent);
-
-    dashboard.addClickHandlersToCurrentArtifacts(currentArtifacts);
-  },
-
-  hideAffordancesBar: function () {
-    dashboard.$affordancesScrollContainer.hide();
-  },
-
   updateAffordancesBar: function (currentArtifactUri) {
     artifactRdfStore = dashboard.currentArtifacts[currentArtifactUri].rdfStore;
     artifactAffordances = dashboard.currentArtifacts[currentArtifactUri].affordances;
     log.fine('Updating inspector with information on ' + Object.keys(artifactAffordances).length + ' affordances of ' + dashboard.currentArtifacts[currentArtifactUri].title);
 
     // Empty affordances in blockly
-    blocklyManager.resetAffordancesCategory();
+    blocklyManager.resetAffordancesCategory(); //TODO REMEMBER THIS
 
     // Extend affordances descriptor with input schema. Do the graph walking here to simplify the templates
     for (const affordanceTitle in artifactAffordances) {
@@ -158,30 +131,6 @@
   },
 
   /** Utilities **/
-
-  revealDashboard: function () {
-    window.setTimeout(function () {
-      dashboard.$loading.fadeOut(200);
-      dashboard.$container.fadeIn(200);
-      dashboard.$headerOptionsContainer.removeClass("hidden");
-      dashboard.$headerOptionsContainer.addClass("centered-element");
-
-      blocklyManager.init();
-
-    }, 2000);
-  },
-
-  addClickHandlersToCurrentArtifacts: function (currentArtifacts) {
-    currentArtifactUris = Object.keys(currentArtifacts);
-    numArtifacts = currentArtifactUris.length;
-
-    // Add click handlers to module links
-    for (var i = 0; i < numArtifacts; i++) {
-      currentArtifact = currentArtifactUris[i];
-      log.debug("Attaching click handler to " + currentArtifact);
-      $("div[id='" + currentArtifact + "']").click({ name: currentArtifact, type: dashboard.clickHandlerTypes.selectArtifact }, dashboard.clickHandler);
-    }
-  },
 
   addClickHandlersToCurrentAffordances: function (currentAffordanceIds) {
     numAffordances = currentAffordanceIds.length;

@@ -32,13 +32,16 @@ var dashboard = {
       case EnvironmentController.selectWorkspaceEvent:
         this.handleSelectWorkspaceEvent(event.data)
         break;
+      case ArtifactsController.selectArtifactEvent:
+        this.handleArtifactSelectedEvent(event.data)
+        break;
       default:
         log.error(`Unrecognized event of type ${event.type}`)
         break;
     }
   },
 
-  handleSelectWorkspaceEvent:async function (workspaceData){
+  handleSelectWorkspaceEvent: async function (workspaceData){
     // Re-Initialize Dashboard
     this.artifactsController.clearArtifactsBar();
     this.artifactsController.clearAffordancesBar();
@@ -49,6 +52,10 @@ var dashboard = {
         this.showError(error)
       }
     }
+  },
+
+  handleArtifactSelectedEvent: function(artifactData) {
+    this.artifactsController.reloadAffordancesFromArtifact(artifactData);
   },
 
   showError: function (message) {

@@ -1,7 +1,9 @@
 class ArtifactsController {
 
+  static selectArtifactEvent = "selectArtifact";
   //A map of type (uri) => {artifact}
   currentArtifacts = {}
+  selectedArtifact = undefined
   
   //jquery shortcuts
   $artifactsScrollContainer = $('#artifacts-scroll-container')
@@ -30,17 +32,47 @@ class ArtifactsController {
   showArtifactsBar() {
     var $artifactsContent = Handlebars.templates.artifactsList({ currentArtifacts: this.currentArtifacts, animate: true });
     this.$artifactsScrollContainer.append($artifactsContent);
+    //set click handler
+    for (const uri of Object.keys(this.currentArtifacts)) {
+      $(`div[id='${uri}']`).click(function() {
+        var event = {
+          data: {
+            uri: uri,
+          },
+          type: ArtifactsController.selectArtifactEvent
+        };
+        dashboard.handleEvent(event);
+      });
+    }
     this.$artifactsScrollContainer.show()
   }
 
   clearArtifactsBar() {
     this.currentArtifacts = {}
-    this.$artifactsScrollContainer.empty();
-    this.$artifactsScrollContainer.hide();
+    this.$artifactsScrollContainer.empty().hide();
+  }
+
+  reloadAffordancesFromArtifact(artifactData){
+    this.selectedArtifact = this.currentArtifacts[artifactData.uri]
+    log.fine(`Showing affordances for artifact ${this.selectedArtifact.title}`)
+    //resolve input schemas
+    for(var i in this.selectedArtifact.affordances){
+      this.selectedArtifact.affordances[i] = yggdrasilInterface.parseInputSchema(this.selectedArtifact.affordances[i], this.selectedArtifact.rdfStore)
+    }
+    this.showAffordancesBar()
+  }
+
+  showAffordancesBar(){
+    //render
+    console.log(this.artifactAffordances)
+    var $affordancesContent = Handlebars.templates.affordancesList({ currentAffordances: this.selectedArtifact.affordances, animate: true });
+    this.$affordancesScrollContainer.append($affordancesContent);
+    //add click handler
+    this.$affordancesScrollContainer.show();
   }
 
   clearAffordancesBar() {
-    this.$affordancesScrollContainer.hide();
+    this.$affordancesScrollContainer.empty().hide();
   }
 
 }

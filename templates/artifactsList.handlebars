@@ -5,9 +5,9 @@
 
   {{#each currentArtifacts}}
   {{#if ../animate}} 
-    <div id="{{uri}}" element="artifactInstance" style="animation-delay:{{delay @index}}s" class="card dashcard slide-left" >
+    <div id="{{uri}}" style="animation-delay:{{delay @index}}s -webkit-animation-delay:{{delay @index}}" class="card dashcard slide-left" >
   {{else}}
-    <div id="{{uri}}" element="artifactInstance" class="card dashcard">
+    <div id="{{uri}}" class="card dashcard">
       {{/if}}
       <div class="card-header artifact-header">{{title}}</div>
       <div class="card-body">
