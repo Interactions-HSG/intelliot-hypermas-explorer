@@ -12,6 +12,10 @@
 @font-size--inspector-text-fullsize : 14px;
 @font-size--inspector-text-small : 10px;
 
+body{
+    margin:0;
+}
+
 p {
     font-size: @font-size--descriptive-text;
 }
@@ -103,5 +107,13 @@ p {
     });
 
     .animation(pulse-red 4s infinite)
+}
 
+.slide-left {
+    .keyframes(slide-left; {
+        0%      {left: -30px; opacity: 0%;}
+        100%    {left: 0px; visibility: visible; opacity: 100%;}
+    });
+    .animation(slide-left ease-in-out 0.6s);
+    animation-fill-mode: forwards;  
 }

@@ -1,32 +1,25 @@
 {{#if currentArtifacts}}
-<div class="scroll-container-spacer"><div class="dashcard-spacer">
-  <div class="dashcard-header command_style">Artifacts
-    <!-- <span id="createEventButton" class="inlineButton yellowBackground">Create Module [blank]!</span> -->
-  </div>
+<h4 class="artifact-scroll-header slide-left">Artifacts </h4>
 
-</div></div>
+<div>
 
-<div class="inside-tasks-scroller">
-
-{{#each currentArtifacts}}
-{{#if ../animate}}
-<div id="{{uri}}" element="artifactInstance" class="dashcard" style="visibility: hidden; animation: slideFromLeft 0.5s forwards; -webkit-animation: slideFromLeft 0.5s forwards; animation-delay: {{half @index}}s; -webkit-animation-delay: {{half @index}}s;">
-{{else}}
-<div id="{{uri}}" element="artifactInstance" class="dashcard" style="left: 0px;">
-{{/if}}
-  <div id="tasks-header" class="dashcard-header command_style">{{title}}</div>
-    <div id="tasks-content" class="dashcard-scroll-container">
-      <span class="event-information-small">Affordances: {{numAffordances}}</span>
+  {{#each currentArtifacts}}
+  {{#if ../animate}} 
+    <div id="{{uri}}" element="artifactInstance" style="animation-delay:{{delay @index}}s" class="card dashcard slide-left" >
+  {{else}}
+    <div id="{{uri}}" element="artifactInstance" class="card dashcard">
+      {{/if}}
+      <div class="card-header artifact-header">{{title}}</div>
+      <div class="card-body">
+        <p class="card-text">Affordances: {{affordances.length}}</span>
+      </div>
     </div>
-  </div>
-{{/each}}
+  {{/each}}
 </div>
 
 {{else}}
-<div class="scroll-container-spacer">
-  <div class="dashcard-spacer">
-    <div class="dashcard-header command_style">No Artifacts</div>
-  </div>
+<div>
+  <p>No Artifacts</p>
 </div>
 {{/if}}
 

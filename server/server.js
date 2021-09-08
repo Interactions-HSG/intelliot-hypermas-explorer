@@ -48,7 +48,8 @@ var Server = function (settings) {
     var lessInput = [
         'color',
         'header',
-        'dashboard'
+        'dashboard',
+        'cards'
     ]
 
     const PROGRESS_STARTED = 'progress_started'

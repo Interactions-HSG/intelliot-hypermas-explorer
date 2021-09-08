@@ -31,6 +31,8 @@ var yggdrasilInterface = {
     })
   },
 
+  //Returns a Promise that when resolved returns an Array of WorkspaceInformation {name, uri}
+  //Otherwise returns an error message when rejected
   fetchWorkspacesInEnvironment: function (environmentSlug) {
     var store = $rdf.graph();
     var fetcher = new $rdf.Fetcher(store, fetcherTimeout);
@@ -58,6 +60,8 @@ var yggdrasilInterface = {
     })
   },
 
+  //Returns a Promise that when resolved returns an Array of ArtifactInformation {uri, affordances: []}
+  //Otherwise returns an error message when rejected
   fetchArtifactsInWorkspace: function (workspaceUri) {
     var store = $rdf.graph();
     var fetcher = new $rdf.Fetcher(store, fetcherTimeout);
@@ -89,27 +93,25 @@ var yggdrasilInterface = {
     })
   },
 
+  //Returns a Promise that when resolved returns the ArtifactInformation {uri, title, affordances[], rdfStore}
+  //Otherwise returns an error message when rejected
   resolveArtifactAffordances: function (artifactUri) {
     var store = $rdf.graph();
     var fetcher = new $rdf.Fetcher(store, fetcherTimeout);
 
     return new Promise((resolve, reject) => {
-      console.log(artifactUri)
       fetcher.nowOrWhenFetched(artifactUri, function (ok) {
         if (!ok) {
           reject(`Unable to fetch data from artifact: ${artifactUri}`)
         } else {
           affordancesMetadata = td.getAffordancesFromTD(artifactUri, store);
           currentArtifactTitle = td.resolveArtifactTitle(artifactUri, store);
-
           artifactInformation = {
             uri: artifactUri,
             title: currentArtifactTitle,
-            affordances: affordancesMetadata,
+            affordances: Object.values(affordancesMetadata),
             rdfStore: store
           }
-
-          log.debugSeparate('Artifact ' + $rdf.sym(artifactUri) + ' Information', artifactInformation);
           resolve(artifactInformation);
         }
       });

@@ -7,9 +7,13 @@
 
   <title>Hypermedia MAS Explorer | IntellIoT</title>
 
+  
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-F3w7mX95PdgyTmZZMECAngseQB83DfGTowi0iMjiWaeVhAn4FJkqJByhZMI3AhiU" crossorigin="anonymous">
+
   <link rel="stylesheet" type="text/css" href="./css/header.css">
-  <link rel="stylesheet" type="text/css" href="./css/dashboard.css">
-  <link rel="stylesheet" type="text/css" href="./css/material.min.css">
+  <link rel="stylesheet" href="./css/cards.css">
+  <!-- <link rel="stylesheet" type="text/css" href="./css/dashboard.css"> -->
+
 </head>
 
 <body>
@@ -45,15 +49,15 @@
 
   <!-- This is the container that hosts all other interface elements -->
   <div id="container">
-    <div id="artifacts-scroll-container">
+    <div id="artifacts-scroll-container" class="col-3">
       <!-- Placeholder for Discovered Artifacts Stack -->
     </div>
 
-    <div id="affordances-scroll-container">
+    <div id="affordances-scroll-container" class="col-3">
       <!-- Placeholder for Discovered Affordances Stack -->
     </div>
 
-    <div id="blockly-container">
+    <div id="blockly-container" class="col-6">
       <!-- Placeholder for End-User Programming Environment -->
     </div>
 
@@ -93,7 +97,10 @@
   <script src="js/controllers/affordances.js"></script> 
   
   <script src="js/controllers/dashboard.js"></script>
-  <script src="js/controllers/main.js"></script>
+
+  <!--Main-->
+  <script src="js/helpers.js"></script>
+  <script src="js/main.js"></script>
 </body>
 
 </html>

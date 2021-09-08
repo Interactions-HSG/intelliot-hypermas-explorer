@@ -134,30 +134,6 @@
 
   /* Yggdrasil Interface Callbacks */
 
-
-  fetchArtifactsCallback: function (artifactsInformation, animateArtifacts) {
-    log.fine(artifactsInformation);
-
-    dashboard.artifactsInformation = [];
-
-    // TODO: This currently just unpacks the artifact information, it's unnecessary. Clean up when functional.
-    for (var i = 0; i < artifactsInformation.length;i++) {
-      artifactUri = artifactsInformation[i].uri;
-      artifactInformation = {
-        uri: artifactUri,
-        affordances: []
-      };
-
-      log.fine('Resolving artifact ' + artifactUri);
-      dashboard.artifactsInformation.push(artifactUri);
-    }
-
-    log.fine(dashboard.artifactsInformation);
-
-    // Fetch artifact affordances
-    yggdrasilInterface.resolveArtifactsAffordances(dashboard.artifactsInformation, dashboard.fetchAffordancesCallback);
-  },
-
   fetchAffordancesCallback: function (artifactsInformation, animateArtifacts) {
 
     if (artifactsInformation.affordances == undefined) {

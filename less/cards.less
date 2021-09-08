@@ -1,0 +1,29 @@
+@import "base";
+@import "color";
+
+.artifact-scroll-header {
+  font-weight: bold;
+  color: @c_interactions_accent_one;
+}
+
+.artifact-header {
+  background-color: @c_interactions_accent_one;
+  color: @c_interactions_snow;
+  font-weight: bold;
+}
+
+.affordances-header{
+
+}
+
+.dashcard {
+  color:black;
+  background-color: @c_interactions_snow;
+  cursor: pointer;
+  visibility: hidden;
+  box-shadow: 0px 5px 10px 0px rgba(0, 0, 0, 0.2);
+  margin-bottom: 10px;
+  &:hover{
+      box-shadow: 0px 5px 10px 0px rgba(0, 0, 0, 0.5);
+  }
+}
