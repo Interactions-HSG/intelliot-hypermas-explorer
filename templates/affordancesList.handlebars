@@ -1,38 +1,41 @@
 {{#if currentAffordances}}
-<div class="dashcard-header variable_style">Affordances</div>
+<h4 class="scroll-header affordance-color slide-left">Affordances </h4>
 
 <div>
-{{#each currentAffordances}}
-{{#if ../animate}}
-<div id="{{@key}}"  class="card dashcard slide-left" style="animation-delay:{{delay @index}}s -webkit-animation-delay:{{delay @index}}">
-{{else}}
-<div id="{{@key}}"  class="card dashcard">
-{{/if}}
+  {{#each currentAffordances}}
+  {{#if ../animate}}
+    <div id="{{@key}}" class="card dashcard slide-left" style="animation-delay:{{delay @index}}s -webkit-animation-delay:{{delay @index}}">
+  {{else}}
+    <div id="{{@key}}" class="card dashcard">
+  {{/if}}
+      <div class="card-header affordance-color-reverse">{{title}}</div>
+      <div class="card-body">
+          <p class="card-text">{{description}}</div>
+          {{#if hasInputSchema}}
+          <div>
+              {{#each inputSchema.properties}}
+                <div class="input-group input-group-sm input-schema">
+                  <span class="input-group-text" id="inputGroup-sizing-sm">{{propertyName}}</span>
+                  <input id="{{propertyName}}" type="text" class="form-control" placeholder="({{schemaType}})">
+                </div>
+              {{/each}}
 
-  <div class="">{{affordanceTitle}}
-    <div id="follow-affordance-button" class="inlineButton">Go!</div>
-  </div>
-
-  <div class="tooltiptext">{{affordanceDescription}}</div>
-
-    {{#if hasInputSchema}}
-    <div id="tasks-content" class="dashcard-scroll-container">
-
-      {{#each inputSchema.properties}}
-        <input class="event-information-small" type="text" id="{{propertyName}}" placeholder="{{propertyName}} ({{schemaType}})"/>
-      {{/each}}
-
-      <!--
-      {{#if inputSchema.requiredProperties}}
-      <span class="event-information-small">Required: <b>{{inputSchema.requiredProperties}}</b></span>
-      {{/if}}
-      -->
+              <!--
+            {{#if inputSchema.requiredProperties}}
+            <span class="event-information-small">Required: <b>{{inputSchema.requiredProperties}}</b></span>
+            {{/if}}
+            -->
+          </div>
+          {{/if}}
+      </div>
     </div>
-    {{/if}}
+    {{/each}}
   </div>
-{{/each}}
-</div>
 
-{{else}}
-<div class="scroll-container-spacer"><div class="dashcard-spacer"><div class="dashcard-header variable_style">No Affordances</div></div></div>
-{{/if}}
+  {{else}}
+  <div class="scroll-container-spacer">
+    <div class="dashcard-spacer">
+      <div class="dashcard-header variable_style">No Affordances</div>
+    </div>
+  </div>
+  {{/if}}

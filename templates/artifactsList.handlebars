@@ -1,6 +1,5 @@
 {{#if currentArtifacts}}
-<h4 class="artifact-scroll-header slide-left">Artifacts </h4>
-
+<h4 class="scroll-header artifact-color slide-left">Artifacts </h4>
 <div>
 
   {{#each currentArtifacts}}
@@ -9,7 +8,7 @@
   {{else}}
     <div id="{{uri}}" class="card dashcard">
       {{/if}}
-      <div class="card-header artifact-header">{{title}}</div>
+      <div class="card-header artifact-color-reverse">{{title}}</div>
       <div class="card-body">
         <p class="card-text">Affordances: {{affordances.length}}</span>
       </div>

@@ -67,7 +67,8 @@ class ArtifactsController {
     console.log(this.artifactAffordances)
     var $affordancesContent = Handlebars.templates.affordancesList({ currentAffordances: this.selectedArtifact.affordances, animate: true });
     this.$affordancesScrollContainer.append($affordancesContent);
-    //add click handler
+    //TODO add click handler
+    console.log(this.selectedArtifact.affordances)
     this.$affordancesScrollContainer.show();
   }
 
