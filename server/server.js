@@ -47,7 +47,7 @@ var Server = function (settings) {
     // All the less files to render
     var lessInput = [
         'color',
-        'header',
+        'main',
         'dashboard',
         'cards'
     ]

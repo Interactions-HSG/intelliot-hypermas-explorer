@@ -15,6 +15,14 @@ var helpers = {
       else
         return parseFloat(value2).toFixed(2);
     });
+
+    Handlebars.registerHelper("toString", function(object) {
+      return JSON.stringify(object)
+    });
+
+    Handlebars.registerHelper("currentTime", function() {
+      return  new Date().toLocaleTimeString('en-US', { hour12: false});
+    })
   
     Handlebars.registerHelper("with2Decimals", function (value, options) {
       var num = parseFloat(value);

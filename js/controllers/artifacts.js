@@ -1,6 +1,7 @@
 class ArtifactsController {
 
   static selectArtifactEvent = "selectArtifact";
+  static testAffordanceEvent = "testAffordance";
   //A map of type (uri) => {artifact}
   currentArtifacts = {}
   selectedArtifact = undefined
@@ -8,6 +9,7 @@ class ArtifactsController {
   //jquery shortcuts
   $artifactsScrollContainer = $('#artifacts-scroll-container')
   $affordancesScrollContainer = $('#affordances-scroll-container')
+  $resultsContainer = $('#results-container')
 
   async reloadArtifactsFromWorkspace(workspaceData){
     log.fine(`Fetching artifacts in workspace ${workspaceData.name}`);
@@ -33,17 +35,15 @@ class ArtifactsController {
     var $artifactsContent = Handlebars.templates.artifactsList({ currentArtifacts: this.currentArtifacts, animate: true });
     this.$artifactsScrollContainer.append($artifactsContent);
     //set click handler
-    for (const uri of Object.keys(this.currentArtifacts)) {
-      $(`div[id='${uri}']`).click(function() {
-        var event = {
-          data: {
-            uri: uri,
-          },
-          type: ArtifactsController.selectArtifactEvent
-        };
-        dashboard.handleEvent(event);
-      });
-    }
+    Object.keys(this.currentArtifacts).forEach(uri => {
+      var event = {
+        data: {
+          uri: uri,
+        },
+        type: ArtifactsController.selectArtifactEvent
+      };
+      $(`div[id='${uri}']`).click(() => dashboard.handleEvent(event));
+    });
     this.$artifactsScrollContainer.show()
   }
 
@@ -63,17 +63,63 @@ class ArtifactsController {
   }
 
   showAffordancesBar(){
-    //render
-    console.log(this.artifactAffordances)
     var $affordancesContent = Handlebars.templates.affordancesList({ currentAffordances: this.selectedArtifact.affordances, animate: true });
     this.$affordancesScrollContainer.append($affordancesContent);
-    //TODO add click handler
-    console.log(this.selectedArtifact.affordances)
+    this.addAffordancesTestHandler()
     this.$affordancesScrollContainer.show();
+  }
+
+  addAffordancesTestHandler(){
+    var selectedArtifact = this.selectedArtifact
+
+    selectedArtifact.affordances.forEach(a => {
+      var event = {
+        data: {
+          affordance: a,
+          artifactRdfStore: selectedArtifact.rdfStore
+        },
+        type: ArtifactsController.testAffordanceEvent
+      };
+      $("div[id='" + a.id + "']")
+      .find("span.test-affordance")
+      .click(() => dashboard.handleEvent(event));
+    });
+
+  }
+
+  //TODO debug
+  async testAffordance(affordanceData){
+    log.fine(`Testing ${affordanceData.affordance.title} affordance`);
+
+    var affordanceId = affordanceData.affordance.id
+    var inputData = null
+
+    if(affordanceData.affordance.hasInputSchema){
+      // Assemble input data according to request
+      // This part should definitely be done using node-wot; however, this needs to be synchronized with wot-td (i.e., yggdrasil needs to provide json TDs that node-wot can parse)
+      inputData = {};
+      $("div[id='" + affordanceId + "']").find("input").each(function(index) {
+        inputData[$(this).attr('id')] = $(this).val();
+      })
+    }
+    try{
+      var res = await yggdrasilInterface.testAffordance(affordanceData.affordance, affordanceData.artifactRdfStore, inputData)
+      this.displayResultToast(affordanceData.affordance.title, res)
+    } catch (error) {
+      console.log(error)
+    }
   }
 
   clearAffordancesBar() {
     this.$affordancesScrollContainer.empty().hide();
+  }
+
+  displayResultToast(invokedAffordance, result){
+    var $toast = Handlebars.templates.resultContent({invoked: invokedAffordance, result: result})
+    this.$resultsContainer.empty()
+    this.$resultsContainer.append($toast)
+    $('.toast').toast({delay: 10*1000, animation: false})
+    $('.toast').toast('show');
   }
 
 }

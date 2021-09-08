@@ -128,6 +128,14 @@ var yggdrasilInterface = {
     });
   },
 
+  testAffordance: function(affordance, artifactRdfStore, inputData) {
+    return new Promise((resolve, reject) => {
+      td.followAffordance(affordance.node, artifactRdfStore, inputData, function(msg) {
+        resolve(msg)
+      })
+    })
+  },
+
   /* Helper Functions */
 
   //Returns the affordance object with its inputSchema if it has one

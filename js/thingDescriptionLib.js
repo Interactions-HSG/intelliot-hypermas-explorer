@@ -158,9 +158,6 @@ var td = {
 	},
 
 	doRequest: function (requestUri, requestMethod, contentType, payload, callback) {
-
-		log.debug(payload);
-
 		if (requestMethod == 'GET') {
 			log.debug('Doing GET request...');
 
@@ -168,12 +165,11 @@ var td = {
 				type: requestMethod,
 				url: requestUri,
 				success: function (msg) {
-					callback(msg);
+					callback(msg)
 				}
 			};
 
-			log.debug(ajaxObject);
-			$.ajax(ajaxObject);
+			$.ajax(ajaxObject)
 		} else if (requestMethod == 'PUT' || requestMethod == 'POST') {
 			log.debug('Doing PUT/POST request...');
 
@@ -209,7 +205,6 @@ var td = {
 				ajaxObject['headers'] = { 'Content-Type': 'application/json' };
 			}
 
-			log.debug(ajaxObject);
 			$.ajax(ajaxObject);
 		} else {
 			log.debug(requestMethod + ' not implemented');

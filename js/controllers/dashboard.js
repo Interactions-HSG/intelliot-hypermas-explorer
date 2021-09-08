@@ -35,37 +35,53 @@ var dashboard = {
       case ArtifactsController.selectArtifactEvent:
         this.handleArtifactSelectedEvent(event.data)
         break;
+      case ArtifactsController.testAffordanceEvent:
+        this.handleTestAffordanceEvent(event.data)
+        break;
       default:
         log.error(`Unrecognized event of type ${event.type}`)
         break;
     }
   },
 
-  handleSelectWorkspaceEvent: async function (workspaceData){
-    // Re-Initialize Dashboard
+  handleSelectWorkspaceEvent: function (workspaceData){
     this.artifactsController.clearArtifactsBar();
     this.artifactsController.clearAffordancesBar();
-    if(workspaceData.uri != "empty"){
-      try{
-        await this.artifactsController.reloadArtifactsFromWorkspace(workspaceData);
-      } catch (error){
-        this.showError(error)
+    (async ()  => {
+      if(workspaceData.uri != "empty"){
+        try{
+          await this.artifactsController.reloadArtifactsFromWorkspace(workspaceData);
+        } catch (error){
+          showError(error)
+        }
       }
-    }
+    })();
   },
 
   handleArtifactSelectedEvent: function(artifactData) {
-    this.artifactsController.reloadAffordancesFromArtifact(artifactData);
+    (async () => {
+      try{
+        await this.artifactsController.reloadAffordancesFromArtifact(artifactData);
+      } catch (error) {
+        showError(error)
+      }
+    })();
+  },
+
+  handleTestAffordanceEvent: function(affordanceData) {
+    (async () => {
+      try{
+        await this.artifactsController.testAffordance(affordanceData);
+      } catch (error) {
+        showError(error)
+      }
+    })();
   },
 
   showError: function (message) {
     //TODO show an alert box or something
     log.error(message)
     alert("ERROR: " + message)
-  },
-
-  reloadDashboard: function () {
-    return false
   },
 
   revealDashboard: function () {
