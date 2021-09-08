@@ -4,11 +4,14 @@
 <div>
   {{#each currentAffordances}}
   {{#if ../animate}}
-    <div id="{{@key}}" class="card dashcard slide-left" style="animation-delay:{{delay @index}}s -webkit-animation-delay:{{delay @index}}">
+    <div id="{{id}}" class="card dashcard slide-left" style="animation-delay:{{delay @index}}s -webkit-animation-delay:{{delay @index}}">
   {{else}}
-    <div id="{{@key}}" class="card dashcard">
+    <div id="{{id}}" class="card dashcard">
   {{/if}}
-      <div class="card-header affordance-color-reverse">{{title}}</div>
+      <div class="card-header affordance-color-reverse">
+          {{title}}
+         <span id="follow-affordance" class="badge rounded-pill clickable">Test</span>
+      </div>
       <div class="card-body">
           <p class="card-text">{{description}}</div>
           {{#if hasInputSchema}}
@@ -19,12 +22,6 @@
                   <input id="{{propertyName}}" type="text" class="form-control" placeholder="({{schemaType}})">
                 </div>
               {{/each}}
-
-              <!--
-            {{#if inputSchema.requiredProperties}}
-            <span class="event-information-small">Required: <b>{{inputSchema.requiredProperties}}</b></span>
-            {{/if}}
-            -->
           </div>
           {{/if}}
       </div>
@@ -33,9 +30,7 @@
   </div>
 
   {{else}}
-  <div class="scroll-container-spacer">
-    <div class="dashcard-spacer">
-      <div class="dashcard-header variable_style">No Affordances</div>
-    </div>
+  <div>
+    <p>No Affordances</p>
   </div>
   {{/if}}

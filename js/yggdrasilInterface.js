@@ -109,6 +109,7 @@ var yggdrasilInterface = {
           var affordances = []
           for (var affordance of Object.values(affordancesMetadata)) {
             affordances.push({
+              id: affordance.affordanceNode.value,
               title: affordance.affordanceTitle,
               description: affordance.affordanceDescription,
               artifact: affordance.affordanceArtifact,

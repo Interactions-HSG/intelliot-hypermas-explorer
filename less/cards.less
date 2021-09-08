@@ -30,7 +30,6 @@
 .dashcard {
   color:black;
   background-color: @c_interactions_snow;
-  cursor: pointer;
   visibility: hidden;
   box-shadow: 0px 5px 10px 0px rgba(0, 0, 0, 0.2);
   margin-bottom: 10px;
@@ -40,6 +39,9 @@
 
   .card-header {
     padding: 5px;
+    display:flex; 
+    flex-direction: row;
+    justify-content: space-between;
   }
 
   .card-body{
@@ -47,7 +49,22 @@
   }
 }
 
+.clickable {
+  cursor: pointer;
+}
+
 .input-schema {
   width: 95%;
   margin: 5px;
+}
+
+
+#follow-affordance{
+  background-color: @c_interactions_gray;
+  color: @c_interactions_darkgray;
+  margin: 2px;
+  height: 20px;
+  &:hover{
+    background-color: @c_interactions_snow_dirty;
+  }
 }

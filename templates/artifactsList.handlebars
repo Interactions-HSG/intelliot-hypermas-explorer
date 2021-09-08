@@ -4,9 +4,9 @@
 
   {{#each currentArtifacts}}
   {{#if ../animate}} 
-    <div id="{{uri}}" style="animation-delay:{{delay @index}}s -webkit-animation-delay:{{delay @index}}" class="card dashcard slide-left" >
+    <div id="{{uri}}" class="card dashcard clickable slide-left" style="animation-delay:{{delay @index}}s -webkit-animation-delay:{{delay @index}}" >
   {{else}}
-    <div id="{{uri}}" class="card dashcard">
+    <div id="{{uri}}" class="card dashcard clickable">
       {{/if}}
       <div class="card-header artifact-color-reverse">{{title}}</div>
       <div class="card-body">
