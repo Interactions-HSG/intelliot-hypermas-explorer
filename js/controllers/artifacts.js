@@ -5,6 +5,7 @@ class ArtifactsController {
   //A map of type (uri) => {artifact}
   currentArtifacts = {}
   selectedArtifact = undefined
+  maxToastShown = 5
   
   //jquery shortcuts
   $artifactsContainer = $('#artifacts-container')
@@ -117,9 +118,7 @@ class ArtifactsController {
   displayResultToast(invokedAffordance, result){
     var $toast = $(Handlebars.templates.resultContent({invoked: invokedAffordance, result: result}))
     this.$resultsContainer.find('.toast.hide').remove()
-    if(this.$resultsContainer.children().length > 3){
-      //always show no more than 4
-      //TODO fix animation?
+    if(this.$resultsContainer.children().length >= this.maxToastShown){
       this.$resultsContainer.children(":first").remove() 
     }
     this.$resultsContainer.append($toast)

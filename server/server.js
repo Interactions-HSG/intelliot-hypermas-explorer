@@ -48,7 +48,6 @@ var Server = function (settings) {
     var lessInput = [
         'color',
         'main',
-        'dashboard',
         'cards'
     ]
 
