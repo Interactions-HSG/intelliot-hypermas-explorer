@@ -60,6 +60,7 @@ class ArtifactsController {
     for(var i in this.selectedArtifact.affordances){
       this.selectedArtifact.affordances[i] = yggdrasilInterface.parseInputSchema(this.selectedArtifact.affordances[i], this.selectedArtifact.rdfStore)
     }
+    this.clearAffordancesBar()
     this.showAffordancesBar()
   }
 
