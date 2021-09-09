@@ -7,8 +7,8 @@ class ArtifactsController {
   selectedArtifact = undefined
   
   //jquery shortcuts
-  $artifactsScrollContainer = $('#artifacts-scroll-container')
-  $affordancesScrollContainer = $('#affordances-scroll-container')
+  $artifactsContainer = $('#artifacts-container')
+  $affordancesContainer = $('#affordances-container')
   $resultsContainer = $('#results-container')
 
   async reloadArtifactsFromWorkspace(workspaceData){
@@ -33,7 +33,7 @@ class ArtifactsController {
 
   showArtifactsBar() {
     var $artifactsContent = Handlebars.templates.artifactsList({ currentArtifacts: this.currentArtifacts, animate: true });
-    this.$artifactsScrollContainer.append($artifactsContent);
+    this.$artifactsContainer.append($artifactsContent);
     //set click handler
     Object.keys(this.currentArtifacts).forEach(uri => {
       var event = {
@@ -44,12 +44,12 @@ class ArtifactsController {
       };
       $(`div[id='${uri}']`).click(() => dashboard.handleEvent(event));
     });
-    this.$artifactsScrollContainer.show()
+    this.$artifactsContainer.show()
   }
 
   clearArtifactsBar() {
     this.currentArtifacts = {}
-    this.$artifactsScrollContainer.empty().hide();
+    this.$artifactsContainer.empty().hide();
   }
 
   reloadAffordancesFromArtifact(artifactData){
@@ -64,9 +64,9 @@ class ArtifactsController {
 
   showAffordancesBar(){
     var $affordancesContent = Handlebars.templates.affordancesList({ currentAffordances: this.selectedArtifact.affordances, animate: true });
-    this.$affordancesScrollContainer.append($affordancesContent);
+    this.$affordancesContainer.append($affordancesContent);
     this.addAffordancesTestHandler()
-    this.$affordancesScrollContainer.show();
+    this.$affordancesContainer.show();
   }
 
   addAffordancesTestHandler(){
@@ -111,7 +111,7 @@ class ArtifactsController {
   }
 
   clearAffordancesBar() {
-    this.$affordancesScrollContainer.empty().hide();
+    this.$affordancesContainer.empty().hide();
   }
 
   displayResultToast(invokedAffordance, result){

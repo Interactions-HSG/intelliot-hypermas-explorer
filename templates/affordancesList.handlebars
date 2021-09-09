@@ -1,36 +1,36 @@
 {{#if currentAffordances}}
-<h4 class="scroll-header affordance-color slide-in-left">Affordances </h4>
-
-<div>
-  {{#each currentAffordances}}
-  {{#if ../animate}}
-    <div id="{{id}}" class="card dashcard slide-in-left" style="animation-delay:{{delay @index}}s -webkit-animation-delay:{{delay @index}}s">
+<div class="scroll-header">
+  <h4 class="affordance-color slide-in-left">Affordances </h4>
+</div>
+<div class="scroll-container">
+{{#each currentAffordances}}
+{{#if ../animate}}
+  <div id="{{id}}" class="card dashcard slide-in-left" style="animation-delay:{{delay @index}}s -webkit-animation-delay:{{delay @index}}s">
   {{else}}
-    <div id="{{id}}" class="card dashcard">
-  {{/if}}
-      <div class="card-header affordance-color-reverse">
-          {{title}}
-         <span class="test-affordance badge rounded-pill clickable">Test</span>
-      </div>
-      <div class="card-body">
-          <p class="card-text">{{description}}</div>
-          {{#if hasInputSchema}}
-          <div>
-              {{#each inputSchema.properties}}
-                <div class="input-group input-group-sm input-schema">
-                  <span class="input-group-text" id="inputGroup-sizing-sm">{{propertyName}}</span>
-                  <input id="{{propertyName}}" type="text" class="form-control" placeholder="({{schemaType}})">
-                </div>
-              {{/each}}
-          </div>
-          {{/if}}
-      </div>
+  <div id="{{id}}" class="card dashcard">
+{{/if}}
+    <div class="card-header affordance-color-reverse">
+      {{title}}
+      <span class="test-affordance badge rounded-pill clickable">Test</span>
     </div>
-    {{/each}}
-  </div>
-
-  {{else}}
-  <div>
-    <p>No Affordances</p>
-  </div>
-  {{/if}}
+    <div class="card-body">
+      <p class="card-text">{{description}}
+    </div>
+    {{#if hasInputSchema}}
+    <div>
+      {{#each inputSchema.properties}}
+      <div class="input-group input-group-sm input-schema">
+        <span class="input-group-text" id="inputGroup-sizing-sm">{{propertyName}}</span>
+        <input id="{{propertyName}}" type="text" class="form-control" placeholder="({{schemaType}})">
+      </div>
+      {{/each}}
+    </div>
+    {{/if}}
+</div>
+{{/each}}
+</div>
+{{else}}
+<div>
+  <p>No Affordances</p>
+</div>
+{{/if}}

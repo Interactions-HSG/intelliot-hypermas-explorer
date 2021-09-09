@@ -1,7 +1,8 @@
 {{#if currentArtifacts}}
-<h4 class="scroll-header artifact-color slide-in-left">Artifacts </h4>
-<div>
-
+<div class="scroll-header">
+  <h4 class="artifact-color slide-in-left">Artifacts </h4>
+</div>
+<div class="scroll-container">
   {{#each currentArtifacts}}
   {{#if ../animate}} 
     <div id="{{uri}}" class="card dashcard clickable slide-in-left" style="animation-delay:{{delay @index}}s -webkit-animation-delay:{{delay @index}}s" >

@@ -1,6 +1,20 @@
 @import "base";
 @import "color";
 
+.scroll-header {
+  font-weight: bold;
+  height: 5%;
+  padding-left: 10px;
+}
+
+.scroll-container {
+  height: 95%;
+  overflow: auto;
+  box-sizing: border-box;
+  padding: 0px 10px;
+}
+
+
 .artifact-color{
   color: @c_interactions_accent_one;
 }
@@ -17,10 +31,6 @@
 .affordance-color-reverse{
   background-color: @c_interactions_accent_two;
   color: @c_interactions_snow;
-}
-
-.scroll-header {
-  font-weight: bold;
 }
 
 .card-header {
