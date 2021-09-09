@@ -8,7 +8,7 @@ templates['affordancesList'] = template({"1":function(container,depth0,helpers,p
         return undefined
     };
 
-  return "<h4 class=\"scroll-header affordance-color slide-left\">Affordances </h4>\r\n\r\n<div>\r\n"
+  return "<h4 class=\"scroll-header affordance-color slide-in-left\">Affordances </h4>\r\n\r\n<div>\r\n"
     + ((stack1 = lookupProperty(helpers,"each").call(depth0 != null ? depth0 : (container.nullContext || {}),(depth0 != null ? lookupProperty(depth0,"currentAffordances") : depth0),{"name":"each","hash":{},"fn":container.program(2, data, 0, blockParams, depths),"inverse":container.noop,"data":data,"loc":{"start":{"line":5,"column":2},"end":{"line":29,"column":13}}})) != null ? stack1 : "")
     + "  </div>\r\n\r\n";
 },"2":function(container,depth0,helpers,partials,data,blockParams,depths) {
@@ -37,11 +37,9 @@ templates['affordancesList'] = template({"1":function(container,depth0,helpers,p
 
   return "    <div id=\""
     + alias3(((helper = (helper = lookupProperty(helpers,"id") || (depth0 != null ? lookupProperty(depth0,"id") : depth0)) != null ? helper : alias2),(typeof helper === "function" ? helper.call(alias1,{"name":"id","hash":{},"data":data,"loc":{"start":{"line":7,"column":13},"end":{"line":7,"column":19}}}) : helper)))
-    + "\" class=\"card dashcard slide-left\" style=\"animation-delay:"
-    + alias3((lookupProperty(helpers,"delay")||(depth0 && lookupProperty(depth0,"delay"))||alias2).call(alias1,(data && lookupProperty(data,"index")),{"name":"delay","hash":{},"data":data,"loc":{"start":{"line":7,"column":77},"end":{"line":7,"column":93}}}))
-    + "s -webkit-animation-delay:"
-    + alias3((lookupProperty(helpers,"delay")||(depth0 && lookupProperty(depth0,"delay"))||alias2).call(alias1,(data && lookupProperty(data,"index")),{"name":"delay","hash":{},"data":data,"loc":{"start":{"line":7,"column":119},"end":{"line":7,"column":135}}}))
-    + "\">\r\n";
+    + "\" class=\"card dashcard slide-in-left\" style=\"animation-delay:"
+    + alias3((lookupProperty(helpers,"delay")||(depth0 && lookupProperty(depth0,"delay"))||alias2).call(alias1,(data && lookupProperty(data,"index")),{"name":"delay","hash":{},"data":data,"loc":{"start":{"line":7,"column":80},"end":{"line":7,"column":96}}}))
+    + "s\">\r\n";
 },"5":function(container,depth0,helpers,partials,data) {
     var helper, lookupProperty = container.lookupProperty || function(parent, propertyName) {
         if (Object.prototype.hasOwnProperty.call(parent, propertyName)) {
@@ -99,7 +97,7 @@ templates['artifactsList'] = template({"1":function(container,depth0,helpers,par
         return undefined
     };
 
-  return "<h4 class=\"scroll-header artifact-color slide-left\">Artifacts </h4>\r\n<div>\r\n\r\n"
+  return "<h4 class=\"scroll-header artifact-color slide-in-left\">Artifacts </h4>\r\n<div>\r\n\r\n"
     + ((stack1 = lookupProperty(helpers,"each").call(depth0 != null ? depth0 : (container.nullContext || {}),(depth0 != null ? lookupProperty(depth0,"currentArtifacts") : depth0),{"name":"each","hash":{},"fn":container.program(2, data, 0, blockParams, depths),"inverse":container.noop,"data":data,"loc":{"start":{"line":5,"column":2},"end":{"line":16,"column":11}}})) != null ? stack1 : "")
     + "</div>\r\n\r\n";
 },"2":function(container,depth0,helpers,partials,data,blockParams,depths) {
@@ -126,10 +124,10 @@ templates['artifactsList'] = template({"1":function(container,depth0,helpers,par
 
   return "    <div id=\""
     + alias3(((helper = (helper = lookupProperty(helpers,"uri") || (depth0 != null ? lookupProperty(depth0,"uri") : depth0)) != null ? helper : alias2),(typeof helper === "function" ? helper.call(alias1,{"name":"uri","hash":{},"data":data,"loc":{"start":{"line":7,"column":13},"end":{"line":7,"column":20}}}) : helper)))
-    + "\" class=\"card dashcard clickable slide-left\" style=\"animation-delay:"
-    + alias3((lookupProperty(helpers,"delay")||(depth0 && lookupProperty(depth0,"delay"))||alias2).call(alias1,(data && lookupProperty(data,"index")),{"name":"delay","hash":{},"data":data,"loc":{"start":{"line":7,"column":88},"end":{"line":7,"column":104}}}))
+    + "\" class=\"card dashcard clickable slide-in-left\" style=\"animation-delay:"
+    + alias3((lookupProperty(helpers,"delay")||(depth0 && lookupProperty(depth0,"delay"))||alias2).call(alias1,(data && lookupProperty(data,"index")),{"name":"delay","hash":{},"data":data,"loc":{"start":{"line":7,"column":91},"end":{"line":7,"column":107}}}))
     + "s -webkit-animation-delay:"
-    + alias3((lookupProperty(helpers,"delay")||(depth0 && lookupProperty(depth0,"delay"))||alias2).call(alias1,(data && lookupProperty(data,"index")),{"name":"delay","hash":{},"data":data,"loc":{"start":{"line":7,"column":130},"end":{"line":7,"column":146}}}))
+    + alias3((lookupProperty(helpers,"delay")||(depth0 && lookupProperty(depth0,"delay"))||alias2).call(alias1,(data && lookupProperty(data,"index")),{"name":"delay","hash":{},"data":data,"loc":{"start":{"line":7,"column":133},"end":{"line":7,"column":149}}}))
     + "\" >\r\n";
 },"5":function(container,depth0,helpers,partials,data) {
     var helper, lookupProperty = container.lookupProperty || function(parent, propertyName) {
@@ -163,7 +161,7 @@ templates['resultContent'] = template({"compiler":[8,">= 4.3.0"],"main":function
         return undefined
     };
 
-  return "  <div class=\"toast\" role=\"alert\" aria-live=\"assertive\" aria-atomic=\"true\">\r\n  <div class=\"toast-header\">\r\n    <strong class=\"me-auto\">"
+  return "  <div class=\"toast slide-in-top\" role=\"alert\" aria-live=\"assertive\" aria-atomic=\"true\">\r\n  <div class=\"toast-header\">\r\n    <strong class=\"me-auto\">"
     + alias4(((helper = (helper = lookupProperty(helpers,"invoked") || (depth0 != null ? lookupProperty(depth0,"invoked") : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"invoked","hash":{},"data":data,"loc":{"start":{"line":3,"column":28},"end":{"line":3,"column":39}}}) : helper)))
     + " result</strong>\r\n    <small>"
     + alias4(((helper = (helper = lookupProperty(helpers,"currentTime") || (depth0 != null ? lookupProperty(depth0,"currentTime") : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"currentTime","hash":{},"data":data,"loc":{"start":{"line":4,"column":11},"end":{"line":4,"column":26}}}) : helper)))

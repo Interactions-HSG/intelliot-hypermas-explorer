@@ -166,6 +166,12 @@ var td = {
 				url: requestUri,
 				success: function (msg) {
 					callback(msg)
+				},
+				error: function(jqXHR, textStatus, errorThrown) {
+					log.debug('Request failed');
+					log.debug(textStatus);
+					log.debug(errorThrown);
+					log.error(jqXHR);
 				}
 			};
 

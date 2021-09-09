@@ -1,10 +1,10 @@
 {{#if currentAffordances}}
-<h4 class="scroll-header affordance-color slide-left">Affordances </h4>
+<h4 class="scroll-header affordance-color slide-in-left">Affordances </h4>
 
 <div>
   {{#each currentAffordances}}
   {{#if ../animate}}
-    <div id="{{id}}" class="card dashcard slide-left" style="animation-delay:{{delay @index}}s -webkit-animation-delay:{{delay @index}}">
+    <div id="{{id}}" class="card dashcard slide-in-left" style="animation-delay:{{delay @index}}s -webkit-animation-delay:{{delay @index}}s">
   {{else}}
     <div id="{{id}}" class="card dashcard">
   {{/if}}

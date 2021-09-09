@@ -115,11 +115,18 @@ class ArtifactsController {
   }
 
   displayResultToast(invokedAffordance, result){
-    var $toast = Handlebars.templates.resultContent({invoked: invokedAffordance, result: result})
-    this.$resultsContainer.empty()
+    var $toast = $(Handlebars.templates.resultContent({invoked: invokedAffordance, result: result}))
+    this.$resultsContainer.find('.toast.hide').remove()
+    if(this.$resultsContainer.children().length > 3){
+      //always show no more than 4
+      //TODO fix animation?
+      this.$resultsContainer.children(":first").remove() 
+    }
     this.$resultsContainer.append($toast)
-    $('.toast').toast({delay: 10*1000, animation: false})
-    $('.toast').toast('show');
+    $toast.toast({autohide: false, animation:false})
+    $toast.toast('show')
+    
+    
   }
 
 }
