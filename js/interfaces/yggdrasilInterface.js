@@ -2,7 +2,8 @@
 // Interactions Research Group, University of St.Gallen
 // This module handles all callbacks to the Hypermedia MAS Infrastructure
 
-var yggdrasilHostname = 'yggdrasil.interactions.ics.unisg.ch'
+//var yggdrasilHostname = 'yggdrasil.interactions.ics.unisg.ch'
+var yggdrasilHostname = 'localhost:8080'
 var yggdrasilUrl = window.location.protocol + '//' + yggdrasilHostname
 
 const EVE = $rdf.Namespace('http://w3id.org/eve#');

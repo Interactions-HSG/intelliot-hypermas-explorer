@@ -45,12 +45,11 @@ class ArtifactsController {
       };
       $(`div[id='${uri}']`).click(() => dashboard.handleEvent(event));
     });
-    this.$artifactsContainer.show()
   }
 
   clearArtifactsBar() {
     this.currentArtifacts = {}
-    this.$artifactsContainer.empty().hide();
+    this.$artifactsContainer.empty();
   }
 
   reloadAffordancesFromArtifact(artifactData){
@@ -68,7 +67,6 @@ class ArtifactsController {
     var $affordancesContent = Handlebars.templates.affordancesList({ currentAffordances: this.selectedArtifact.affordances, animate: true });
     this.$affordancesContainer.append($affordancesContent);
     this.addAffordancesTestHandler()
-    this.$affordancesContainer.show();
   }
 
   addAffordancesTestHandler(){
@@ -113,7 +111,7 @@ class ArtifactsController {
   }
 
   clearAffordancesBar() {
-    this.$affordancesContainer.empty().hide();
+    this.$affordancesContainer.empty();
   }
 
   displayResultToast(invokedAffordance, result){

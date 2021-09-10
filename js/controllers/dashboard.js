@@ -14,17 +14,20 @@ var dashboard = {
   //component controllers
   environmentController: new EnvironmentController("intelliot"),
   artifactsController: new ArtifactsController(),
+  blocklyController: new BlocklyController(),
 
   init: async function () {
     log.fine('Initializing the dashboard and loading data');
-    this.$container.hide();
+    //this.$container.hide();
     // Load Environment
     try {
       await this.environmentController.fetchWorkspaces();
       this.revealDashboard();
+      
     } catch (error) {
       this.showError(error)
     }
+    //this.blocklyController.initialize();
   },
 
   handleEvent: function (event) {

@@ -12,7 +12,7 @@
 
   <link rel="stylesheet" type="text/css" href="./css/main.css">
   <link rel="stylesheet" href="./css/cards.css">
-  <!-- <link rel="stylesheet" type="text/css" href="./css/dashboard.css"> -->
+  <link rel="stylesheet" href="./css/blockly.css">
 
 </head>
 
@@ -59,7 +59,9 @@
       </div>
 
       <div id="blockly-container" class="col-lg-8 col-6">
+        <div id="blockly-injection">
         <!-- Placeholder for End-User Programming Environment -->
+        </div>
       </div>
     </div>
     <div id="results-container" class="toast-container bottom-0 end-0">
@@ -93,13 +95,15 @@
   <script src="js/interfaces/yggdrasilInterface.js"></script>
   <script src="js/interfaces/thingDescriptionLib.js"></script>
 
-  <script src="js/blocklyManager.js"></script>
+  <!--Blockly-->
+  <script src ="js/blockly/toolbox.js"></script>
+  <script src="js/blockly/theme.js"></script>
+  <script src="js/blockly/controller.js"></script>
 
   <!-- Controllers -->
   <script src="js/controllers/environment.js"></script>
   <script src="js/controllers/artifacts.js"></script>
-  <script src="js/controllers/affordances.js"></script> 
-  
+
   <script src="js/controllers/dashboard.js"></script>
 
   <!--Main-->
