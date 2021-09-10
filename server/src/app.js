@@ -13,9 +13,11 @@ exports.startServer = async function(options) {
 
   app.use(cors())
 
-  app.use(express.static(options.staticDirectory)),
+  //enable static serving of files
+  app.use('/dashboard', express.static(options.staticDirectory)),
   app.use('/templates', express.static(path.join(options.staticDirectory, 'templates')))
 
+  //bodyparser
   var rawBodySaver = function (req, res, buf, encoding) {
     if (buf && buf.length) {
         req.rawBody = buf.toString(encoding || 'utf8');
@@ -25,7 +27,7 @@ exports.startServer = async function(options) {
   app.use(bodyParser.urlencoded({ verify: rawBodySaver, extended: true }));
   app.use(bodyParser.raw({ verify: rawBodySaver, type: '*/*' }));
 
-
+  //middleware for setting response result
   app.use(function(_, res, next) {
     res.setResult = function(result) {
       result(this)
@@ -33,12 +35,15 @@ exports.startServer = async function(options) {
     next()
   })
 
+  //routes to get data
   require(path.join(options.srcDirectory, 'routes'))(app)
 
+  //notFound
   app.use(function(req, res) {
     res.setResult(notFound(`${req.originalUrl} not found`))
   })
 
+  //start listening
   server.listen(options.port, function() {
     console.log(`Started on port ${options.port}!`)
   })
