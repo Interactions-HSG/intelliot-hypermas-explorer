@@ -61,6 +61,7 @@ class ArtifactsController {
     }
     this.clearAffordancesBar()
     this.showAffordancesBar()
+    return this.selectedArtifact;
   }
 
   showAffordancesBar(){

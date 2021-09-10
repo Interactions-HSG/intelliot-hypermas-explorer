@@ -18,16 +18,15 @@ var dashboard = {
 
   init: async function () {
     log.fine('Initializing the dashboard and loading data');
-    //this.$container.hide();
     // Load Environment
+    this.$container.hide()
     try {
       await this.environmentController.fetchWorkspaces();
-      this.revealDashboard();
-      
+      await this.revealDashboard();
     } catch (error) {
       this.showError(error)
     }
-    //this.blocklyController.initialize();
+    this.blocklyController.initialize();
   },
 
   handleEvent: function (event) {
@@ -59,14 +58,18 @@ var dashboard = {
         }
       }
     })();
+    this.blocklyController.hideArea();
   },
 
   handleArtifactSelectedEvent: function(artifactData) {
     (async () => {
       try{
-        await this.artifactsController.reloadAffordancesFromArtifact(artifactData);
+        artifact = await this.artifactsController.reloadAffordancesFromArtifact(artifactData);
+        this.blocklyController.hideArea();
+        this.blocklyController.loadArtifact(artifact);
+        this.blocklyController.showArea();
       } catch (error) {
-        showError(error)
+        this.showError(error)
       }
     })();
   },
@@ -76,7 +79,7 @@ var dashboard = {
       try{
         await this.artifactsController.testAffordance(affordanceData);
       } catch (error) {
-        showError(error)
+        this.showError(error)
       }
     })();
   },
@@ -88,11 +91,15 @@ var dashboard = {
   },
 
   revealDashboard: function () {
-    window.setTimeout(function () {
-      dashboard.$loading.fadeOut(200);
-      dashboard.$container.fadeIn(200);
-      dashboard.$settings.fadeIn(150);
-    }, 1000);
+    return new Promise((resolve) => {
+      window.setTimeout(function () {
+        dashboard.$loading.fadeOut(200);
+        dashboard.$container.fadeIn(200);
+        dashboard.$settings.fadeIn(150);
+        resolve()
+      }, 1000);
+    });
+   
   }
 
 }
