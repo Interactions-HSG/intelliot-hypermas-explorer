@@ -1,0 +1,285 @@
+body {
+  margin: 0;
+}
+p {
+  font-size: 12px;
+}
+#debug-text {
+  position: fixed;
+  top: 10px;
+  left: 10px;
+  z-index: 9999;
+  width: 300px;
+  height: 100px;
+  border: 1px solid #ccc;
+  background: rgba(255, 255, 255, 0.8);
+  color: #000;
+  padding: 10px;
+}
+#debug-control {
+  position: fixed;
+  top: 10px;
+  left: 400px;
+  z-index: 9999;
+  width: 300px;
+  height: 100px;
+  border: 1px solid #ccc;
+  background: rgba(255, 255, 255, 0.8);
+  color: #000;
+  padding: 10px;
+}
+.pulse-gray {
+  -webkit-animation: pulse-gray 2s infinite;
+  -moz-animation: pulse-gray 2s infinite;
+  animation: pulse-gray 2s infinite;
+}
+@-moz-keyframes pulse-gray {
+  0% {
+    background-color: none;
+  }
+  50% {
+    background-color: #0c2d70;
+  }
+  100% {
+    background-color: none;
+  }
+}
+@-webkit-keyframes pulse-gray {
+  0% {
+    background-color: none;
+  }
+  50% {
+    background-color: #0c2d70;
+  }
+  100% {
+    background-color: none;
+  }
+}
+@keyframes pulse-gray {
+  0% {
+    background-color: none;
+  }
+  50% {
+    background-color: #0c2d70;
+  }
+  100% {
+    background-color: none;
+  }
+}
+.pulse-blue {
+  -webkit-animation: pulse-blue 4s infinite;
+  -moz-animation: pulse-blue 4s infinite;
+  animation: pulse-blue 4s infinite;
+}
+@-moz-keyframes pulse-blue {
+  0% {
+    background-color: none;
+  }
+  50% {
+    background-color: #f5eca7;
+  }
+  100% {
+    background-color: none;
+  }
+}
+@-webkit-keyframes pulse-blue {
+  0% {
+    background-color: none;
+  }
+  50% {
+    background-color: #f5eca7;
+  }
+  100% {
+    background-color: none;
+  }
+}
+@keyframes pulse-blue {
+  0% {
+    background-color: none;
+  }
+  50% {
+    background-color: #f5eca7;
+  }
+  100% {
+    background-color: none;
+  }
+}
+.pulse-red {
+  -webkit-animation: pulse-red 4s infinite;
+  -moz-animation: pulse-red 4s infinite;
+  animation: pulse-red 4s infinite;
+}
+@-moz-keyframes pulse-red {
+  0% {
+    background-color: none;
+  }
+  50% {
+    background-color: #f1c5c5;
+  }
+  100% {
+    background-color: none;
+  }
+}
+@-webkit-keyframes pulse-red {
+  0% {
+    background-color: none;
+  }
+  50% {
+    background-color: #f1c5c5;
+  }
+  100% {
+    background-color: none;
+  }
+}
+@keyframes pulse-red {
+  0% {
+    background-color: none;
+  }
+  50% {
+    background-color: #f1c5c5;
+  }
+  100% {
+    background-color: none;
+  }
+}
+.slide-in-left {
+  -webkit-animation: slide-left ease-in-out 0.6s;
+  -moz-animation: slide-left ease-in-out 0.6s;
+  animation: slide-left ease-in-out 0.6s;
+  animation-fill-mode: forwards;
+}
+@-moz-keyframes slide-left {
+  0% {
+    left: -30px;
+    opacity: 0%;
+  }
+  100% {
+    left: 0px;
+    visibility: visible;
+    opacity: 100%;
+  }
+}
+@-webkit-keyframes slide-left {
+  0% {
+    left: -30px;
+    opacity: 0%;
+  }
+  100% {
+    left: 0px;
+    visibility: visible;
+    opacity: 100%;
+  }
+}
+@keyframes slide-left {
+  0% {
+    left: -30px;
+    opacity: 0%;
+  }
+  100% {
+    left: 0px;
+    visibility: visible;
+    opacity: 100%;
+  }
+}
+.slide-in-top {
+  -webkit-animation: slide-top ease-in-out 0.6s;
+  -moz-animation: slide-top ease-in-out 0.6s;
+  animation: slide-top ease-in-out 0.6s;
+  animation-fill-mode: forwards;
+}
+@-moz-keyframes slide-top {
+  0% {
+    bottom: -30px;
+    opacity: 0%;
+  }
+  100% {
+    bottom: 0px;
+    visibility: visible;
+    opacity: 100%;
+  }
+}
+@-webkit-keyframes slide-top {
+  0% {
+    bottom: -30px;
+    opacity: 0%;
+  }
+  100% {
+    bottom: 0px;
+    visibility: visible;
+    opacity: 100%;
+  }
+}
+@keyframes slide-top {
+  0% {
+    bottom: -30px;
+    opacity: 0%;
+  }
+  100% {
+    bottom: 0px;
+    visibility: visible;
+    opacity: 100%;
+  }
+}
+.scroll-header {
+  font-weight: bold;
+  height: 5%;
+  padding-left: 10px;
+}
+.scroll-container {
+  height: 95%;
+  overflow: auto;
+  box-sizing: border-box;
+  padding: 0px 10px;
+}
+.artifact-color {
+  color: #dd7373;
+}
+.artifact-color-reverse {
+  background-color: #dd7373;
+  color: #ffffff;
+}
+.affordance-color {
+  color: #ead94c;
+}
+.affordance-color-reverse {
+  background-color: #ead94c;
+  color: #ffffff;
+}
+.card-header {
+  font-weight: bold;
+}
+.dashcard {
+  color: black;
+  background-color: #ffffff;
+  visibility: hidden;
+  box-shadow: 0px 5px 10px 0px rgba(0, 0, 0, 0.2);
+  margin-bottom: 10px;
+}
+.dashcard:hover {
+  box-shadow: 0px 5px 10px 0px rgba(0, 0, 0, 0.5);
+}
+.dashcard .card-header {
+  padding: 5px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+.dashcard .card-body {
+  padding: 5px;
+}
+.clickable {
+  cursor: pointer;
+}
+.input-schema {
+  width: 95%;
+  margin: 5px;
+}
+.test-affordance {
+  background-color: #eeeeee;
+  color: #636363;
+  margin: 2px;
+  height: 20px;
+}
+.test-affordance:hover {
+  background-color: #c8c8c8;
+}

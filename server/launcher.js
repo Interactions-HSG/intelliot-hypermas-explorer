@@ -6,5 +6,16 @@
     - dashboard for initialization functions
 */
 
-var server  = require('./server.js')
-server.run()
+const yggdrasilHostName = "localhost:8080"
+const staticDirectory = "../client/"
+const srcDirectory = "../src/"
+const port = 8090
+
+
+var server  = require('./src/app.js')
+server.startServer({
+    yggdrasilHostName, 
+    staticDirectory,
+    srcDirectory,
+    port
+})

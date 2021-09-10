@@ -22,7 +22,7 @@ var Server = function (settings) {
     var self = this
 
     // Directories
-    var cBaseDir = '..'
+    var cBaseDir = '../../client'
     var cLessDir = path.join(cBaseDir, 'less')
     var cCssDir = path.join(cBaseDir, 'css')
     var cTemplateDir = path.join(cBaseDir, 'templates')
