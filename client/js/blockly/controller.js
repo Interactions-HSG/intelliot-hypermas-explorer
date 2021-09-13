@@ -70,7 +70,8 @@ class BlocklyController {
   }
   
   clearArea() {
-    //TODO remove all blocks
+    this.workspace.clear();
+    this.workspace.clearUndo();
   }
 
   showArea(){
