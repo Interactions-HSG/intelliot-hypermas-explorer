@@ -12,7 +12,7 @@ const fetcherTimeout = 5000 // 5000 ms timeout
 var yggdrasilInterface = {
 
   fetchEnvironments: function (callback) {
-    log.fine("Fetching Yggdrasil environments");
+    log.debug("Fetching Yggdrasil environments");
 
     $.ajax({
       type: 'GET',
@@ -25,7 +25,7 @@ var yggdrasilInterface = {
       async: true,
       timeout: yggdrasilInterface.default_timeout,
     }).done(function (result) {
-      log.fine("Success: fetchModules");
+      log.debug("Success: fetchModules");
       callback(result);
     }).fail(function (jqXHR, textStatus, errorThrown) {
       log.error('Failure fetching module types: ' + jqXHR.statusText);
@@ -108,6 +108,7 @@ var yggdrasilInterface = {
           affordancesMetadata = td.getAffordancesFromTD(artifactUri, store);
           currentArtifactTitle = td.resolveArtifactTitle(artifactUri, store);
           var affordances = []
+
           for (var affordance of Object.values(affordancesMetadata)) {
             affordances.push({
               id: affordance.affordanceNode.value,

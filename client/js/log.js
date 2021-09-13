@@ -26,9 +26,9 @@ var log = {
 
 	debugSeparate : function(label, content) {
 		if(typeof console !== 'undefined')  {
-			console.log('---- ' + label + ' start ----');
-			console.log(content);
-			console.log('---- ' + label + ' end ----');
+			//console.log('---- ' + label + ' start ----');
+			//console.log(content);
+			//console.log('---- ' + label + ' end ----');
 		}
 	},
 

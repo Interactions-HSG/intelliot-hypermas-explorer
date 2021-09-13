@@ -64,16 +64,16 @@ var td = {
 	},
 
 	hasInputSchema: function(affordanceId, rdfStore) {
-		log.fine('Affordance ' + affordanceId);
+		log.debug('Affordance ' + affordanceId);
 		inputSchemaBlankId = rdfStore.any((affordanceId), TD("hasInputSchema"));
-		log.fine('Input Schema: ' + inputSchemaBlankId);
+		log.debug('Input Schema: ' + inputSchemaBlankId);
 		return (inputSchemaBlankId != undefined);
 	},
 
 	// TODO: Currently only works for non-nested IntegerSchemas
 	getInputSchema: function(affordanceBlankNode, rdfStore) {
 
-		log.fineSeparate('Affordance Blank Node', affordanceBlankNode);
+		log.debugSeparate('Affordance Blank Node', affordanceBlankNode);
 
 		if (!td.hasInputSchema(affordanceBlankNode, rdfStore)) {
 			log.error('Input schema requested for affordance without input schema. Returning null.');
@@ -81,7 +81,7 @@ var td = {
 		}
 
 		inputSchemaBlankId = rdfStore.any((affordanceBlankNode), TD("hasInputSchema"));
-		log.fine('Affordance ' + affordanceBlankNode + ' schema: ' + inputSchemaBlankId);
+		log.debug('Affordance ' + affordanceBlankNode + ' schema: ' + inputSchemaBlankId);
 
 		propertiesBlankIds = rdfStore.each(inputSchemaBlankId, JS("properties"));
 
@@ -92,10 +92,10 @@ var td = {
 
 		for (var i = 0; i < propertiesBlankIds.length; i++) {
 			propertiesBlankId = propertiesBlankIds[i];
-			log.fineSeparate('properties', propertiesBlankId);
+			log.debugSeparate('properties', propertiesBlankId);
 
 			propertyName = rdfStore.any(propertiesBlankId, JS('propertyName'));
-			log.fineSeparate('propertyName', propertyName.value);
+			log.debugSeparate('propertyName', propertyName.value);
 
 			thisSchema = {
 				schemaType: 'IntegerSchema',			// TODO Actual schema needs to go here
@@ -105,18 +105,18 @@ var td = {
 			// Of no use. Should be handled through thingwot anyway
 			propertyMaximum = rdfStore.any(propertiesBlankId, JS('maximum'));
 			if (propertyMaximum != undefined) {
-				log.fineSeparate('propertyMaximum', propertyMaximum.value);
+				log.debugSeparate('propertyMaximum', propertyMaximum.value);
 			}
 
 			// Of no use. Should be handled through thingwot anyway
 			propertyMinimum = rdfStore.any(propertiesBlankId, JS('minimum'));
 			if (propertyMinimum != undefined) {
-				log.fineSeparate('propertyMinimum', propertyMinimum.value);
+				log.debugSeparate('propertyMinimum', propertyMinimum.value);
 			}
 
 			requiredProperties = rdfStore.any(inputSchemaBlankId, JS('required'));
 			if (requiredProperties != undefined) {
-				log.fineSeparate('requiredProperties', requiredProperties.value);
+				log.debugSeparate('requiredProperties', requiredProperties.value);
 				inputSchema['requiredProperties'] = requiredProperties.value;
 			}
 
@@ -128,7 +128,7 @@ var td = {
 
 	followAffordance: function(affordanceBlankNode, rdfStore, inputData, callback) {
 
-		log.fineSeparate('Affordance Blank Node', affordanceBlankNode);
+		log.debugSeparate('Affordance Blank Node', affordanceBlankNode);
 
 		formBlankNode = rdfStore.any(affordanceBlankNode, TD("hasForm"));
 
