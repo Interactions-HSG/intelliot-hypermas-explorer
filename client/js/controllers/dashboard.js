@@ -1,22 +1,17 @@
-// Hypermedia MAS Explorer
-// Interactions Research Group, University of St.Gallen
-// Based on work by Ralf Mosshammer / Siemens AG (2015) and Simon Mayer / Pro2Future AG (2017)
-//
-// Main UI controls and handlers, talks with component logic controllers to retrieve data
-
-var dashboard = {
-
-  // jquery shortcuts
-  $container: $('#container'),
-  $settings: $('#settings'),
-  $loading: $('#loading'),
+class Dashboard {
 
   //component controllers
-  environmentController: new EnvironmentController("intelliot"),
-  artifactsController: new ArtifactsController(),
-  blocklyController: new BlocklyController(),
+  environmentController = new EnvironmentController("intelliot");
+  artifactsController = new ArtifactsController();
+  blocklyController = new BlocklyController();
 
-  init: async function () {
+  // jquery shortcuts
+  $container = $('#container');
+  $settings = $('#settings');
+  $loading = $('#loading');
+
+
+  async init() {
     log.fine('Initializing the dashboard and loading data');
     // Load Environment
     this.$container.hide()
@@ -27,9 +22,9 @@ var dashboard = {
       this.showError(error)
     }
     this.blocklyController.initialize();
-  },
+  }
 
-  handleEvent: function (event) {
+  handleEvent(event) {
     switch (event.type) {
       case EnvironmentController.selectWorkspaceEvent:
         this.handleSelectWorkspaceEvent(event.data)
@@ -44,53 +39,52 @@ var dashboard = {
         log.error(`Unrecognized event of type ${event.type}`)
         break;
     }
-  },
+  }
 
-  handleSelectWorkspaceEvent: function (workspaceData){
+  handleSelectWorkspaceEvent(workspaceData) {
     this.artifactsController.clearArtifactsBar();
     this.artifactsController.clearAffordancesBar();
-    (async ()  => {
-      if(workspaceData.uri != "empty"){
-        try{
+    (async () => {
+      if (workspaceData.uri != "empty") {
+        try {
           await this.artifactsController.reloadArtifactsFromWorkspace(workspaceData);
-        } catch (error){
+        } catch (error) {
           showError(error)
         }
       }
     })();
     this.blocklyController.hideArea();
-  },
+  }
 
-  handleArtifactSelectedEvent: function(artifactData) {
-    (async () => {
-      try{
-        artifact = await this.artifactsController.reloadAffordancesFromArtifact(artifactData);
-        this.blocklyController.hideArea();
-        this.blocklyController.loadArtifact(artifact);
-        this.blocklyController.showArea();
-      } catch (error) {
-        this.showError(error)
-      }
-    })();
-  },
+  handleArtifactSelectedEvent(artifactData) {
+      (async () => {
+        try {
+          var artifact = await this.artifactsController.reloadAffordancesFromArtifact(artifactData);
+          this.blocklyController.hideArea();
+          this.blocklyController.loadArtifact(artifact);
+          this.blocklyController.showArea();
+        } catch (error) {
+          this.showError(error)
+        }
+      })();
+    }
 
-  handleTestAffordanceEvent: function(affordanceData) {
-    (async () => {
-      try{
-        await this.artifactsController.testAffordance(affordanceData);
-      } catch (error) {
-        this.showError(error)
-      }
-    })();
-  },
+    handleTestAffordanceEvent(affordanceData) {
+      (async () => {
+        try {
+          await this.artifactsController.testAffordance(affordanceData);
+        } catch (error) {
+          this.showError(error)
+        }
+      })();
+    }
 
-  showError: function (message) {
-    //TODO show an alert box or something
+  showError(message) {
     log.error(message)
     alert("ERROR: " + message)
-  },
+  }
 
-  revealDashboard: function () {
+  revealDashboard() {
     return new Promise((resolve) => {
       window.setTimeout(function () {
         dashboard.$loading.fadeOut(200);
@@ -99,7 +93,5 @@ var dashboard = {
         resolve()
       }, 1000);
     });
-   
   }
-
 }
