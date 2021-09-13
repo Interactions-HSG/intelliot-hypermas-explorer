@@ -22,6 +22,7 @@ var toolboxDefinition = {
     {
       "kind": "category",
       "name": "Affordances",
+      "toolboxitemid": "Affordances",
       "contents": []
     },
   ]

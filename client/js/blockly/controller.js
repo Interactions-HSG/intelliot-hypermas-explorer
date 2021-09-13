@@ -4,8 +4,9 @@ class BlocklyController {
 
   workspace = undefined
   toolbox = undefined
-  affordanceCategory = []
-
+  affordanceCategory = undefined
+  flyout = undefined
+  
   //jquery shortcuts
   $blocklyInjection = $('#blockly-injection')
   $blocklyContainer = $('#blockly-container')
@@ -21,9 +22,9 @@ class BlocklyController {
       trashcan: true
     }
     this.workspace = Blockly.inject(this.$blocklyInjection[0], options);
-    this.toolbox = JSON.parse(JSON.stringify(toolboxDefinition)); //very ugly deep copy
-    this.affordanceCategory = this.toolbox.contents.find(x => x.kind == "category" && x.name == "Affordances").contents
-
+    this.toolbox = this.workspace.getToolbox();
+    this.affordanceCategory = this.toolbox.getToolboxItemById('Affordances');
+    this.flyout = this.toolbox.getFlyout();
     window.addEventListener('resize',this.onResize, false)
     this.$blocklyContainer.hide()
   }
@@ -50,6 +51,7 @@ class BlocklyController {
 
 
   loadArtifact(artifact) {
+    var affordancesBlocks = []
     artifact.affordances.forEach(affordance => {
       //define blocks
       Blockly.Blocks[affordance.title] = {
@@ -62,13 +64,13 @@ class BlocklyController {
         }
       };
       //generate block and add to category
-      this.affordanceCategory.push({kind: "block", type: affordance.title})
+      affordancesBlocks.push({kind: "block", type: affordance.title})
     });
-    this.workspace.updateToolbox(this.toolbox)
+    this.affordanceCategory.updateFlyoutContents(affordancesBlocks);
   }
   
   clearArea() {
-    this.affordanceCategory.splice(0,this.affordanceCategory.length);
+    //TODO remove all blocks
   }
 
   showArea(){
@@ -77,6 +79,8 @@ class BlocklyController {
   }
 
   hideArea(){
+    this.toolbox.setSelectedItem(null)
+    this.flyout.hide()
     this.clearArea()
     this.$blocklyContainer.fadeOut()
   }
