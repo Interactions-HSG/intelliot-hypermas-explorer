@@ -25,7 +25,6 @@ class BlocklyController {
     this.affordanceCategory = this.toolbox.contents.find(x => x.kind == "category" && x.name == "Affordances").contents
 
     window.addEventListener('resize',this.onResize, false)
-    this.onResize();
     this.$blocklyContainer.hide()
   }
 
@@ -69,7 +68,7 @@ class BlocklyController {
   }
   
   clearArea() {
-    this.affordanceCategory.splice(0,this.affordanceCategory.length)
+    this.affordanceCategory.splice(0,this.affordanceCategory.length);
   }
 
   showArea(){
