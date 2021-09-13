@@ -15,6 +15,7 @@ class BlocklyController {
   initialize() {
     var options = {
       toolbox: toolboxDefinition,
+      //theme: 'intelliot',
       grid: { 
         spacing: 20,
         length: 1,
