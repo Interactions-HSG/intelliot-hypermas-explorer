@@ -10,6 +10,8 @@ class BlocklyController {
   //jquery shortcuts
   $blocklyInjection = $('#blockly-injection')
   $blocklyContainer = $('#blockly-container')
+
+
   initialize() {
     var options = {
       toolbox: toolboxDefinition,
@@ -25,28 +27,34 @@ class BlocklyController {
     this.toolbox = this.workspace.getToolbox();
     this.affordanceCategory = this.toolbox.getToolboxItemById('Affordances');
     this.flyout = this.toolbox.getFlyout();
-    window.addEventListener('resize',this.onResize, false)
+    window.addEventListener('resize',this.getResizeHandler(this.workspace), false)
     this.$blocklyContainer.hide()
   }
 
-  onResize() {
-    var blocklyArea = document.getElementById('blockly-container');
-    var blocklyDiv = document.getElementById('blockly-injection');
-    // Compute the absolute coordinates and dimensions of blocklyArea.
-    var element = blocklyArea;
-    var x = 0;
-    var y = 20;
-    do {
-      x += element.offsetLeft;
-      //y += element.offsetTop;
-      element = element.offsetParent;
-    } while (element);
-    // Position blocklyDiv over blocklyArea.
-    blocklyDiv.style.left = x + 'px';
-    blocklyDiv.style.top = y + 'px';
-    blocklyDiv.style.width = blocklyArea.offsetWidth + 'px';
-    blocklyDiv.style.height = blocklyArea.offsetHeight + 'px';
-    Blockly.svgResize(this.workspace);
+  getResizeHandler(workspace) {
+    return function() {
+      var blocklyArea = document.getElementById('blockly-container');
+      var blocklyDiv = document.getElementById('blockly-injection');
+      // Compute the absolute coordinates and dimensions of blocklyArea.
+      var element = blocklyArea;
+      var x = 0;
+      var y = 20;
+      do {
+        x += element.offsetLeft;
+        //y += element.offsetTop;
+        element = element.offsetParent;
+      } while (element);
+      // Position blocklyDiv over blocklyArea.
+      blocklyDiv.style.left = x + 'px';
+      blocklyDiv.style.top = y + 'px';
+      blocklyDiv.style.width = blocklyArea.offsetWidth + 'px';
+      blocklyDiv.style.height = blocklyArea.offsetHeight + 'px';
+      Blockly.svgResize(workspace);
+    }
+  }
+
+  resize(){
+    this.getResizeHandler(this.workspace)();
   }
 
 
@@ -76,7 +84,7 @@ class BlocklyController {
 
   showArea(){
     this.$blocklyContainer.fadeIn();
-    this.onResize();
+    this.resize();
   }
 
   hideArea(){
