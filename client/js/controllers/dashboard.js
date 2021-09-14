@@ -53,6 +53,7 @@ class Dashboard {
         }
       }
     })();
+    this.blocklyController.clearWorkspace();
     this.blocklyController.hideArea();
   }
 
@@ -60,7 +61,7 @@ class Dashboard {
       (async () => {
         try {
           var artifact = await this.artifactsController.reloadAffordancesFromArtifact(artifactData);
-          this.blocklyController.hideArea();
+          this.blocklyController.hideMenu();
           this.blocklyController.loadArtifact(artifact);
           this.blocklyController.showArea();
         } catch (error) {

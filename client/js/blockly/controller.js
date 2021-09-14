@@ -78,9 +78,10 @@ class BlocklyController {
     this.affordanceCategory.updateFlyoutContents(affordancesBlocks);
   }
   
-  clearArea() {
+  clearWorkspace() {
     this.workspace.clear();
     this.workspace.clearUndo();
+    this.affordanceCategory.updateFlyoutContents({})
   }
 
   showArea(){
@@ -88,10 +89,13 @@ class BlocklyController {
     this.resize();
   }
 
-  hideArea(){
+  hideMenu(){
     this.toolbox.setSelectedItem(null)
     this.flyout.hide()
-    this.clearArea()
+  }
+
+  hideArea(){
+    this.hideMenu();
     this.$blocklyContainer.fadeOut()
   }
   
