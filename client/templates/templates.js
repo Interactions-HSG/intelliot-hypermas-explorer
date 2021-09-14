@@ -20,9 +20,9 @@ templates['affordancesList'] = template({"1":function(container,depth0,helpers,p
     };
 
   return ((stack1 = lookupProperty(helpers,"if").call(alias1,(depths[1] != null ? lookupProperty(depths[1],"animate") : depths[1]),{"name":"if","hash":{},"fn":container.program(3, data, 0, blockParams, depths),"inverse":container.program(5, data, 0, blockParams, depths),"data":data,"loc":{"start":{"line":7,"column":0},"end":{"line":11,"column":7}}})) != null ? stack1 : "")
-    + "    <div class=\"card-header affordance-color-reverse\">\r\n      "
-    + alias4(((helper = (helper = lookupProperty(helpers,"title") || (depth0 != null ? lookupProperty(depth0,"title") : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"title","hash":{},"data":data,"loc":{"start":{"line":13,"column":6},"end":{"line":13,"column":15}}}) : helper)))
-    + "\r\n      <span class=\"test-affordance badge rounded-pill clickable\">Test</span>\r\n    </div>\r\n    <div class=\"card-body\">\r\n      <p class=\"card-text\">"
+    + "    <div class=\"card-header affordance-color-reverse\">\r\n      <div class=\"card-title\">"
+    + alias4(((helper = (helper = lookupProperty(helpers,"title") || (depth0 != null ? lookupProperty(depth0,"title") : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"title","hash":{},"data":data,"loc":{"start":{"line":13,"column":30},"end":{"line":13,"column":39}}}) : helper)))
+    + "</div>\r\n      <span class=\"test-affordance badge rounded-pill clickable\">Test</span>\r\n    </div>\r\n    <div class=\"card-body\">\r\n      <p class=\"card-text\">"
     + alias4(((helper = (helper = lookupProperty(helpers,"description") || (depth0 != null ? lookupProperty(depth0,"description") : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"description","hash":{},"data":data,"loc":{"start":{"line":17,"column":27},"end":{"line":17,"column":42}}}) : helper)))
     + "\r\n    </div>\r\n"
     + ((stack1 = lookupProperty(helpers,"if").call(alias1,(depth0 != null ? lookupProperty(depth0,"hasInputSchema") : depth0),{"name":"if","hash":{},"fn":container.program(7, data, 0, blockParams, depths),"inverse":container.noop,"data":data,"loc":{"start":{"line":19,"column":4},"end":{"line":28,"column":11}}})) != null ? stack1 : "")

@@ -34,10 +34,6 @@
   color: @c_interactions_snow;
 }
 
-.card-header {
-  font-weight: bold;
-}
-
 .dashcard {
   color:black;
   background-color: @c_interactions_snow;
@@ -49,6 +45,7 @@
   }
 
   .card-header {
+    font-weight: bold;
     padding: 5px;
     display:flex; 
     flex-direction: row;
@@ -70,7 +67,17 @@
 }
 
 
+.card-title {
+  flex-shrink: 1;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 100%;
+  max-height: 30px;
+  margin:0;
+}
+
 .test-affordance{
+  flex-shrink: 2;
   background-color: @c_interactions_gray;
   color: @c_interactions_darkgray;
   margin: 2px;
