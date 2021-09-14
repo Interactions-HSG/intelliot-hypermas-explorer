@@ -22,6 +22,10 @@ class BlocklyController {
         colour: '#ccc',
         snap: true
       },
+      zoom: {
+        controls: true, 
+        wheel: true
+      },
       trashcan: true
     }
     this.workspace = Blockly.inject(this.$blocklyInjection[0], options);
