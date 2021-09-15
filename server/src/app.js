@@ -14,8 +14,7 @@ exports.startServer = async function(options) {
   app.use(cors())
 
   //enable static serving of files
-  app.use('/dashboard', express.static(options.staticDirectory)),
-  app.use('/templates', express.static(path.join(options.staticDirectory, 'templates')))
+  app.use('/dashboard', express.static(options.staticDirectory))
 
   //bodyparser
   var rawBodySaver = function (req, res, buf, encoding) {
