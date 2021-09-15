@@ -1,3 +1,5 @@
+const { notImplemented, internalServerError } = require("../utils/action-results")
+
 exports.mapControllerRoutes = function (controllerName, mapper) {
   const controller = require(`../controllers/${controllerName}`)
   return app => mapper(app, controller)

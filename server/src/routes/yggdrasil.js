@@ -12,7 +12,4 @@ module.exports = mapControllerRoutes('yggdrasil', function (app, controller) {
 
   app.route('/yggdrasil/:environmentId/workspaces/:workspaceId/artifacts/:artifactId')
     .get(action(controller.getArtifact))
-
-  app.route('/yggdrasil/:environmentId/workspaces/:workspaceId/artifacts/:artifactId/useAffordance/:affordanceId')
-    .put(action(controller.useAffordance))
 })

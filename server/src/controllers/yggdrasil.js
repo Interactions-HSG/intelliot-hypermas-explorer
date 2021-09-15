@@ -1,7 +1,35 @@
 const {ok, notImplemented} = require('../utils/action-results')
+const yggdrasilService = require('../services/yggdrasil-service')
 
-exports.sayHello = function(req) {
-  return ok({message: "Hello!"})
+function EnvironmentDto(name, uri, workspaces){
+  return {
+    name,
+    uri,
+    workspaces
+  }
+}
+
+function WorkspaceDto(uri, name, artifacts){
+  return {
+    name,
+    uri, 
+    artifacts
+  }
+}
+
+function ArtifactDto(uri, name, affordances) {
+  return {
+    name,
+    uri,
+    affordances
+  }
+}
+
+function AffordanceDto(uri, name) {
+  return {
+    name,
+    uri,
+  }
 }
 
 exports.getWorkspacesInEnvironment = function(req){
@@ -13,9 +41,5 @@ exports.getArtifactsInWorkspace = function(req){
 }
 
 exports.getArtifact = function(req){
-  return notImplemented()
-}
-
-exports.useAffordance = function(req) {
   return notImplemented()
 }
