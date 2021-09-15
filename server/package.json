@@ -1,15 +1,15 @@
 {
-  "name": "C-AVL-Explorer",
+  "name": "intelliot-hypermas-explorer",
   "version": "1.0.0",
-  "description": "AVL Modules Explorer Web Frontend",
+  "description": "intelliot hypermas explorer",
   "author": "Simon Mayer <simon.mayer@pro2future.at>",
   "private": true,
   "dependencies": {
     "body-parser": "*",
     "connect": "^3.2.0",
+    "cors": "^2.8.5",
     "express": "^4.15.3",
     "handlebars": "^4.7.7",
-    "less": "*",
     "request": "*"
   }
 }
