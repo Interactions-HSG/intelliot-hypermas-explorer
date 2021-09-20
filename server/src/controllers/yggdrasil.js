@@ -1,27 +1,26 @@
 const {ok, notImplemented} = require('../utils/action-results')
 const yggdrasilService = require('../services/yggdrasil-service')
 
-function EnvironmentDto(name, uri, workspaces){
+function EnvironmentDto(environmentId, workspaces){
   return {
-    name,
-    uri,
+    environmentId,
     workspaces
   }
 }
 
-function WorkspaceDto(uri, name, artifacts){
+function WorkspaceDto(parentEnvironment, workspaceId, artifacts){
   return {
-    name,
-    uri, 
+    parentEnvironment,
+    workspaceId,
     artifacts
   }
 }
 
-function ArtifactDto(uri, name, affordances) {
+function ArtifactDto(parentWorkspace, artifactId, thingDescription) {
   return {
-    name,
-    uri,
-    affordances
+    parentWorkspace,
+    artifactId,
+    thingDescription
   }
 }
 
@@ -33,14 +32,16 @@ function AffordanceDto(uri, name) {
 }
 
 exports.getWorkspacesInEnvironment = async function(req){
-  workspaceObj = await yggdrasilService.getWorkspacesInEnvironment(req.params.environmentId)
-  return ok(workspaceObj)
+  var workspaces = await yggdrasilService.getWorkspacesInEnvironment(req.params.environmentId)
+  return ok(EnvironmentDto(req.params.environmentId, workspaces))
 }
 
 exports.getArtifactsInWorkspace = async function(req){
-  return notImplemented()
+  var artifacts = await yggdrasilService.getArtifactsInWorkspace(req.params.environmentId, req.params.workspaceId)
+  return ok(WorkspaceDto(req.params.environmentId, req.params.workspaceId, artifacts))
 }
 
 exports.getArtifact = async function(req){
-  return notImplemented()
+  var artifactTD = await yggdrasilService.getArtifactTD(req.params.environmentId, req.params.workspaceId, req.params.artifactId)
+  return ok(ArtifactDto(req.params.workspaceId, req.params.artifactId, artifactTD));
 }
