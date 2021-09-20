@@ -1,9 +1,7 @@
 class MockedYggdrasil {
-  
-  hostname = ""
 
-  constructor(hostname) {
-    this.hostname = hostname;
+  constructor(protocol, hostname, port){
+
   }
 
   async getWorkspacesInEnvironment(environmentSlug) {
@@ -20,6 +18,4 @@ class MockedYggdrasil {
 
 }
 
-module.exports = function(hostname){
-  return new MockedYggdrasil(hostname)
-} 
+module.exports = (protocol, hostname, port) => new MockedYggdrasil(protocol, hostname, port)

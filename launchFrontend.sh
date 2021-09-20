@@ -13,4 +13,4 @@ done
 
 echo "Launching..."
 cd server
-node launcher.js
+nodemon launcher.js

@@ -32,14 +32,15 @@ function AffordanceDto(uri, name) {
   }
 }
 
-exports.getWorkspacesInEnvironment = function(req){
+exports.getWorkspacesInEnvironment = async function(req){
+  workspaceObj = await yggdrasilService.getWorkspacesInEnvironment(req.params.environmentId)
+  return ok(workspaceObj)
+}
+
+exports.getArtifactsInWorkspace = async function(req){
   return notImplemented()
 }
 
-exports.getArtifactsInWorkspace = function(req){
-  return notImplemented()
-}
-
-exports.getArtifact = function(req){
+exports.getArtifact = async function(req){
   return notImplemented()
 }

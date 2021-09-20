@@ -7,6 +7,7 @@
   "dependencies": {
     "@node-wot/binding-http": "^0.7.8",
     "@node-wot/core": "^0.7.8",
+    "axios": "^0.21.4",
     "body-parser": "*",
     "connect": "^3.2.0",
     "cors": "^2.8.5",
