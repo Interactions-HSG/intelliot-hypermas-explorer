@@ -23,13 +23,26 @@ class APIYggdrasil {
     })
   }
 
+  getEnvironmentURI(environmentId){
+    return `${this.baseURL}/environment/${environmentId}`
+  }
+
+  getWorkspaceURI(environmentId, workspaceId){
+    return `${this.baseURL}/environments/${environmentId}/workspaces/${workspaceId}`
+  }
+
+  getArtifactURI(environmentId, workspaceId, artifactId){
+    return `${this.baseURL}/environments/${environmentId}/workspaces/${workspaceId}/artifacts/${artifactId}`
+  }
+
+
   async getWorkspacesInEnvironment(environmentId) {
     var path = `/environments/${environmentId}`
     var mapper = n =>{
       var uri = n.value;
       var array = n.value.split("/")
-      var name = array[array.length-1]
-      return {name, uri}
+      var id = array[array.length-1]
+      return {id, uri}
     }
     return await this._getContainedElements(path, mapper)
   }
@@ -39,8 +52,8 @@ class APIYggdrasil {
     var mapper = n =>{
       var uri = n.value;
       var array = n.value.split("/")
-      var name = array[array.length-1]
-      return {name, uri}
+      var id = array[array.length-1]
+      return {id, uri}
     }
     return await this._getContainedElements(path, mapper)
   }

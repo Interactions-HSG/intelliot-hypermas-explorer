@@ -1,47 +1,73 @@
 const {ok, notImplemented} = require('../utils/action-results')
 const yggdrasilService = require('../services/yggdrasil-service')
 
-function EnvironmentDto(environmentId, workspaces){
+function EnvironmentDto(id, uri, workspaces){
   return {
-    environmentId,
-    workspaces
+    id,
+    uri,
+    workspaces: WorkspacesDTO(workspaces)
   }
 }
 
-function WorkspaceDto(parentEnvironment, workspaceId, artifacts){
+function WorkspacesDTO(workspaces){
+  return workspaces;
+}
+
+function WorkspaceDto(parentEnvironmentId, parentUri, id, uri, artifacts){
   return {
-    parentEnvironment,
-    workspaceId,
-    artifacts
+    parent:{id: parentEnvironmentId, type: 'environment', uri: parentUri},
+    id,
+    uri,
+    artifacts: ArtifactsDTO(artifacts)
   }
 }
 
-function ArtifactDto(parentWorkspace, artifactId, thingDescription) {
+function ArtifactsDTO(artifacts){
+  return artifacts;
+}
+
+function ArtifactDto(workspaceId, workspaceUri, id, thingDescription) {
   return {
-    parentWorkspace,
-    artifactId,
+    parent:{id: workspaceId, type: 'workspace', uri: workspaceUri},
+    id,
     thingDescription
   }
 }
 
-function AffordanceDto(uri, name) {
-  return {
-    name,
-    uri,
-  }
+exports.getEnvironmentInfo = async function(req){
+  var id = req.params.environmentId
+  var workspaces = await yggdrasilService.getWorkspacesInEnvironment(id)
+  var uri = yggdrasilService.getEnvironmentURI(id)
+  return ok(EnvironmentDto(id, uri, workspaces))
 }
 
-exports.getWorkspacesInEnvironment = async function(req){
-  var workspaces = await yggdrasilService.getWorkspacesInEnvironment(req.params.environmentId)
-  return ok(EnvironmentDto(req.params.environmentId, workspaces))
+exports.getWorkspacesInEnvironment = async function(req) {
+  var id = req.params.environmentId
+  var workspaces = await yggdrasilService.getWorkspacesInEnvironment(id)
+  return ok(WorkspacesDTO(workspaces))
 }
 
-exports.getArtifactsInWorkspace = async function(req){
-  var artifacts = await yggdrasilService.getArtifactsInWorkspace(req.params.environmentId, req.params.workspaceId)
-  return ok(WorkspaceDto(req.params.environmentId, req.params.workspaceId, artifacts))
+exports.getWorkspaceInfo = async function(req){
+  var envId = req.params.environmentId
+  var id = req.params.workspaceId
+  var artifacts = await yggdrasilService.getArtifactsInWorkspace(envId, id)
+  var parentURI = yggdrasilService.getEnvironmentURI(envId)
+  var uri = yggdrasilService.getWorkspaceURI(envId, id)
+  return ok(WorkspaceDto(envId, parentURI, id, uri, artifacts))
+}
+
+exports.getArtifactsInWorkspace = async function(req) {
+  var envId = req.params.environmentId
+  var id = req.params.workspaceId
+  var artifacts = await yggdrasilService.getArtifactsInWorkspace(envId, id)
+  return ok(ArtifactsDTO(artifacts))
 }
 
 exports.getArtifact = async function(req){
-  var artifactTD = await yggdrasilService.getArtifactTD(req.params.environmentId, req.params.workspaceId, req.params.artifactId)
-  return ok(ArtifactDto(req.params.workspaceId, req.params.artifactId, artifactTD));
+  var envId = req.params.environmentId
+  var workId = req.params.workspaceId
+  var artifactId = req.params.artifactId
+  var parentUri = yggdrasilService.getWorkspaceURI(envId, workId);
+  var artifactTD = await yggdrasilService.getArtifactTD(envId, workId, artifactId)
+  return ok(ArtifactDto(workId, parentUri, artifactId, artifactTD));
 }
