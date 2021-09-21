@@ -1,36 +1,86 @@
-{{#if currentAffordances}}
-<div class="scroll-header">
-  <h4 class="affordance-color slide-in-left">Affordances </h4>
-</div>
+<!-- Property -->
 <div class="scroll-container">
-{{#each currentAffordances}}
-{{#if ../animate}}
-  <div id="{{id}}" class="card dashcard slide-in-left" style="animation-delay:{{delay @index}}s -webkit-animation-delay:{{delay @index}}s">
-  {{else}}
-  <div id="{{id}}" class="card dashcard">
-{{/if}}
-    <div class="card-header affordance-color-reverse">
-      <div class="card-title">{{title}}</div>
-      <span class="test-affordance badge rounded-pill clickable">Test</span>
-    </div>
-    <div class="card-body">
-      <p class="card-text">{{description}}
-    </div>
-    {{#if hasInputSchema}}
-    <div>
-      {{#each inputSchema.properties}}
-      <div class="input-group input-group-sm input-schema">
-        <span class="input-group-text" id="inputGroup-sizing-sm">{{propertyName}}</span>
-        <input id="{{propertyName}}" type="text" class="form-control" placeholder="({{schemaType}})">
-      </div>
-      {{/each}}
-    </div>
-    {{/if}}
+<div class="scroll-header">
+  <h4 class="property-color slide-in-left">Properties </h4>
 </div>
-{{/each}}
-</div>
+{{#if properties}}
+    {{#each properties}}
+      {{#if ../animate}}
+        <div id="{{id}}" class="card dashcard slide-in-left" style="animation-delay:{{delay @index}}s -webkit-animation-delay:{{delay @index}}s">
+        {{else}}
+        <div id="{{id}}" class="card dashcard">
+      {{/if}}
+        <div class="card-header property-color-reverse">
+          <div class="card-title">{{id}}</div>
+          <span class="test-affordance badge rounded-pill clickable">Test</span>
+        </div>
+        <div class="card-body">
+          <p class="card-text">{{description}}
+        </div>
+        </div>
+  {{/each}}
 {{else}}
-<div>
-  <p>No Affordances</p>
-</div>
+  <div>
+    <p class="empty-message">This artifact has no properties</p>
+  </div>
 {{/if}}
+
+<!-- Actions -->
+<div class="scroll-header">
+  <h4 class="action-color slide-in-left">Actions </h4>
+</div>
+{{#if actions}}
+    {{#each actions}}
+      {{#if ../animate}}
+        <div id="{{id}}" class="card dashcard slide-in-left" style="animation-delay:{{delay @index}}s -webkit-animation-delay:{{delay @index}}s">
+        {{else}}
+        <div id="{{id}}" class="card dashcard">
+      {{/if}}
+        <div class="card-header action-color-reverse">
+          <div class="card-title">{{id}}</div>
+          <span class="test-affordance badge rounded-pill clickable">Test</span>
+        </div>
+        <div class="card-body">
+          <p class="card-text">{{description}}
+          {{#if input}}
+            <div>
+              {{#with input}}
+                {{>schemaInput}}
+              {{/with}}
+            </div>
+          {{/if}}
+        </div>
+        </div>
+  {{/each}}
+{{else}}
+  <div>
+    <p class="empty-message">This artifact has no actions</p>
+  </div>
+{{/if}}
+
+<!-- Events -->
+<div class="scroll-header">
+  <h4 class="event-color slide-in-left">Events </h4>
+</div>
+{{#if events}}
+    {{#each events}}
+      {{#if ../animate}}
+        <div id="{{id}}" class="card dashcard slide-in-left" style="animation-delay:{{delay @index}}s -webkit-animation-delay:{{delay @index}}s">
+        {{else}}
+        <div id="{{id}}" class="card dashcard">
+      {{/if}}
+        <div class="card-header event-color-reverse">
+          <div class="card-title">{{id}}</div>
+          <span class="test-affordance badge rounded-pill clickable">Test</span>
+        </div>
+        <div class="card-body">
+          <p class="card-text">{{description}}
+        </div>
+        </div>
+  {{/each}}
+{{else}}
+  <div>
+    <p class="empty-message">This artifact has no events</p>
+  </div>
+{{/if}}
+</div>

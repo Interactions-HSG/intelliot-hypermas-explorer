@@ -3,30 +3,30 @@ var helpers = {
     Handlebars.registerHelper("delay", function (value, options) {
       return parseInt(value) / 10;
     });
-  
-    Handlebars.registerHelper("truncateHash", function (value, options) {
-      if (value.includes("#")) return value.split("#")[1]
-      else return value;
-    });
-  
-    Handlebars.registerHelper("minWith2Decimals", function (value1, value2, options) {
-      if (value1 < value2)
-        return parseFloat(value1).toFixed(2);
-      else
-        return parseFloat(value2).toFixed(2);
-    });
-
-    Handlebars.registerHelper("toString", function(object) {
-      return JSON.stringify(object)
-    });
 
     Handlebars.registerHelper("currentTime", function() {
       return  new Date().toLocaleTimeString('en-US', { hour12: false});
     })
   
-    Handlebars.registerHelper("with2Decimals", function (value, options) {
-      var num = parseFloat(value);
-      return num.toFixed(2);
+    Handlebars.registerHelper("isObjectType", function (value) {
+      return value == 'object'
     });
+    Handlebars.registerHelper("isNumericType", function (value) {
+      return value == 'number' || value == 'integer'
+    });
+    Handlebars.registerHelper("isBooleanType", function (value) {
+      return value == 'boolean'
+    });
+
+    Handlebars.registerHelper("toList", function (value) {
+      return Object.keys(value).map(x => {
+        return {
+          key: x,
+          value: value[x]
+        }
+      })
+    });
+
+    Handlebars.registerPartial('schemaInput', Handlebars.templates.schemaInput);
   }
 }

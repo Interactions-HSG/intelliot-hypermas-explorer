@@ -5,7 +5,10 @@
   font-weight: bold;
   height: 5%;
   min-height: 30px;
-  padding-left: 10px;
+}
+
+.scroll-header.artifact-header {
+  margin-left: 10px;
 }
 
 .scroll-container {
@@ -25,12 +28,31 @@
   color: @c_interactions_snow;
 }
 
-.affordance-color{
+
+.property-color{
+  color: @c_interactions_accent_three;
+}
+
+.property-color-reverse{
+  background-color: @c_interactions_accent_three;
+  color: @c_interactions_snow;
+}
+
+.action-color{
   color: @c_interactions_accent_two;
 }
 
-.affordance-color-reverse{
+.action-color-reverse{
   background-color: @c_interactions_accent_two;
+  color: @c_interactions_snow;
+}
+
+.event-color{
+  color: @c_interactions_accent_four;
+}
+
+.event-color-reverse{
+  background-color: @c_interactions_accent_four;
   color: @c_interactions_snow;
 }
 
@@ -54,6 +76,10 @@
 
   .card-body{
     padding: 5px;
+  }
+
+  .card-text {
+    margin:0px;
   }
 }
 
@@ -85,4 +111,8 @@
   &:hover{
     background-color: @c_interactions_snow_dirty;
   }
+}
+
+.empty-message {
+  font-size: 11pt;
 }

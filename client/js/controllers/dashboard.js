@@ -1,7 +1,8 @@
 class Dashboard {
 
+  environmentId = "intelliot"
   //component controllers
-  environmentController = new EnvironmentController("intelliot");
+  environmentController = new EnvironmentController(this.environmentId);
   artifactsController = new ArtifactsController();
   blocklyController = new BlocklyController();
 
@@ -47,9 +48,9 @@ class Dashboard {
     (async () => {
       if (workspaceData.uri != "empty") {
         try {
-          await this.artifactsController.reloadArtifactsFromWorkspace(workspaceData);
+          await this.artifactsController.reloadArtifactsFromWorkspace(workspaceData.parent, workspaceData.id);
         } catch (error) {
-          showError(error)
+          this.showError(error)
         }
       }
     })();
@@ -60,9 +61,9 @@ class Dashboard {
   handleArtifactSelectedEvent(artifactData) {
       (async () => {
         try {
-          var artifact = await this.artifactsController.reloadAffordancesFromArtifact(artifactData);
+          this.artifactsController.showArtifactAffordances(artifactData.id);
           this.blocklyController.hideMenu();
-          this.blocklyController.loadArtifact(artifact);
+          //this.blocklyController.loadArtifact(artifactData);
           this.blocklyController.showArea();
         } catch (error) {
           this.showError(error)

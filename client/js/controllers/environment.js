@@ -3,20 +3,21 @@ class EnvironmentController {
   
   static selectWorkspaceEvent = "selectWorkspace";
 
-  currentEnvironment = null;
-  workspacesInformation = [];
+  environmentId = null;
+  workspaces = [];
   //jquery shortcuts
   $workspaceChooser = $('#workspace-chooser')
 
-  constructor(environmentName){
-    this.currentEnvironment = environmentName;
-    this.workspacesInformation = [];
+  constructor(environmentId){
+    this.environmentId = environmentId;
+    this.workspaces = [];
 
     this.$workspaceChooser.change(function () {
       var event = {
         data: {
+          parent: environmentId,
           uri: this.options[this.selectedIndex].value,
-          name: this.options[this.selectedIndex].text,
+          id: this.options[this.selectedIndex].text,
         },
         type: EnvironmentController.selectWorkspaceEvent
       };
@@ -25,32 +26,27 @@ class EnvironmentController {
   }
 
   async fetchWorkspaces() {
-    log.fine("Fetching Yggdrasil workspaces in environment " + this.currentEnvironment);
+    log.fine("Fetching Yggdrasil workspaces in environment " + this.environmentId);
     try {
-      this.workspacesInformation = await yggdrasilInterface.fetchWorkspacesInEnvironment(this.currentEnvironment)
-      log.fine("Workspaces retrieved.")
-      log.fine('Environment ' + this.currentEnvironment + ' contains ' + this.workspacesInformation.length + ' workspace(s)!');
+      this.workspaces = await yggdrasilInterface.fetchWorkspaces(this.environmentId)
+      log.fine('Environment ' + this.environmentId + ' contains ' + this.workspaces.length + ' workspace(s)!');
       this.updateWorkspaceChooser()
-      return Promise.resolve(this.workspacesInformation)
+      return Promise.resolve(this.workspaces)
     } catch (error) {
       return Promise.reject(error)
     }
   }
 
   updateWorkspaceChooser() {
-
-    log.fineSeparate('Updating inspector...', this.workspacesInformation);
-
     // Remove all options in workspace-chooser
-    if (this.workspacesInformation.length > 0) {
+    if (this.workspaces.length > 0) {
       this.$workspaceChooser.find('option').remove();
       this.$workspaceChooser.append(new Option("Select Workspace...", "empty"));
     }
-
     // Add workspaces to workspace-chooser
-    for (var workspaceIndex in this.workspacesInformation) {
-      var workspaceInformation = this.workspacesInformation[workspaceIndex];
-      this.$workspaceChooser.append(new Option(workspaceInformation.name, workspaceInformation.uri));
+    for (var workspaceIndex in this.workspaces) {
+      var workspace = this.workspaces[workspaceIndex];
+      this.$workspaceChooser.append(new Option(workspace.id, workspace.uri));
     }
   }
 }

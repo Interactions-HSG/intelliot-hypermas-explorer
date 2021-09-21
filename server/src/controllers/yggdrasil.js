@@ -30,6 +30,7 @@ function ArtifactDto(workspaceId, workspaceUri, id, thingDescription) {
   return {
     parent:{id: workspaceId, type: 'workspace', uri: workspaceUri},
     id,
+    uri: thingDescription.id,
     thingDescription
   }
 }

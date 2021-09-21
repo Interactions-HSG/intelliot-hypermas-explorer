@@ -1,0 +1,19 @@
+
+
+{{#if (isBooleanType type)}}
+  <select id="{{this.id}}_input" class="form-select">
+    <option value="true" selected>True</option>
+    <option value="false">False</option>
+  </select>
+{{/if}}
+{{#if (isNumericType type)}}
+  <input  id="{{id}}_input" type="number" class="form-control" value="{{minimum}}" max="{{maximum}}" min="{{minimum}}" >
+{{/if}}
+{{#if (isObjectType type)}}
+  {{#each (toList properties)}}
+    <label>{{key}}</label>
+    {{>schemaInput value}}
+  {{/each}}
+{{else}}
+  
+{{/if}}

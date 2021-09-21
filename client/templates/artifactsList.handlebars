@@ -1,17 +1,25 @@
 {{#if currentArtifacts}}
-<div class="scroll-header">
+<div class="artifact-header scroll-header">
   <h4 class="artifact-color slide-in-left">Artifacts </h4>
 </div>
 <div class="scroll-container">
   {{#each currentArtifacts}}
   {{#if ../animate}} 
-    <div id="{{uri}}" class="card dashcard clickable slide-in-left" style="animation-delay:{{delay @index}}s -webkit-animation-delay:{{delay @index}}s" >
+    <div id="{{id}}" class="card dashcard clickable slide-in-left" style="animation-delay:{{delay @index}}s -webkit-animation-delay:{{delay @index}}s" >
   {{else}}
-    <div id="{{uri}}" class="card dashcard clickable">
+    <div id="{{id}}" class="card dashcard clickable">
       {{/if}}
-      <div class="card-header artifact-color-reverse">{{title}}</div>
+      <div class="card-header artifact-color-reverse">{{id}}</div>
       <div class="card-body">
-        <p class="card-text">Affordances: {{affordances.length}}</span>
+        {{#if propertiesNum}}
+        <p class="card-text">{{propertiesNum}} properties</p>
+        {{/if}}
+        {{#if actionsNum}}
+        <p class="card-text">{{actionsNum}} actions</p>
+        {{/if}}
+        {{#if eventsNum}}
+        <p class="card-text">{{eventsNum}} events </p>
+        {{/if}}
       </div>
     </div>
   {{/each}}
