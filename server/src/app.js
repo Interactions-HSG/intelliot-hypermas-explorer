@@ -13,9 +13,6 @@ exports.startServer = async function(options) {
 
   app.use(cors())
 
-  //enable static serving of files
-  app.use('/dashboard', express.static(options.staticDirectory))
-
   //bodyparser
   var rawBodySaver = function (req, res, buf, encoding) {
     if (buf && buf.length) {
@@ -34,10 +31,18 @@ exports.startServer = async function(options) {
     next()
   })
 
+  //Set default route
+  app.get('/', function (req, res) {
+    res.redirect('/dashboard')
+  })
+
+  //enable static serving of files
+  app.use('/dashboard', express.static(options.staticDirectory))
+
   //routes to get data
   require(path.join(options.srcDirectory, 'routes'))(app)
 
-  //notFound
+  //TODO notFound
   app.use(function(req, res) {
     res.setResult(notFound(`${req.originalUrl} not found`))
   })
