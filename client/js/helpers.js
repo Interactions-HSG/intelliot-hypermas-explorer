@@ -29,6 +29,9 @@ var helpers = {
     Handlebars.registerHelper("isStringType", function (value) {
       return value == 'string'
     });
+    Handlebars.registerHelper("isArrayType", function (value) {
+      return value == 'array'
+    });
 
     Handlebars.registerHelper("toList", function (value) {
       return Object.keys(value).map(x => {

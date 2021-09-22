@@ -29,3 +29,7 @@
     <input type="text" class="form-control">
   </div>
 {{/if}}
+{{#if (isArrayType value.type)}}
+  {{!TODO support for arrays}}
+  <p>Not supporting array input at the moment</p>
+{{/if}}

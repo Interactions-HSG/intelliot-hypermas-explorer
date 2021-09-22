@@ -91,7 +91,7 @@ class ArtifactsController {
       animate: true
     });
     this.$affordancesContainer.append($affordancesContent);
-    //this._addAffordancesTestHandler()
+    this._addAffordancesTestHandler()
   }
 
   _generatePropertyList(properties){
