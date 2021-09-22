@@ -116,22 +116,21 @@ class ArtifactsController {
 
   
   _addAffordancesTestHandler() {
-    $("div.affordance").each( function() {
-      $(this).find('span.test-affordance').click(e => {
-        var array = this.id.split("_")
-        var id = array[1]
-        var type = array[0]
-        var data = $('form[id="form_'+id+'"]').serializeArray()
+    $('form').each(function() {
+      $(this).submit(e => {
+        e.preventDefault();
+        var id = this.id.split("_")[1]
+        var input = $(this).serializeArray()
+        var type = this.name
         var event = {
           data: {
             type,
             id,
-            input: data
+            input
           },
           type: ArtifactsController.testAffordanceEvent
         }
-        console.log(event.data.input)
-        //dashboard.handleEvent(event);
+        console.log(event)
       })
     })
   }

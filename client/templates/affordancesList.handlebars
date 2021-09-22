@@ -36,18 +36,22 @@
         {{else}}
         <div id="action_{{id}}" class="affordance card dashcard">
       {{/if}}
-        <div class="card-header action-color-reverse">
-          <div class="card-title">{{id}}</div>
-          <span class="test-affordance badge rounded-pill clickable">Test</span>
-        </div>
-        <div class="card-body">
-          <p class="card-text">{{description}}
-          {{#if input}}
-            <form id="form_{{id}}" class="input-schema">
-              {{>schemaInput value=input key='Input:'}}
-            </form>
-          {{/if}}
-        </div>
+          <form id="form_{{id}}" name="action">
+            <div class="card-header action-color-reverse">
+              <div class="card-title">{{id}}</div>
+              <button type="submit" form="form_{{id}}" class="clickable rounded-pill badge test-affordance">
+                Test
+              </button>
+            </div>
+            <div class="card-body">
+              <p class="card-text">{{description}}
+              {{#if input}}
+                <div class="input-schema">
+                  {{>schemaInput value=input key='Input:'}}
+                </div>
+              {{/if}}
+            </div>
+          </form>
         </div>
   {{/each}}
 {{else}}

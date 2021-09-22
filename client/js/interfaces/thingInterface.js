@@ -18,7 +18,6 @@ class ThingInterface {
   async loadThing(){
     var factory = await this._servient.start();
     this._thing = await factory.consume(this.td)
-    console.log(this._thing)
     this.properties = this._generatePropertyList(this._thing.properties)
     this.actions = this._generateActionList(this._thing.actions)
     this.events = this._generateEventList(this._thing.events)
