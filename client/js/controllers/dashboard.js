@@ -71,15 +71,15 @@ class Dashboard {
       })();
     }
 
-    handleTestAffordanceEvent(affordanceData) {
-      (async () => {
-        try {
-          await this.artifactsController.testAffordance(affordanceData);
-        } catch (error) {
-          this.showError(error)
-        }
-      })();
-    }
+  handleTestAffordanceEvent(affordanceData) {
+    (async () => {
+      try {
+        await this.artifactsController.testAffordance(affordanceData.id, affordanceData.type);
+      } catch (error) {
+        this.showError(error)
+      }
+    })();
+  }
 
   showError(message) {
     log.error(message)

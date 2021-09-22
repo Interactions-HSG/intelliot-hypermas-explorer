@@ -6,9 +6,9 @@
 {{#if properties}}
     {{#each properties}}
       {{#if ../animate}}
-        <div id="{{id}}" class="card dashcard slide-in-left" style="animation-delay:{{delay @index}}s -webkit-animation-delay:{{delay @index}}s">
+        <div id="property_{{id}}" class="affordance card dashcard slide-in-left" style="animation-delay:{{delay @index}}s -webkit-animation-delay:{{delay @index}}s">
         {{else}}
-        <div id="{{id}}" class="card dashcard">
+        <div id="property_{{id}}" class="affordance card dashcard">
       {{/if}}
         <div class="card-header property-color-reverse">
           <div class="card-title">{{id}}</div>
@@ -32,9 +32,9 @@
 {{#if actions}}
     {{#each actions}}
       {{#if ../animate}}
-        <div id="{{id}}" class="card dashcard slide-in-left" style="animation-delay:{{delay @index}}s -webkit-animation-delay:{{delay @index}}s">
+        <div id="action_{{id}}" class="affordance card dashcard slide-in-left" style="animation-delay:{{delay @index}}s -webkit-animation-delay:{{delay @index}}s">
         {{else}}
-        <div id="{{id}}" class="card dashcard">
+        <div id="action_{{id}}" class="affordance card dashcard">
       {{/if}}
         <div class="card-header action-color-reverse">
           <div class="card-title">{{id}}</div>
@@ -63,9 +63,9 @@
 {{#if events}}
     {{#each events}}
       {{#if ../animate}}
-        <div id="{{id}}" class="card dashcard slide-in-left" style="animation-delay:{{delay @index}}s -webkit-animation-delay:{{delay @index}}s">
+        <div id="event_{{id}}" class="affordance card dashcard slide-in-left" style="animation-delay:{{delay @index}}s -webkit-animation-delay:{{delay @index}}s">
         {{else}}
-        <div id="{{id}}" class="card dashcard">
+        <div id="event_{{id}}" class="affordance card dashcard">
       {{/if}}
         <div class="card-header event-color-reverse">
           <div class="card-title">{{id}}</div>

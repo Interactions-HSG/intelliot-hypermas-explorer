@@ -5,6 +5,7 @@ class ArtifactsController {
 
   currentArtifacts = []
   selectedArtifact = undefined
+  selectedThing = undefined
   maxToastShown = 5
 
   //jquery shortcuts
@@ -67,8 +68,11 @@ class ArtifactsController {
     this.$artifactsContainer.empty();
   }
 
-  showArtifactAffordances(artifactId) {
+  async showArtifactAffordances(artifactId) {
     this.selectedArtifact = this.currentArtifacts.find(a => a.id == artifactId);
+    this.selectedThing = new ThingInterface(this.selectedArtifact.thingDescription);
+    await this.selectedThing.loadThing();
+
     this.clearAffordancesBar()
     this.showAffordancesBar()
     return this.selectedArtifact;
@@ -129,28 +133,37 @@ class ArtifactsController {
   }
   
   _addAffordancesTestHandler() {
-    var selectedArtifact = this.selectedArtifact
-
-    selectedArtifact.affordances.forEach(a => {
-      var event = {
-        data: {
-          affordance: a,
-          artifactRdfStore: selectedArtifact.rdfStore
-        },
-        type: ArtifactsController.testAffordanceEvent
-      };
-      $("div[id='" + a.id + "']")
-        .find("span.test-affordance")
-        .click(() => dashboard.handleEvent(event));
-    });
-
+    $("div.affordance").each( function() {
+      $(this).find('span.test-affordance').click(e => {
+        var array = this.id.split("_")
+        var event = {
+          data: {
+            type: array[0],
+            id: array[1]
+          },
+          type: ArtifactsController.testAffordanceEvent
+        }
+        dashboard.handleEvent(event);
+      })
+    })
   }
 
-  //TODO debug
-  async testAffordance(affordanceData) {
-    log.fine(`Testing ${affordanceData.affordance.title} affordance`);
-
-    var affordanceId = affordanceData.affordance.id
+  async testAffordance(affordanceId, type) {
+    log.fine(`Testing ${affordanceId} ${type}`);
+    var res = {}
+    switch (type) {
+      case 'property':
+        res = await this.selectedThing.readProperty(affordanceId)
+        break;
+      case 'action':
+        res = await this.selectedThing.invokeAction(affordanceId)
+        break;
+      default:
+        log.error(`Test unsupported affordance ${affordanceId} of type: ${type}`)
+        break;
+    }
+    console.log(res)
+    /*
     var inputData = null
 
     if (affordanceData.affordance.hasInputSchema) {
@@ -166,7 +179,7 @@ class ArtifactsController {
       this.displayResultToast(affordanceData.affordance.title, res)
     } catch (error) {
       console.log(error)
-    }
+    }*/
   }
 
   displayResultToast(invokedAffordance, result) {
