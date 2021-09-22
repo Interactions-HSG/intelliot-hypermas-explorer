@@ -1,19 +1,31 @@
-
-
-{{#if (isBooleanType type)}}
-  <select id="{{this.id}}_input" class="form-select">
-    <option value="true" selected>True</option>
-    <option value="false">False</option>
-  </select>
+{{#if (isBooleanType value.type)}}
+  <div class="input-group input-group-sm mb-3">
+    <span class="input-group-text">{{key}}</span>
+    <select class="form-select form-select-sm">
+      <option value="true" selected>True</option>
+      <option value="false">False</option>
+    </select>
+  </div>
 {{/if}}
-{{#if (isNumericType type)}}
-  <input  id="{{id}}_input" type="number" class="form-control" value="{{minimum}}" max="{{maximum}}" min="{{minimum}}" >
+{{#if (isNumericType value.type)}}
+  <div class="input-group input-group-sm mb-3">
+    <span class="input-group-text">{{key}}</span>
+    <input type="number" class="form-control" value="{{average value.type value.minimum value.maximum}}" max="{{value.maximum}}" min="{{value.minimum}}" >
+  </div>
 {{/if}}
-{{#if (isObjectType type)}}
-  {{#each (toList properties)}}
-    <label>{{key}}</label>
-    {{>schemaInput value}}
-  {{/each}}
-{{else}}
-  
+{{#if (isObjectType value.type)}}
+  <div class="object-schema">
+    <p>{{key}}</p>
+    {{#each (toList value.properties)}}
+      <div class="props">
+        {{>schemaInput value=value key=key}}
+      </div>
+    {{/each}}
+  </div>
+{{/if}}
+{{#if (isStringType value.type)}}
+  <div class="input-group input-group-sm mb-3">
+    <span class="input-group-text">{{key}}</span>
+    <input type="text" class="form-control">
+  </div>
 {{/if}}

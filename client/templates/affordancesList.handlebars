@@ -43,10 +43,8 @@
         <div class="card-body">
           <p class="card-text">{{description}}
           {{#if input}}
-            <div>
-              {{#with input}}
-                {{>schemaInput}}
-              {{/with}}
+            <div class="input-schema">
+              {{>schemaInput value=input key='Input:'}}
             </div>
           {{/if}}
         </div>
