@@ -74,7 +74,7 @@ class Dashboard {
   handleTestAffordanceEvent(affordanceData) {
     (async () => {
       try {
-        await this.artifactsController.testAffordance(affordanceData.id, affordanceData.type);
+        await this.artifactsController.testAffordance(affordanceData.id, affordanceData.type, affordanceData.input);
       } catch (error) {
         this.showError(error)
       }

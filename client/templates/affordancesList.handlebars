@@ -43,9 +43,9 @@
         <div class="card-body">
           <p class="card-text">{{description}}
           {{#if input}}
-            <div class="input-schema">
+            <form id="form_{{id}}" class="input-schema">
               {{>schemaInput value=input key='Input:'}}
-            </div>
+            </form>
           {{/if}}
         </div>
         </div>

@@ -72,7 +72,6 @@ class ArtifactsController {
     this.selectedArtifact = this.currentArtifacts.find(a => a.id == artifactId);
     this.selectedThing = new ThingInterface(this.selectedArtifact.thingDescription);
     await this.selectedThing.loadThing();
-
     this.clearAffordancesBar()
     this.showAffordancesBar()
     return this.selectedArtifact;
@@ -82,73 +81,62 @@ class ArtifactsController {
     this.$affordancesContainer.empty();
   }
 
+  testAction =[ 
+    {
+    id: "TestAction",
+    "@type": [
+        "https://www.w3.org/2019/wot/td#ActionAffordance",
+    ],
+    forms: [
+        {
+            "href": "https://api.interactions.ics.unisg.ch/leubot1/v1.2/elbow",
+            "contentType": "application/json",
+            "op": [
+                "invokeaction"
+            ],
+            "htv:methodName": "PUT"
+        }
+    ],
+    "input": {
+        "type": "number",
+    }
+    },
+  ]
+
   showAffordancesBar() {
-    //generate information to display
-    var properties = this._generatePropertyList(this.selectedArtifact.thingDescription.properties)
-    var actions = this._generateActionList(this.selectedArtifact.thingDescription.actions)
-    var events = this._generateEventList(this.selectedArtifact.thingDescription.events)
-    //generate and add DOM elements
     var $affordancesContent = Handlebars.templates.affordancesList({
-      properties,
-      actions,
-      events,
+      properties: this.selectedThing.properties,
+      actions: this.testAction,
+      events: this.selectedThing.events,
       animate: true
     });
     this.$affordancesContainer.append($affordancesContent);
     this._addAffordancesTestHandler()
   }
 
-  _generatePropertyList(properties){
-    if(!properties) {
-      return []
-    }
-    return Object.keys(properties).map(id => { 
-      return {
-        id,
-        description: properties[id].description,
-      }
-    })
-  }
-
-  _generateActionList(actions){
-    if(!actions) {
-      return []
-    }
-    return Object.keys(actions).map(id => {
-      var input = actions[id].input
-      return {
-        id,
-        input,
-        description: actions[id].description,
-      }
-    })
-  }
-
-  _generateEventList(properties){
-    if(!properties) {
-      return []
-    }
-    //TODO implement
-    return []
-  }
   
   _addAffordancesTestHandler() {
     $("div.affordance").each( function() {
       $(this).find('span.test-affordance').click(e => {
         var array = this.id.split("_")
+        var id = array[1]
+        var type = array[0]
+        var data = $('form[id="form_'+id+'"]').serializeArray()
         var event = {
           data: {
-            type: array[0],
-            id: array[1]
+            type,
+            id,
+            input: data
           },
           type: ArtifactsController.testAffordanceEvent
         }
-        dashboard.handleEvent(event);
+        console.log(event.data.input)
+        //dashboard.handleEvent(event);
       })
     })
   }
 
-  async testAffordance(affordanceId, type) {
+  async testAffordance(affordanceId, type, data) {
     log.fine(`Testing ${affordanceId} ${type}`);
     var res = {}
     switch (type) {
@@ -156,30 +144,13 @@ class ArtifactsController {
         res = await this.selectedThing.readProperty(affordanceId)
         break;
       case 'action':
-        res = await this.selectedThing.invokeAction(affordanceId)
+        res = await this.selectedThing.invokeAction(affordanceId, data)
         break;
       default:
         log.error(`Test unsupported affordance ${affordanceId} of type: ${type}`)
         break;
     }
     console.log(res)
-    /*
-    var inputData = null
-
-    if (affordanceData.affordance.hasInputSchema) {
-      // Assemble input data according to request
-      // This part should definitely be done using node-wot; however, this needs to be synchronized with wot-td (i.e., yggdrasil needs to provide json TDs that node-wot can parse)
-      inputData = {};
-      $("div[id='" + affordanceId + "']").find("input").each(function (index) {
-        inputData[$(this).attr('id')] = $(this).val();
-      })
-    }
-    try {
-      var res = await yggdrasilInterface.testAffordance(affordanceData.affordance, affordanceData.artifactRdfStore, inputData)
-      this.displayResultToast(affordanceData.affordance.title, res)
-    } catch (error) {
-      console.log(error)
-    }*/
   }
 
   displayResultToast(invokedAffordance, result) {

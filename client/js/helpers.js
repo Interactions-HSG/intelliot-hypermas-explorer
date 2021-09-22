@@ -5,12 +5,17 @@ var helpers = {
     });
 
     Handlebars.registerHelper("average", function(type, ...values){
-      values = values.slice(0,-1)
-      var avg = values.reduce((a,b) => a+b, 0) / values.length;
-      if(type == 'integer')
-        return avg.toFixed()
-      else 
-        return avg.toFixed(2)
+      values = values.slice(0,-1).filter(x => x)
+      if(values.length > 0){
+        var avg = values.reduce((a,b) => a+b, 0) / values.length;
+        if(type == 'integer')
+          return avg.toFixed()
+        else 
+          return avg.toFixed(2)
+      } else {
+        return 0
+      }
+      
     })
 
     Handlebars.registerHelper("currentTime", function() {
@@ -20,8 +25,11 @@ var helpers = {
     Handlebars.registerHelper("isObjectType", function (value) {
       return value == 'object'
     });
-    Handlebars.registerHelper("isNumericType", function (value) {
-      return value == 'number' || value == 'integer'
+    Handlebars.registerHelper("isNumberType", function (value) {
+      return value == 'number' 
+    });
+    Handlebars.registerHelper("isIntegerType", function (value) {
+      return value == 'integer'
     });
     Handlebars.registerHelper("isBooleanType", function (value) {
       return value == 'boolean'
