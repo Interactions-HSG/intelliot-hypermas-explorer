@@ -57,12 +57,12 @@
 
 {{#if (isObjectType value.type)}}
   <div class="object-schema">
-    <p>{{key}}</p>
+    <p class="key">{{key}}</p>
+    <div class="properties">
     {{#each (toList value.properties)}}
-      <div class="props">
         {{>schemaInput value=this.value key=this.key required=../value.required}}
-      </div>
     {{/each}}
+    </div>
   </div>
 {{/if}}
 

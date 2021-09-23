@@ -338,11 +338,11 @@ templates['schemaInput'] = template({"1":function(container,depth0,helpers,parti
         return undefined
     };
 
-  return "  <div class=\"object-schema\">\r\n    <p>"
-    + container.escapeExpression(((helper = (helper = lookupProperty(helpers,"key") || (depth0 != null ? lookupProperty(depth0,"key") : depth0)) != null ? helper : alias2),(typeof helper === "function" ? helper.call(alias1,{"name":"key","hash":{},"data":data,"loc":{"start":{"line":60,"column":7},"end":{"line":60,"column":14}}}) : helper)))
-    + "</p>\r\n"
-    + ((stack1 = lookupProperty(helpers,"each").call(alias1,(lookupProperty(helpers,"toList")||(depth0 && lookupProperty(depth0,"toList"))||alias2).call(alias1,((stack1 = (depth0 != null ? lookupProperty(depth0,"value") : depth0)) != null ? lookupProperty(stack1,"properties") : stack1),{"name":"toList","hash":{},"data":data,"loc":{"start":{"line":61,"column":12},"end":{"line":61,"column":37}}}),{"name":"each","hash":{},"fn":container.program(12, data, 0, blockParams, depths),"inverse":container.noop,"data":data,"loc":{"start":{"line":61,"column":4},"end":{"line":65,"column":13}}})) != null ? stack1 : "")
-    + "  </div>\r\n";
+  return "  <div class=\"object-schema\">\r\n    <p class=\"key\">"
+    + container.escapeExpression(((helper = (helper = lookupProperty(helpers,"key") || (depth0 != null ? lookupProperty(depth0,"key") : depth0)) != null ? helper : alias2),(typeof helper === "function" ? helper.call(alias1,{"name":"key","hash":{},"data":data,"loc":{"start":{"line":60,"column":19},"end":{"line":60,"column":26}}}) : helper)))
+    + "</p>\r\n    <div class=\"properties\">\r\n"
+    + ((stack1 = lookupProperty(helpers,"each").call(alias1,(lookupProperty(helpers,"toList")||(depth0 && lookupProperty(depth0,"toList"))||alias2).call(alias1,((stack1 = (depth0 != null ? lookupProperty(depth0,"value") : depth0)) != null ? lookupProperty(stack1,"properties") : stack1),{"name":"toList","hash":{},"data":data,"loc":{"start":{"line":62,"column":12},"end":{"line":62,"column":37}}}),{"name":"each","hash":{},"fn":container.program(12, data, 0, blockParams, depths),"inverse":container.noop,"data":data,"loc":{"start":{"line":62,"column":4},"end":{"line":64,"column":13}}})) != null ? stack1 : "")
+    + "    </div>\r\n  </div>\r\n";
 },"12":function(container,depth0,helpers,partials,data,blockParams,depths) {
     var stack1, lookupProperty = container.lookupProperty || function(parent, propertyName) {
         if (Object.prototype.hasOwnProperty.call(parent, propertyName)) {
@@ -351,9 +351,7 @@ templates['schemaInput'] = template({"1":function(container,depth0,helpers,parti
         return undefined
     };
 
-  return "      <div class=\"props\">\r\n"
-    + ((stack1 = container.invokePartial(lookupProperty(partials,"schemaInput"),depth0,{"name":"schemaInput","hash":{"required":((stack1 = (depths[1] != null ? lookupProperty(depths[1],"value") : depths[1])) != null ? lookupProperty(stack1,"required") : stack1),"key":(depth0 != null ? lookupProperty(depth0,"key") : depth0),"value":(depth0 != null ? lookupProperty(depth0,"value") : depth0)},"data":data,"indent":"        ","helpers":helpers,"partials":partials,"decorators":container.decorators})) != null ? stack1 : "")
-    + "      </div>\r\n";
+  return ((stack1 = container.invokePartial(lookupProperty(partials,"schemaInput"),depth0,{"name":"schemaInput","hash":{"required":((stack1 = (depths[1] != null ? lookupProperty(depths[1],"value") : depths[1])) != null ? lookupProperty(stack1,"required") : stack1),"key":(depth0 != null ? lookupProperty(depth0,"key") : depth0),"value":(depth0 != null ? lookupProperty(depth0,"value") : depth0)},"data":data,"indent":"        ","helpers":helpers,"partials":partials,"decorators":container.decorators})) != null ? stack1 : "");
 },"14":function(container,depth0,helpers,partials,data) {
     return "  <p>Not supporting array input at the moment</p>\r\n";
 },"compiler":[8,">= 4.3.0"],"main":function(container,depth0,helpers,partials,data,blockParams,depths) {

@@ -18,8 +18,6 @@ var helpers = {
     })
 
     Handlebars.registerHelper("isInArray", function(item, array){
-      console.log(item)
-      console.log(array)
       return array? array.includes(item) : false;
     });
     Handlebars.registerHelper("currentTime", () => new Date().toLocaleTimeString('en-US', { hour12: false}));

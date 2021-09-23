@@ -95,11 +95,38 @@ class ArtifactsController {
 
   
   _addAffordancesTestHandler() {
+
+    var getObject = function(element) {
+      var obj = {}
+      
+      return obj
+    }
+
+    var getSchema = function(rootObj){
+      var inputData = {}
+      for (const element of rootObj.children('input, select, div.object-schema')) {
+        if($(element).is('div')){
+          var propName = $(element).children('p.key').text()
+          inputData[propName] = {}
+          for (const prop of $(element).children('.properties').children('.input-group')){
+            var propObj = getSchema($(prop))
+            Object.keys(propObj).forEach(k => {
+              inputData[propName][k] = propObj[k]
+            })
+          }
+        } else {
+          var propName = $(element).attr('name')
+          var propValue = $(element).val()
+          inputData[propName] = propValue
+        }
+      }
+      return inputData;
+    }
     $('form').each(function() {
       $(this).submit(e => {
         e.preventDefault();
         var id = this.id.split("_")[1]
-        var input = $(this).serializeArray()
+        var input = getSchema($(this).find('.input-schema'))['Input:']
         var type = this.name
         var event = {
           data: {
@@ -125,13 +152,13 @@ class ArtifactsController {
         res = await this.selectedThing.invokeAction(affordanceId, data)
         break;
       default:
-        log.error(`Test unsupported affordance ${affordanceId} of type: ${type}`)
+        log.error(`Trying to use unsupported affordance ${affordanceId} of type: ${type}`)
         break;
     }
-    console.log(res)
+    this._displayResultToast(affordanceId, res)
   }
 
-  displayResultToast(invokedAffordance, result) {
+  _displayResultToast(invokedAffordance, result) {
     var $toast = $(Handlebars.templates.resultContent({
       invoked: invokedAffordance,
       result: result
@@ -146,8 +173,6 @@ class ArtifactsController {
       animation: false
     })
     $toast.toast('show')
-
-
   }
 
 }
