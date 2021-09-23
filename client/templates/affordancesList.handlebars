@@ -6,17 +6,21 @@
 {{#if properties}}
     {{#each properties}}
       {{#if ../animate}}
-        <div id="property_{{id}}" class="affordance card dashcard slide-in-left" style="animation-delay:{{delay @index}}s -webkit-animation-delay:{{delay @index}}s">
+        <div id="property_{{id}}" class="card dashcard slide-in-left" style="animation-delay:{{delay @index}}s -webkit-animation-delay:{{delay @index}}s">
         {{else}}
-        <div id="property_{{id}}" class="affordance card dashcard">
+        <div id="property_{{id}}" class="card dashcard">
       {{/if}}
-        <div class="card-header property-color-reverse">
-          <div class="card-title">{{id}}</div>
-          <span class="test-affordance badge rounded-pill clickable">Test</span>
-        </div>
-        <div class="card-body">
-          <p class="card-text">{{description}}
-        </div>
+          <form id="form_{{id}}" name="property">
+            <div class="card-header property-color-reverse">
+              <div class="card-title">{{id}}</div>
+              <button type="submit" form="form_{{id}}" class="clickable rounded-pill badge test-affordance">
+                Test
+              </button>
+            </div>
+            <div class="card-body">
+              <p class="card-text">{{description}}
+            </div>
+          </form>
         </div>
   {{/each}}
 {{else}}
@@ -32,9 +36,9 @@
 {{#if actions}}
     {{#each actions}}
       {{#if ../animate}}
-        <div id="action_{{id}}" class="affordance card dashcard slide-in-left" style="animation-delay:{{delay @index}}s -webkit-animation-delay:{{delay @index}}s">
+        <div id="action_{{id}}" class="card dashcard slide-in-left" style="animation-delay:{{delay @index}}s -webkit-animation-delay:{{delay @index}}s">
         {{else}}
-        <div id="action_{{id}}" class="affordance card dashcard">
+        <div id="action_{{id}}" class="card dashcard">
       {{/if}}
           <form id="form_{{id}}" name="action">
             <div class="card-header action-color-reverse">
@@ -47,7 +51,7 @@
               <p class="card-text">{{description}}
               {{#if input}}
                 <div class="input-schema">
-                  {{>schemaInput value=input key='Input:'}}
+                  {{>schemaInput value=input key='Input:' required=input.required}}
                 </div>
               {{/if}}
             </div>
@@ -64,26 +68,8 @@
 <div class="scroll-header">
   <h4 class="event-color slide-in-left">Events </h4>
 </div>
-{{#if events}}
-    {{#each events}}
-      {{#if ../animate}}
-        <div id="event_{{id}}" class="affordance card dashcard slide-in-left" style="animation-delay:{{delay @index}}s -webkit-animation-delay:{{delay @index}}s">
-        {{else}}
-        <div id="event_{{id}}" class="affordance card dashcard">
-      {{/if}}
-        <div class="card-header event-color-reverse">
-          <div class="card-title">{{id}}</div>
-          <span class="test-affordance badge rounded-pill clickable">Test</span>
-        </div>
-        <div class="card-body">
-          <p class="card-text">{{description}}
-        </div>
-        </div>
-  {{/each}}
-{{else}}
   <div>
     {{!TODO support events and change this}}
     <p class="empty-message">Events are not yet supported.</p>
   </div>
-{{/if}}
 </div>

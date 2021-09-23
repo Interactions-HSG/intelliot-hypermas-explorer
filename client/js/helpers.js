@@ -15,41 +15,36 @@ var helpers = {
       } else {
         return 0
       }
-      
     })
 
-    Handlebars.registerHelper("currentTime", function() {
-      return  new Date().toLocaleTimeString('en-US', { hour12: false});
-    })
-  
-    Handlebars.registerHelper("isObjectType", function (value) {
-      return value == 'object'
+    Handlebars.registerHelper("isInArray", function(item, array){
+      console.log(item)
+      console.log(array)
+      return array? array.includes(item) : false;
     });
-    Handlebars.registerHelper("isNumberType", function (value) {
-      return value == 'number' 
-    });
-    Handlebars.registerHelper("isIntegerType", function (value) {
-      return value == 'integer'
-    });
-    Handlebars.registerHelper("isBooleanType", function (value) {
-      return value == 'boolean'
-    });
-    Handlebars.registerHelper("isStringType", function (value) {
-      return value == 'string'
-    });
-    Handlebars.registerHelper("isArrayType", function (value) {
-      return value == 'array'
+    Handlebars.registerHelper("currentTime", () => new Date().toLocaleTimeString('en-US', { hour12: false}));
+    Handlebars.registerHelper({
+      "isObjectType": (value) => value == 'object',
+      "isNumberType": (value) => value == 'number',
+      "isIntegerType": (value) => value == 'integer',
+      "isBooleanType": (value) => value == 'boolean',
+      "isStringType": (value) => value == 'string',
+      "isArrayType": (value) => value == 'array',
     });
 
     Handlebars.registerHelper("toList", function (value) {
-      return Object.keys(value).map(x => {
+      var list = Object.keys(value).map(x => {
         return {
           key: x,
           value: value[x]
         }
       })
+      return list
     });
 
+    Handlebars.registerHelper("toString",(value) => JSON.stringify(value));
+
+    //Partials
     Handlebars.registerPartial('schemaInput', Handlebars.templates.schemaInput);
   }
 }

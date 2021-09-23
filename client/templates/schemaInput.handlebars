@@ -1,40 +1,72 @@
 {{#if (isBooleanType value.type)}}
   <div class="input-group input-group-sm mb-3">
     <span class="input-group-text">{{key}}</span>
-    <select name="{{key}}" class="form-select form-select-sm">
-      <option value="true" selected>True</option>
+    <select name="{{key}}" class="form-select form-select-sm"
+      {{#if (isInArray key required)}}
+      required
+      {{/if}}>
+      <option selected>----</option>
+      <option value="true">True</option>
       <option value="false">False</option>
     </select>
   </div>
 {{/if}}
+
+
 {{#if (isNumberType value.type)}}
   <div class="input-group input-group-sm mb-3">
     <span class="input-group-text">{{key}}</span>
-    <input type="number" name="{{key}}" class="form-control" value="{{average value.type value.minimum value.maximum}}" max="{{value.maximum}}" min="{{value.minimum}}" >
+    <input type="number" name="{{key}}" class="form-control" 
+      placeholder="{{average value.type value.minimum value.maximum}}" 
+      max="{{value.maximum}}" 
+      min="{{value.minimum}}"
+      {{#if (isInArray key required)}}
+      required
+      {{/if}}>
   </div>
 {{/if}}
+
+
 {{#if (isIntegerType value.type)}}
   <div class="input-group input-group-sm mb-3">
     <span class="input-group-text">{{key}}</span>
-    <input type="number" name="{{key}}" step="1" pattern="\d*" class="form-control" value="{{average value.type value.minimum value.maximum}}" max="{{value.maximum}}" min="{{value.minimum}}" >
+    <input type="number" name="{{key}}" class="form-control" 
+      placeholder="{{average value.type value.minimum value.maximum}}" 
+      max="{{value.maximum}}" 
+      step="1" 
+      pattern="\d*"
+      min="{{value.minimum}}"
+      {{#if (isInArray key required)}}
+      required
+      {{/if}}>
   </div>
 {{/if}}
+
+
+{{#if (isStringType value.type)}}
+  <div class="input-group input-group-sm mb-3">
+    <span class="input-group-text">{{key}}</span>
+    <input type="text" name="{{key}}" class="form-control"
+    placeholder="{{key}} value"
+    {{#if (isInArray key required)}}
+    required
+    {{/if}}>
+  </div>
+{{/if}}
+
+
 {{#if (isObjectType value.type)}}
   <div class="object-schema">
     <p>{{key}}</p>
     {{#each (toList value.properties)}}
       <div class="props">
-        {{>schemaInput value=value key=key}}
+        {{>schemaInput value=this.value key=this.key required=../value.required}}
       </div>
     {{/each}}
   </div>
 {{/if}}
-{{#if (isStringType value.type)}}
-  <div class="input-group input-group-sm mb-3">
-    <span class="input-group-text">{{key}}</span>
-    <input type="text" name="{{key}}"  class="form-control">
-  </div>
-{{/if}}
+
+
 {{#if (isArrayType value.type)}}
   {{!TODO support for arrays}}
   <p>Not supporting array input at the moment</p>

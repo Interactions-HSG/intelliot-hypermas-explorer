@@ -81,32 +81,11 @@ class ArtifactsController {
     this.$affordancesContainer.empty();
   }
 
-  testAction =[ 
-    {
-    id: "TestAction",
-    "@type": [
-        "https://www.w3.org/2019/wot/td#ActionAffordance",
-    ],
-    forms: [
-        {
-            "href": "https://api.interactions.ics.unisg.ch/leubot1/v1.2/elbow",
-            "contentType": "application/json",
-            "op": [
-                "invokeaction"
-            ],
-            "htv:methodName": "PUT"
-        }
-    ],
-    "input": {
-        "type": "number",
-    }
-    },
-  ]
 
   showAffordancesBar() {
     var $affordancesContent = Handlebars.templates.affordancesList({
       properties: this.selectedThing.properties,
-      actions: this.testAction,
+      actions: this.selectedThing.actions,
       events: this.selectedThing.events,
       animate: true
     });
@@ -130,7 +109,7 @@ class ArtifactsController {
           },
           type: ArtifactsController.testAffordanceEvent
         }
-        console.log(event)
+        dashboard.handleEvent(event);
       })
     })
   }
