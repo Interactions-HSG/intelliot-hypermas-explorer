@@ -2,20 +2,20 @@ const baseColor = "#244482"
 const baseColorLight = "#EAEEF5"
 const whiteColor = "#ffffff"
 
-const actionColor = "#ead94c"
-const propertyColor = "#2f898d"
-const eventColor = "#643e9f"
+const actionColor = "#f2cb42"
+const propertyColor = "#2e91a3"
+const eventColor = "#7a2ea3"
 const triggerColor = "#ce7e00"
 
 var categoryStyles = {
-  properties_category :{
+  properties_category: {
     colour: propertyColor
   },
   actions_category: {
-     colour : actionColor
+    colour: actionColor
   },
   events_category: {
-     colour: eventColor,
+    colour: eventColor,
   },
   triggers_category: {
     colour: triggerColor,
@@ -23,7 +23,18 @@ var categoryStyles = {
 }
 
 var blockStyles = {
-
+  trigger_block_style: {
+    colourPrimary: triggerColor,
+  },
+  property_block_style: {
+    colourPrimary: propertyColor,
+  },
+  action_block_style: {
+    colourPrimary: actionColor,
+  },
+  event_block_style: {
+    colourPrimary: eventColor,
+  }
 }
 
 var componentStyle = {

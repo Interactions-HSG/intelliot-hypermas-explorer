@@ -63,7 +63,7 @@ class Dashboard {
         try {
           this.artifactsController.showArtifactAffordances(artifactData.id);
           this.blocklyController.hideMenu();
-          //this.blocklyController.loadArtifact(artifactData);
+          this.blocklyController.loadArtifact(artifactData);
           this.blocklyController.showArea();
         } catch (error) {
           this.showError(error)

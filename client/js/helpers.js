@@ -30,15 +30,7 @@ var helpers = {
       "isArrayType": (value) => value == 'array',
     });
 
-    Handlebars.registerHelper("toList", function (value) {
-      var list = Object.keys(value).map(x => {
-        return {
-          key: x,
-          value: value[x]
-        }
-      })
-      return list
-    });
+    Handlebars.registerHelper("toList", (value) => utils.toList(value));
 
     Handlebars.registerHelper("toString",(value) => JSON.stringify(value));
 

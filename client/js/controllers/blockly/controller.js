@@ -4,7 +4,9 @@ class BlocklyController {
 
   workspace = undefined
   toolbox = undefined
-  affordanceCategory = undefined
+  propertyCategory = undefined
+  actionCategory = undefined
+  eventCategory = undefined
   flyout = undefined
   
   //jquery shortcuts
@@ -30,13 +32,50 @@ class BlocklyController {
     }
     this.workspace = Blockly.inject(this.$blocklyInjection[0], options);
     this.toolbox = this.workspace.getToolbox();
-    this.affordanceCategory = this.toolbox.getToolboxItemById('Affordances');
+    this.propertyCategory = this.toolbox.getToolboxItemById('Properties');
+    this.actionCategory = this.toolbox.getToolboxItemById('Actions');
+    this.eventCategory = this.toolbox.getToolboxItemById('Events');
     this.flyout = this.toolbox.getFlyout();
-    window.addEventListener('resize',this.getResizeHandler(this.workspace), false)
+    window.addEventListener('resize',this._resizeHandler(this.workspace), false)
     this.$blocklyContainer.hide()
   }
 
-  getResizeHandler(workspace) {
+  loadArtifact(artifact) {
+    var propertyBlocks = this._generatePropertyBlocks(artifact.thingDescription.properties, artifact.id)
+    var actionBlocks = this._generateActionBlocks(artifact.thingDescription.actions, artifact.id)
+    var eventBlocks = this._generateEventBlocks(artifact.thingDescription.events, artifact.id)
+    
+    this.propertyCategory.updateFlyoutContents(propertyBlocks)
+    this.actionCategory.updateFlyoutContents(actionBlocks)
+    this.eventCategory.updateFlyoutContents(eventBlocks)
+  }
+  
+  resize(){
+    this._resizeHandler(this.workspace)();
+  }
+
+  clearWorkspace() {
+    this.propertyCategory.updateFlyoutContents([])
+    this.actionCategory.updateFlyoutContents([])
+    this.eventCategory.updateFlyoutContents([])
+  }
+
+  showArea(){
+    this.$blocklyContainer.fadeIn();
+    this.resize();
+  }
+
+  hideMenu(){
+    this.toolbox.setSelectedItem(null)
+    this.flyout.hide()
+  }
+
+  hideArea(){
+    this.hideMenu();
+    this.$blocklyContainer.fadeOut()
+  }
+
+  _resizeHandler(workspace) {
     return function() {
       var blocklyArea = document.getElementById('blockly-container');
       var blocklyDiv = document.getElementById('blockly-injection');
@@ -58,49 +97,28 @@ class BlocklyController {
     }
   }
 
-  resize(){
-    this.getResizeHandler(this.workspace)();
+  _generatePropertyBlocks(properties, artifactId){
+    var blocks = []
+    utils.toList(properties).forEach( p => {
+      toolboxUtils.definePropertyBlock(p.key, p.value, artifactId)
+      blocks.push({kind: "block", type: p.key})
+    });
+    return blocks;
   }
 
-
-  loadArtifact(artifact) {
-    var affordancesBlocks = []
-    artifact.affordances.forEach(affordance => {
-      //define blocks
-      Blockly.Blocks[affordance.title] = {
-        init: function() {
-          this.setPreviousStatement(true, null);
-          this.setNextStatement(true, null);
-          this.setColour(300);
-          this.appendDummyInput().appendField(affordance.title);
-          this.setTooltip(`Use the affordance ${affordance.title}`);
-        }
-      };
-      //generate block and add to category
-      affordancesBlocks.push({kind: "block", type: affordance.title})
+  _generateActionBlocks(actions, artifactId){
+    var blocks = []
+    utils.toList(actions).forEach( a => {
+      toolboxUtils.defineActionBlock(a.key, a.value, artifactId)
+      blocks.push({kind: "block", type: a.key})
     });
-    this.affordanceCategory.updateFlyoutContents(affordancesBlocks);
+    return blocks;
   }
   
-  clearWorkspace() {
-    this.workspace.clear();
-    this.workspace.clearUndo();
-    this.affordanceCategory.updateFlyoutContents({})
+  _generateEventBlocks(events, artifactId){
+    //TODO implement when supporting events
+    return []
   }
-
-  showArea(){
-    this.$blocklyContainer.fadeIn();
-    this.resize();
-  }
-
-  hideMenu(){
-    this.toolbox.setSelectedItem(null)
-    this.flyout.hide()
-  }
-
-  hideArea(){
-    this.hideMenu();
-    this.$blocklyContainer.fadeOut()
-  }
+  
   
 }
