@@ -29,20 +29,10 @@ class ThingInterface {
     return {error: 'NotImplemented'}
   }
 
-  async invokeAction(action, propertyValues){
-    console.log(propertyValues)
-    var payload = this._composeInput(action, propertyValues);
-    // var res = await this._thing.invokeAction(action, payload)
+  async invokeAction(action, payload){
+    console.log(payload)
+    //var res = await this._thing.invokeAction(action, payload)
     return {error: 'NotImplemented'}
-  }
-
-  _composeInput(id, propertyValues){
-    var actionObject = this._generateActionList(this._thing.actions).find(x => x.id == id)
-    if(!actionObject || !actionObject.input){
-      return undefined 
-    }
-    console.log(actionObject.input)
-    
   }
 
   _generatePropertyList(properties){

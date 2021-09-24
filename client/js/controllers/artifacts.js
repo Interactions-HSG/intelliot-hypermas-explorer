@@ -40,12 +40,12 @@ class ArtifactsController {
     var displayList = this.currentArtifacts.map(a => {
       return {
         id: a.id,
-        propertiesNum:a.thingDescription.properties ? Object.keys(a.thingDescription.properties).length: undefined,
+        propertiesNum: a.thingDescription.properties ? Object.keys(a.thingDescription.properties).length : undefined,
         actionsNum: a.thingDescription.actions ? Object.keys(a.thingDescription.actions).length : undefined,
         eventsNum: a.thingDescription.events ? Object.keys(a.thingDescription.events).length : undefined
       }
     });
-    
+
     //generate DOM elements
     var $artifactsContent = Handlebars.templates.artifactsList({
       currentArtifacts: displayList,
@@ -93,40 +93,32 @@ class ArtifactsController {
     this._addAffordancesTestHandler()
   }
 
-  
+
   _addAffordancesTestHandler() {
-
-    var getObject = function(element) {
-      var obj = {}
-      
-      return obj
-    }
-
-    var getSchema = function(rootObj){
+    var getSchema = function (rootObj) {
       var inputData = {}
       for (const element of rootObj.children('input, select, div.object-schema')) {
-        if($(element).is('div')){
+        if ($(element).is('div')) {
           var propName = $(element).children('p.key').text()
           inputData[propName] = {}
-          for (const prop of $(element).children('.properties').children('.input-group')){
+          for (const prop of $(element).children('.properties').children('.input-group')) {
             var propObj = getSchema($(prop))
             Object.keys(propObj).forEach(k => {
-                inputData[propName][k] = propObj[k]
+              inputData[propName][k] = propObj[k]
             })
           }
         } else {
-          
           var propName = $(element).attr('name')
           var propValue = $(element).val()
-          if($(element).attr('type') == 'number'){
-            propValue  = propValue ? Number(propValue) : undefined
+          if ($(element).attr('type') == 'number') {
+            propValue = propValue ? Number(propValue) : undefined
           }
           inputData[propName] = propValue
         }
       }
       return inputData;
     }
-    $('form').each(function() {
+    $('form').each(function () {
       $(this).submit(e => {
         e.preventDefault();
         var id = this.id.split("_")[1]
