@@ -111,12 +111,16 @@ class ArtifactsController {
           for (const prop of $(element).children('.properties').children('.input-group')){
             var propObj = getSchema($(prop))
             Object.keys(propObj).forEach(k => {
-              inputData[propName][k] = propObj[k]
+                inputData[propName][k] = propObj[k]
             })
           }
         } else {
+          
           var propName = $(element).attr('name')
           var propValue = $(element).val()
+          if($(element).attr('type') == 'number'){
+            propValue  = propValue ? Number(propValue) : undefined
+          }
           inputData[propName] = propValue
         }
       }

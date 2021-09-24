@@ -17,7 +17,7 @@
   <div class="input-group input-group-sm mb-3">
     <span class="input-group-text">{{key}}</span>
     <input type="number" name="{{key}}" class="form-control" 
-      placeholder="{{average value.type value.minimum value.maximum}}" 
+      placeholder="{{value.minimum}}" 
       max="{{value.maximum}}" 
       min="{{value.minimum}}"
       {{#if (isInArray key required)}}
@@ -31,7 +31,7 @@
   <div class="input-group input-group-sm mb-3">
     <span class="input-group-text">{{key}}</span>
     <input type="number" name="{{key}}" class="form-control" 
-      placeholder="{{average value.type value.minimum value.maximum}}" 
+      placeholder="{{value.minimum}}" 
       max="{{value.maximum}}" 
       step="1" 
       pattern="\d*"
@@ -47,7 +47,7 @@
   <div class="input-group input-group-sm mb-3">
     <span class="input-group-text">{{key}}</span>
     <input type="text" name="{{key}}" class="form-control"
-    placeholder="{{key}} value"
+    placeholder="{{value.type}}"
     {{#if (isInArray key required)}}
     required
     {{/if}}>

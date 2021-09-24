@@ -282,7 +282,7 @@ templates['schemaInput'] = template({"1":function(container,depth0,helpers,parti
     + "</span>\r\n    <input type=\"number\" name=\""
     + alias4(((helper = (helper = lookupProperty(helpers,"key") || (depth0 != null ? lookupProperty(depth0,"key") : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"key","hash":{},"data":data,"loc":{"start":{"line":19,"column":31},"end":{"line":19,"column":38}}}) : helper)))
     + "\" class=\"form-control\" \r\n      placeholder=\""
-    + alias4((lookupProperty(helpers,"average")||(depth0 && lookupProperty(depth0,"average"))||alias2).call(alias1,((stack1 = (depth0 != null ? lookupProperty(depth0,"value") : depth0)) != null ? lookupProperty(stack1,"type") : stack1),((stack1 = (depth0 != null ? lookupProperty(depth0,"value") : depth0)) != null ? lookupProperty(stack1,"minimum") : stack1),((stack1 = (depth0 != null ? lookupProperty(depth0,"value") : depth0)) != null ? lookupProperty(stack1,"maximum") : stack1),{"name":"average","hash":{},"data":data,"loc":{"start":{"line":20,"column":19},"end":{"line":20,"column":69}}}))
+    + alias4(alias5(((stack1 = (depth0 != null ? lookupProperty(depth0,"value") : depth0)) != null ? lookupProperty(stack1,"minimum") : stack1), depth0))
     + "\" \r\n      max=\""
     + alias4(alias5(((stack1 = (depth0 != null ? lookupProperty(depth0,"value") : depth0)) != null ? lookupProperty(stack1,"maximum") : stack1), depth0))
     + "\" \r\n      min=\""
@@ -303,7 +303,7 @@ templates['schemaInput'] = template({"1":function(container,depth0,helpers,parti
     + "</span>\r\n    <input type=\"number\" name=\""
     + alias4(((helper = (helper = lookupProperty(helpers,"key") || (depth0 != null ? lookupProperty(depth0,"key") : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"key","hash":{},"data":data,"loc":{"start":{"line":33,"column":31},"end":{"line":33,"column":38}}}) : helper)))
     + "\" class=\"form-control\" \r\n      placeholder=\""
-    + alias4((lookupProperty(helpers,"average")||(depth0 && lookupProperty(depth0,"average"))||alias2).call(alias1,((stack1 = (depth0 != null ? lookupProperty(depth0,"value") : depth0)) != null ? lookupProperty(stack1,"type") : stack1),((stack1 = (depth0 != null ? lookupProperty(depth0,"value") : depth0)) != null ? lookupProperty(stack1,"minimum") : stack1),((stack1 = (depth0 != null ? lookupProperty(depth0,"value") : depth0)) != null ? lookupProperty(stack1,"maximum") : stack1),{"name":"average","hash":{},"data":data,"loc":{"start":{"line":34,"column":19},"end":{"line":34,"column":69}}}))
+    + alias4(alias5(((stack1 = (depth0 != null ? lookupProperty(depth0,"value") : depth0)) != null ? lookupProperty(stack1,"minimum") : stack1), depth0))
     + "\" \r\n      max=\""
     + alias4(alias5(((stack1 = (depth0 != null ? lookupProperty(depth0,"value") : depth0)) != null ? lookupProperty(stack1,"maximum") : stack1), depth0))
     + "\" \r\n      step=\"1\" \r\n      pattern=\"\\d*\"\r\n      min=\""
@@ -324,8 +324,8 @@ templates['schemaInput'] = template({"1":function(container,depth0,helpers,parti
     + "</span>\r\n    <input type=\"text\" name=\""
     + alias4(((helper = (helper = lookupProperty(helpers,"key") || (depth0 != null ? lookupProperty(depth0,"key") : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"key","hash":{},"data":data,"loc":{"start":{"line":49,"column":29},"end":{"line":49,"column":36}}}) : helper)))
     + "\" class=\"form-control\"\r\n    placeholder=\""
-    + alias4(((helper = (helper = lookupProperty(helpers,"key") || (depth0 != null ? lookupProperty(depth0,"key") : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"key","hash":{},"data":data,"loc":{"start":{"line":50,"column":17},"end":{"line":50,"column":24}}}) : helper)))
-    + " value\"\r\n"
+    + alias4(container.lambda(((stack1 = (depth0 != null ? lookupProperty(depth0,"value") : depth0)) != null ? lookupProperty(stack1,"type") : stack1), depth0))
+    + "\"\r\n"
     + ((stack1 = lookupProperty(helpers,"if").call(alias1,(lookupProperty(helpers,"isInArray")||(depth0 && lookupProperty(depth0,"isInArray"))||alias2).call(alias1,(depth0 != null ? lookupProperty(depth0,"key") : depth0),(depth0 != null ? lookupProperty(depth0,"required") : depth0),{"name":"isInArray","hash":{},"data":data,"loc":{"start":{"line":51,"column":10},"end":{"line":51,"column":34}}}),{"name":"if","hash":{},"fn":container.program(9, data, 0),"inverse":container.noop,"data":data,"loc":{"start":{"line":51,"column":4},"end":{"line":53,"column":11}}})) != null ? stack1 : "")
     + ">\r\n  </div>\r\n";
 },"9":function(container,depth0,helpers,partials,data) {
