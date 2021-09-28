@@ -25,14 +25,23 @@ class ThingInterface {
 
 
   async readProperty(property){
-    //var res = await this._thing.readProperty(property);
-    return {error: 'NotImplemented'}
+    var res;
+    try {
+      var res = await this._thing.readProperty(property);
+    } catch (error) {
+      res = {error: error.message}
+    }
+    return res;
   }
 
   async invokeAction(action, payload){
-    console.log(payload)
-    //var res = await this._thing.invokeAction(action, payload)
-    return {error: 'NotImplemented'}
+    var res
+    try {
+    var res = await this._thing.invokeAction(action, payload)
+    } catch (error) {
+      res = {error: error.message}
+    }
+    return res;
   }
 
   _generatePropertyList(properties){
