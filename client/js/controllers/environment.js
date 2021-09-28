@@ -5,14 +5,16 @@ class EnvironmentController {
 
   environmentId = null;
   workspaces = [];
+  currentValue = null;
   //jquery shortcuts
   $workspaceChooser = $('#workspace-chooser')
 
   constructor(environmentId){
     this.environmentId = environmentId;
     this.workspaces = [];
+    this.currentValue = "empty"
 
-    this.$workspaceChooser.change(function () {
+    this.$workspaceChooser.change(async function () {
       var event = {
         data: {
           parent: environmentId,
@@ -21,7 +23,13 @@ class EnvironmentController {
         },
         type: EnvironmentController.selectWorkspaceEvent
       };
-      dashboard.handleEvent(event)
+      var res = await dashboard.handleEvent(event)
+      if(!res) {
+        console.log(res)
+        $(this).val(this.currentValue);
+        return false;
+      }
+      this.currentValue =  this.options[this.selectedIndex].value;
     });
   }
 

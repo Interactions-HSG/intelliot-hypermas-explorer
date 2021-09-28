@@ -25,63 +25,78 @@ class Dashboard {
     this.blocklyController.initialize();
   }
 
-  handleEvent(event) {
+  //returns a promise whose value resolve to:
+  // - true when the event is handled, 
+  // - false when ther was an error and it might be necessary to abort the event.
+  async handleEvent(event) {
     switch (event.type) {
       case EnvironmentController.selectWorkspaceEvent:
-        this.handleSelectWorkspaceEvent(event.data)
-        break;
+        return await this.handleSelectWorkspaceEvent(event.data)
       case ArtifactsController.selectArtifactEvent:
-        this.handleArtifactSelectedEvent(event.data)
-        break;
+        return await this.handleArtifactSelectedEvent(event.data)
       case ArtifactsController.testAffordanceEvent:
-        this.handleTestAffordanceEvent(event.data)
-        break;
+        return await this.handleTestAffordanceEvent(event.data)
       default:
         log.error(`Unrecognized event of type ${event.type}`)
-        break;
+        return new Promise.resolve(false);
     }
   }
 
-  handleSelectWorkspaceEvent(workspaceData) {
-    this.artifactsController.clearArtifactsBar();
-    this.artifactsController.clearAffordancesBar();
-    (async () => {
+  async handleSelectWorkspaceEvent(workspaceData) {
+    var res = true;
+    if(!this.blocklyController.isEmpty()){
+      var res = await this.waitConfirm("Are you sure? You will lose all your blocks")
+    }
+    if(res){
+      this.artifactsController.clearArtifactsBar();
+      this.artifactsController.clearAffordancesBar();
       if (workspaceData.uri != "empty") {
         try {
           await this.artifactsController.reloadArtifactsFromWorkspace(workspaceData.parent, workspaceData.id);
         } catch (error) {
           this.showError(error)
+          return Promise.resolve(false) //abort change
         }
       }
-    })();
-    this.blocklyController.clearWorkspace();
-    this.blocklyController.hideArea();
+      this.blocklyController.clearWorkspace();
+      this.blocklyController.hideArea();
+    }
+    return Promise.resolve(res)
   }
 
-  handleArtifactSelectedEvent(artifactData) {
-      (async () => {
-        try {
-          this.artifactsController.showArtifactAffordances(artifactData.id);
-          this.blocklyController.hideMenu();
-          this.blocklyController.loadArtifact(artifactData);
-          this.blocklyController.showArea();
-        } catch (error) {
-          this.showError(error)
-        }
-      })();
+  async handleArtifactSelectedEvent(artifactData) {
+      try {
+        this.artifactsController.showArtifactAffordances(artifactData.id);
+        this.blocklyController.hideMenu();
+        this.blocklyController.loadArtifact(artifactData);
+        this.blocklyController.showArea();
+        return Promise.resolve(true);
+      } catch (error) {
+        this.showError(error);
+        return Promise.resolve(false);
+      }
     }
 
-  handleTestAffordanceEvent(affordanceData) {
-    (async () => {
-      try {
-        await this.artifactsController.testAffordance(affordanceData.id, affordanceData.type, affordanceData.input);
-      } catch (error) {
-        this.showError(error)
-      }
-    })();
+  async handleTestAffordanceEvent(affordanceData) {
+    try {
+      await this.artifactsController.testAffordance(affordanceData.id, affordanceData.type, affordanceData.input);
+      return Promise.resolve(true);
+    } catch (error) {
+      this.showError(error);
+      return Promise.resolve(false);
+    }
+  }
+
+  waitConfirm(message){
+    //TODO better graphic
+    return new Promise((resolve, _) => {
+      var res = confirm(message)
+      resolve(res)
+    })
   }
 
   showError(message) {
+    //TODO better graphic
     log.error(message)
     alert("ERROR: " + message)
   }

@@ -20,6 +20,7 @@ class ArtifactsController {
       var artifacts = await yggdrasilInterface.fetchArtifacts(environmentId, workspaceId);
       log.fine(`Workspace contained ${artifacts.length} artifact(s)!`);
       //fetch affordances
+      //TODO better error handling
       for (var artifact of artifacts) {
         try {
           var artifactDescription = await yggdrasilInterface.getArtifactDescription(environmentId, workspaceId, artifact.id)
@@ -59,7 +60,7 @@ class ArtifactsController {
         data: artifact,
         type: ArtifactsController.selectArtifactEvent
       };
-      $(`div[id='${artifact.id}']`).click(() => dashboard.handleEvent(event));
+      $(`div[id='${artifact.id}']`).click(async () => await dashboard.handleEvent(event));
     });
   }
 
@@ -74,7 +75,6 @@ class ArtifactsController {
     await this.selectedThing.loadThing();
     this.clearAffordancesBar()
     this.showAffordancesBar()
-    return this.selectedArtifact;
   }
 
   clearAffordancesBar() {
@@ -119,7 +119,7 @@ class ArtifactsController {
       return inputData;
     }
     $('form').each(function () {
-      $(this).submit(e => {
+      $(this).submit(async (e) => {
         e.preventDefault();
         var id = this.id.split("_")[1]
         var input = getSchema($(this).find('.input-schema'))['Input:']
@@ -132,7 +132,7 @@ class ArtifactsController {
           },
           type: ArtifactsController.testAffordanceEvent
         }
-        dashboard.handleEvent(event);
+        await dashboard.handleEvent(event);
       })
     })
   }

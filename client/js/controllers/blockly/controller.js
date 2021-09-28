@@ -2,12 +2,12 @@
 //Should try to do that and maybe the library would also work on node
 class BlocklyController {
 
-  workspace = undefined
-  toolbox = undefined
-  propertyCategory = undefined
-  actionCategory = undefined
-  eventCategory = undefined
-  flyout = undefined
+  _workspace = undefined
+  _toolbox = undefined
+  _propertyCategory = undefined
+  _actionCategory = undefined
+  _eventCategory = undefined
+  _flyout = undefined
   
   //jquery shortcuts
   $blocklyInjection = $('#blockly-injection')
@@ -30,13 +30,13 @@ class BlocklyController {
       },
       trashcan: true
     }
-    this.workspace = Blockly.inject(this.$blocklyInjection[0], options);
-    this.toolbox = this.workspace.getToolbox();
-    this.propertyCategory = this.toolbox.getToolboxItemById('Properties');
-    this.actionCategory = this.toolbox.getToolboxItemById('Actions');
-    this.eventCategory = this.toolbox.getToolboxItemById('Events');
-    this.flyout = this.toolbox.getFlyout();
-    window.addEventListener('resize',this._resizeHandler(this.workspace), false)
+    this._workspace = Blockly.inject(this.$blocklyInjection[0], options);
+    this._toolbox = this._workspace.getToolbox();
+    this._propertyCategory = this._toolbox.getToolboxItemById('Properties');
+    this._actionCategory = this._toolbox.getToolboxItemById('Actions');
+    this._eventCategory = this._toolbox.getToolboxItemById('Events');
+    this._flyout = this._toolbox.getFlyout();
+    window.addEventListener('resize',this._resizeHandler(this._workspace), false)
     this.$blocklyContainer.hide()
   }
 
@@ -45,19 +45,21 @@ class BlocklyController {
     var actionBlocks = this._generateActionBlocks(artifact.thingDescription.actions, artifact.id)
     var eventBlocks = this._generateEventBlocks(artifact.thingDescription.events, artifact.id)
     
-    this.propertyCategory.updateFlyoutContents(propertyBlocks)
-    this.actionCategory.updateFlyoutContents(actionBlocks)
-    this.eventCategory.updateFlyoutContents(eventBlocks)
+    this._propertyCategory.updateFlyoutContents(propertyBlocks)
+    this._actionCategory.updateFlyoutContents(actionBlocks)
+    this._eventCategory.updateFlyoutContents(eventBlocks)
   }
-  
-  resize(){
-    this._resizeHandler(this.workspace)();
+
+  isEmpty() {
+    return this._workspace.getAllBlocks().length == 0;
   }
 
   clearWorkspace() {
-    this.propertyCategory.updateFlyoutContents([])
-    this.actionCategory.updateFlyoutContents([])
-    this.eventCategory.updateFlyoutContents([])
+    this._propertyCategory.updateFlyoutContents([])
+    this._actionCategory.updateFlyoutContents([])
+    this._eventCategory.updateFlyoutContents([])
+    this._workspace.clear()
+    this._workspace.clearUndo()
   }
 
   showArea(){
@@ -66,13 +68,17 @@ class BlocklyController {
   }
 
   hideMenu(){
-    this.toolbox.setSelectedItem(null)
-    this.flyout.hide()
+    this._toolbox.setSelectedItem(null)
+    this._flyout.hide()
   }
 
   hideArea(){
     this.hideMenu();
     this.$blocklyContainer.fadeOut()
+  }
+
+  resize(){
+    this._resizeHandler(this._workspace)();
   }
 
   _resizeHandler(workspace) {
