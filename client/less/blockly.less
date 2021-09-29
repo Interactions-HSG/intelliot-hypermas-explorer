@@ -1,3 +1,25 @@
+@import "color";
+
+#blockly-controls {
+  height: 10%;
+  width:100%;
+  padding-left: 120px; //toolbox size
+  background-color: @c_interactions_blue_dark;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  button {
+    margin:5px;
+    max-height: 80%;
+  }
+}
+
+#blockly-relative{
+  height:90%;
+  width:100%;
+  position:relative;
+}
+
 #blockly-injection{
   position:absolute;
 }

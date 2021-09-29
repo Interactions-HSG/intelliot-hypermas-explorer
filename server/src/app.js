@@ -42,7 +42,7 @@ exports.startServer = async function(options) {
   //routes to get data
   require(path.join(options.srcDirectory, 'routes'))(app)
 
-  //TODO notFound
+  //TODO notFound landing page
   app.use(function(req, res) {
     res.setResult(notFound(`${req.originalUrl} not found`))
   })

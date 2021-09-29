@@ -1,5 +1,4 @@
 //TODO can i move all the logic in the backend and retrieve the jsons for the toolbox?
-//Should try to do that and maybe the library would also work on node
 class BlocklyController {
 
   _workspace = undefined
@@ -11,6 +10,7 @@ class BlocklyController {
   
   //jquery shortcuts
   $blocklyInjection = $('#blockly-injection')
+  $blocklyRelative = $('#blockly-relative')
   $blocklyContainer = $('#blockly-container')
 
 
@@ -36,7 +36,8 @@ class BlocklyController {
     this._actionCategory = this._toolbox.getToolboxItemById('Actions');
     this._eventCategory = this._toolbox.getToolboxItemById('Events');
     this._flyout = this._toolbox.getFlyout();
-    window.addEventListener('resize',this._resizeHandler(this._workspace), false)
+    window.addEventListener('resize',
+      this._resizeHandler(this._workspace, this.$blocklyRelative[0], this.$blocklyInjection[0]), false)
     this.$blocklyContainer.hide()
   }
 
@@ -78,19 +79,17 @@ class BlocklyController {
   }
 
   resize(){
-    this._resizeHandler(this._workspace)();
+    this._resizeHandler(this._workspace, this.$blocklyRelative[0], this.$blocklyInjection[0])();
   }
 
-  _resizeHandler(workspace) {
+  _resizeHandler(workspace, blocklyArea, blocklyDiv) {
     return function() {
-      var blocklyArea = document.getElementById('blockly-container');
-      var blocklyDiv = document.getElementById('blockly-injection');
       // Compute the absolute coordinates and dimensions of blocklyArea.
       var element = blocklyArea;
       var x = 0;
-      var y = 20;
+      var y = 0;
       do {
-        x += element.offsetLeft;
+        //x += element.offsetLeft;
         //y += element.offsetTop;
         element = element.offsetParent;
       } while (element);
