@@ -7,7 +7,7 @@ const propertyColor = "#2e91a3"
 const eventColor = "#7a2ea3"
 const triggerColor = "#ce7e00"
 
-var categoryStyles = {
+const categoryStyles = {
   properties_category: {
     colour: propertyColor
   },
@@ -22,7 +22,7 @@ var categoryStyles = {
   }
 }
 
-var blockStyles = {
+const blockStyles = {
   trigger_block_style: {
     colourPrimary: triggerColor,
   },
@@ -37,13 +37,13 @@ var blockStyles = {
   }
 }
 
-var componentStyle = {
+const componentStyle = {
   toolboxBackgroundColour: baseColor,
   toolboxForegroundColour: whiteColor,
   flyoutBackgroundColour: baseColorLight,
 }
 
-var intelliotTheme = Blockly.Theme.defineTheme('intelliot', {
+const intelliotTheme = Blockly.Theme.defineTheme('intelliot', {
   base: Blockly.Themes.Classic,
   blockStyles: blockStyles,
   categoryStyles: categoryStyles,
