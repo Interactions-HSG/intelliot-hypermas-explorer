@@ -376,7 +376,7 @@ Blockly.Blocks['belief'] = {
       .appendField(new Blockly.FieldTextInput('name'),'functor')
       .appendField('(')
     this._updateShape();
-    this.setMutator(new Blockly.Mutator(mutator_ui_blocks));
+    this.setMutator(new Blockly.Mutator(['mutator_block_input']));
   },
 
   mutationToDom: function() {
@@ -416,14 +416,18 @@ Blockly.Blocks['belief'] = {
 
   compose: function(containerBlock) {
     var itemBlock = containerBlock.getInputTargetBlock('inputs');
-    console.log(itemBlock)
+    //set the first unmovable
+    itemBlock.setMovable(false)
     // Count number of inputs.
     var connections = [];
     while (itemBlock && !itemBlock.isInsertionMarker()) {
+      if(connections.length > 0){
+        itemBlock.setMovable(true);
+      }
       connections.push(itemBlock.valueConnection_);
-      itemBlock = itemBlock.nextConnection &&
-          itemBlock.nextConnection.targetBlock();
+      itemBlock = itemBlock.nextConnection && itemBlock.nextConnection.targetBlock();
     }
+    
     // Disconnect any children that don't belong.
     for (var i = 0; i < this._atoms; i++) {
       var connection = this.getInput('atom' + i).connection.targetConnection;
@@ -438,7 +442,6 @@ Blockly.Blocks['belief'] = {
       Blockly.Mutator.reconnect(connections[i], this, 'atom' + i);
     }
   },
-
   
   saveConnections: function(containerBlock) {
     var itemBlock = containerBlock.getInputTargetBlock('inputs');
@@ -461,9 +464,6 @@ Blockly.Blocks['belief'] = {
       if (!this.getInput('atom' + i)) {
         this.appendValueInput('atom' + i)
             .setAlign(Blockly.ALIGN_RIGHT);
-        if(i+1 != this._atoms){
-          this.appendDummyInput().appendField(',')
-        }
       }
     }
     // Remove deleted inputs.
@@ -471,7 +471,8 @@ Blockly.Blocks['belief'] = {
       this.removeInput('atom' + i);
       i++;
     }
+
     this.appendDummyInput('end')
-    .appendField(new Blockly.FieldLabelSerializable(') is true'), 'END');
+      .appendField(new Blockly.FieldLabelSerializable(') is true'), 'END');
   }
 }
