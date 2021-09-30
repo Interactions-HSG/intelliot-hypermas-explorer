@@ -1,4 +1,4 @@
-var utils = {
+const utils = {
   toList: function(object) {
     var list = Object.keys(object).map(x => {
       return {

@@ -1,4 +1,4 @@
-var helpers = {
+const helpers = {
   registerHelpers: function() {
     Handlebars.registerHelper("delay", function (value, options) {
       return parseInt(value) / 10;

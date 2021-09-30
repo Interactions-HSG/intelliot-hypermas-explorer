@@ -2,7 +2,7 @@
 // Interactions Research Group, University of St.Gallen
 // Based on work by Ralf Mosshammer / Siemens AG (2015) and Simon Mayer / Pro2Future AG (2017)
 
-var log = {
+const log = {
 
 	fine: function(text) {
 		if(typeof console !== 'undefined')  {

@@ -105,7 +105,7 @@ class BlocklyController {
   _generatePropertyBlocks(properties, artifactId){
     var blocks = []
     utils.toList(properties).forEach( p => {
-      toolboxUtils.definePropertyBlock(p.key, p.value, artifactId)
+      affordanceBlockUtils.definePropertyBlock(p.key, p.value, artifactId)
       blocks.push({kind: "block", type: p.key})
     });
     return blocks;
@@ -114,7 +114,7 @@ class BlocklyController {
   _generateActionBlocks(actions, artifactId){
     var blocks = []
     utils.toList(actions).forEach( a => {
-      toolboxUtils.defineActionBlock(a.key, a.value, artifactId)
+      affordanceBlockUtils.defineActionBlock(a.key, a.value, artifactId)
       blocks.push({kind: "block", type: a.key})
     });
     return blocks;
