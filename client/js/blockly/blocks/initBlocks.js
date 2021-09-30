@@ -77,7 +77,7 @@ Blockly.defineBlocksWithJsonArray(
     },
     {
       "type": "opposite_init_belief",
-      "message0": "is false that %1 %2",
+      "message0": "it's false that %1 %2",
       "args0": [{
           "type": "input_dummy"
         },
@@ -414,7 +414,6 @@ Blockly.Blocks['belief'] = {
   },
 
   _updateShape: function(){
-    // Add new inputs.
     if(this.getInput('end')){
       this.removeInput('end')
     }
