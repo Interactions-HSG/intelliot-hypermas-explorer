@@ -58,30 +58,6 @@ Blockly.defineBlocksWithJsonArray(
       "helpUrl": ""
     },
     {
-      "type": "belief",
-      "message0": "%1 ( %2 %3 ) is true",
-      "args0": [{
-          "type": "field_input",
-          "name": "functor",
-          "text": "name"
-        },
-        {
-          "type": "input_dummy"
-        },
-        {
-          "type": "input_value",
-          "name": "atom",
-          "check": "atom"
-        }
-      ],
-      "inputsInline": true,
-      "output": "belief",
-      "colour": 120,
-      "tooltip": "Define a fact which is true in the agent mind",
-      "helpUrl": "",
-      //"mutator": "belief_mutator"
-    },
-    {
       "type": "no_init_belief",
       "message0": "it doesn't know if %1 %2",
       "args0": [{
@@ -369,3 +345,133 @@ Blockly.defineBlocksWithJsonArray(
     }
   ]
 )
+
+const belief_block_json = {
+  "args0": [{
+      "type": "field_input",
+      "name": "functor",
+      "text": "name"
+    },
+    {
+      "type": "input_dummy"
+    },
+    {
+      "type": "input_value",
+      "name": "atom0",
+      "check": "atom"
+    },
+  ],
+  "inputsInline": true,
+  "output": "belief",
+  "colour": 120,
+  "tooltip": "Define a fact which is true in the agent mind",
+  "helpUrl": "",
+}
+
+Blockly.Blocks['belief'] = {
+  init: function(){
+    this.jsonInit(belief_block_json);
+    this._atoms = 1;
+    this.appendDummyInput()
+      .appendField(new Blockly.FieldTextInput('name'),'functor')
+      .appendField('(')
+    this._updateShape();
+    this.setMutator(new Blockly.Mutator(mutator_ui_blocks));
+  },
+
+  mutationToDom: function() {
+    var container = Blockly.utils.xml.createElement('mutation');
+    container.setAttribute('atoms', this._atoms);
+    return container;
+  },
+
+  domToMutation: function(xmlElement) {
+    this._atoms = parseInt(xmlElement.getAttribute('atoms'), 10);
+    this._updateShape();
+  },
+
+  saveExtraState: function() {
+    return {
+      'atoms': this._atoms
+    };
+  },
+
+  loadExtraState: function(state) {
+    this.itemCount_ = state['atoms'];
+    this._updateShape();
+  },
+
+  decompose: function(workspace) {
+    var containerBlock = workspace.newBlock('mutator_block_root');
+    containerBlock.initSvg();
+    var connection = containerBlock.getInput('inputs').connection;
+    for (var i = 0; i < this._atoms; i++) {
+      var itemBlock = workspace.newBlock('mutator_block_input');
+      itemBlock.initSvg();
+      connection.connect(itemBlock.previousConnection);
+      connection = itemBlock.nextConnection;
+    }
+    return containerBlock;
+  },
+
+  compose: function(containerBlock) {
+    var itemBlock = containerBlock.getInputTargetBlock('inputs');
+    console.log(itemBlock)
+    // Count number of inputs.
+    var connections = [];
+    while (itemBlock && !itemBlock.isInsertionMarker()) {
+      connections.push(itemBlock.valueConnection_);
+      itemBlock = itemBlock.nextConnection &&
+          itemBlock.nextConnection.targetBlock();
+    }
+    // Disconnect any children that don't belong.
+    for (var i = 0; i < this._atoms; i++) {
+      var connection = this.getInput('atom' + i).connection.targetConnection;
+      if (connection && connections.indexOf(connection) == -1) {
+        connection.disconnect();
+      }
+    }
+    this._atoms = connections.length;
+    this._updateShape();
+    // Reconnect any child blocks.
+    for (var i = 0; i < this._atoms; i++) {
+      Blockly.Mutator.reconnect(connections[i], this, 'atom' + i);
+    }
+  },
+
+  
+  saveConnections: function(containerBlock) {
+    var itemBlock = containerBlock.getInputTargetBlock('inputs');
+    var i = 0;
+    while (itemBlock) {
+      var input = this.getInput('atom' + i);
+      itemBlock.valueConnection_ = input && input.connection.targetConnection;
+      i++;
+      itemBlock = itemBlock.nextConnection &&
+          itemBlock.nextConnection.targetBlock();
+    }
+  },
+
+  _updateShape: function(){
+    // Add new inputs.
+    if(this.getInput('end')){
+      this.removeInput('end')
+    }
+    for (var i = 0; i < this._atoms; i++) {
+      if (!this.getInput('atom' + i)) {
+        this.appendValueInput('atom' + i)
+            .setAlign(Blockly.ALIGN_RIGHT);
+        if(i+1 != this._atoms){
+          this.appendDummyInput().appendField(',')
+        }
+      }
+    }
+    // Remove deleted inputs.
+    while (this.getInput('atom' + i)) {
+      this.removeInput('atom' + i);
+      i++;
+    }
+    this.appendDummyInput('end')
+    .appendField(new Blockly.FieldLabelSerializable(') is true'), 'END');
+  }
+}
