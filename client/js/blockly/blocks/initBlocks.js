@@ -26,7 +26,7 @@ Blockly.defineBlocksWithJsonArray(
       "helpUrl": ""
     },
     {
-      "type": "agent_init",
+      "type": "init_agent",
       "message0": "When agent %1 %2 %3 is born %4 it %5",
       "args0": [{
           "type": "input_dummy"
@@ -48,7 +48,7 @@ Blockly.defineBlocksWithJsonArray(
           "check": [
             "init_belief",
             "init_goal",
-            "add_rule"
+            "init_rule"
           ]
         }
       ],
@@ -78,7 +78,8 @@ Blockly.defineBlocksWithJsonArray(
       "output": "belief",
       "colour": 120,
       "tooltip": "Define a fact which is true in the agent mind",
-      "helpUrl": ""
+      "helpUrl": "",
+      //"mutator": "belief_mutator"
     },
     {
       "type": "no_init_belief",
@@ -155,9 +156,10 @@ Blockly.defineBlocksWithJsonArray(
       "helpUrl": ""
     },
     {
-      "type": "add_rule",
+      "type": "init_rule",
       "message0": "knows that %1 %2",
-      "args0": [{
+      "args0": [
+        {
           "type": "input_dummy"
         },
         {
@@ -171,6 +173,40 @@ Blockly.defineBlocksWithJsonArray(
       "nextStatement": null,
       "colour": 30,
       "tooltip": "Add knowledge of a rule to the agent mind",
+      "helpUrl": ""
+    },
+    {
+      "type": "rule",
+      "message0": "%1 ( %2 %3 ) is true when %4 %5",
+      "args0": [
+        {
+          "type": "field_input",
+          "name": "functor",
+          "text": "name"
+        },
+        {
+          "type": "input_dummy"
+        },
+        {
+          "type": "input_value",
+          "name": "variable",
+          "check": "variable"
+        },
+        {
+          "type": "input_dummy"
+        },
+        {
+          "type": "input_value",
+          "name": "statement",
+          "check": [
+            "statement",
+            "predicate"
+          ]
+        }
+      ],
+      "output": "rule",
+      "colour": 270,
+      "tooltip": "Define a rule that holds when the statement holds",
       "helpUrl": ""
     },
     {
@@ -201,7 +237,7 @@ Blockly.defineBlocksWithJsonArray(
     },
     {
       "type": "no_predicate",
-      "message0": "it doesn't know if %1 %2",
+      "message0": "agent doesn't know if %1 %2",
       "args0": [{
           "type": "input_dummy"
         },
@@ -232,7 +268,7 @@ Blockly.defineBlocksWithJsonArray(
       "inputsInline": true,
       "output": "predicate",
       "colour": 285,
-      "tooltip": "Strongly negate the belief",
+      "tooltip": "Strongly negate the predicate",
       "helpUrl": ""
     },
     {
@@ -290,40 +326,7 @@ Blockly.defineBlocksWithJsonArray(
       "helpUrl": ""
     },
     {
-      "type": "rule",
-      "message0": "%1 ( %2 %3 ) is true when %4 %5",
-      "args0": [{
-          "type": "field_input",
-          "name": "functor",
-          "text": "name"
-        },
-        {
-          "type": "input_dummy"
-        },
-        {
-          "type": "input_value",
-          "name": "variable",
-          "check": "variable"
-        },
-        {
-          "type": "input_dummy"
-        },
-        {
-          "type": "input_value",
-          "name": "statement",
-          "check": [
-            "statement",
-            "predicate"
-          ]
-        }
-      ],
-      "output": "rule",
-      "colour": 270,
-      "tooltip": "Define a rule that holds when the statement holds",
-      "helpUrl": ""
-    },
-    {
-      "type": "and_or_statment",
+      "type": "and_or_statement",
       "message0": "%1 %2 %3 %4",
       "args0": [{
           "type": "input_value",
@@ -361,7 +364,7 @@ Blockly.defineBlocksWithJsonArray(
       ],
       "output": "statement",
       "colour": 270,
-      "tooltip": "Provides and/or conditions to compose statements or predicate",
+      "tooltip": "Provides and/or conditions to compose statements or predicates",
       "helpUrl": ""
     }
   ]

@@ -26,3 +26,5 @@ Blockly.defineBlocksWithJsonArray(
     },
   ]
 )
+
+const mutator_ui_blocks = ['mutator_block_root', 'mutator_block_input']

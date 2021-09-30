@@ -61,6 +61,7 @@ class BlocklyController {
     this._eventCategory.updateFlyoutContents([])
     this._workspace.clear()
     this._workspace.clearUndo()
+    this._workspace.trashcan.emptyContents();
   }
 
   showArea(){
