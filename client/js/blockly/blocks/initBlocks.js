@@ -347,20 +347,6 @@ Blockly.defineBlocksWithJsonArray(
 )
 
 const belief_block_json = {
-  "args0": [{
-      "type": "field_input",
-      "name": "functor",
-      "text": "name"
-    },
-    {
-      "type": "input_dummy"
-    },
-    {
-      "type": "input_value",
-      "name": "atom0",
-      "check": "atom"
-    },
-  ],
   "inputsInline": true,
   "output": "belief",
   "colour": 120,
