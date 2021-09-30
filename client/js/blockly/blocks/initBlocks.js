@@ -378,6 +378,17 @@ Blockly.Blocks['belief'] = {
     this._updateShape();
     this.setMutator(new Blockly.Mutator(['mutator_block_input']));
   },
+  
+  saveExtraState: function() {
+    return {
+      'atoms': this._atoms
+    };
+  },
+
+  loadExtraState: function(state) {
+    this.itemCount_ = state['atoms'];
+    this._updateShape();
+  },
 
   mutationToDom: function() {
     var container = Blockly.utils.xml.createElement('mutation');
@@ -390,57 +401,18 @@ Blockly.Blocks['belief'] = {
     this._updateShape();
   },
 
-  saveExtraState: function() {
-    return {
-      'atoms': this._atoms
-    };
-  },
-
-  loadExtraState: function(state) {
-    this.itemCount_ = state['atoms'];
-    this._updateShape();
-  },
-
   decompose: function(workspace) {
-    var containerBlock = workspace.newBlock('mutator_block_root');
-    containerBlock.initSvg();
-    var connection = containerBlock.getInput('inputs').connection;
-    for (var i = 0; i < this._atoms; i++) {
-      var itemBlock = workspace.newBlock('mutator_block_input');
-      itemBlock.initSvg();
-      connection.connect(itemBlock.previousConnection);
-      connection = itemBlock.nextConnection;
-    }
-    return containerBlock;
+    return ComposerUtils.initUIBlocks(workspace, this._atoms)
   },
 
   compose: function(containerBlock) {
     var itemBlock = containerBlock.getInputTargetBlock('inputs');
-    //set the first unmovable
-    itemBlock.setMovable(false)
-    // Count number of inputs.
-    var connections = [];
-    while (itemBlock && !itemBlock.isInsertionMarker()) {
-      if(connections.length > 0){
-        itemBlock.setMovable(true);
-      }
-      connections.push(itemBlock.valueConnection_);
-      itemBlock = itemBlock.nextConnection && itemBlock.nextConnection.targetBlock();
-    }
-    
-    // Disconnect any children that don't belong.
-    for (var i = 0; i < this._atoms; i++) {
-      var connection = this.getInput('atom' + i).connection.targetConnection;
-      if (connection && connections.indexOf(connection) == -1) {
-        connection.disconnect();
-      }
-    }
-    this._atoms = connections.length;
+    ComposerUtils.forbidZeroItems(itemBlock);
+    var connections = ComposerUtils.getConnections(itemBlock);
+    ComposerUtils.disconnectChildren(this, connections, 'atom', this._atoms);
+    this._atoms = connections.length
     this._updateShape();
-    // Reconnect any child blocks.
-    for (var i = 0; i < this._atoms; i++) {
-      Blockly.Mutator.reconnect(connections[i], this, 'atom' + i);
-    }
+    ComposerUtils.connectChildren(this, connections, 'atom', this._atoms)
   },
   
   saveConnections: function(containerBlock) {
@@ -460,18 +432,7 @@ Blockly.Blocks['belief'] = {
     if(this.getInput('end')){
       this.removeInput('end')
     }
-    for (var i = 0; i < this._atoms; i++) {
-      if (!this.getInput('atom' + i)) {
-        this.appendValueInput('atom' + i)
-            .setAlign(Blockly.ALIGN_RIGHT);
-      }
-    }
-    // Remove deleted inputs.
-    while (this.getInput('atom' + i)) {
-      this.removeInput('atom' + i);
-      i++;
-    }
-
+    ComposerUtils.addInputFields(this, 'atom', this._atoms)
     this.appendDummyInput('end')
       .appendField(new Blockly.FieldLabelSerializable(') is true'), 'END');
   }
