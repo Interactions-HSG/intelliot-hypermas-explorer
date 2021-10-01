@@ -4,8 +4,7 @@ const toolboxDefinition = {
       "kind": "category",
       "name": "Basics",
       "toolboxitemid": "Basics",
-      "contents": [
-        {
+      "contents": [{
           "kind": "block",
           "type": "atom"
         },
@@ -27,7 +26,16 @@ const toolboxDefinition = {
         },
         {
           "kind": "block",
-          "type": "rule"
+          //"type": "rule",
+          "blockxml": "<block type='rule'>" +
+            "<value name='variable0'>" +
+            "<shadow type='variable'></shadow>" +
+            "</value>" +
+            "</block>"
+        },
+        {
+          "kind": "block",
+          "type": "always"
         },
         {
           "kind": "block",
@@ -43,26 +51,48 @@ const toolboxDefinition = {
       "kind": "category",
       "name": "Agent Initialization",
       "toolboxitemid": "Agent_Initialization",
-      "contents": [
-        {
+      "contents": [{
           "kind": "block",
           "type": "init_agent"
         },
         {
           "kind": "block",
-          "type": "init_belief"
+          //"type": "init_belief",
+          "blockxml": "<block type='init_belief'>" +
+            "<value name='belief'>" +
+            "<shadow type='belief'></shadow>" +
+            "</value>" +
+            "</block>"
         },
         {
           "kind": "block",
-          "blockxml": "<block type='init_rule'><value name='rule'><block type='rule'></block></value></block>"
+          //"type": "init_rule",
+          "blockxml": "<block type='init_rule'>" +
+            "<value name='rule'>" +
+            "<block type='rule'>" +
+            "<value name='variable0'>" +
+            "<shadow type='variable'></shadow>" +
+            "</value>" +
+            "</block>" +
+            "</value>" +
+            "</block>"
         },
         {
           "kind": "block",
-          "type": "init_goal"
+          //"type": "init_goal",
+          "blockxml": "<block type='init_goal'>" +
+            "<value name='goal'>" +
+            "<shadow type='belief'></shadow>" +
+            "</value>" +
+            "</block>"
         },
         {
           "kind": "block",
-          "type": "belief"
+          "blockxml": "<block type='belief'>" +
+            "<value name='atom0'>" +
+            "<shadow type='atom'></shadow>" +
+            "</value>" +
+            "</block>"
         },
         {
           "kind": "block",
@@ -71,6 +101,107 @@ const toolboxDefinition = {
         {
           "kind": "block",
           "type": "opposite_init_belief"
+        },
+      ]
+    },
+    {
+      "kind": "category",
+      "name": "Agent Plan Definition",
+      "toolboxitemid": "Agent_Plan_Definition",
+      "contents": [{
+          "kind": "block",
+          "type": "define_plan"
+        },
+        {
+          "kind": "block",
+          //"type": "belief_add_remove_trigger"
+          "blockxml": "<block type='belief_add_remove_trigger'>" +
+                        "<value name='belief'>" +
+                          "<block type='predicate'></block>" +
+                        "</value>" +
+                      "</block>"
+        },
+        {
+          "kind": "block",
+          //"type": "goal_add_remove_trigger"
+          "blockxml": "<block type='goal_add_remove_trigger'>" +
+                        "<value name='goal'>" +
+                          "<block type='predicate'></block>" +
+                        "</value>" +
+                      "</block>"
+        },
+        {
+          "kind": "block",
+          //"type": "test_add_remove_trigger"
+          "blockxml": "<block type='test_add_remove_trigger'>" +
+                        "<value name='test'>" +
+                          "<block type='predicate'></block>" +
+                        "</value>" +
+                      "</block>"
+        },
+      ]
+    },
+    {
+      "kind": "category",
+      "name": "Agent Plan Body",
+      "toolboxitemid": "Agent_Plan_Body",
+      "contents": [{
+          "kind": "block",
+          //"type": "add_belief",
+          "blockxml": "<block type='add_belief'>" +
+                        "<value name='belief'>" +
+                            "<block type='predicate'></block>" +
+                          "</value>" +
+                        "</block>"
+        },
+        {
+          "kind": "block",
+          //"type": "remove_belief",
+          "blockxml": "<block type='remove_belief'>" +
+                        "<value name='belief'>" +
+                          "<block type='predicate'></block>" +
+                        "</value>" +
+                      "</block>"
+        },
+        {
+          "kind": "block",
+          //"type": "update_belief"
+          "blockxml": "<block type='update_belief'>" +
+                        "<value name='belief'>" +
+                          "<block type='predicate'></block>" +
+                        "</value>" +
+                      "</block>"
+        },
+        {
+          "kind": "block",
+          //"type": "add_goal",
+          "blockxml": "<block type='add_goal'>" +
+                        "<value name='goal'>" +
+                          "<block type='predicate'></block>" +
+                        "</value>" +
+                      "</block>"
+        },
+        {
+          "kind": "block",
+          //"type": "add_parallel_goal",
+          "blockxml": "<block type='add_parallel_goal'>" +
+                        "<value name='goal'>" +
+                          "<block type='predicate'></block>" +
+                        "</value>" +
+                      "</block>"
+        },
+        {
+          "kind": "block",
+          //"type": "add_test_goal",
+          "blockxml": "<block type='add_test_goal'>" +
+                        "<value name='goal'>" +
+                          "<block type='predicate'></block>" +
+                        "</value>" +
+                      "</block>"
+        },
+        {
+          "kind": "block",
+          "type": "check_expression"
         },
       ]
     },

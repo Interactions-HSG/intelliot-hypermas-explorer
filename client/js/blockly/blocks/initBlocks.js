@@ -8,7 +8,7 @@ Blockly.defineBlocksWithJsonArray(
         "text": "atom"
       }],
       "output": "atom",
-      "colour": 230,
+      "colour": 190,
       "tooltip": "An atom is any string that starts with a lowercase letter or a number",
       "helpUrl": ""
     },
@@ -46,9 +46,7 @@ Blockly.defineBlocksWithJsonArray(
           "type": "input_statement",
           "name": "config",
           "check": [
-            "init_belief",
-            "init_goal",
-            "init_rule"
+            "init_block"
           ]
         }
       ],
@@ -106,8 +104,8 @@ Blockly.defineBlocksWithJsonArray(
         }
       ],
       "inputsInline": true,
-      "previousStatement": null,
-      "nextStatement": null,
+      "previousStatement": "init_block",
+      "nextStatement": "init_block",
       "colour": 30,
       "tooltip": "Add a belief to the agent mind",
       "helpUrl": ""
@@ -125,8 +123,8 @@ Blockly.defineBlocksWithJsonArray(
         }
       ],
       "inputsInline": true,
-      "previousStatement": null,
-      "nextStatement": null,
+      "previousStatement": "init_block",
+      "nextStatement": "init_block",
       "colour": 30,
       "tooltip": "Add the goal for the agent",
       "helpUrl": ""
@@ -145,8 +143,8 @@ Blockly.defineBlocksWithJsonArray(
         }
       ],
       "inputsInline": true,
-      "previousStatement": null,
-      "nextStatement": null,
+      "previousStatement": "init_block",
+      "nextStatement": "init_block",
       "colour": 30,
       "tooltip": "Add knowledge of a rule to the agent mind",
       "helpUrl": ""
@@ -207,6 +205,10 @@ Blockly.defineBlocksWithJsonArray(
               "=="
             ],
             [
+              "=/=",
+              "=/="
+            ],
+            [
               ">",
               ">"
             ],
@@ -237,7 +239,7 @@ Blockly.defineBlocksWithJsonArray(
         }
       ],
       "output": "statement",
-      "colour": 270,
+      "colour": 230,
       "tooltip": "Provides conditions over variables and atoms",
       "helpUrl": ""
     },
@@ -279,9 +281,17 @@ Blockly.defineBlocksWithJsonArray(
         }
       ],
       "output": "statement",
-      "colour": 270,
+      "colour": 230,
       "tooltip": "Provides and/or conditions to compose statements or predicates",
       "helpUrl": ""
-    }
+    },
+    {
+      "type": "always",
+      "message0": "always",
+      "output": "statement",
+      "colour": 230,
+      "tooltip": "Make something be always true.",
+      "helpUrl": ""
+    },
   ]
 )
