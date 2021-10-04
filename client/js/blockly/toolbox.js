@@ -39,11 +39,41 @@ const toolboxDefinition = {
         },
         {
           "kind": "block",
+          "type": "operation"
+        },
+        {
+          "kind": "block",
+          "type": "not"
+        },
+        {
+          "kind": "block",
           "type": "statement"
         },
         {
           "kind": "block",
           "type": "and_or_statement"
+        }
+      ]
+    },
+    {
+      "kind": "category",
+      "name": "Objects",
+      "toolboxitemid": "Objects",
+      "contents": [{
+        "kind": "block",
+        "type": "create_object"
+        },
+        {
+          "kind": "block",
+          "type": "add_fields"
+        },
+        {
+          "kind": "block",
+          "type": "object_field"
+        },
+        {
+          "kind": "block",
+          "type": "get_object_value"
         }
       ]
     },

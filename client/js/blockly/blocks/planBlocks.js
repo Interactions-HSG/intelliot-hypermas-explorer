@@ -223,7 +223,8 @@ Blockly.defineBlocksWithJsonArray([{
         "name": "term0",
         "check": [
           "variable",
-          "atom"
+          "atom",
+          "operation"
         ]
       },
       {
@@ -235,8 +236,8 @@ Blockly.defineBlocksWithJsonArray([{
             "=="
           ],
           [
-            "=/=",
-            "=/="
+            "≠",
+            "!="
           ],
           [
             ">",
@@ -247,11 +248,11 @@ Blockly.defineBlocksWithJsonArray([{
             "<"
           ],
           [
-            ">=",
+            "≥",
             ">="
           ],
           [
-            "<=",
+            "≤",
             "<="
           ]
         ]
@@ -264,7 +265,8 @@ Blockly.defineBlocksWithJsonArray([{
         "name": "term1",
         "check": [
           "variable",
-          "atom"
+          "atom",
+          "operation"
         ]
       }
     ],
