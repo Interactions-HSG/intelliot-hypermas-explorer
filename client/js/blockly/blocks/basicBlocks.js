@@ -243,7 +243,7 @@ Blockly.Blocks['atom'] = {
         return value;
       } else {
         block.setWarningText("An atom must not be empty")
-        return newValue
+        return value;
       }
     })
   }
@@ -269,15 +269,20 @@ Blockly.Blocks['variable'] = {
     this.jsonInit(variable_block_json);
     var block = this;
     this.getField('value').setValidator(function(newValue){
+      var regex = new RegExp("[A-Z][a-zA-Z0-9]*")
       var value = newValue.trim();
       if(value){
         value = value.replaceAll(" ", "_")
         value = value[0].toUpperCase()+value.slice(1);
+        if(!regex.test(value)){
+          block.setWarningText("A variable must not start with a number")
+          return value;
+        }
         block.setWarningText();
         return value;
       } else {
         block.setWarningText("A variable name must not be empty")
-        return newValue
+        return value;
       }
     })
   }
