@@ -5,6 +5,67 @@ JASONGenerator.RULE_INDENT = "   "
 JASONGenerator.NO_PRECEDENCE = 0;
 JASONGenerator.OPERATION = 1;
 
+//Code from blockly repository
+//This is the same as workspaceToCode but enforce the order of top blocks as needed
+JASONGenerator.generateJASON = function(workspace){
+  var code = [];
+  this.init(workspace);
+  var blocks = workspace.getTopBlocks(true);
+  //-----enforcing block order here-------
+  var ordered_blocks = [];
+  var init = blocks.filter(b => b.type == 'init_agent')
+  if(init.length == 0){
+    console.warn("The agent has no initialization");
+  }
+  if(init.length > 1){
+    console.error("The agent initialization can be defined only once");
+    return null;
+  }
+  ordered_blocks.push(init[0]);
+  var total = blocks.filter(b => b.type != 'init_agent').length;
+  blocks = blocks.filter(b => b.type == 'define_plan') //ignore any dangling blocks
+  var ignored = total - blocks.length;
+  if(blocks.length == 0){
+    console.warn("The agent has no defined plans");
+  }
+  ordered_blocks = ordered_blocks.concat(blocks);
+
+  blocks = ordered_blocks;
+  if(ignored){
+    console.warn(`Ignoring ${ignored} blocks that are not properly nested.`)
+  }
+  //--------------------------------------
+  for (var i = 0, block; (block = blocks[i]); i++) {
+    var line = this.blockToCode(block);
+    if (Array.isArray(line)) {
+      // Value blocks return tuples of code and operator order.
+      // Top-level blocks don't care about operator order.
+      line = line[0];
+    }
+    if (line) {
+      if (block.outputConnection) {
+        // This block is a naked value.  Ask the language's code generator if
+        // it wants to append a semicolon, or something.
+        line = this.scrubNakedValue(line);
+        if (this.STATEMENT_PREFIX && !block.suppressPrefixSuffix) {
+          line = this.injectId(this.STATEMENT_PREFIX, block) + line;
+        }
+        if (this.STATEMENT_SUFFIX && !block.suppressPrefixSuffix) {
+          line = line + this.injectId(this.STATEMENT_SUFFIX, block);
+        }
+      }
+      code.push(line);
+    }
+  }
+  code = code.join('\n');  // Blank line between each section.
+  code = this.finish(code);
+  // Final scrubbing of whitespace.
+  code = code.replace(/^\s+\n/, '');
+  code = code.replace(/\n\s+$/, '\n');
+  code = code.replace(/[ \t]+\n/g, '\n');
+  return code;
+};
+
 
 JASONGenerator.scrub_ = function(block, code, opt_thisOnly) {
   const nextBlock =
@@ -50,7 +111,6 @@ JASONGenerator['no_predicate'] = function(block){
 
 JASONGenerator['opposite_predicate'] = function(block){
   var predicate = JASONGenerator.valueToCode(block, 'predicate', JASONGenerator.NO_PRECEDENCE)
-  console.log(predicate);
   var code = `~${predicate}`
   return [code, JASONGenerator.NO_PRECEDENCE]
 }
@@ -115,9 +175,9 @@ JASONGenerator['belief'] = function (block){
 JASONGenerator['init_agent'] = function(block){
   var name = block.getFieldValue('name');
   var start_comment = `//This is the initial state of agent ${name}\n`
+  var end_comment = `//Plan library:\n`
   var statements = JASONGenerator.statementToCode(block, 'config', JASONGenerator.NO_PRECEDENCE)
-  console.log(statements)
-  var code = `${start_comment}${statements}\n`
+  var code = `${start_comment}${statements}\n${end_comment}`
   return code;
 }
 
