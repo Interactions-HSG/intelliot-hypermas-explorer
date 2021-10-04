@@ -29,7 +29,10 @@ const toolboxDefinition = {
           //"type": "rule",
           "blockxml": "<block type='rule'>" +
             "<value name='variable0'>" +
-            "<shadow type='variable'></shadow>" +
+            "<block type='variable'></block>" +
+            "</value>" +
+            "<value name='rule_body'>" +
+            "<block type='rule_body'></block>" +
             "</value>" +
             "</block>"
         },
@@ -60,8 +63,8 @@ const toolboxDefinition = {
       "name": "Objects",
       "toolboxitemid": "Objects",
       "contents": [{
-        "kind": "block",
-        "type": "create_object"
+          "kind": "block",
+          "type": "create_object"
         },
         {
           "kind": "block",
@@ -101,7 +104,10 @@ const toolboxDefinition = {
             "<value name='rule'>" +
             "<block type='rule'>" +
             "<value name='variable0'>" +
-            "<shadow type='variable'></shadow>" +
+            "<block type='variable'></block>" +
+            "</value>" +
+            "<value name='rule_body'>" +
+            "<block type='rule_body'></block>" +
             "</value>" +
             "</block>" +
             "</value>" +
@@ -120,7 +126,7 @@ const toolboxDefinition = {
           "kind": "block",
           "blockxml": "<block type='belief'>" +
             "<value name='atom0'>" +
-            "<shadow type='atom'></shadow>" +
+            "<block type='atom'></block>" +
             "</value>" +
             "</block>"
         },
@@ -146,28 +152,28 @@ const toolboxDefinition = {
           "kind": "block",
           //"type": "belief_add_remove_trigger"
           "blockxml": "<block type='belief_add_remove_trigger'>" +
-                        "<value name='belief'>" +
-                          "<block type='predicate'></block>" +
-                        "</value>" +
-                      "</block>"
+            "<value name='belief'>" +
+            "<block type='predicate'></block>" +
+            "</value>" +
+            "</block>"
         },
         {
           "kind": "block",
           //"type": "goal_add_remove_trigger"
           "blockxml": "<block type='goal_add_remove_trigger'>" +
-                        "<value name='goal'>" +
-                          "<block type='predicate'></block>" +
-                        "</value>" +
-                      "</block>"
+            "<value name='goal'>" +
+            "<block type='predicate'></block>" +
+            "</value>" +
+            "</block>"
         },
         {
           "kind": "block",
           //"type": "test_add_remove_trigger"
           "blockxml": "<block type='test_add_remove_trigger'>" +
-                        "<value name='test'>" +
-                          "<block type='predicate'></block>" +
-                        "</value>" +
-                      "</block>"
+            "<value name='test'>" +
+            "<block type='predicate'></block>" +
+            "</value>" +
+            "</block>"
         },
       ]
     },
@@ -179,55 +185,55 @@ const toolboxDefinition = {
           "kind": "block",
           //"type": "add_belief",
           "blockxml": "<block type='add_belief'>" +
-                        "<value name='belief'>" +
-                            "<block type='predicate'></block>" +
-                          "</value>" +
-                        "</block>"
+            "<value name='belief'>" +
+            "<block type='predicate'></block>" +
+            "</value>" +
+            "</block>"
         },
         {
           "kind": "block",
           //"type": "remove_belief",
           "blockxml": "<block type='remove_belief'>" +
-                        "<value name='belief'>" +
-                          "<block type='predicate'></block>" +
-                        "</value>" +
-                      "</block>"
+            "<value name='belief'>" +
+            "<block type='predicate'></block>" +
+            "</value>" +
+            "</block>"
         },
         {
           "kind": "block",
           //"type": "update_belief"
           "blockxml": "<block type='update_belief'>" +
-                        "<value name='belief'>" +
-                          "<block type='predicate'></block>" +
-                        "</value>" +
-                      "</block>"
+            "<value name='belief'>" +
+            "<block type='predicate'></block>" +
+            "</value>" +
+            "</block>"
         },
         {
           "kind": "block",
           //"type": "add_goal",
           "blockxml": "<block type='add_goal'>" +
-                        "<value name='goal'>" +
-                          "<block type='predicate'></block>" +
-                        "</value>" +
-                      "</block>"
+            "<value name='goal'>" +
+            "<block type='predicate'></block>" +
+            "</value>" +
+            "</block>"
         },
         {
           "kind": "block",
           //"type": "add_parallel_goal",
           "blockxml": "<block type='add_parallel_goal'>" +
-                        "<value name='goal'>" +
-                          "<block type='predicate'></block>" +
-                        "</value>" +
-                      "</block>"
+            "<value name='goal'>" +
+            "<block type='predicate'></block>" +
+            "</value>" +
+            "</block>"
         },
         {
           "kind": "block",
           //"type": "add_test_goal",
           "blockxml": "<block type='add_test_goal'>" +
-                        "<value name='goal'>" +
-                          "<block type='predicate'></block>" +
-                        "</value>" +
-                      "</block>"
+            "<value name='goal'>" +
+            "<block type='predicate'></block>" +
+            "</value>" +
+            "</block>"
         },
         {
           "kind": "block",

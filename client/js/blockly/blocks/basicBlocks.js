@@ -58,7 +58,7 @@ Blockly.defineBlocksWithJsonArray([
     "args0": [
       {
         "type": "input_value",
-        "name": "var",
+        "name": "value",
         "check": [
           "variable",
           "atom",
@@ -77,7 +77,7 @@ Blockly.defineBlocksWithJsonArray([
       },
       {
         "type": "input_value",
-        "name": "belief",
+        "name": "predicate",
         "check": "predicate"
       }
     ],
@@ -95,7 +95,7 @@ Blockly.defineBlocksWithJsonArray([
       },
       {
         "type": "input_value",
-        "name": "belief",
+        "name": "predicate",
         "check": "predicate"
       }
     ],
@@ -182,11 +182,11 @@ Blockly.defineBlocksWithJsonArray([
         "options": [
           [
             "and",
-            "and"
+            "&"
           ],
           [
             "or",
-            "or"
+            "|"
           ]
         ]
       },
@@ -215,6 +215,9 @@ Blockly.defineBlocksWithJsonArray([
     "tooltip": "Make something be always true.",
     "helpUrl": ""
   },
+  {
+    
+  }
 ]);
 
 
@@ -238,7 +241,7 @@ Blockly.Blocks['atom'] = {
     this.getField('value').setValidator(function(newValue){
       var value = newValue.trim();
       if(value){
-        value = value[0].toLowerCase()+value.slice(1);
+        value = utils.uncapitalize(value)
         block.setWarningText();
         return value;
       } else {
@@ -273,7 +276,7 @@ Blockly.Blocks['variable'] = {
       var value = newValue.trim();
       if(value){
         value = value.replaceAll(" ", "_")
-        value = value[0].toUpperCase()+value.slice(1);
+        value = utils.capitalize(value)
         if(!regex.test(value)){
           block.setWarningText("A variable must not start with a number")
           return value;

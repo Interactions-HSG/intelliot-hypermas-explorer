@@ -28,13 +28,13 @@ Blockly.defineBlocksWithJsonArray(
 )
 
 const ComposerUtils = {
-  addInputFields: function (block, fieldLabel, currentItems, inputType) {
+  addInputFields: function (block, fieldLabel, currentItems, inputType, separator = ',') {
     for (var i = 0; i < currentItems; i++) {
       if (!block.getInput(fieldLabel + i)) {
         var input = block.appendValueInput(fieldLabel + i)
           .setCheck(inputType)
         if(i != 0) {
-          input.appendField(',')
+          input.appendField(separator)
         }
       }
     }
