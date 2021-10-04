@@ -37,6 +37,10 @@ const toolboxDefinition = {
             "</block>"
         },
         {
+          "kind": "block", 
+          "type": "rule_body"
+        },
+        {
           "kind": "block",
           "type": "always"
         },
@@ -152,6 +156,14 @@ const toolboxDefinition = {
             "<block type='predicate'></block>" +
             "</value>" +
             "</block>"
+        },
+        {
+          "kind": "block", 
+          "type": "predicate"
+        },
+        {
+          "kind": "block", 
+          "type": "rule_body"
         },
       ]
     },

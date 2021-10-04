@@ -89,7 +89,7 @@ const rule_body_block_json = {
 Blockly.Blocks['rule_body'] = {
   init: function(){
     this.jsonInit(rule_body_block_json);
-    this._statements = 1;
+    this._statements = 2;
     this._updateShape();
     this.setMutator(new Blockly.Mutator(['mutator_block_input']));
   },

@@ -38,9 +38,11 @@ class BlocklyController {
     this._flyout = this._toolbox.getFlyout();
     window.addEventListener('resize',
       this._resizeHandler(this._workspace, this.$blocklyRelative[0], this.$blocklyInjection[0]), false)
-    this.$blocklyContainer.hide()
-
-    $('#export_code').click(e =>console.log(JASONGenerator.generateJASON(this._workspace)))
+    
+    //TODO uncomment this
+    //this.$blocklyContainer.hide()
+    //$('#export_code').click(e =>console.log(JASONGenerator.generateJASON(this._workspace)))
+    $('#export_code').click(e =>console.log(JASONGenerator.workspaceToCode(this._workspace)))
     
   }
 
@@ -79,7 +81,8 @@ class BlocklyController {
 
   hideArea(){
     this.hideMenu();
-    this.$blocklyContainer.fadeOut()
+    //TODO uncomment
+    //this.$blocklyContainer.fadeOut()
   }
 
   resize(){

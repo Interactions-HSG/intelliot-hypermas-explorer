@@ -1,4 +1,5 @@
-Blockly.defineBlocksWithJsonArray([{
+Blockly.defineBlocksWithJsonArray([
+  {
     "type": "define_plan",
     "message0": "Define plan %1 %2 when %3 if %4 do %5",
     "args0": [{
@@ -20,7 +21,8 @@ Blockly.defineBlocksWithJsonArray([{
         "name": "context",
         "check": [
           "statement",
-          "predicate"
+          "predicate",
+          "rule_body"
         ],
         "align": "RIGHT"
       },
@@ -44,11 +46,11 @@ Blockly.defineBlocksWithJsonArray([{
         "options": [
           [
             "starts",
-            "add"
+            "+"
           ],
           [
             "stops",
-            "remove"
+            "-"
           ]
         ]
       },
@@ -76,11 +78,11 @@ Blockly.defineBlocksWithJsonArray([{
         "options": [
           [
             "wants",
-            "add"
+            "+!"
           ],
           [
             "failed",
-            "remove"
+            "-!"
           ]
         ]
       },
@@ -108,11 +110,11 @@ Blockly.defineBlocksWithJsonArray([{
         "options": [
           [
             "wants",
-            "add"
+            "+?"
           ],
           [
             "failed",
-            "remove"
+            "-?"
           ]
         ]
       },
