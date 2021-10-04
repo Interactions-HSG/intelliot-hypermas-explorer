@@ -59,10 +59,9 @@
       </div>
 
       <div id="blockly-container" class="col-lg-8 col-6">
-        <!--<div id="blockly-controls">
-            <button type="button" class="btn btn-light">Import</button>
-            <button type="button" class="btn btn-light">Export</button>
-        </div>-->
+        <div id="blockly-controls">
+            <button id="export_code" type="button" class="btn btn-light">Export</button>
+        </div>
         <div id="blockly-relative">
           <div id="blockly-injection">
           <!-- Placeholder for End-User Programming Environment -->
@@ -108,18 +107,22 @@
   <script src="js/interfaces/thingInterface.js"></script>
 
   <!--Blockly-->
+
+  <!--Generator-->
+  <script src="js/blockly/generators/JASONGenerator.js"></script>
+
+  <!--Blocks-->
   <script src ="js/blockly/blocks/basicBlocks.js"></script>
   <script src ="js/blockly/blocks/initBlocks.js"></script>
   <script src ="js/blockly/blocks/planBlocks.js"></script>
   <script src ="js/blockly/blocks/mutatorBlocks.js"></script>
   <script src ="js/blockly/blocks/objectBlocks.js"></script>
-
   <script src ="js/blockly/blocks/affordanceBlocks.js"></script>
-
   <script src ="js/blockly/blocks/beliefBlock.js"></script>
   <script src ="js/blockly/blocks/ruleBlock.js"></script>
   <script src ="js/blockly/blocks/predicateBlock.js"></script>
   
+  <!--Theme and Toolbox-->
   <script src ="js/blockly/toolbox.js"></script>
   <script src="js/blockly/theme.js"></script>
 

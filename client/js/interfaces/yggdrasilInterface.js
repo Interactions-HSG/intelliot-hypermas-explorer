@@ -7,7 +7,7 @@ class YggdrasilInterface {
   constructor(baseURL) {
     this.client = axios.create({
       baseURL: baseURL,
-      timeout: 1000,
+      timeout: 5000,
       headers: {
         Accept: 'application/json'
       }

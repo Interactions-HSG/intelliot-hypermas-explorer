@@ -39,6 +39,9 @@ class BlocklyController {
     window.addEventListener('resize',
       this._resizeHandler(this._workspace, this.$blocklyRelative[0], this.$blocklyInjection[0]), false)
     this.$blocklyContainer.hide()
+
+    $('#export_code').click(e =>console.log(JASONGenerator.workspaceToCode(this._workspace)))
+    
   }
 
   loadArtifact(artifact) {
