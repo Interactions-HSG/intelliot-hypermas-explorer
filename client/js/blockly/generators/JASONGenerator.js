@@ -115,10 +115,9 @@ JASONGenerator['belief'] = function (block){
 JASONGenerator['init_agent'] = function(block){
   var name = block.getFieldValue('name');
   var start_comment = `//This is the initial state of agent ${name}\n`
-  var end_comment = `//Plan library:\n`
   var statements = JASONGenerator.statementToCode(block, 'config', JASONGenerator.NO_PRECEDENCE)
   console.log(statements)
-  var code = `${start_comment}${statements}\n${end_comment}`
+  var code = `${start_comment}${statements}\n`
   return code;
 }
 
