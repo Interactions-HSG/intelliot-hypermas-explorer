@@ -60,28 +60,6 @@ const toolboxDefinition = {
     },
     {
       "kind": "category",
-      "name": "Objects",
-      "toolboxitemid": "Objects",
-      "contents": [{
-          "kind": "block",
-          "type": "create_object"
-        },
-        {
-          "kind": "block",
-          "type": "add_fields"
-        },
-        {
-          "kind": "block",
-          "type": "object_field"
-        },
-        {
-          "kind": "block",
-          "type": "get_object_value"
-        }
-      ]
-    },
-    {
-      "kind": "category",
       "name": "Agent Initialization",
       "toolboxitemid": "Agent_Initialization",
       "contents": [{
@@ -239,6 +217,28 @@ const toolboxDefinition = {
           "kind": "block",
           "type": "check_expression"
         },
+      ]
+    },
+    {
+      "kind": "category",
+      "name": "Objects",
+      "toolboxitemid": "Objects",
+      "contents": [{
+          "kind": "block",
+          "type": "create_object"
+        },
+        {
+          "kind": "block",
+          "type": "add_fields"
+        },
+        {
+          "kind": "block",
+          "type": "object_field"
+        },
+        {
+          "kind": "block",
+          "type": "get_object_value"
+        }
       ]
     },
     {

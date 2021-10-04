@@ -215,9 +215,6 @@ Blockly.defineBlocksWithJsonArray([
     "tooltip": "Make something be always true.",
     "helpUrl": ""
   },
-  {
-    
-  }
 ]);
 
 

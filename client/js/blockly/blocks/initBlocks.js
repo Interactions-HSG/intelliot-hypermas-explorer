@@ -8,7 +8,7 @@ Blockly.defineBlocksWithJsonArray(
         },
         {
           "type": "field_input",
-          "name": "agentName",
+          "name": "name",
           "text": "agentName"
         },
         {

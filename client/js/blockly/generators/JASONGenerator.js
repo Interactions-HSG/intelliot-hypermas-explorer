@@ -1,8 +1,21 @@
 const JASONGenerator = new Blockly.Generator('JASON');
-JASONGenerator.INDENT = "\n  "
+JASONGenerator.INDENT = ""
+JASONGenerator.BASIC_INDENT = "\n  "
 JASONGenerator.RULE_INDENT = "   "
 JASONGenerator.NO_PRECEDENCE = 0;
 JASONGenerator.OPERATION = 1;
+
+
+JASONGenerator.scrub_ = function(block, code, opt_thisOnly) {
+  const nextBlock =
+      block.nextConnection && block.nextConnection.targetBlock();
+  let nextCode = '';
+  if (nextBlock) {
+      nextCode =
+          opt_thisOnly ? '' : '\n' + JASONGenerator.blockToCode(nextBlock);
+  }
+  return code + nextCode;
+};
 
 //Basic blocks
 
@@ -46,17 +59,15 @@ JASONGenerator['rule'] = function(block){
   var functor = block.getFieldValue('functor');
   var variables = generationUtils.getItems(block, 'variable', block._variables)
   var rule_body = JASONGenerator.valueToCode(block, 'rule_body', JASONGenerator.NO_PRECEDENCE)
-  var code = `${functor}(${variables})${JASONGenerator.INDENT}:- ${rule_body}`
+  var code = `${functor}(${variables})${JASONGenerator.BASIC_INDENT}:- ${rule_body}`
   return [code, JASONGenerator.NO_PRECEDENCE]
 }
 
 JASONGenerator['rule_body'] = function(block){
-  var statements = generationUtils.getItems(block, 'statement', block._statements, ` &${JASONGenerator.INDENT}${JASONGenerator.RULE_INDENT}`)
+  var statements = generationUtils.getItems(block, 'statement', block._statements, ` &${JASONGenerator.BASIC_INDENT}${JASONGenerator.RULE_INDENT}`)
   var code = statements;
   return [code, JASONGenerator.NO_PRECEDENCE]
 }
-
-
 
 JASONGenerator['always'] = function(block){
   var code = ""
@@ -94,6 +105,37 @@ JASONGenerator['and_or_statement'] = function(block) {
 
 //Init Blocks
 
+JASONGenerator['belief'] = function (block){
+  var functor = block.getFieldValue('functor');
+  var atomString = generationUtils.getItems(block, 'atom', block._atoms)
+  var code = `${functor}(${atomString})`
+  return [code, JASONGenerator.NO_PRECEDENCE]
+}
+
+JASONGenerator['init_agent'] = function(block){
+  var name = block.getFieldValue('name');
+  var start_comment = `//This is the initial state of agent ${name}\n`
+  var end_comment = `//Plan library:\n`
+  var statements = JASONGenerator.statementToCode(block, 'config', JASONGenerator.NO_PRECEDENCE)
+  console.log(statements)
+  var code = `${start_comment}${statements}\n${end_comment}`
+  return code;
+}
+
+JASONGenerator['init_belief'] = function(block){
+  var code = JASONGenerator.valueToCode(block, 'belief', JASONGenerator.NO_PRECEDENCE)+"."
+  return code
+}
+
+JASONGenerator['init_goal'] = function(block){
+  var code = "!"+JASONGenerator.valueToCode(block, 'goal', JASONGenerator.NO_PRECEDENCE)+"."
+  return code
+}
+
+JASONGenerator['init_rule'] = function(block){
+  var code = JASONGenerator.valueToCode(block, 'rule', JASONGenerator.NO_PRECEDENCE)+"."
+  return code
+}
 
 //Utils
 const generationUtils = {
