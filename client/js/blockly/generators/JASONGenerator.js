@@ -232,7 +232,7 @@ JASONGenerator['goal_add_remove_trigger'] = function(block) {
 
 JASONGenerator['test_add_remove_trigger'] = function(block) {
   var symbol = block.getFieldValue('option')
-  var goal =JASONGenerator.valueToCode(block, 'goal', JASONGenerator.NO_PRECEDENCE)
+  var goal = JASONGenerator.valueToCode(block, 'goal', JASONGenerator.NO_PRECEDENCE)
   var code = symbol+goal
   return [code, JASONGenerator.NO_PRECEDENCE]
 }
@@ -240,43 +240,63 @@ JASONGenerator['test_add_remove_trigger'] = function(block) {
 //plan body
 
 JASONGenerator['add_belief'] = function(block) {
-  var belief =JASONGenerator.valueToCode(block, 'belief', JASONGenerator.NO_PRECEDENCE)
+  var belief = JASONGenerator.valueToCode(block, 'belief', JASONGenerator.NO_PRECEDENCE)
   var code = `+${belief};`
   return code
 }
 
 JASONGenerator['remove_belief'] = function(block) {
-  var belief =JASONGenerator.valueToCode(block, 'belief', JASONGenerator.NO_PRECEDENCE)
+  var belief = JASONGenerator.valueToCode(block, 'belief', JASONGenerator.NO_PRECEDENCE)
   var code = `-${belief};`
   return code
 }
 
 JASONGenerator['update_belief'] = function(block) {
-  var belief =JASONGenerator.valueToCode(block, 'belief', JASONGenerator.NO_PRECEDENCE)
+  var belief = JASONGenerator.valueToCode(block, 'belief', JASONGenerator.NO_PRECEDENCE)
   var code = `-+${belief};`
   return code
 }
 
 JASONGenerator['add_goal'] = function(block) {
-  var goal =JASONGenerator.valueToCode(block, 'goal', JASONGenerator.NO_PRECEDENCE)
+  var goal = JASONGenerator.valueToCode(block, 'goal', JASONGenerator.NO_PRECEDENCE)
   var code = `!${goal};`
   return code
 }
 
 JASONGenerator['add_parallel_goal'] = function(block) {
-  var goal =JASONGenerator.valueToCode(block, 'goal', JASONGenerator.NO_PRECEDENCE)
+  var goal = JASONGenerator.valueToCode(block, 'goal', JASONGenerator.NO_PRECEDENCE)
   var code = `!!${goal};`
   return code
 }
 
 JASONGenerator['add_test_goal'] = function(block) {
-  var goal =JASONGenerator.valueToCode(block, 'goal', JASONGenerator.NO_PRECEDENCE)
+  var goal = JASONGenerator.valueToCode(block, 'goal', JASONGenerator.NO_PRECEDENCE)
   var code = `?${goal};`
   return code
 }
 
 JASONGenerator['check_expression'] = function(block) {
   var code = `${JASONGenerator.valueToCode(block, 'statement', JASONGenerator.NO_PRECEDENCE)};`
+  return code
+}
+
+JASONGenerator['invoke_action'] = function(block){
+  var actionName = block.getFieldValue('actionName');
+  var arguments = generationUtils.getItems(block, 'argument', block._arguments)
+  var code = `${actionName}(${arguments});`
+  return code
+}
+
+JASONGenerator['use_affordance'] = function(block){
+  var affordance = JASONGenerator.valueToCode(block, 'affordance', JASONGenerator.NO_PRECEDENCE)
+  var code = `${affordance};`
+  return code
+}
+
+JASONGenerator['assign_variable'] = function(block){
+  var variable = JASONGenerator.valueToCode(block, 'variable', JASONGenerator.NO_PRECEDENCE)
+  var operation = JASONGenerator.valueToCode(block, 'operation', JASONGenerator.NO_PRECEDENCE)
+  var code = `${variable} = ${operation};`
   return code
 }
 

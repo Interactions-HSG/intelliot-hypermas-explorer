@@ -249,5 +249,27 @@ Blockly.defineBlocksWithJsonArray([
     "colour": 15,
     "tooltip": "Check a statement and continue the execution of a plan only if it is true ",
     "helpUrl": ""
+  },
+  {
+    "type": "assign_variable",
+    "message0": "set %1 = %2",
+    "args0": [
+      {
+        "type": "input_value",
+        "name": "variable",
+        "check": "variable"
+      },
+      {
+        "type": "input_value",
+        "name": "operation",
+        "check": ["operation", "atom", "variable", "statement"]
+      }
+    ],
+    "inputsInline": true,
+    "previousStatement": "body_block",
+    "nextStatement": "body_block",
+    "colour": 15,
+    "tooltip": "Assign the result of an operation to a variable",
+    "helpUrl": ""
   }
 ])

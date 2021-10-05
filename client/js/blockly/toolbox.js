@@ -241,6 +241,10 @@ const toolboxDefinition = {
           "kind": "block",
           "type": "check_expression"
         },
+        {
+          "kind": "block",
+          "type": "assign_variable"
+        },
       ]
     },
     {
