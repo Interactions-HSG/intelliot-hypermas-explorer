@@ -96,7 +96,10 @@ JASONGenerator['number'] = function(block){
 JASONGenerator['predicate'] = function(block) {
   var functor = block.getFieldValue('functor');
   var termString = generationUtils.getItems(block, 'term', block._terms)
-  var code = `${functor}(${termString})`
+  var code = functor
+  if(termString) {
+    code = `${functor}(${termString})`
+  }
   return [code, JASONGenerator.NO_PRECEDENCE]
 }
 
@@ -165,7 +168,10 @@ JASONGenerator['and_or_statement'] = function(block) {
 JASONGenerator['belief'] = function (block){
   var functor = block.getFieldValue('functor');
   var atomString = generationUtils.getItems(block, 'atom', block._atoms)
-  var code = `${functor}(${atomString})`
+  var code = functor
+  if(atomString) {
+    code = `${functor}(${atomString})`
+  }
   return [code, JASONGenerator.NO_PRECEDENCE]
 }
 
@@ -287,7 +293,7 @@ JASONGenerator['check_expression'] = function(block) {
 JASONGenerator['invoke_action'] = function(block){
   var actionName = block.getFieldValue('actionName');
   var arguments = generationUtils.getItems(block, 'argument', block._arguments)
-  var code = `${actionName}(${arguments});`
+  var code = `${actionName}(${arguments ? arguments : ""});`
   return code
 }
 
@@ -318,7 +324,11 @@ const generationUtils = {
       var item = JASONGenerator.valueToCode(block, itemName+i, JASONGenerator.NO_PRECEDENCE)
       itemArray.push(item)
     }
-    return itemArray.reduce((s, t) => s+separator+t)
+    if(itemArray.length){
+      return itemArray.reduce((s, t) => s+separator+t)
+    } else {
+      return null;
+    }
   },
 
   getRootStatement: function(block) {

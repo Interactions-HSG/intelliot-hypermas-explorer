@@ -12,7 +12,6 @@ Blockly.Blocks['predicate'] = {
     this._terms = 1;
     this.appendDummyInput()
       .appendField(new Blockly.FieldTextInput('name'),'functor')
-      .appendField('(')
     this._updateShape();
     this.setMutator(new Blockly.Mutator(['mutator_block_input']));
   },
@@ -45,7 +44,6 @@ Blockly.Blocks['predicate'] = {
 
   compose: function(containerBlock) {
     var itemBlock = containerBlock.getInputTargetBlock('inputs');
-    ComposerUtils.forbidZeroItems(itemBlock);
     var connections = ComposerUtils.getConnections(itemBlock);
     ComposerUtils.disconnectChildren(this, connections, 'term', this._terms);
     this._terms = connections.length
@@ -66,11 +64,18 @@ Blockly.Blocks['predicate'] = {
   },
 
   _updateShape: function(){
+    if(this._terms == 0 && this.getInput('start')) {
+      this.removeInput('start')
+    } else if(this._terms > 0 && !this.getInput('start')){
+      this.appendDummyInput('start')
+        .appendField('(')
+    }
     if(this.getInput('end')){
       this.removeInput('end')
     }
     ComposerUtils.addInputFields(this, 'term', this._terms, ['atom', 'variable', 'operation'])
+    var endMessage = (this._terms ? ')' : '') + ' is true'
     this.appendDummyInput('end')
-      .appendField(') is true');
+      .appendField(new Blockly.FieldLabelSerializable(endMessage), 'END');
   }
 }

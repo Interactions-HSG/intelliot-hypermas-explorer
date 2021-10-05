@@ -12,7 +12,6 @@ Blockly.Blocks['belief'] = {
     this._atoms = 1;
     this.appendDummyInput()
       .appendField(new Blockly.FieldTextInput('name'),'functor')
-      .appendField('(')
     this._updateShape();
     this.setMutator(new Blockly.Mutator(['mutator_block_input']));
   },
@@ -45,7 +44,6 @@ Blockly.Blocks['belief'] = {
 
   compose: function(containerBlock) {
     var itemBlock = containerBlock.getInputTargetBlock('inputs');
-    ComposerUtils.forbidZeroItems(itemBlock);
     var connections = ComposerUtils.getConnections(itemBlock);
     ComposerUtils.disconnectChildren(this, connections, 'atom', this._atoms);
     this._atoms = connections.length
@@ -66,11 +64,18 @@ Blockly.Blocks['belief'] = {
   },
 
   _updateShape: function(){
+    if(this._atoms == 0 && this.getInput('start')) {
+      this.removeInput('start')
+    } else if(this._atoms > 0 && !this.getInput('start')){
+      this.appendDummyInput('start')
+        .appendField('(')
+    }
     if(this.getInput('end')){
       this.removeInput('end')
     }
     ComposerUtils.addInputFields(this, 'atom', this._atoms, 'atom')
+    var endMessage = (this._atoms ? ')' : '') + ' is true'
     this.appendDummyInput('end')
-      .appendField(new Blockly.FieldLabelSerializable(') is true'), 'END');
+      .appendField(new Blockly.FieldLabelSerializable(endMessage), 'END');
   }
 }
