@@ -209,6 +209,9 @@ JASONGenerator['define_plan'] = function(block) {
   var trigger = JASONGenerator.valueToCode(block, 'trigger', JASONGenerator.NO_PRECEDENCE)
   var context = JASONGenerator.valueToCode(block, 'context', JASONGenerator.NO_PRECEDENCE)
   var body = generationUtils.getStackCode(generationUtils.getRootStatement(block), JASONGenerator.BASIC_INDENT+JASONGenerator.THREE_INDENT);
+  if(body.slice(-1) == ';'){
+    body=body.slice(0,-1);
+  }
   var code = `${label}\n${trigger}${JASONGenerator.BASIC_INDENT}:  ${context}${JASONGenerator.BASIC_INDENT}<- ${body}.`
   return code;
 }
@@ -238,45 +241,42 @@ JASONGenerator['test_add_remove_trigger'] = function(block) {
 
 JASONGenerator['add_belief'] = function(block) {
   var belief =JASONGenerator.valueToCode(block, 'belief', JASONGenerator.NO_PRECEDENCE)
-  var code = `+${belief}`
+  var code = `+${belief};`
   return code
 }
 
 JASONGenerator['remove_belief'] = function(block) {
   var belief =JASONGenerator.valueToCode(block, 'belief', JASONGenerator.NO_PRECEDENCE)
-  var code = `-${belief}`
+  var code = `-${belief};`
   return code
 }
 
 JASONGenerator['update_belief'] = function(block) {
   var belief =JASONGenerator.valueToCode(block, 'belief', JASONGenerator.NO_PRECEDENCE)
-  var code = `-+${belief}`
+  var code = `-+${belief};`
   return code
 }
 
 JASONGenerator['add_goal'] = function(block) {
   var goal =JASONGenerator.valueToCode(block, 'goal', JASONGenerator.NO_PRECEDENCE)
-  var code = `!${goal}`
+  var code = `!${goal};`
   return code
 }
 
 JASONGenerator['add_parallel_goal'] = function(block) {
   var goal =JASONGenerator.valueToCode(block, 'goal', JASONGenerator.NO_PRECEDENCE)
-  var code = `!!${goal}`
+  var code = `!!${goal};`
   return code
 }
 
 JASONGenerator['add_test_goal'] = function(block) {
   var goal =JASONGenerator.valueToCode(block, 'goal', JASONGenerator.NO_PRECEDENCE)
-  var code = `?${goal}`
+  var code = `?${goal};`
   return code
 }
 
 JASONGenerator['check_expression'] = function(block) {
-  var term1 = JASONGenerator.valueToCode(block, 'term1', JASONGenerator.NO_PRECEDENCE)
-  var term2 = JASONGenerator.valueToCode(block, 'term2', JASONGenerator.NO_PRECEDENCE)
-  var symbol = block.getFieldValue('symbol')
-  var code = `${term1} ${symbol} ${term2}.`
+  var code = `${JASONGenerator.valueToCode(block, 'statement', JASONGenerator.NO_PRECEDENCE)};`
   return code
 }
 

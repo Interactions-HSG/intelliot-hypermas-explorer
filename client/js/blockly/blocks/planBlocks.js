@@ -235,63 +235,19 @@ Blockly.defineBlocksWithJsonArray([
   },
   {
     "type": "check_expression",
-    "message0": "continue if %1 %2 %3 %4",
-    "args0": [{
-        "type": "input_value",
-        "name": "term1",
-        "check": [
-          "variable",
-          "atom",
-          "operation"
-        ]
-      },
-      {
-        "type": "field_dropdown",
-        "name": "symbol",
-        "options": [
-          [
-            "==",
-            "=="
-          ],
-          [
-            "≠",
-            "!="
-          ],
-          [
-            ">",
-            ">"
-          ],
-          [
-            "<",
-            "<"
-          ],
-          [
-            "≥",
-            ">="
-          ],
-          [
-            "≤",
-            "<="
-          ]
-        ]
-      },
-      {
-        "type": "input_dummy"
-      },
+    "message0": "continue if %1 is true",
+    "args0": [
       {
         "type": "input_value",
-        "name": "term2",
-        "check": [
-          "variable",
-          "atom",
-          "operation"
-        ]
+        "name": "statement",
+        "check": "statement"
       }
     ],
+    "inputsInline": true,
     "previousStatement": "body_block",
     "nextStatement": "body_block",
     "colour": 15,
-    "tooltip": "Check an expression between variables or atoms and continue the execution of a plan only if it is true ",
+    "tooltip": "Check a statement and continue the execution of a plan only if it is true ",
     "helpUrl": ""
   }
 ])
