@@ -70,7 +70,7 @@ Blockly.Blocks['invoke_action'] = {
     if(this.getInput('end')){
       this.removeInput('end')
     }
-    ComposerUtils.addInputFields(this, 'argument', this._arguments, 'argument')
+    ComposerUtils.addInputFields(this, 'argument', this._arguments, ['atom', 'variable', 'predicate'])
     this.appendDummyInput('end')
       .appendField(new Blockly.FieldLabelSerializable(')'), 'END');
   }
