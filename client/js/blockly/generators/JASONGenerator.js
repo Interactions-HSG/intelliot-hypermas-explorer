@@ -305,12 +305,14 @@ const generationUtils = {
     if(!block) {
       return "true"
     }
-    code = JASONGenerator.blockToCode(block);
+    var code = JASONGenerator.blockToCode(block);
     const nextBlock = block.nextConnection && block.nextConnection.targetBlock();
+    console.log(nextBlock)
     var newCode='';
     if(nextBlock) {
       newCode = indent + this.getStackCode(nextBlock, indent)
     }
+    console.log(code);
     return code + newCode;
   }
 }
