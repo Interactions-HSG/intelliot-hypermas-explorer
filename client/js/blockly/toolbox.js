@@ -10,6 +10,14 @@ const toolboxDefinition = {
         },
         {
           "kind": "block",
+          "type": "string"
+        },
+        {
+          "kind": "block",
+          "type": "number"
+        },
+        {
+          "kind": "block",
           "type": "variable"
         },
         {

@@ -69,7 +69,7 @@ Blockly.Blocks['predicate'] = {
     if(this.getInput('end')){
       this.removeInput('end')
     }
-    ComposerUtils.addInputFields(this, 'term', this._terms, ['atom', 'variable'])
+    ComposerUtils.addInputFields(this, 'term', this._terms, ['atom', 'variable', 'operation'])
     this.appendDummyInput('end')
       .appendField(') is true');
   }

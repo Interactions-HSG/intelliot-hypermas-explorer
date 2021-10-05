@@ -234,7 +234,7 @@ const atom_block_json = {
   }],
   "output": "atom",
   "colour": 190,
-  "tooltip": "An atom is any string that starts with a lowercase letter or a number",
+  "tooltip": "An atom is any string that starts with a lowercase letter and no spaces",
   "helpUrl": ""
 }
 
@@ -245,6 +245,7 @@ Blockly.Blocks['atom'] = {
     this.getField('value').setValidator(function(newValue){
       var value = newValue.trim();
       if(value){
+        value = value.replaceAll(" ", "_")
         value = utils.uncapitalize(value)
         block.setWarningText();
         return value;
@@ -256,6 +257,58 @@ Blockly.Blocks['atom'] = {
   }
 }
 
+const string_block_json = {
+  "message0": "\"%1\"",
+  "args0": [{
+    "type": "field_input",
+    "name": "value",
+    "text": "string"
+  }],
+  "output": "atom",
+  "colour": 200,
+  "tooltip": "A string",
+  "helpUrl": ""
+}
+Blockly.Blocks['string'] = {
+  init: function(){
+    this.jsonInit(string_block_json);
+    var block = this;
+    this.getField('value').setValidator(function(newValue){
+      //TODO implement validation for strings
+      return newValue;
+    });
+  }
+}
+
+
+const number_block_json = {
+  "message0": "%1",
+  "args0": [{
+    "type": "field_input",
+    "name": "value",
+    "text": "0"
+  }],
+  "output": "atom",
+  "colour": 200,
+  "tooltip": "A number",
+  "helpUrl": ""
+}
+Blockly.Blocks['number'] = {
+  init: function(){
+    this.jsonInit(number_block_json);
+    var block = this;
+    this.getField('value').setValidator(function(newValue){
+      //TODO check validation for numbers
+      var regex = new RegExp("^[0-9]+(\.[0-9])?[0-9]*$", 'g')
+      if(!regex.test(newValue)){
+        block.setWarningText("Not a valid number");
+        return newValue;
+      }
+      block.setWarningText();
+      return newValue;
+    });
+  }
+}
 
 const variable_block_json = {
   "type": "variable",

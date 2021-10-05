@@ -69,13 +69,7 @@ JASONGenerator.generateJASON = function(workspace){
 //Basic blocks
 
 JASONGenerator['atom'] = function(block) {
-  var value = block.getFieldValue('value')
-  var code
-  if(value.includes(" ")){
-    code = `"${value}"`
-  } else {
-    code = value
-  }
+  var code = block.getFieldValue('value')
   return [code, JASONGenerator.NO_PRECEDENCE]
 }
 
@@ -86,6 +80,16 @@ JASONGenerator['variable'] = function(block) {
 
 JASONGenerator['any_variable'] = function(block) {
   var code = "_"
+  return [code, JASONGenerator.NO_PRECEDENCE]
+}
+
+JASONGenerator['string'] = function(block){
+  var code =`"${block.getFieldValue('value')}"`
+  return [code, JASONGenerator.NO_PRECEDENCE]
+}
+
+JASONGenerator['number'] = function(block){
+  var code = block.getFieldValue('value')
   return [code, JASONGenerator.NO_PRECEDENCE]
 }
 
