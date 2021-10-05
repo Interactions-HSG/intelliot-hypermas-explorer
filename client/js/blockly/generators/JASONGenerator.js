@@ -129,10 +129,16 @@ JASONGenerator['rule_body'] = function(block){
   return [code, JASONGenerator.NO_PRECEDENCE]
 }
 
-JASONGenerator['always'] = function(block){
+JASONGenerator['true'] = function(_){
   var code = "true"
   return [code, JASONGenerator.NO_PRECEDENCE] 
 }
+
+JASONGenerator['false'] = function(_){
+  var code = "false"
+  return [code, JASONGenerator.NO_PRECEDENCE] 
+}
+
 
 JASONGenerator['not'] = function(block){
   var code = "not "+ JASONGenerator.valueToCode(block, 'value', JASONGenerator.OPERATION)
@@ -222,7 +228,7 @@ JASONGenerator['define_plan'] = function(block) {
   if(body.slice(-1) == ';'){
     body=body.slice(0,-1);
   }
-  var code = `${label}\n${trigger}${JASONGenerator.BASIC_INDENT}:  ${context}${JASONGenerator.BASIC_INDENT}<- ${body}.`
+  var code = `${label}\n${trigger+JASONGenerator.BASIC_INDENT}:  ${context+JASONGenerator.BASIC_INDENT}<- ${body}.`
   return code;
 }
 

@@ -215,11 +215,19 @@ Blockly.defineBlocksWithJsonArray([
     "helpUrl": ""
   },
   {
-    "type": "always",
-    "message0": "always",
+    "type": "true",
+    "message0": "true",
     "output": "statement",
     "colour": 230,
     "tooltip": "Make something be always true.",
+    "helpUrl": ""
+  },
+  {
+    "type": "false",
+    "message0": "false",
+    "output": "statement",
+    "colour": 230,
+    "tooltip": "Make something be always false.",
     "helpUrl": ""
   },
 ]);

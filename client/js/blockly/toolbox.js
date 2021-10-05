@@ -54,7 +54,11 @@ const toolboxDefinition = {
         },
         {
           "kind": "block",
-          "type": "always"
+          "type": "true"
+        },
+        {
+          "kind": "block",
+          "type": "false"
         },
         {
           "kind": "block",
