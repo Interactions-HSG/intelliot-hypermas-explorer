@@ -218,6 +218,22 @@ Blockly.defineBlocksWithJsonArray([
     "helpUrl": ""
   },
   {
+    "type": "use_affordance",
+    "message0": "use affordance %1",
+    "args0": [
+      {
+        "type": "input_value",
+        "name": "action",
+        "check": "affordance"
+      }
+    ],
+    "previousStatement": "body_block",
+    "nextStatement": "body_block",
+    "colour": 15,
+    "tooltip": "Invoke the affordance",
+    "helpUrl": ""
+  },
+  {
     "type": "check_expression",
     "message0": "continue if %1 %2 %3 %4",
     "args0": [{

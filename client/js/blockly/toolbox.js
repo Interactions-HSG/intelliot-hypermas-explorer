@@ -231,6 +231,14 @@ const toolboxDefinition = {
         },
         {
           "kind": "block",
+          "type": "invoke_action"
+        },
+        {
+          "kind": "block",
+          "type": "use_affordance",
+        },
+        {
+          "kind": "block",
           "type": "check_expression"
         },
       ]
