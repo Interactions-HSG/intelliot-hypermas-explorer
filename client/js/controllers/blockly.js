@@ -25,6 +25,7 @@ class BlocklyController {
         snap: true
       },
       zoom: {
+        startScale: 0.7,
         controls: true, 
         wheel: true
       },

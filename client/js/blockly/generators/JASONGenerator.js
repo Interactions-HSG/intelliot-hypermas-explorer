@@ -1,7 +1,7 @@
 const JASONGenerator = new Blockly.Generator('JASON');
 JASONGenerator.INDENT = ""
 JASONGenerator.BASIC_INDENT = "\n  "
-JASONGenerator.RULE_INDENT = "   "
+JASONGenerator.THREE_INDENT = "   "
 JASONGenerator.NO_PRECEDENCE = 0;
 JASONGenerator.OPERATION = 1;
 
@@ -66,18 +66,6 @@ JASONGenerator.generateJASON = function(workspace){
   return code;
 };
 
-
-JASONGenerator.scrub_ = function(block, code, opt_thisOnly) {
-  const nextBlock =
-      block.nextConnection && block.nextConnection.targetBlock();
-  let nextCode = '';
-  if (nextBlock) {
-      nextCode =
-          opt_thisOnly ? '' : '\n' + JASONGenerator.blockToCode(nextBlock);
-  }
-  return code + nextCode;
-};
-
 //Basic blocks
 
 JASONGenerator['atom'] = function(block) {
@@ -124,7 +112,7 @@ JASONGenerator['rule'] = function(block){
 }
 
 JASONGenerator['rule_body'] = function(block){
-  var statements = generationUtils.getItems(block, 'statement', block._statements, ` &${JASONGenerator.BASIC_INDENT}${JASONGenerator.RULE_INDENT}`)
+  var statements = generationUtils.getItems(block, 'statement', block._statements, ` &${JASONGenerator.BASIC_INDENT}${JASONGenerator.THREE_INDENT}`)
   var code = statements;
   return [code, JASONGenerator.NO_PRECEDENCE]
 }
@@ -189,7 +177,7 @@ JASONGenerator['init_agent'] = function(block){
   var name = block.getFieldValue('name');
   var start_comment = `//This is the initial state of agent ${name}\n`
   var end_comment = `//Plan library:\n`
-  var statements = JASONGenerator.statementToCode(block, 'config')
+  var statements = generationUtils.getStackCode(generationUtils.getRootStatement(block), '\n');
   var code = `${start_comment}${statements}\n${end_comment}`
   return code;
 }
@@ -215,9 +203,8 @@ JASONGenerator['define_plan'] = function(block) {
   var label = `@${block.getFieldValue('label')}`;
   var trigger = JASONGenerator.valueToCode(block, 'trigger', JASONGenerator.NO_PRECEDENCE)
   var context = JASONGenerator.valueToCode(block, 'context', JASONGenerator.NO_PRECEDENCE)
-  var body = JASONGenerator.statementToCode(block, 'body')
-
-  var code = `${label}\n${trigger}${JASONGenerator.BASIC_INDENT}:  ${context}${JASONGenerator.BASIC_INDENT}<- ${body}`
+  var body = generationUtils.getStackCode(generationUtils.getRootStatement(block), JASONGenerator.BASIC_INDENT+JASONGenerator.THREE_INDENT);
+  var code = `${label}\n${trigger}${JASONGenerator.BASIC_INDENT}:  ${context}${JASONGenerator.BASIC_INDENT}<- ${body}.`
   return code;
 }
 
@@ -300,5 +287,22 @@ const generationUtils = {
       itemArray.push(item)
     }
     return itemArray.reduce((s, t) => s+separator+t)
+  },
+
+  getRootStatement: function(block) {
+    return block.getFirstStatementConnection() ? block.getFirstStatementConnection().targetBlock(): undefined;
+  },
+
+  getStackCode: function(block, indent){
+    if(!block) {
+      return ""
+    }
+    code = JASONGenerator.blockToCode(block);
+    const nextBlock = block.nextConnection && block.nextConnection.targetBlock();
+    var newCode='';
+    if(nextBlock) {
+      newCode = indent + this.getStackCode(nextBlock, indent)
+    }
+    return code + newCode;
   }
 }
