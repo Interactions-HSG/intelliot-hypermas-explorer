@@ -1,29 +1,22 @@
-Blockly.defineBlocksWithJsonArray([{
-  "type": "create_object",
-  "message0": "Create object %1 %2 %3",
-  "args0": [
-    {
-      "type": "input_dummy"
-    },
-    {
-      "type": "input_value",
-      "name": "result",
-      "check": "variable",
-      "align": "RIGHT"
-    },
-    {
-      "type": "input_statement",
-      "name": "NAME",
-      "check": "object_field"
-    }
-  ],
-  "inputsInline": true,
-  "previousStatement": "body_block",
-  "nextStatement": "body_block",
-  "colour": 165,
-  "tooltip": "Create a new json object and store that in the result.",
-  "helpUrl": ""
-},
+Blockly.defineBlocksWithJsonArray([
+  {
+    "type": "create_object",
+    "message0": "new object %1 %2",
+    "args0": [
+      {
+        "type": "input_dummy"
+      },
+      {
+        "type": "input_statement",
+        "name": "fields",
+        "check": "object_field"
+      }
+    ],
+    "output": "object",
+    "colour": 165,
+    "tooltip": "",
+    "helpUrl": ""
+  },
 {
   "type": "object_field",
   "message0": "%1 → %2 %3",
@@ -38,10 +31,13 @@ Blockly.defineBlocksWithJsonArray([{
     },
     {
       "type": "input_value",
-      "name": "NAME",
+      "name": "value",
       "check": [
         "atom",
-        "variable"
+        "variable",
+        "operation",
+        "object",
+        "statement"
       ]
     }
   ],

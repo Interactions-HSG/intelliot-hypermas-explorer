@@ -262,7 +262,7 @@ Blockly.defineBlocksWithJsonArray([
       {
         "type": "input_value",
         "name": "operation",
-        "check": ["operation", "atom", "variable", "statement"]
+        "check": ["operation", "atom", "variable", "statement", "object"]
       }
     ],
     "inputsInline": true,
