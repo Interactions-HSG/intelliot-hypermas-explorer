@@ -14,6 +14,10 @@ const toolboxDefinition = {
         },
         {
           "kind": "block",
+          "type": "any_variable"
+        },
+        {
+          "kind": "block",
           "type": "predicate"
         },
         {

@@ -84,6 +84,11 @@ JASONGenerator['variable'] = function(block) {
   return [code, JASONGenerator.NO_PRECEDENCE]
 }
 
+JASONGenerator['any_variable'] = function(block) {
+  var code = "_"
+  return [code, JASONGenerator.NO_PRECEDENCE]
+}
+
 JASONGenerator['predicate'] = function(block) {
   var functor = block.getFieldValue('functor');
   var termString = generationUtils.getItems(block, 'term', block._terms)
@@ -118,7 +123,7 @@ JASONGenerator['rule_body'] = function(block){
 }
 
 JASONGenerator['always'] = function(block){
-  var code = ""
+  var code = "true"
   return [code, JASONGenerator.NO_PRECEDENCE] 
 }
 
@@ -268,7 +273,10 @@ JASONGenerator['add_test_goal'] = function(block) {
 }
 
 JASONGenerator['check_expression'] = function(block) {
-  var code = "NOT_IMPLEMENTED" //TODO
+  var term1 = JASONGenerator.valueToCode(block, 'term1', JASONGenerator.NO_PRECEDENCE)
+  var term2 = JASONGenerator.valueToCode(block, 'term2', JASONGenerator.NO_PRECEDENCE)
+  var symbol = block.getFieldValue('symbol')
+  var code = `${term1} ${symbol} ${term2}.`
   return code
 }
 
@@ -295,7 +303,7 @@ const generationUtils = {
 
   getStackCode: function(block, indent){
     if(!block) {
-      return ""
+      return "true"
     }
     code = JASONGenerator.blockToCode(block);
     const nextBlock = block.nextConnection && block.nextConnection.targetBlock();

@@ -222,7 +222,7 @@ Blockly.defineBlocksWithJsonArray([
     "message0": "continue if %1 %2 %3 %4",
     "args0": [{
         "type": "input_value",
-        "name": "term0",
+        "name": "term1",
         "check": [
           "variable",
           "atom",
@@ -264,7 +264,7 @@ Blockly.defineBlocksWithJsonArray([
       },
       {
         "type": "input_value",
-        "name": "term1",
+        "name": "term2",
         "check": [
           "variable",
           "atom",

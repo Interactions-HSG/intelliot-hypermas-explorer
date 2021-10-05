@@ -1,5 +1,12 @@
 Blockly.defineBlocksWithJsonArray([
   {
+    "type": "any_variable",
+    "message0": "any",
+    "output": "variable",
+    "colour": 0,
+    "tooltip": "A special variable that match with everything and does not store the result"
+  },
+  {
     "type": "operation",
     "message0": "%1 %2 %3 %4",
     "args0": [
