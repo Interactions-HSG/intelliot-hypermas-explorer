@@ -2,14 +2,14 @@ Blockly.defineBlocksWithJsonArray(
   [
     {
       "type": "init_agent",
-      "message0": "When agent %1 %2 %3 is born %4 it %5",
+      "message0": "When agent%1%2%3is born %4 it %5",
       "args0": [{
           "type": "input_dummy"
         },
         {
-          "type": "field_input",
+          "type": "field_label_serializable",
           "name": "name",
-          "text": "agentName"
+          "text": "new_agent"
         },
         {
           "type": "input_dummy"

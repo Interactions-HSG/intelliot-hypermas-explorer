@@ -12,6 +12,7 @@ class BlocklyController {
   $blocklyInjection = $('#blockly-injection')
   $blocklyRelative = $('#blockly-relative')
   $blocklyContainer = $('#blockly-container')
+  $tabs = $('#tabs')
 
 
   initialize() {
@@ -25,7 +26,7 @@ class BlocklyController {
         snap: true
       },
       zoom: {
-        startScale: 0.7,
+        startScale: 0.8,
         controls: true, 
         wheel: true
       },
@@ -37,13 +38,14 @@ class BlocklyController {
     this._actionCategory = this._toolbox.getToolboxItemById('Actions');
     this._eventCategory = this._toolbox.getToolboxItemById('Events');
     this._flyout = this._toolbox.getFlyout();
-    window.addEventListener('resize',
-      this._resizeHandler(this._workspace, this.$blocklyRelative[0], this.$blocklyInjection[0]), false)
-
+    window.addEventListener('resize', this._resizeHandler(this._workspace, this.$blocklyRelative[0], this.$blocklyInjection[0]), false)
+    
     this.$blocklyContainer.hide()
+    
+    
     //TODO uncomment this
     //$('#export_code').click(e =>console.log(JASONGenerator.generateJASON(this._workspace)))
-    $('#export_code').click(e =>console.log(JASONGenerator.workspaceToCode(this._workspace)))
+    $('#export-code').click(e =>console.log(JASONGenerator.workspaceToCode(this._workspace)))
     $('#debug').click(e =>console.log(Blockly.Xml.workspaceToDom(this._workspace, true)))
   }
 
@@ -72,7 +74,26 @@ class BlocklyController {
 
   showArea(){
     this.$blocklyContainer.fadeIn();
+    var definition = this._workspace.newBlock("init_agent")
+    definition.initSvg()
+    this.$tabs.find('span.nav-link.active').each(function(index){
+      $(this).dblclick(function(){
+        var val=this.innerHTML;
+        var input=document.createElement("input");
+        input.value=val;
+        input.onblur=function(){
+          var val=this.value;
+          definition.setFieldValue(val, "name")
+          this.parentNode.innerHTML=val;
+        }
+        this.innerHTML="";
+        this.appendChild(input);
+        input.focus();
+      })
+    })
     this.resize();
+    this._workspace.scrollbar.workspace_.scroll(10,15)
+    this._workspace.render();
   }
 
   hideMenu(){
