@@ -302,6 +302,6 @@ const toolboxDefinition = {
       "categorystyle": "events_category",
       //"hidden" : "true",
       "contents": []
-    }
+    },
   ]
 }

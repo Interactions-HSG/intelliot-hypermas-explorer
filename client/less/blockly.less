@@ -3,14 +3,37 @@
 #blockly-controls {
   height: 10%;
   width:100%;
-  //padding-left: 120px; //toolbox size
   background-color: @c_interactions_blue_dark;
   display: flex;
   flex-direction: row;
   align-items: center;
+}
+
+.toolbox-title {
+  display: flex;
+  align-items: center; 
+  color: white;
+  font-weight: bold;
+  padding-left: 20px;
+  width: 190px;
+  height: 100%;
+  font-size: 20pt;
+}
+
+.blockly-buttons{  
+  background-color: #C7C7C7;
+  box-sizing: border-box;
+  flex-grow: 1;
+  height:100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+  align-items: center;
+  padding-right: 5px; 
   button {
+    font-size: 10pt;
     margin:5px;
-    max-height: 80%;
+    max-height: 50%;
   }
 }
 
@@ -22,6 +45,10 @@
 
 #blockly-injection{
   position:absolute;
+}
+
+.blocklyToolboxDiv {
+  width: 190px;
 }
 
 .blocklyTreeRow {
