@@ -7,15 +7,20 @@ class BlocklyController {
   _actionCategory = undefined
   _eventCategory = undefined
   _flyout = undefined
+
+  _blockStorageArray = []
   
   //jquery shortcuts
   $blocklyInjection = $('#blockly-injection')
   $blocklyRelative = $('#blockly-relative')
   $blocklyContainer = $('#blockly-container')
+
   $tabs = $('#tabs')
+  $addTabButton = $('#add-new-tab')
 
 
   initialize() {
+    this.$blocklyContainer.hide()
     var options = {
       toolbox: toolboxDefinition,
       theme: 'intelliot',
@@ -40,8 +45,7 @@ class BlocklyController {
     this._flyout = this._toolbox.getFlyout();
     window.addEventListener('resize', this._resizeHandler(this._workspace, this.$blocklyRelative[0], this.$blocklyInjection[0]), false)
     
-    this.$blocklyContainer.hide()
-    
+    this.$addTabButton.click(e => this.addTab("ciao"))
     
     //TODO uncomment this
     //$('#export_code').click(e =>console.log(JASONGenerator.generateJASON(this._workspace)))
@@ -74,7 +78,21 @@ class BlocklyController {
 
   showArea(){
     this.$blocklyContainer.fadeIn();
+    this.addTab();
+    this.resize();
+    this._workspace.scrollbar.workspace_.scroll(10,15)
+  }
+
+  async addTab() {
+    //TODO better prompt
+    var agentName = await dashboard.waitInput("Create a new agent with name:", "new_agent")
+    this.$tabs.find('span.active').removeClass('active');
+    this.$tabs.append(`<li class="nav-item">
+                        <span class="nav-link active">${agentName ? agentName : "new_agent"}</span>
+                      </li>`)
     var definition = this._workspace.newBlock("init_agent")
+    definition.setFieldValue(agentName, "name")
+    definition.setDeletable(false)
     definition.initSvg()
     this.$tabs.find('span.nav-link.active').each(function(index){
       $(this).dblclick(function(){
@@ -91,8 +109,6 @@ class BlocklyController {
         input.focus();
       })
     })
-    this.resize();
-    this._workspace.scrollbar.workspace_.scroll(10,15)
     this._workspace.render();
   }
 

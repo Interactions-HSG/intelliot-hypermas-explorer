@@ -95,6 +95,14 @@ class Dashboard {
     })
   }
 
+  waitInput(message, defaultValue){
+    //TODO better graphic
+    return new Promise((resolve, _) => {
+      var res = prompt(message, defaultValue)
+      resolve(res)
+    })
+  }
+
   showError(message) {
     //TODO better graphic
     log.error(message)
