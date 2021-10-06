@@ -5,9 +5,9 @@
   width:100%;
   display: flex;
   flex-direction: row;
-  align-items: center;
   box-sizing: content-box;
-  border-right: 1px solid #C7C7C7;
+  background-color: @c_interactions_light_gray;
+  border-right: 2px solid @c_interactions_light_gray;
 }
 
 .toolbox-title {
@@ -22,8 +22,14 @@
   font-size: 20pt;
 }
 
+.toolbox-tabs {
+  padding-left: 3px;
+  display: flex;
+  align-items:flex-end;
+}
+
+
 .blockly-buttons{  
-  background-color: #C7C7C7;
   flex-grow: 1;
   height:100%;
   display: flex;
@@ -46,6 +52,9 @@
 
 #blockly-injection{
   position:absolute;
+  box-sizing: content-box;
+  border-right: 1px solid @c_interactions_light_gray;
+  border-bottom: 1px solid @c_interactions_light_gray;
 }
 
 .blocklyToolboxDiv {
@@ -59,5 +68,10 @@
   align-items: center;
   text-align: left;
 }
+
+.blocklyMainBackground{
+  stroke: none;
+}
+
 
 
