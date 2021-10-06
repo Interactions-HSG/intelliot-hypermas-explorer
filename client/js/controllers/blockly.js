@@ -44,7 +44,7 @@ class BlocklyController {
     //TODO uncomment this
     //$('#export_code').click(e =>console.log(JASONGenerator.generateJASON(this._workspace)))
     $('#export_code').click(e =>console.log(JASONGenerator.workspaceToCode(this._workspace)))
-    
+    $('#debug').click(e =>console.log(Blockly.Xml.workspaceToDom(this._workspace, true)))
   }
 
   loadArtifact(artifact) {
@@ -112,8 +112,8 @@ class BlocklyController {
   _generatePropertyBlocks(properties, artifactId){
     var blocks = []
     utils.toList(properties).forEach( p => {
-      affordanceBlockUtils.definePropertyBlock(p.key, p.value, artifactId)
-      blocks.push({kind: "block", type: p.key})
+      var block = affordanceBlockUtils.definePropertyBlock(p.key, p.value, artifactId)
+      blocks.push(block)
     });
     return blocks;
   }
@@ -121,8 +121,8 @@ class BlocklyController {
   _generateActionBlocks(actions, artifactId){
     var blocks = []
     utils.toList(actions).forEach( a => {
-      affordanceBlockUtils.defineActionBlock(a.key, a.value, artifactId)
-      blocks.push({kind: "block", type: a.key})
+      var block = affordanceBlockUtils.defineActionBlock(a.key, a.value, artifactId)
+      blocks.push(block)
     });
     return blocks;
   }
