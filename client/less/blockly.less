@@ -3,13 +3,15 @@
 #blockly-controls {
   height: 10%;
   width:100%;
-  background-color: @c_interactions_blue_dark;
   display: flex;
   flex-direction: row;
   align-items: center;
+  box-sizing: content-box;
+  border-right: 1px solid #C7C7C7;
 }
 
 .toolbox-title {
+  background-color: @c_interactions_blue_dark;
   display: flex;
   align-items: center; 
   color: white;
@@ -22,7 +24,6 @@
 
 .blockly-buttons{  
   background-color: #C7C7C7;
-  box-sizing: border-box;
   flex-grow: 1;
   height:100%;
   display: flex;
