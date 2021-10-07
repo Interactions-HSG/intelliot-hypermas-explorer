@@ -118,7 +118,7 @@ class ArtifactsController {
       }
       return inputData;
     }
-    $('form').each(function () {
+    $('form.affordance-form').each(function () {
       $(this).submit(async (e) => {
         e.preventDefault();
         var id = this.id.split("_")[1]

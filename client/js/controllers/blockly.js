@@ -18,9 +18,15 @@ class BlocklyController {
   $tabs = $('#tabs')
   $addTabButton = $('#add-new-tab')
 
+  $blocklyLauncher = $('#blockly-launcher')
+  $launcherForm = $('#launcher-form')
+  $agentName = $('#agentName')
+
 
   initialize() {
     this.$blocklyContainer.hide()
+    this.$blocklyLauncher.hide();
+
     var options = {
       toolbox: toolboxDefinition,
       theme: 'intelliot',
@@ -45,7 +51,14 @@ class BlocklyController {
     this._flyout = this._toolbox.getFlyout();
     window.addEventListener('resize', this._resizeHandler(this._workspace, this.$blocklyRelative[0], this.$blocklyInjection[0]), false)
     
-    this.$addTabButton.click(e => this.addTab("ciao"))
+
+    this.$launcherForm.submit(e => {
+      e.preventDefault()
+      this.hideLauncher();
+      this.showArea(this.$agentName.val())
+    })
+
+    this.$addTabButton.click(e => this.addTab())
     
     //TODO uncomment this
     //$('#export_code').click(e =>console.log(JASONGenerator.generateJASON(this._workspace)))
@@ -76,16 +89,25 @@ class BlocklyController {
     this._workspace.trashcan.emptyContents();
   }
 
-  showArea(){
-    this.$blocklyContainer.fadeIn();
-    this.addTab();
+  showLauncher(){
+    this.$blocklyLauncher.fadeIn(500);
+  }
+
+  hideLauncher(){
+    this.$blocklyLauncher.hide();
+  }
+
+  showArea(agentName){
+    this.addTab(agentName);
+    this.$blocklyContainer.fadeIn(500);
     this.resize();
     this._workspace.scrollbar.workspace_.scroll(10,15)
   }
 
-  async addTab() {
-    //TODO better prompt
-    var agentName = await dashboard.waitInput("Create a new agent with name:", "new_agent")
+  async addTab(agentName) {
+    if(!agentName){
+      var agentName = await dashboard.waitInput("Create a new agent with name:", "new_agent")
+    }
     this.$tabs.find('span.active').removeClass('active');
     this.$tabs.append(`<li class="nav-item">
                         <span class="nav-link active">${agentName ? agentName : "new_agent"}</span>
@@ -94,6 +116,9 @@ class BlocklyController {
     definition.setFieldValue(agentName, "name")
     definition.setDeletable(false)
     definition.initSvg()
+    this.$tabs.find('span').each(function(index){
+      $(this).off('dblclick')
+    })
     this.$tabs.find('span.nav-link.active').each(function(index){
       $(this).dblclick(function(){
         var val=this.innerHTML;

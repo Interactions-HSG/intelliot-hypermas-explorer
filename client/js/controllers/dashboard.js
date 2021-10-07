@@ -50,6 +50,9 @@ class Dashboard {
     if(res){
       this.artifactsController.clearArtifactsBar();
       this.artifactsController.clearAffordancesBar();
+      this.blocklyController.clearWorkspace();
+      this.blocklyController.hideArea();
+      this.blocklyController.hideLauncher();
       if (workspaceData.uri != "empty") {
         try {
           await this.artifactsController.reloadArtifactsFromWorkspace(workspaceData.parent, workspaceData.id);
@@ -57,9 +60,8 @@ class Dashboard {
           this.showError(error)
           return Promise.resolve(false) //abort change
         }
+        this.blocklyController.showLauncher();
       }
-      this.blocklyController.clearWorkspace();
-      this.blocklyController.hideArea();
     }
     return Promise.resolve(res)
   }
@@ -69,7 +71,6 @@ class Dashboard {
         this.artifactsController.showArtifactAffordances(artifactData.id);
         this.blocklyController.hideMenu();
         this.blocklyController.loadArtifact(artifactData);
-        this.blocklyController.showArea();
         return Promise.resolve(true);
       } catch (error) {
         this.showError(error);

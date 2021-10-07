@@ -156,3 +156,40 @@ box-shadow: inset -10px -10px 0px -30px #FFFFFF;
 .red {
   background-color: red;
 }
+
+#blockly-launcher{
+  display:flex;
+  justify-content: center;
+  .box{
+    margin-top:10%;
+    display:flex;
+    align-items: center;
+    width: 60%;
+    height: 30%;
+    border:2px solid @c_interactions_gray_lighter;
+    border-radius: 15px;
+  }
+  .launcher-row{
+    width: 100%;
+    display:flex;
+    justify-content: center;
+    align-items: baseline;
+    .launcher-title {
+      text-align: right;
+      margin-right: 10px;
+    }
+    .input-group{
+      width: 40%;
+    }
+  }
+
+}
+
+.btn-blue{
+  background-color: @c_interactions_blue;
+  color: @c_interactions_snow;
+  &:hover{
+    background-color:  @c_interactions_blue_dark;
+    color: @c_interactions_snow;
+  }
+}
