@@ -81,6 +81,7 @@ class BlocklyController {
   }
 
   clearWorkspace() {
+    this.$tabs.empty();
     this._propertyCategory.updateFlyoutContents([])
     this._actionCategory.updateFlyoutContents([])
     this._eventCategory.updateFlyoutContents([])
