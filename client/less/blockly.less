@@ -1,5 +1,34 @@
 @import "color";
 
+#blockly-relative{
+  height:90%;
+  width:100%;
+  position:relative;
+}
+
+#blockly-injection{
+  position:absolute;
+  box-sizing: content-box;
+  border-right: 1px solid @c_interactions_gray_light;
+  border-bottom: 1px solid @c_interactions_gray_light;
+}
+
+.blocklyToolboxDiv {
+  width: 190px;
+}
+
+.blocklyTreeRow {
+  margin: 5px;
+  height: 30px;
+  display: flex;
+  align-items: center;
+  text-align: left;
+}
+
+.blocklyMainBackground{
+  stroke: none;
+}
+
 #blockly-controls {
   height: 10%;
   width:100%;
@@ -96,12 +125,10 @@ div.toolbox-tabs{
   }
 }
 
-
 #add-new-tab{
   margin: 4px;
   border-radius: 5px;
 }  
-
 
 .blockly-buttons{  
   height:100%;
@@ -115,35 +142,6 @@ div.toolbox-tabs{
     margin:5px;
     max-height: 50%;
   }
-}
-
-#blockly-relative{
-  height:90%;
-  width:100%;
-  position:relative;
-}
-
-#blockly-injection{
-  position:absolute;
-  box-sizing: content-box;
-  border-right: 1px solid @c_interactions_gray_light;
-  border-bottom: 1px solid @c_interactions_gray_light;
-}
-
-.blocklyToolboxDiv {
-  width: 190px;
-}
-
-.blocklyTreeRow {
-  margin: 5px;
-  height: 30px;
-  display: flex;
-  align-items: center;
-  text-align: left;
-}
-
-.blocklyMainBackground{
-  stroke: none;
 }
 
 

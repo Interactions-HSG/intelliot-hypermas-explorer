@@ -8,20 +8,16 @@ class BlocklyController {
   _eventCategory = undefined
   _flyout = undefined
 
-  _blockStorageMap = {}
-  _currentStorageKey = undefined
+  _tabsController = undefined;
 
   //jquery shortcuts
   $blocklyInjection = $('#blockly-injection')
   $blocklyRelative = $('#blockly-relative')
   $blocklyContainer = $('#blockly-container')
 
-  $tabs = $('#tabs')
-  $addTabButton = $('#add-new-tab')
-
   $blocklyLauncher = $('#blockly-launcher')
   $launcherForm = $('#launcher-form')
-  $agentName = $('#agentName')
+  $agentNameInput = $('#agentName')
 
 
   initialize() {
@@ -50,16 +46,14 @@ class BlocklyController {
     this._actionCategory = this._toolbox.getToolboxItemById('Actions');
     this._eventCategory = this._toolbox.getToolboxItemById('Events');
     this._flyout = this._toolbox.getFlyout();
+    this._tabsController = new FileTabsController(this)
+
     window.addEventListener('resize', this._resizeHandler(this._workspace, this.$blocklyRelative[0], this.$blocklyInjection[0]), false)
-
-
     this.$launcherForm.submit(e => {
       e.preventDefault()
       this.hideLauncher();
-      this.showArea(this.$agentName.val())
+      this.showArea(this.$agentNameInput.val())
     })
-
-    this.$addTabButton.click(e => this._addTab())
 
     //TODO uncomment this
     //$('#export_code').click(e =>console.log(JasonGenerator.generate(this._workspace)))
@@ -83,8 +77,6 @@ class BlocklyController {
   }
 
   clearIDE() {
-    var button = this.$tabs.find('#tab-button').detach()
-    this.$tabs.empty().append(button)
     this._propertyCategory.updateFlyoutContents([])
     this._actionCategory.updateFlyoutContents([])
     this._eventCategory.updateFlyoutContents([])
@@ -106,7 +98,7 @@ class BlocklyController {
   }
 
   showArea(agentName) {
-    this._addTab(agentName);
+    this._tabsController.addTab(agentName);
     this.$blocklyContainer.fadeIn(500);
     this.resize();
     this._workspace.scrollbar.workspace_.scroll(10, 15)
@@ -162,174 +154,5 @@ class BlocklyController {
     //TODO implement when supporting events
     return []
   }
-
-  _selectTab(oldAgent, newAgent) {
-    this._currentStorageKey = newAgent
-    this._swapWorkspace(oldAgent, newAgent)
-    var topBlock = this._workspace.getBlocksByType('init_agent')[0]
-    this._addTabHandlers(topBlock)
-  }
-
-  _swapWorkspace(oldAgent, newAgent) {
-    if (oldAgent) {
-      //save current blocks in the blockMap as xml
-      this._saveWorkspace(oldAgent)
-      //remove all the blocks
-      this._clearWorkspace();
-      //load new blocks from the block map
-      var newBlocks = this._blockStorageMap[newAgent]
-      if (newBlocks) {
-        //and add them if present
-        Blockly.Xml.domToWorkspace(newBlocks, this._workspace)
-      }
-    } else {
-      //remove all blocks
-      this._clearWorkspace();
-    }
-    console.log(this._blockStorageMap)
-  }
-
-  _saveWorkspace(name){
-    if(name){
-      this._blockStorageMap[name] = Blockly.Xml.workspaceToDom(this._workspace);
-    }
-  }
-
-  async _addTab(agentName) {
-    if (!agentName) {
-      var agentName = await dashboard.waitInput("Create a new agent with name:", "new_agent")
-    }
-    agentName = this._manageNameChange(agentName, true)
-    var prevTab = this.$tabs.find('div.active')
-    prevTab.removeClass('active').addClass('inactive');
-    var newTab = $(
-    `<li>
-      <div class="nav-item nav-link active">
-        <button type="button" class="btn-close" aria-label="Close"></button>
-        <span>${agentName ? agentName : "new_agent"}</span>
-      </div>
-    </li>`)
-    this.$tabs.find('#tab-button').before(newTab)
-
-    this._addTabHandlers(definition)
-    this._addTabDeleteHandler(newTab)
-
-    var oldName = prevTab.children('span').text()
-    this._currentStorageKey = agentName
-    this._saveWorkspace(oldName)
-    this._clearWorkspace();
-    var definition = this._workspace.newBlock("init_agent")
-    definition.setFieldValue(agentName, "name")
-    definition.setDeletable(false)
-    definition.initSvg()
-    this._saveWorkspace(agentName)
-
-    this._workspace.render();
-  }
-
-  async _deleteTab(agentName, nextTab){
-    var res = await dashboard.waitConfirm("Are you sure? You will lose the code for agent "+agentName)
-    if(res){
-      //delete the code from the block storage map
-      delete this._blockStorageMap[agentName]
-      console.log(this._blockStorageMap)
-      //select a new tab if any
-      if(nextTab){
-        this._selectTab(null, nextTab)
-      }
-
-      console.log(this._blockStorageMap)
-    }
-    return res;
-  }
-
-  _addTabDeleteHandler(tab){
-    //add delete handler
-    var controller = this;
-    tab.find('button').each(function(index){
-      var agentName = $(this).siblings('span').text();
-      $(this).click(async function(e){
-        var newTab = controller.$tabs.children().first()
-            .children('div.nav-link')
-        var newAgentName = newTab.children('span').text()
-        var res = await controller._deleteTab(agentName, newAgentName)
-        if(res){
-          $(this).parent().parent().remove()
-          newTab.removeClass('inactive').addClass('active')
-        }
-      })
-    })
-  }
-
-  _addTabHandlers(topBlock) {
-    var controller = this;
-    //remove handlers for unselected tabs and add click handler
-    this.$tabs.find('div.nav-link').each(function (index) {
-      $(this).off('dblclick click')
-    })
-    //add handler for selected tab
-    var editNameHandler = function (element) {
-      return function () {
-        var val = $(element).children('span').text();
-        var input = $(`<input size="10" type="text" value="${val}" class="">`)
-        input.keyup(function (e) {
-          if (e.key === 'Enter') $(this).blur()
-        })
-        input.blur(function (e) {
-          var valueToSet = val
-          var newVal = $(this).val()
-          if (newVal) {
-            var valueToSet = controller._manageNameChange(newVal)
-          }
-          topBlock.setFieldValue(valueToSet, "name")
-          var span = $(this).parent().children('span')
-          span.text(valueToSet).show()
-          $(this).parent().children().remove('input')
-        })
-        $(element).children('span').hide();
-        $(element).append(input);
-        input.focus();
-        input.select();
-      }
-    }
-
-    this.$tabs.find('div.nav-link.active').each(function (index) {
-      $(this).dblclick(editNameHandler(this))
-    })
-
-    //add handler for click unselected tabs
-    this.$tabs.find('div.nav-link').each(function (index) {
-      $(this).click(function (e) {
-        if ($(this).hasClass('inactive')) {
-          var oldAgent = controller.$tabs.find('div.active').children('span').text()
-          var newAgent = $(this).children('span').text()
-          controller.$tabs.find('div.active').removeClass('active').addClass('inactive');
-          $(this).removeClass('inactive').addClass('active')
-          controller._selectTab(oldAgent, newAgent)
-        }
-      })
-    })
-  }
-
-  _manageNameChange(newName, isCreate=false){
-    if(this._currentStorageKey){
-      if(isCreate || newName != this._currentStorageKey){
-        if(newName in this._blockStorageMap){
-          //generate valid name name_(countofSameNames+1)
-          var regex = new RegExp(`^${newName}(_[0-9]*)?$`)
-          var count = Object.keys(this._blockStorageMap).filter(x => regex.test(x)).length;
-          newName = newName + '_' + count
-        }
-        //swap memory to new name only if not create
-        if(!isCreate){
-          this._blockStorageMap[newName] = this._blockStorageMap[this._currentStorageKey]
-          delete this._blockStorageMap[this._currentStorageKey]
-        }
-      }
-    }
-    this._currentStorageKey = newName
-    return newName
-  }
-
 
 }
