@@ -182,6 +182,9 @@ class BlocklyController {
         //and add them if present
         Blockly.Xml.domToWorkspace(newBlocks, this._workspace)
       }
+    } else {
+      //remove all blocks
+      this._clearWorkspace();
     }
     console.log(this._blockStorageMap)
   }
@@ -199,12 +202,17 @@ class BlocklyController {
     agentName = this._manageNameChange(agentName, true)
     var prevTab = this.$tabs.find('div.active')
     prevTab.removeClass('active').addClass('inactive');
-    this.$tabs.find('#tab-button').before(`<li>
-                        <div class="nav-item nav-link active">
-                        <button type="button" class="btn-close" aria-label="Close"></button>
-                        <span>${agentName ? agentName : "new_agent"}</span>
-                        </div>
-                      </li>`)
+    var newTab = $(
+    `<li>
+      <div class="nav-item nav-link active">
+        <button type="button" class="btn-close" aria-label="Close"></button>
+        <span>${agentName ? agentName : "new_agent"}</span>
+      </div>
+    </li>`)
+    this.$tabs.find('#tab-button').before(newTab)
+
+    this._addTabHandlers(definition)
+    this._addTabDeleteHandler(newTab)
 
     var oldName = prevTab.children('span').text()
     this._currentStorageKey = agentName
@@ -216,9 +224,41 @@ class BlocklyController {
     definition.initSvg()
     this._saveWorkspace(agentName)
 
-    this._addTabHandlers(definition)
-
     this._workspace.render();
+  }
+
+  async _deleteTab(agentName, nextTab){
+    var res = await dashboard.waitConfirm("Are you sure? You will lose the code for agent "+agentName)
+    if(res){
+      //delete the code from the block storage map
+      delete this._blockStorageMap[agentName]
+      console.log(this._blockStorageMap)
+      //select a new tab if any
+      if(nextTab){
+        this._selectTab(null, nextTab)
+      }
+
+      console.log(this._blockStorageMap)
+    }
+    return res;
+  }
+
+  _addTabDeleteHandler(tab){
+    //add delete handler
+    var controller = this;
+    tab.find('button').each(function(index){
+      var agentName = $(this).siblings('span').text();
+      $(this).click(async function(e){
+        var newTab = controller.$tabs.children().first()
+            .children('div.nav-link')
+        var newAgentName = newTab.children('span').text()
+        var res = await controller._deleteTab(agentName, newAgentName)
+        if(res){
+          $(this).parent().parent().remove()
+          newTab.removeClass('inactive').addClass('active')
+        }
+      })
+    })
   }
 
   _addTabHandlers(topBlock) {
