@@ -131,7 +131,7 @@ templates['affordancesList'] = template({"1":function(container,depth0,helpers,p
         return undefined
     };
 
-  return "<!-- Property -->\r\n<div class=\"scroll-container\">\r\n<div class=\"scroll-header\">\r\n  <h4 class=\"property-color slide-in-left\">Properties </h4>\r\n</div>\r\n"
+  return "<!-- Property -->\r\n<div id=\"affordance-scroller\" class=\"scroll-container\">\r\n<div class=\"scroll-header\">\r\n  <h4 class=\"property-color slide-in-left\">Properties </h4>\r\n</div>\r\n"
     + ((stack1 = lookupProperty(helpers,"if").call(alias1,(depth0 != null ? lookupProperty(depth0,"properties") : depth0),{"name":"if","hash":{},"fn":container.program(1, data, 0, blockParams, depths),"inverse":container.program(7, data, 0, blockParams, depths),"data":data,"loc":{"start":{"line":6,"column":0},"end":{"line":30,"column":7}}})) != null ? stack1 : "")
     + "\r\n<!-- Actions -->\r\n<div class=\"scroll-header\">\r\n  <h4 class=\"action-color slide-in-left\">Actions </h4>\r\n</div>\r\n"
     + ((stack1 = lookupProperty(helpers,"if").call(alias1,(depth0 != null ? lookupProperty(depth0,"actions") : depth0),{"name":"if","hash":{},"fn":container.program(9, data, 0, blockParams, depths),"inverse":container.program(17, data, 0, blockParams, depths),"data":data,"loc":{"start":{"line":36,"column":0},"end":{"line":65,"column":7}}})) != null ? stack1 : "")

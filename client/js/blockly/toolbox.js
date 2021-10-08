@@ -82,10 +82,7 @@ const toolboxDefinition = {
       "kind": "category",
       "name": "Agent Initialization",
       "toolboxitemid": "Agent_Initialization",
-      "contents": [{
-          "kind": "block",
-          "type": "init_agent"
-        },
+      "contents": [
         {
           "kind": "block",
           //"type": "init_belief",

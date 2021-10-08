@@ -50,7 +50,7 @@ class Dashboard {
     if(res){
       this.artifactsController.clearArtifactsBar();
       this.artifactsController.clearAffordancesBar();
-      this.blocklyController.clearWorkspace();
+      this.blocklyController.clearIDE();
       this.blocklyController.hideArea();
       this.blocklyController.hideLauncher();
       if (workspaceData.uri != "empty") {

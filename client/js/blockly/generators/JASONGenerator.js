@@ -1,13 +1,13 @@
-const JASONGenerator = new Blockly.Generator('JASON');
-JASONGenerator.INDENT = ""
-JASONGenerator.BASIC_INDENT = "\n  "
-JASONGenerator.THREE_INDENT = "   "
-JASONGenerator.NO_PRECEDENCE = 0;
-JASONGenerator.OPERATION = 1;
+const JasonGenerator = new Blockly.Generator('JASON');
+JasonGenerator.INDENT = ""
+JasonGenerator.BASIC_INDENT = "\n  "
+JasonGenerator.THREE_INDENT = "   "
+JasonGenerator.NO_PRECEDENCE = 0;
+JasonGenerator.OPERATION = 1;
 
 //Code from blockly repository
 //This is the same as workspaceToCode but enforce the order of top blocks as needed
-JASONGenerator.generateJASON = function(workspace){
+JasonGenerator.generate = function(workspace){
   var code = [];
   this.init(workspace);
   var blocks = workspace.getTopBlocks(true);
@@ -68,133 +68,133 @@ JASONGenerator.generateJASON = function(workspace){
 
 //Basic blocks
 
-JASONGenerator['atom'] = function(block) {
+JasonGenerator['atom'] = function(block) {
   var code = block.getFieldValue('value')
-  return [code, JASONGenerator.NO_PRECEDENCE]
+  return [code, JasonGenerator.NO_PRECEDENCE]
 }
 
-JASONGenerator['variable'] = function(block) {
+JasonGenerator['variable'] = function(block) {
   var code = block.getFieldValue('value')
-  return [code, JASONGenerator.NO_PRECEDENCE]
+  return [code, JasonGenerator.NO_PRECEDENCE]
 }
 
-JASONGenerator['any_variable'] = function(block) {
+JasonGenerator['any_variable'] = function(block) {
   var code = "_"
-  return [code, JASONGenerator.NO_PRECEDENCE]
+  return [code, JasonGenerator.NO_PRECEDENCE]
 }
 
-JASONGenerator['string'] = function(block){
+JasonGenerator['string'] = function(block){
   var code =`"${block.getFieldValue('value')}"`
-  return [code, JASONGenerator.NO_PRECEDENCE]
+  return [code, JasonGenerator.NO_PRECEDENCE]
 }
 
-JASONGenerator['number'] = function(block){
+JasonGenerator['number'] = function(block){
   var code = block.getFieldValue('value')
-  return [code, JASONGenerator.NO_PRECEDENCE]
+  return [code, JasonGenerator.NO_PRECEDENCE]
 }
 
-JASONGenerator['predicate'] = function(block) {
+JasonGenerator['predicate'] = function(block) {
   var functor = block.getFieldValue('functor');
   var termString = generationUtils.getItems(block, 'term', block._terms)
   var code = functor
   if(termString) {
     code = `${functor}(${termString})`
   }
-  return [code, JASONGenerator.NO_PRECEDENCE]
+  return [code, JasonGenerator.NO_PRECEDENCE]
 }
 
-JASONGenerator['no_predicate'] = function(block){
-  var predicate = JASONGenerator.valueToCode(block, 'predicate', JASONGenerator.NO_PRECEDENCE)
+JasonGenerator['no_predicate'] = function(block){
+  var predicate = JasonGenerator.valueToCode(block, 'predicate', JasonGenerator.NO_PRECEDENCE)
   var code = `not ${predicate}`
-  return [code, JASONGenerator.NO_PRECEDENCE]
+  return [code, JasonGenerator.NO_PRECEDENCE]
 }
 
-JASONGenerator['opposite_predicate'] = function(block){
-  var predicate = JASONGenerator.valueToCode(block, 'predicate', JASONGenerator.NO_PRECEDENCE)
+JasonGenerator['opposite_predicate'] = function(block){
+  var predicate = JasonGenerator.valueToCode(block, 'predicate', JasonGenerator.NO_PRECEDENCE)
   var code = `~${predicate}`
-  return [code, JASONGenerator.NO_PRECEDENCE]
+  return [code, JasonGenerator.NO_PRECEDENCE]
 }
 
-JASONGenerator['rule'] = function(block){
+JasonGenerator['rule'] = function(block){
   var functor = block.getFieldValue('functor');
   var variables = generationUtils.getItems(block, 'variable', block._variables)
-  var rule_body = JASONGenerator.valueToCode(block, 'rule_body', JASONGenerator.NO_PRECEDENCE)
-  var code = `${functor}(${variables})${JASONGenerator.BASIC_INDENT}:- ${rule_body}`
-  return [code, JASONGenerator.NO_PRECEDENCE]
+  var rule_body = JasonGenerator.valueToCode(block, 'rule_body', JasonGenerator.NO_PRECEDENCE)
+  var code = `${functor}(${variables})${JasonGenerator.BASIC_INDENT}:- ${rule_body}`
+  return [code, JasonGenerator.NO_PRECEDENCE]
 }
 
-JASONGenerator['rule_body'] = function(block){
-  var statements = generationUtils.getItems(block, 'statement', block._statements, ` &${JASONGenerator.BASIC_INDENT}${JASONGenerator.THREE_INDENT}`)
+JasonGenerator['rule_body'] = function(block){
+  var statements = generationUtils.getItems(block, 'statement', block._statements, ` &${JasonGenerator.BASIC_INDENT}${JasonGenerator.THREE_INDENT}`)
   var code = statements;
-  return [code, JASONGenerator.NO_PRECEDENCE]
+  return [code, JasonGenerator.NO_PRECEDENCE]
 }
 
-JASONGenerator['true'] = function(_){
+JasonGenerator['true'] = function(_){
   var code = "true"
-  return [code, JASONGenerator.NO_PRECEDENCE] 
+  return [code, JasonGenerator.NO_PRECEDENCE] 
 }
 
-JASONGenerator['false'] = function(_){
+JasonGenerator['false'] = function(_){
   var code = "false"
-  return [code, JASONGenerator.NO_PRECEDENCE] 
+  return [code, JasonGenerator.NO_PRECEDENCE] 
 }
 
 
-JASONGenerator['not'] = function(block){
-  var code = "not "+ JASONGenerator.valueToCode(block, 'value', JASONGenerator.OPERATION)
-  return [code, JASONGenerator.NO_PRECEDENCE] 
+JasonGenerator['not'] = function(block){
+  var code = "not "+ JasonGenerator.valueToCode(block, 'value', JasonGenerator.OPERATION)
+  return [code, JasonGenerator.NO_PRECEDENCE] 
 }
 
-JASONGenerator['operation'] = function(block) {
-  var var1 = JASONGenerator.valueToCode(block, 'var1', JASONGenerator.NO_PRECEDENCE)
-  var var2 = JASONGenerator.valueToCode(block, 'var2', JASONGenerator.NO_PRECEDENCE)
+JasonGenerator['operation'] = function(block) {
+  var var1 = JasonGenerator.valueToCode(block, 'var1', JasonGenerator.NO_PRECEDENCE)
+  var var2 = JasonGenerator.valueToCode(block, 'var2', JasonGenerator.NO_PRECEDENCE)
   var symbol = block.getFieldValue('symbol')
   var code = `${var1} ${symbol} ${var2}`
-  return [code, JASONGenerator.OPERATION]
+  return [code, JasonGenerator.OPERATION]
 }
 
-JASONGenerator['statement'] = function(block) {
-  var statement1 = JASONGenerator.valueToCode(block, 'statement1', JASONGenerator.NO_PRECEDENCE)
-  var statment2 = JASONGenerator.valueToCode(block, 'statement2', JASONGenerator.NO_PRECEDENCE)
+JasonGenerator['statement'] = function(block) {
+  var statement1 = JasonGenerator.valueToCode(block, 'statement1', JasonGenerator.NO_PRECEDENCE)
+  var statment2 = JasonGenerator.valueToCode(block, 'statement2', JasonGenerator.NO_PRECEDENCE)
   var symbol = block.getFieldValue('symbol')
   var code = `${statement1} ${symbol} ${statment2}`
-  return [code, JASONGenerator.OPERATION]
+  return [code, JasonGenerator.OPERATION]
 }
 
-JASONGenerator['and_or_statement'] = function(block) {
-  var statement1 = JASONGenerator.valueToCode(block, 'statement1', JASONGenerator.NO_PRECEDENCE)
-  var statment2 = JASONGenerator.valueToCode(block, 'statement2', JASONGenerator.NO_PRECEDENCE)
+JasonGenerator['and_or_statement'] = function(block) {
+  var statement1 = JasonGenerator.valueToCode(block, 'statement1', JasonGenerator.NO_PRECEDENCE)
+  var statment2 = JasonGenerator.valueToCode(block, 'statement2', JasonGenerator.NO_PRECEDENCE)
   var symbol = block.getFieldValue('symbol')
   var code = `${statement1} ${symbol} ${statment2}`
-  return [code, JASONGenerator.OPERATION]
+  return [code, JasonGenerator.OPERATION]
 }
 
 //Init Blocks
 
-JASONGenerator['belief'] = function (block){
+JasonGenerator['belief'] = function (block){
   var functor = block.getFieldValue('functor');
   var atomString = generationUtils.getItems(block, 'atom', block._atoms)
   var code = functor
   if(atomString) {
     code = `${functor}(${atomString})`
   }
-  return [code, JASONGenerator.NO_PRECEDENCE]
+  return [code, JasonGenerator.NO_PRECEDENCE]
 }
 
-JASONGenerator['no_init_belief'] = function(block){
-  var predicate = JASONGenerator.valueToCode(block, 'belief', JASONGenerator.NO_PRECEDENCE)
+JasonGenerator['no_init_belief'] = function(block){
+  var predicate = JasonGenerator.valueToCode(block, 'belief', JasonGenerator.NO_PRECEDENCE)
   var code = `not ${predicate}`
-  return [code, JASONGenerator.NO_PRECEDENCE]
+  return [code, JasonGenerator.NO_PRECEDENCE]
 }
 
-JASONGenerator['opposite_init_belief'] = function(block){
-  var predicate = JASONGenerator.valueToCode(block, 'belief', JASONGenerator.NO_PRECEDENCE)
+JasonGenerator['opposite_init_belief'] = function(block){
+  var predicate = JasonGenerator.valueToCode(block, 'belief', JasonGenerator.NO_PRECEDENCE)
   var code = `~${predicate}`
-  return [code, JASONGenerator.NO_PRECEDENCE]
+  return [code, JasonGenerator.NO_PRECEDENCE]
 }
 
 
-JASONGenerator['init_agent'] = function(block){
+JasonGenerator['init_agent'] = function(block){
   var name = block.getFieldValue('name');
   var start_comment = `//This is the initial state of agent ${name}\n`
   var end_comment = `//Plan library:\n`
@@ -203,115 +203,115 @@ JASONGenerator['init_agent'] = function(block){
   return code;
 }
 
-JASONGenerator['init_belief'] = function(block){
-  var code = JASONGenerator.valueToCode(block, 'belief', JASONGenerator.NO_PRECEDENCE)+"."
+JasonGenerator['init_belief'] = function(block){
+  var code = JasonGenerator.valueToCode(block, 'belief', JasonGenerator.NO_PRECEDENCE)+"."
   return code
 }
 
-JASONGenerator['init_goal'] = function(block){
-  var code = "!"+JASONGenerator.valueToCode(block, 'goal', JASONGenerator.NO_PRECEDENCE)+"."
+JasonGenerator['init_goal'] = function(block){
+  var code = "!"+JasonGenerator.valueToCode(block, 'goal', JasonGenerator.NO_PRECEDENCE)+"."
   return code
 }
 
-JASONGenerator['init_rule'] = function(block){
-  var code = JASONGenerator.valueToCode(block, 'rule', JASONGenerator.NO_PRECEDENCE)+"."
+JasonGenerator['init_rule'] = function(block){
+  var code = JasonGenerator.valueToCode(block, 'rule', JasonGenerator.NO_PRECEDENCE)+"."
   return code
 }
 
 //Agent Plan Blocks
 
-JASONGenerator['define_plan'] = function(block) {
+JasonGenerator['define_plan'] = function(block) {
   var label = `@${block.getFieldValue('label')}`;
-  var trigger = JASONGenerator.valueToCode(block, 'trigger', JASONGenerator.NO_PRECEDENCE)
-  var context = JASONGenerator.valueToCode(block, 'context', JASONGenerator.NO_PRECEDENCE)
-  var body = generationUtils.getStackCode(generationUtils.getRootStatement(block), JASONGenerator.BASIC_INDENT+JASONGenerator.THREE_INDENT);
+  var trigger = JasonGenerator.valueToCode(block, 'trigger', JasonGenerator.NO_PRECEDENCE)
+  var context = JasonGenerator.valueToCode(block, 'context', JasonGenerator.NO_PRECEDENCE)
+  var body = generationUtils.getStackCode(generationUtils.getRootStatement(block), JasonGenerator.BASIC_INDENT+JasonGenerator.THREE_INDENT);
   if(body.slice(-1) == ';'){
     body=body.slice(0,-1);
   }
-  var code = `${label}\n${trigger+JASONGenerator.BASIC_INDENT}:  ${context+JASONGenerator.BASIC_INDENT}<- ${body}.`
+  var code = `${label}\n${trigger+JasonGenerator.BASIC_INDENT}:  ${context+JasonGenerator.BASIC_INDENT}<- ${body}.`
   return code;
 }
 
-JASONGenerator['belief_add_remove_trigger'] = function(block) {
+JasonGenerator['belief_add_remove_trigger'] = function(block) {
   var symbol = block.getFieldValue('option')
-  var belief = JASONGenerator.valueToCode(block, 'belief', JASONGenerator.NO_PRECEDENCE)
+  var belief = JasonGenerator.valueToCode(block, 'belief', JasonGenerator.NO_PRECEDENCE)
   var code = symbol+belief
-  return [code, JASONGenerator.NO_PRECEDENCE]
+  return [code, JasonGenerator.NO_PRECEDENCE]
 }
 
-JASONGenerator['goal_add_remove_trigger'] = function(block) {
+JasonGenerator['goal_add_remove_trigger'] = function(block) {
   var symbol = block.getFieldValue('option')
-  var goal = JASONGenerator.valueToCode(block, 'goal', JASONGenerator.NO_PRECEDENCE)
+  var goal = JasonGenerator.valueToCode(block, 'goal', JasonGenerator.NO_PRECEDENCE)
   var code = symbol+goal
-  return [code, JASONGenerator.NO_PRECEDENCE]
+  return [code, JasonGenerator.NO_PRECEDENCE]
 }
 
-JASONGenerator['test_add_remove_trigger'] = function(block) {
+JasonGenerator['test_add_remove_trigger'] = function(block) {
   var symbol = block.getFieldValue('option')
-  var goal = JASONGenerator.valueToCode(block, 'goal', JASONGenerator.NO_PRECEDENCE)
+  var goal = JasonGenerator.valueToCode(block, 'goal', JasonGenerator.NO_PRECEDENCE)
   var code = symbol+goal
-  return [code, JASONGenerator.NO_PRECEDENCE]
+  return [code, JasonGenerator.NO_PRECEDENCE]
 }
 
 //plan body
 
-JASONGenerator['add_belief'] = function(block) {
-  var belief = JASONGenerator.valueToCode(block, 'belief', JASONGenerator.NO_PRECEDENCE)
+JasonGenerator['add_belief'] = function(block) {
+  var belief = JasonGenerator.valueToCode(block, 'belief', JasonGenerator.NO_PRECEDENCE)
   var code = `+${belief};`
   return code
 }
 
-JASONGenerator['remove_belief'] = function(block) {
-  var belief = JASONGenerator.valueToCode(block, 'belief', JASONGenerator.NO_PRECEDENCE)
+JasonGenerator['remove_belief'] = function(block) {
+  var belief = JasonGenerator.valueToCode(block, 'belief', JasonGenerator.NO_PRECEDENCE)
   var code = `-${belief};`
   return code
 }
 
-JASONGenerator['update_belief'] = function(block) {
-  var belief = JASONGenerator.valueToCode(block, 'belief', JASONGenerator.NO_PRECEDENCE)
+JasonGenerator['update_belief'] = function(block) {
+  var belief = JasonGenerator.valueToCode(block, 'belief', JasonGenerator.NO_PRECEDENCE)
   var code = `-+${belief};`
   return code
 }
 
-JASONGenerator['add_goal'] = function(block) {
-  var goal = JASONGenerator.valueToCode(block, 'goal', JASONGenerator.NO_PRECEDENCE)
+JasonGenerator['add_goal'] = function(block) {
+  var goal = JasonGenerator.valueToCode(block, 'goal', JasonGenerator.NO_PRECEDENCE)
   var code = `!${goal};`
   return code
 }
 
-JASONGenerator['add_parallel_goal'] = function(block) {
-  var goal = JASONGenerator.valueToCode(block, 'goal', JASONGenerator.NO_PRECEDENCE)
+JasonGenerator['add_parallel_goal'] = function(block) {
+  var goal = JasonGenerator.valueToCode(block, 'goal', JasonGenerator.NO_PRECEDENCE)
   var code = `!!${goal};`
   return code
 }
 
-JASONGenerator['add_test_goal'] = function(block) {
-  var goal = JASONGenerator.valueToCode(block, 'goal', JASONGenerator.NO_PRECEDENCE)
+JasonGenerator['add_test_goal'] = function(block) {
+  var goal = JasonGenerator.valueToCode(block, 'goal', JasonGenerator.NO_PRECEDENCE)
   var code = `?${goal};`
   return code
 }
 
-JASONGenerator['check_expression'] = function(block) {
-  var code = `${JASONGenerator.valueToCode(block, 'statement', JASONGenerator.NO_PRECEDENCE)};`
+JasonGenerator['check_expression'] = function(block) {
+  var code = `${JasonGenerator.valueToCode(block, 'statement', JasonGenerator.NO_PRECEDENCE)};`
   return code
 }
 
-JASONGenerator['invoke_action'] = function(block){
+JasonGenerator['invoke_action'] = function(block){
   var actionName = block.getFieldValue('actionName');
   var arguments = generationUtils.getItems(block, 'argument', block._arguments)
   var code = `${actionName}(${arguments ? arguments : ""});`
   return code
 }
 
-JASONGenerator['use_affordance'] = function(block){
-  var affordance = JASONGenerator.valueToCode(block, 'affordance', JASONGenerator.NO_PRECEDENCE)
+JasonGenerator['use_affordance'] = function(block){
+  var affordance = JasonGenerator.valueToCode(block, 'affordance', JasonGenerator.NO_PRECEDENCE)
   var code = `${affordance};`
   return code
 }
 
-JASONGenerator['assign_variable'] = function(block){
-  var variable = JASONGenerator.valueToCode(block, 'variable', JASONGenerator.NO_PRECEDENCE)
-  var operation = JASONGenerator.valueToCode(block, 'operation', JASONGenerator.NO_PRECEDENCE)
+JasonGenerator['assign_variable'] = function(block){
+  var variable = JasonGenerator.valueToCode(block, 'variable', JasonGenerator.NO_PRECEDENCE)
+  var operation = JasonGenerator.valueToCode(block, 'operation', JasonGenerator.NO_PRECEDENCE)
   var code = `${variable} = ${operation};`
   return code
 }
@@ -327,7 +327,7 @@ const generationUtils = {
   getItems: function(block, itemName, itemCount, separator=','){
     var itemArray = []
     for (let i = 0; i < itemCount; i++) {
-      var item = JASONGenerator.valueToCode(block, itemName+i, JASONGenerator.NO_PRECEDENCE)
+      var item = JasonGenerator.valueToCode(block, itemName+i, JasonGenerator.NO_PRECEDENCE)
       itemArray.push(item)
     }
     if(itemArray.length){
@@ -345,7 +345,7 @@ const generationUtils = {
     if(!block) {
       return "true"
     }
-    var code = JASONGenerator.blockToCode(block);
+    var code = JasonGenerator.blockToCode(block);
     const nextBlock = block.nextConnection && block.nextConnection.targetBlock();
     var newCode='';
     if(nextBlock) {
