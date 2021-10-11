@@ -46,7 +46,7 @@ class BlocklyController {
     this._actionCategory = this._toolbox.getToolboxItemById('Actions');
     this._eventCategory = this._toolbox.getToolboxItemById('Events');
     this._flyout = this._toolbox.getFlyout();
-    this._tabsController = new FileTabsController(this)
+    this._tabsController = new FileTabsController(this._workspace)
 
     window.addEventListener('resize', this._resizeHandler(this._workspace, this.$blocklyRelative[0], this.$blocklyInjection[0]), false)
     this.$launcherForm.submit(e => {
@@ -84,9 +84,7 @@ class BlocklyController {
   }
 
   _clearWorkspace() {
-    this._workspace.clear()
-    this._workspace.clearUndo()
-    this._workspace.trashcan.emptyContents();
+    this._tabsController.clearWorkspace();
   }
 
   showLauncher() {
