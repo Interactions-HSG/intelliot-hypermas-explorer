@@ -71,9 +71,9 @@ class FileTabsController {
     return validName
   }
 
-  _removeTab(toRemove, isSelected){
+  async _removeTab(toRemove, isSelected){
     //ask for confirm
-    var res = dashboard.waitConfirm(`Are you sure to delete ${toRemove}? You will lose all your blocks.`)
+    var res = await dashboard.waitConfirm(`Are you sure to delete ${toRemove}? You will lose all your blocks.`)
     if(res){
       //reset key and empty storage
       this._currentStorageKey = undefined
