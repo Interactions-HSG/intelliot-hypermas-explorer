@@ -49,7 +49,7 @@ class BlocklyController {
     this._tabsController = new FileTabsController(this._workspace)
 
     this._tabsController.onNoTabs(() => {
-      this.hideArea();
+      this.$blocklyContainer.hide();
       this.showLauncher();
     });
 
