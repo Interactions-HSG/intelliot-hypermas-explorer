@@ -3,11 +3,13 @@ class FileTabsController {
   _blockStorage = {}
   _currentStorageKey = undefined
   _workspace = undefined
+  _noTabsCallback = undefined
 
   $tabs = $('#tabs')
   $addTabButton = $('#tab-button')
 
-  constructor(workspace){
+  constructor(workspace, callback){
+    this._noTabsCallback = ()=> {}
     this._blockStorage = {}
     this._workspace = workspace;
     this.$addTabButton.find('button').click(async e => {
@@ -15,6 +17,10 @@ class FileTabsController {
       agentName = agentName ? agentName : "new_agent"
       this.addTab(agentName)
     })
+  }
+
+  getCurrentAgent(){
+    return this._currentStorageKey;
   }
 
   addTab(tabName){
@@ -38,6 +44,10 @@ class FileTabsController {
 
     //render a new tab
     this._addTabDom(validName)  
+  }
+
+  onNoTabs(callback){
+    this._noTabsCallback = callback
   }
 
   _selectTab(newTab){
@@ -79,20 +89,22 @@ class FileTabsController {
       this._currentStorageKey = undefined
       delete this._blockStorage[toRemove] 
 
+      
+      //remove DOM
+      this._removeTabDom(toRemove)
+
       //manually select the first available tab
       if(isSelected){
         var firstTab = this.$tabs.find('.nav-item').first()
         var tabName = firstTab.find('span').text()
-        if(tabName != toRemove){
+        if(tabName){
           firstTab.addClass('active').removeClass('inactive')
           this._selectTab(tabName)
         } else {
           this.clearWorkspace()
+          this._noTabsCallback();
         }
       }
-
-      //remove DOM
-      this._removeTabDom(toRemove)
     }
   }
 

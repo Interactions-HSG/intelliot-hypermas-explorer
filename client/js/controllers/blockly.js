@@ -48,7 +48,13 @@ class BlocklyController {
     this._flyout = this._toolbox.getFlyout();
     this._tabsController = new FileTabsController(this._workspace)
 
+    this._tabsController.onNoTabs(() => {
+      this.hideArea();
+      this.showLauncher();
+    });
+
     window.addEventListener('resize', this._resizeHandler(this._workspace, this.$blocklyRelative[0], this.$blocklyInjection[0]), false)
+    
     this.$launcherForm.submit(e => {
       e.preventDefault()
       this.hideLauncher();
