@@ -199,7 +199,7 @@ JasonGenerator['init_agent'] = function(block){
   var start_comment = `//This is the initial state of agent ${name}\n`
   var end_comment = `//Plan library:\n`
   var statements = generationUtils.getStackCode(generationUtils.getRootStatement(block), '\n');
-  var code = `${start_comment}${statements}\n${end_comment}`
+  var code = `${start_comment}${statements ? statement : ""}\n${end_comment}`
   return code;
 }
 
@@ -225,6 +225,7 @@ JasonGenerator['define_plan'] = function(block) {
   var trigger = JasonGenerator.valueToCode(block, 'trigger', JasonGenerator.NO_PRECEDENCE)
   var context = JasonGenerator.valueToCode(block, 'context', JasonGenerator.NO_PRECEDENCE)
   var body = generationUtils.getStackCode(generationUtils.getRootStatement(block), JasonGenerator.BASIC_INDENT+JasonGenerator.THREE_INDENT);
+  body = body ? body : "true"
   if(body.slice(-1) == ';'){
     body=body.slice(0,-1);
   }
@@ -343,7 +344,7 @@ const generationUtils = {
 
   getStackCode: function(block, indent){
     if(!block) {
-      return "true"
+      return null
     }
     var code = JasonGenerator.blockToCode(block);
     const nextBlock = block.nextConnection && block.nextConnection.targetBlock();
