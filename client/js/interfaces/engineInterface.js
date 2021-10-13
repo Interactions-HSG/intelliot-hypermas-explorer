@@ -62,3 +62,6 @@ class EngineInterface {
   }
 
 }
+
+//use as singleton
+var engineInterface = new EngineInterface(engineURL);

@@ -31,4 +31,4 @@ class YggdrasilInterface {
 }
 
 //use as singleton
-var yggdrasilInterface = new YggdrasilInterface(engineURL);
+var yggdrasilInterface = new YggdrasilInterface(yggdrasilURL);
