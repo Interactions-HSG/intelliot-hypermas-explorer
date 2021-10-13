@@ -1,5 +1,3 @@
-const { Servient } = require("@node-wot/core");
-const { HttpClientFactory } = require('@node-wot/binding-http');
 const axios = require('axios');
 const $rdf = require('rdflib');
 
@@ -8,15 +6,10 @@ const EVE = $rdf.Namespace('http://w3id.org/eve#');
 class APIYggdrasil {
 
   baseURL = undefined
-  servient = undefined
   client = undefined
 
   constructor(protocol, hostname, port) {
     this.baseURL = `${protocol}://${hostname}:${port}`
-    
-    this.servient = new Servient();
-    this.servient.addClientFactory(new HttpClientFactory(null));
-
     this.client = axios.create({
       baseURL: this.baseURL,
       timeout: 1000

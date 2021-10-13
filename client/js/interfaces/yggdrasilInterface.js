@@ -1,4 +1,4 @@
-const backendURL = 'http://localhost:8090/yggdrasil'
+const yggdrasilURL = 'http://localhost:8090/yggdrasil'
 
 class YggdrasilInterface {
 
@@ -31,4 +31,4 @@ class YggdrasilInterface {
 }
 
 //use as singleton
-var yggdrasilInterface = new YggdrasilInterface(backendURL);
+var yggdrasilInterface = new YggdrasilInterface(engineURL);
