@@ -199,7 +199,7 @@ JasonGenerator['init_agent'] = function(block){
   var start_comment = `//This is the initial state of agent ${name}\n`
   var end_comment = `//Plan library:\n`
   var statements = generationUtils.getStackCode(generationUtils.getRootStatement(block), '\n');
-  var code = `${start_comment}${statements ? statement : ""}\n${end_comment}`
+  var code = `${start_comment}${statements ? statements : ""}\n${end_comment}`
   return code;
 }
 
