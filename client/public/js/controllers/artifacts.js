@@ -17,13 +17,13 @@ class ArtifactsController {
     this.currentArtifacts = []
     log.fine(`Fetching artifacts in workspace ${workspaceId}`);
     try {
-      var artifacts = await yggdrasilInterface.fetchArtifacts(environmentId, workspaceId);
+      var artifacts = await environmentInterface.fetchArtifacts(environmentId, workspaceId);
       log.fine(`Workspace contained ${artifacts.length} artifact(s)!`);
       //fetch affordances
       //TODO better error handling
       for (var artifact of artifacts) {
         try {
-          var artifactDescription = await yggdrasilInterface.getArtifactDescription(environmentId, workspaceId, artifact.id)
+          var artifactDescription = await environmentInterface.getArtifactDescription(environmentId, workspaceId, artifact.id)
           this.currentArtifacts.push(artifactDescription)
         } catch (error) {
           log.error(error)

@@ -1,4 +1,4 @@
-//Controller for the Environment discovery and setup, talks to Yggdrasil using yggdrasilInterface.js
+//Controller for the Environment discovery and setup, talks to the backend using the environmentInterface
 class EnvironmentController {
   
   static selectWorkspaceEvent = "selectWorkspace";
@@ -34,9 +34,9 @@ class EnvironmentController {
   }
 
   async fetchWorkspaces() {
-    log.fine("Fetching Yggdrasil workspaces in environment " + this.environmentId);
+    log.fine("Fetching workspaces in environment " + this.environmentId);
     try {
-      this.workspaces = await yggdrasilInterface.fetchWorkspaces(this.environmentId)
+      this.workspaces = await environmentInterface.fetchWorkspaces(this.environmentId)
       log.fine('Environment ' + this.environmentId + ' contains ' + this.workspaces.length + ' workspace(s)!');
       this.updateWorkspaceChooser()
       return Promise.resolve(this.workspaces)

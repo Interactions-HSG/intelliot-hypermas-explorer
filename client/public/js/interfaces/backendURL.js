@@ -1,0 +1,1 @@
+const backendURL = `http://${window.location.hostname}:${serverPort}`

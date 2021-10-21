@@ -1,6 +1,4 @@
-const engineURL = `http://${window.location.hostname}:${serverPort}/engine`
-
-class EngineInterface {
+class MasInterface {
 
   client = null
 
@@ -64,4 +62,4 @@ class EngineInterface {
 }
 
 //use as singleton
-var engineInterface = new EngineInterface(engineURL);
+var masInterface = new MasInterface(backendURL);

@@ -1,6 +1,4 @@
-const yggdrasilURL = `http://${window.location.hostname}:${serverPort}/yggdrasil`
-
-class YggdrasilInterface {
+class EnvironmentInterface {
 
   client = null
 
@@ -31,4 +29,4 @@ class YggdrasilInterface {
 }
 
 //use as singleton
-var yggdrasilInterface = new YggdrasilInterface(yggdrasilURL);
+var environmentInterface = new EnvironmentInterface(backendURL);
