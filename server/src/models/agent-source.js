@@ -1,6 +1,6 @@
 const { createSchema } = require('./model-utils')
 
-module.exports = createSchema('AgentDefinition', 'AgentDefinitions', mongoose => ({
+module.exports = createSchema('AgentSource', 'AgentSources', mongoose => ({
   id: String,
   code: String,
   xml: String
