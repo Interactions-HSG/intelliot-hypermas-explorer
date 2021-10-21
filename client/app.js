@@ -3,6 +3,14 @@ const cors = require('cors');
 
 const config = require('./config');
 
+
+function notFound(req, res){
+  if (req.accepts('html')) {
+    res.status(404).sendFile('notFound.html', {root: './public/html'})
+    return;
+  }
+}
+
 exports.startServer = async function(options) {
   console.log("Starting intelliot-hypermas-client...")
 
@@ -16,10 +24,18 @@ exports.startServer = async function(options) {
     res.redirect('/dashboard')
   })
 
+  app.get('/dashboard', function(req, res){
+    res.sendFile('dashboard.html', {root: './public/html'})
+  })
+
+  //prevent from navigating path
+  app.get('/html*', notFound)
+
   //enable static serving of files
   app.use(express.static(options.staticDirectory))
 
-  //TODO not found
+  //Not found catcher
+  app.use(notFound)
 
   //start listening
   server.listen(options.port, function() {
