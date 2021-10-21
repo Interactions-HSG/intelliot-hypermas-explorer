@@ -1,12 +1,18 @@
 const {notFound} = require('./utils/action-results')
 
 const express = require('express');
+const mongoose = require('mongoose')
 const bodyParser = require('body-parser');
 const cors = require('cors');
 const path = require('path')
 
 exports.startServer = async function(options) {
   console.log("Starting intelliot-hypermas-server...")
+
+  console.log('Connecting to mongodb...')
+  const url = process.env.MONGO_URL || 'mongodb://localhost:27017/masDB'
+  await mongoose.connect(url)
+  console.log('Connected!')
 
   const app = express()
   const server = require('http').createServer(app)

@@ -47,6 +47,5 @@ exports.startServer = async function(options) {
 
 //Start the server
 var port = process.env.SERVER_PORT || 8080
-console.log(process.env)
 fs.writeFileSync('./public/js/config.js', `const serverPort = ${port}`);
 this.startServer(config);
