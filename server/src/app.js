@@ -31,18 +31,10 @@ exports.startServer = async function(options) {
     next()
   })
 
-  //Set default route
-  app.get('/', function (req, res) {
-    res.redirect('/dashboard')
-  })
-
-  //enable static serving of files
-  app.use('/dashboard', express.static(options.staticDirectory))
-
   //routes to get data
   require(path.join(options.srcDirectory, 'routes'))(app)
 
-  //TODO notFound landing page
+  //notFound
   app.use(function(req, res) {
     res.setResult(notFound(`${req.originalUrl} not found`))
   })

@@ -9,10 +9,10 @@
   
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-F3w7mX95PdgyTmZZMECAngseQB83DfGTowi0iMjiWaeVhAn4FJkqJByhZMI3AhiU" crossorigin="anonymous">
 
-  <link rel="stylesheet" type="text/css" href="./css/main.css">
-  <link rel="stylesheet" href="./css/cards.css">
-  <link rel="stylesheet" href="./css/blockly.css">
-  <link rel="icon" href="./img/favicon.ico">
+  <link rel="stylesheet" type="text/css" href="/css/main.css">
+  <link rel="stylesheet" type="text/css" href="/css/cards.css">
+  <link rel="stylesheet" type="text/css" href="/css/blockly.css">
+  <link rel="icon" href="/img/favicon.ico">
 
 </head>
 
@@ -20,14 +20,14 @@
 
   <!-- This is the loader -->
   <div id="loading">
-    <img id="loading-logo" src="./img/interactions-logo-reduced.png" alt="Interactions Research Group, University of St.Gallen"/>
+    <img id="loading-logo" src="/img/interactions-logo-reduced.png" alt="Interactions Research Group, University of St.Gallen"/>
     <br/>
     <p>Loading...</p>
   </div>
 
   <!-- This is the top bar -->
   <div id="header">
-    <div class="logo-left"><img src="./img/interactions-logo-pure-white.png" alt="Interactions Research Group, University of St.Gallen"/></div>
+    <div class="logo-left"><img src="/img/interactions-logo-pure-white.png" alt="Interactions Research Group, University of St.Gallen"/></div>
 
     <div id="settings" style="display: none">
       <div id="workspace">
@@ -41,7 +41,7 @@
         <a href="https://interactions.ics.unisg.ch" target="_new">Interactions Research Group, University of St.Gallen</a><br/>
         <a href="http://intelliot.eu/" target="_new">IntellIoT Project (EU H2020 #957218)</a>
       </div>
-      <div class="logo-right"><img src="./img/IntellIoT-Logo.png" alt="IntellIoT Research Project"/></div>
+      <div class="logo-right"><img src="/img/IntellIoT-Logo.png" alt="IntellIoT Research Project"/></div>
     </div>
     
     
@@ -119,50 +119,53 @@
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
 
 
+  <!--Configuration-->
+  <script src="/js/config.js"></script>
+  
   <!-- Precompiled handlebars templates -->
-  <script src="js/helpers.js"></script>
-  <script src='./templates/templates.js'></script>
+  <script src="/js/helpers.js"></script>
+  <script src='/templates/templates.js'></script>
 
   <!-- Custom scripts -->
   <!-- libs -->
-  <script src="js/utils.js"></script>
-  <script src="js/log.js"></script>
-  <script src="js/interfaces/yggdrasilInterface.js"></script>
-  <script src="js/interfaces/thingInterface.js"></script>
+  <script src="/js/utils.js"></script>
+  <script src="/js/log.js"></script>
+  <script src="/js/interfaces/yggdrasilInterface.js"></script>
+  <script src="/js/interfaces/thingInterface.js"></script>
 
   <!--Blockly-->
 
   <!--Generator-->
-  <script src="js/blockly/generators/JASONGenerator.js"></script>
+  <script src="/js/blockly/generators/JASONGenerator.js"></script>
 
   <!--Blocks-->
-  <script src ="js/blockly/blocks/basicBlocks.js"></script>
-  <script src ="js/blockly/blocks/initBlocks.js"></script>
-  <script src ="js/blockly/blocks/planBlocks.js"></script>
-  <script src ="js/blockly/blocks/mutatorBlocks.js"></script>
-  <script src ="js/blockly/blocks/objectBlocks.js"></script>
+  <script src ="/js/blockly/blocks/basicBlocks.js"></script>
+  <script src ="/js/blockly/blocks/initBlocks.js"></script>
+  <script src ="/js/blockly/blocks/planBlocks.js"></script>
+  <script src ="/js/blockly/blocks/mutatorBlocks.js"></script>
+  <script src ="/js/blockly/blocks/objectBlocks.js"></script>
 
   <!--Mutating blocks-->
-  <script src ="js/blockly/blocks/affordanceBlocks.js"></script>
-  <script src ="js/blockly/blocks/beliefBlock.js"></script>
-  <script src ="js/blockly/blocks/ruleBlock.js"></script>
-  <script src ="js/blockly/blocks/predicateBlock.js"></script>
-  <script src ="js/blockly/blocks/invokeActionBlock.js"></script>
+  <script src ="/js/blockly/blocks/affordanceBlocks.js"></script>
+  <script src ="/js/blockly/blocks/beliefBlock.js"></script>
+  <script src ="/js/blockly/blocks/ruleBlock.js"></script>
+  <script src ="/js/blockly/blocks/predicateBlock.js"></script>
+  <script src ="/js/blockly/blocks/invokeActionBlock.js"></script>
   
   <!--Theme and Toolbox-->
-  <script src ="js/blockly/toolbox.js"></script>
-  <script src="js/blockly/theme.js"></script>
+  <script src ="/js/blockly/toolbox.js"></script>
+  <script src="/js/blockly/theme.js"></script>
 
 
   <!-- Controllers -->
-  <script src="js/controllers/fileTabs.js"></script>
-  <script src="js/controllers/blockly.js"></script>
-  <script src="js/controllers/environment.js"></script>
-  <script src="js/controllers/artifacts.js"></script>
-  <script src="js/controllers/dashboard.js"></script>
+  <script src="/js/controllers/fileTabs.js"></script>
+  <script src="/js/controllers/blockly.js"></script>
+  <script src="/js/controllers/environment.js"></script>
+  <script src="/js/controllers/artifacts.js"></script>
+  <script src="/js/controllers/dashboard.js"></script>
 
   <!--Main-->
-  <script src="js/main.js"></script>
+  <script src="/js/main.js"></script>
 </body>
 
 </html>

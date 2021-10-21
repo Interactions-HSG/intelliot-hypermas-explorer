@@ -1,4 +1,4 @@
-const yggdrasilURL = 'http://localhost:8090/yggdrasil'
+const yggdrasilURL = backendURL+'/yggdrasil'
 
 class YggdrasilInterface {
 
