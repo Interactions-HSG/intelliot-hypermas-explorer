@@ -1,0 +1,39 @@
+services:
+  mongo:
+    image: mongo:4.4.2
+    ports:
+      - "27017:27017"
+    volumes:
+      - "mongoVolume:/data/db"
+    networks:
+      - intelliot
+  server:
+    image: intelliot-server
+    build:
+      context: ./server
+      dockerfile: Dockerfile
+    ports:
+      - "${SERVER_PORT}:80"
+    networks:
+      - intelliot
+    depends_on:
+      - mongo
+  client:
+    image: intelliot-client
+    build:
+      context: ./client
+      dockerfile: Dockerfile
+    environment:
+      - "SERVER_PORT=${SERVER_PORT}"
+    ports:
+      - "${CLIENT_PORT}:80"
+    networks:
+      - intelliot
+    depends_on:
+      - server
+
+volumes:
+  mongoVolume:
+
+networks:
+  intelliot:
