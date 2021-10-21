@@ -1,4 +1,4 @@
-const yggdrasilURL = backendURL+'/yggdrasil'
+const yggdrasilURL = `http://${window.location.hostname}:${serverPort}/yggdrasil`
 
 class YggdrasilInterface {
 

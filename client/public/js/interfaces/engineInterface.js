@@ -1,4 +1,4 @@
-const engineURL = backendURL+'/engine'
+const engineURL = `http://${window.location.hostname}:${serverPort}/engine`
 
 class EngineInterface {
 

@@ -1,1 +1,1 @@
-const backendURL = 'http://localhost:8080'
+const serverPort = 8080;

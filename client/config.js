@@ -1,4 +1,4 @@
 module.exports = {
   staticDirectory: "public",
-  port: 8090
+  port: 80
 }

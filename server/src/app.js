@@ -11,7 +11,9 @@ exports.startServer = async function(options) {
   const app = express()
   const server = require('http').createServer(app)
 
-  app.use(cors())
+  app.use(cors({
+    origin: '*'
+  }))
 
   //bodyparser
   var rawBodySaver = function (req, res, buf, encoding) {
