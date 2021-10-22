@@ -1,6 +1,6 @@
 const { mapControllerRoutes, action } = require('./route-utils')
 
-module.exports = mapControllerRoutes('mas', function (app, controller) {
+module.exports = mapControllerRoutes('definition', function (app, controller) {
 
   app.route('/agents')
     .get(action(controller.getAllAgents))
@@ -12,13 +12,11 @@ module.exports = mapControllerRoutes('mas', function (app, controller) {
   
   app.route('/agents/:id')
     .get(action(controller.getAgent))
+    .put(action(controller.updateAgent))
+    .delete(action(controller.deleteAgent))
 
   app.route('/mas/:id')
     .get(action(controller.getMas))
-
-  app.route('/mas/:id/run')
-    .get(action(controller.runMas))
-
-  app.route('/mas/:id/stop')
-    .get(action(controller.stopMas))
+    .put(action(controller.updateMas))
+    .delete(action(controller.deleteMas))
 })

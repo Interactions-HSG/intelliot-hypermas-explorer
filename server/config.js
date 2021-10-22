@@ -3,9 +3,9 @@ module.exports = {
   yggdrasilHostName: "localhost",
   yggdrasilPort: 8087,
 
-  engineProtocol: "http",
-  engineHostName: "localhost",
-  enginePort: 8088,
+  runtimeProtocol: "http",
+  runtimeHostName: "localhost",
+  runtimePort: 8088,
 
   srcDirectory: "../src/",
   
