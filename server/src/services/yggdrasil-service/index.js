@@ -1,5 +1,5 @@
 const config = require('../../../config')
-const useMock = true;
+const useMock = true; //TODO change this to not use mock
 
 const mocked = require('./mocked')
 const api = require('./API')
