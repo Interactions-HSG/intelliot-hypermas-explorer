@@ -1,8 +1,5 @@
-const runtimeService = require('../services/single-runtime-service')
 const { AgentSource, MASDefinition } = require('../models')
 const { ok, created, badRequest, notFound } = require('../utils/action-results')
-
-//TODO error handling and DTO wrapping
 
 function agentSourceDTO(agent){
   return {
@@ -50,9 +47,17 @@ exports.createMas = async function (req) {
     id: req.body.id,
     agents: req.body.agents
   })
+  //check unique id
   var mas = await MASDefinition.find({id: newMas.id});
   if(mas.length > 0){
     return badRequest("Id already in use")
+  }
+  //check if there are duplicate names for agents
+  for (const agent of newMas.agents) {
+    var count = newMas.agents.filter(x => x.name == agent.name).length;
+    if(count > 1){
+      return badRequest(`Trying to define a mas with ${count} agents with name ${agent.name} is not defined`)
+    }
   }
   var createdMas = await newMas.save()
   return created(masDTO(createdMas))

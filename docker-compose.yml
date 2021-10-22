@@ -38,8 +38,6 @@ services:
       - "${CLIENT_PORT}:80"
     networks:
       - intelliot
-    depends_on:
-      - server
 
 volumes:
   mongoVolume:

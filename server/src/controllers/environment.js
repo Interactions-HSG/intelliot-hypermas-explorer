@@ -1,4 +1,4 @@
-const {ok, notImplemented} = require('../utils/action-results')
+const {ok} = require('../utils/action-results')
 const yggdrasilService = require('../services/yggdrasil-service')
 
 function EnvironmentDto(id, uri, workspaces){
