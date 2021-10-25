@@ -1,9 +1,8 @@
 const axios = require('axios');
 const protocol = "http"
-const hostname = "localhost"
-const port = "9000"
+const hostname = "host.docker.internal" //TODO change this
+const port = "8088"
 
-//TODO implement
 class SingleRuntimeService {
 
   baseURL = undefined
@@ -18,65 +17,60 @@ class SingleRuntimeService {
   }
 
   async saveAgentSource(runtimeURL, agentSource) {
-    return new Promise((resolve, reject) => {
-      //make call to remote runtime
-      reject("Not implemented")
-    })
+    var res = await this.client.put(
+      runtimeURL+'/agents/'+agentSource.id, 
+      {code: agentSource.code}
+    )
+    return(res.data);
   }
 
   async getRuntimeAgents(runtimeURL){
-    return new Promise((resolve, reject) => {
-      //make call to remote runtime
-      reject("Not implemented")
-    })
+    var res = await this.client.get(runtimeURL+'/runtime/agents' )
+    return res.data;
+  }
+
+  async getRuntimeAgentByName(runtimeURL, name){
+    try{
+      var res = await this.client.get(runtimeURL+'/runtime/agents/'+name)
+      return res.data;
+    } catch(error){
+      return undefined;
+    }
   }
 
   async addRuntimeAgent(runtimeURL, agentDef, agentSource) {
-    return new Promise((resolve, reject) => {
-      try{
-        await this.saveAgentSource(agentSource)
-      } catch (error) {
-        reject(error)
-      }
-      //make call to remote runtime to add agent
-      reject("Not implemented")
-    })
+    await this.saveAgentSource(runtimeURL, agentSource)
+    var res = await this.client.post(
+      runtimeURL+'/runtime/agents',
+      agentDef
+    )
+    return res.data;
   }
 
   async removeRuntimeAgent(runtimeURL, name) {
-    return new Promise((resolve, reject) => {
-      //make call to remote runtime to kill agent
-      reject("Not implemented")
-    })
+    var res = await this.client.delete(runtimeURL+'/runtime/agents/'+name)
+    return res.data;
   }
 
   async startRuntime(mas, agentSources) {
-    return new Promise((resolve, reject) => {
-      try {
-        for (const source of agentSources) {
-          this.saveAgentSource(source)
-        }
-      } catch (error){
-        reject(error)
-      }
-      
-      //make call to remote runtime to start
-      reject("Not implemented")
-    })
+    for (const source of agentSources) {
+      await this.saveAgentSource(this.baseURL, source)
+    }
+    await this.client.post(
+      this.baseURL+'/runtime',
+      mas
+    )   
+    return (this.baseURL)
   }
 
   async getRuntime(runtimeURL) {
-    return new Promise((resolve, reject) => {
-      //make call to remote runtime to get
-      reject("Not implemented")
-    })
+    var res = await this.client.get(runtimeURL+'/runtime')
+    return res.data;
   }
 
   async stopRuntime(runtimeURL) {
-    return new Promise((resolve, reject) => {
-      //make call to remote runtime to stop runtime
-      reject("Not implemented")
-    })
+    var res = await this.client.delete(runtimeURL+'/runtime')
+    return res.data;
   }
 
 }

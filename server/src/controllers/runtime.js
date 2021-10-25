@@ -26,6 +26,14 @@ function runtimeDTO(runtime, remoteMas){
   }
 }
 
+function agentSourceDTO(agentSource){
+  return {
+    id: agentSource.id,
+    code: agentSource.code,
+    xml: agentSource.xml
+  }
+}
+
 function agentDTO(agent){
   return agent
 }
@@ -45,15 +53,22 @@ exports.startRuntime = async function (req) {
   //check if all agents are defined and store them in an Array
   var agentSources = []
   for (const agent of mas.agents) {
-    var agentSource = await AgentSource.find({id: agent.type});
-    if(agentSource.length == 0){
-      return badRequest(`Type ${agentSource.type} is not defined`)
+    if(!agentSources.some(x => x.id == agent.type)){
+      var agentSource = await AgentSource.find({id: agent.type});
+      if(agentSource.length == 0){
+        return badRequest(`Type ${agentSource.type} is not defined`)
+      }
+      agentSources.push(agentSource[0])
     }
-    agentSources.push(agentSource)
   }
   //start the mas on the remote runtime and provide all the sources
   try {
-    var URL = await runtimeService.startRuntime(mas, agentSources)
+    var URL = await runtimeService.startRuntime(mas, agentSources.map(a=> {
+      return {
+        id: a.id, 
+        code: a.code
+      }
+    }))
     //save the runtime info locally
     var newRuntime = new Runtime({
       masId: req.body.masId,
@@ -138,13 +153,13 @@ exports.addRuntimeAgent = async function (req) {
 
   //check if the name is already in use
   try {
-    var runtimeAgent = await runtimeService.getRuntimeAgentByName(runtime.runtimeURL, req.params.name)
+    var runtimeAgent = await runtimeService.getRuntimeAgentByName(runtime.runtimeURL, req.body.name)
     if(runtimeAgent){
-      return badRequest(`Name ${req.params.name} is already in use in this runtime`)
+      return badRequest(`Name ${req.body.name} is already in use in this runtime`)
     }
     
     //add the agent on the remote runtime
-    runtimeAgent = await runtimeService.addRuntimeAgent(runtime.runtimeURL, req.body, agentSource)
+    runtimeAgent = await runtimeService.addRuntimeAgent(runtime.runtimeURL, agentDTO(req.body), agentSourceDTO(agentSource[0]))
     return created(agentDTO(runtimeAgent))
     
   } catch (error) {
