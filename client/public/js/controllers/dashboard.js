@@ -115,6 +115,11 @@ class Dashboard {
     alert("SUCCESS: " + message)
   }
 
+  showInfo(message) {
+    //TODO better graphic
+    alert("INFO: " + message)
+  }
+
   revealDashboard() {
     return new Promise((resolve) => {
       window.setTimeout(function () {
