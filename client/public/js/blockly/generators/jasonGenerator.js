@@ -27,6 +27,7 @@ JasonGenerator.generate = function(workspace){
   var ignored = total - blocks.length;
   if(blocks.length == 0){
     console.warn("The agent has no defined plans");
+    return null;
   }
   ordered_blocks = ordered_blocks.concat(blocks);
 

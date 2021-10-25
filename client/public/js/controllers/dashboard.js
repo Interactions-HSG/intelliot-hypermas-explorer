@@ -110,6 +110,11 @@ class Dashboard {
     alert("ERROR: " + message)
   }
 
+  showSuccess(message) {
+    //TODO better graphic
+    alert("SUCCESS: " + message)
+  }
+
   revealDashboard() {
     return new Promise((resolve) => {
       window.setTimeout(function () {

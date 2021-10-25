@@ -76,14 +76,15 @@
             <div class="toolbox-tabs">
               <ul id="tabs" class="nav nav-tabs">
                 <li id="tab-button">
-                  <button id="add-new-tab" type="button"> + </button>
+                  <button id="add-new-tab" type="button" class="btn-light"> + </button>
                 </li>
               </ul>
               
             </div>
             <div class="blockly-buttons">
-              <button id="export-code" type="button" class="btn btn-light">Export</button>
-              <button id="debug" type="button" class="btn btn-light">Debug</button>
+              <button id="save-code" type="button" class="btn btn-light">Save</button>
+              <button id="load-code" type="button" class="btn btn-light">Load</button>
+              <button id="run-mas" type="button" class="btn btn-primary">Run</button>
             </div>
         </div>
         <div id="blockly-relative">
@@ -161,6 +162,7 @@
 
   <!-- Controllers -->
   <script src="/js/controllers/fileTabs.js"></script>
+  <script src="/js/controllers/workspaceButtons.js"></script>
   <script src="/js/controllers/blockly.js"></script>
   <script src="/js/controllers/environment.js"></script>
   <script src="/js/controllers/artifacts.js"></script>

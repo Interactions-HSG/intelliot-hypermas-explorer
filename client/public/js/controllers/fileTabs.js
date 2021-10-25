@@ -8,7 +8,7 @@ class FileTabsController {
   $tabs = $('#tabs')
   $addTabButton = $('#tab-button')
 
-  constructor(workspace, callback){
+  constructor(workspace){
     this._noTabsCallback = ()=> {}
     this._blockStorage = {}
     this._workspace = workspace;

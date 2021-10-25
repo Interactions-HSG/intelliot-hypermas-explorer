@@ -9,6 +9,7 @@ class BlocklyController {
   _flyout = undefined
 
   _tabsController = undefined;
+  _buttonsController = undefined;
 
   //jquery shortcuts
   $blocklyInjection = $('#blockly-injection')
@@ -46,12 +47,14 @@ class BlocklyController {
     this._actionCategory = this._toolbox.getToolboxItemById('Actions');
     this._eventCategory = this._toolbox.getToolboxItemById('Events');
     this._flyout = this._toolbox.getFlyout();
-    this._tabsController = new FileTabsController(this._workspace)
 
+    this._tabsController = new FileTabsController(this._workspace)
     this._tabsController.onNoTabs(() => {
       this.$blocklyContainer.hide();
       this.showLauncher();
     });
+
+    this._buttonsController = new WorkspaceButtonsController(this._workspace, this._tabsController);
 
     window.addEventListener('resize', this._resizeHandler(this._workspace, this.$blocklyRelative[0], this.$blocklyInjection[0]), false)
     
@@ -60,12 +63,6 @@ class BlocklyController {
       this.hideLauncher();
       this.showArea(this.$agentNameInput.val())
     })
-
-    //TODO uncomment this
-    //$('#export_code').click(e =>console.log(JasonGenerator.generate(this._workspace)))
-    $('#export-code').click(e => console.log(JasonGenerator.workspaceToCode(this._workspace)))
-
-    $('#debug').click(e => console.log(Blockly.Xml.workspaceToDom(this._workspace, true)))
   }
 
   loadArtifact(artifact) {

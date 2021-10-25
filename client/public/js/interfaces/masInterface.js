@@ -22,13 +22,13 @@ class MasInterface {
     return res.data;
   }
 
-  async saveAgentSource(id, code, xml){
-    var body = {
-      id,
-      code, 
-      xml
-    }
-    var res = await this.client.post(`/agents`, body);
+  async createAgentSource(id, code, xml){
+    var res = await this.client.post(`/agents`, {id, code, xml});
+    return res.data;
+  }
+
+  async updateAgentSource(id, code, xml){
+    var res = await this.client.put(`/agents/${id}`, {code, xml});
     return res.data;
   }
 
