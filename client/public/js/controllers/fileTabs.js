@@ -11,6 +11,7 @@ class FileTabsController {
   constructor(workspace){
     this._noTabsCallback = ()=> {}
     this._blockStorage = {}
+    this._currentStorageKey = undefined
     this._workspace = workspace;
     this.$addTabButton.find('button').click(async e => {
       var agentName = await dashboard.waitInput("Create a new agent with name:", "new_agent")
@@ -176,6 +177,16 @@ class FileTabsController {
         this._workspace.render()
       }
     }
+  }
+
+  clearAll(){
+    this.clearWorkspace();
+    this._blockStorage = {}
+    this._currentStorageKey = undefined
+    //remove all tabs
+    this.$tabs.find('li').filter(function(){
+      return $(this).children('button').length == 0
+    }).remove()
   }
 
   clearWorkspace(){
