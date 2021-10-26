@@ -6,8 +6,12 @@ class WorkspaceButtonsController {
   $saveButton = $('#save-code')
   $loadButton = $('#load-code')
   $runButton = $('#run-mas')
-  $modal = $('#load-chooser-modal')
-  _chooseModal = new bootstrap.Modal(document.getElementById('load-chooser-modal'))
+
+  $loadModal = $('#load-chooser-modal')
+  _loadModal = new bootstrap.Modal(document.getElementById('load-chooser-modal'))
+
+  $runModal = $('#mas-config-modal')
+  _runModal = new bootstrap.Modal(document.getElementById('mas-config-modal'))
 
   constructor(workspace, fileTabController){
     this._workspace = workspace
@@ -15,12 +19,16 @@ class WorkspaceButtonsController {
     this.$saveButton.click(e => this.saveCode())
     this.$loadButton.click(e => this.showLoadMenu())
     this.$runButton.click(e => this.runMas())
-    this._chooseModal.hide()
+    this._loadModal.hide()
 
-    var $select = this.$modal.find('select')
-    this.$modal.find('button').click(e => {
-      this.loadCode($select.val())
-      this._chooseModal.hide()
+    var $select = this.$loadModal.find('select')
+    this.$loadModal.find('.btn-confirm').click(e => {
+      this._loadCode($select.val())
+      this._loadModal.hide()
+    })
+
+    this.$runModal.find('.btn-confirm').click(e => {
+      this._runModal.hide()
     })
   }
 
@@ -67,18 +75,17 @@ class WorkspaceButtonsController {
       dashboard.showInfo("There are no agents to be loaded")
       return
     }
-    var $select = this.$modal.find('select')
+    var $select = this.$loadModal.find('select')
     for(const agent of agentSources){
       $select.append($('<option>', {
         value: agent.id,
         text: agent.id
       }));
     }
-    this._chooseModal.show()
+    this._loadModal.show()
   }
 
-  async loadCode(id){
-    console.log("loding code for "+id)
+  async _loadCode(id){
     try{
       var agentSource = await masInterface.getAgentSource(id);
       this._fileTabController.loadTab(agentSource.id, agentSource.xml)
@@ -88,6 +95,6 @@ class WorkspaceButtonsController {
   }
 
   async runMas(){
-
+    this._runModal.show()
   }
 }
