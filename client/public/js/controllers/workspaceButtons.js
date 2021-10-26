@@ -81,7 +81,7 @@ class WorkspaceButtonsController {
     console.log("loding code for "+id)
     try{
       var agentSource = await masInterface.getAgentSource(id);
-      console.log(agentSource)
+      this._fileTabController.loadTab(agentSource.id, agentSource.xml)
     } catch(error){
       dashboard.showError(error)
     }

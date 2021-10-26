@@ -46,6 +46,34 @@ class FileTabsController {
     this._addTabDom(validName)  
   }
 
+  loadTab(agentId, xml){
+    var confirm = true;
+    if(agentId in this._blockStorage){
+      confirm = dashboard.waitConfirm(`Are you sure to load a new version of ${agentId}?\n
+      This will overwrite your current blocks.`)
+      if(!confirm){return}
+      //replace tab
+      this._selectTab(agentId)
+      this._setSelected(agentId)
+      this._loadXml(agentId, xml)
+
+    } else {
+      this._loadXml(agentId, xml)
+      //render a new tab
+      this._addTabDom(agentId)  
+    }
+  }
+
+  _loadXml(id, xml){
+      //save and clean previous workspace
+      this._saveWorkspace()
+      this.clearWorkspace()
+      //add key in block storage
+      this._currentStorageKey = id
+      this._blockStorage[this._currentStorageKey] = Blockly.Xml.textToDom(xml)
+      this._loadWorkspace()
+  }
+
   onNoTabs(callback){
     this._noTabsCallback = callback
   }
@@ -98,8 +126,8 @@ class FileTabsController {
         var firstTab = this.$tabs.find('.nav-item').first()
         var tabName = firstTab.find('span').text()
         if(tabName){
-          firstTab.addClass('active').removeClass('inactive')
           this._selectTab(tabName)
+          this._setSelected(tabName)
         } else {
           this.clearWorkspace()
           this._noTabsCallback();
@@ -145,6 +173,7 @@ class FileTabsController {
       if (newBlocks) {
         //and add them if present
         Blockly.Xml.domToWorkspace(newBlocks, this._workspace)
+        this._workspace.render()
       }
     }
   }
@@ -156,6 +185,13 @@ class FileTabsController {
 
     this._workspace.clearUndo()
     this._workspace.trashcan.emptyContents();
+  }
+
+  _setSelected(name){
+    this._deselectAllTabs()
+    this.$tabs.find('div').filter(function(){
+      return $(this).find('span').text() == name
+    }).removeClass('inactive').addClass('active');
   }
 
   _addTabDom(name){
