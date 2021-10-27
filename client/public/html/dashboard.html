@@ -49,7 +49,7 @@
 
   <!-- This is the container that hosts all other interface elements -->
   <div id="container">
-    <div class="row">
+    <div class="row row-body">
       <div id="artifacts-container" class="col-lg-2 col-3">
         <!-- Placeholder for Discovered Artifacts Stack -->
       </div>
@@ -73,19 +73,21 @@
             <div class="toolbox-title">
               Toolbox:
             </div>
-            <div class="toolbox-tabs">
-              <ul id="tabs" class="nav nav-tabs">
-                <li id="tab-button">
-                  <button id="add-new-tab" type="button" class="btn-light"> + </button>
-                </li>
-              </ul>
+            <div class="toolbox-tools">
+              <div class="blockly-buttons">
+                <button id="save-code" type="button" class="btn btn-light">Save</button>
+                <button id="load-code" type="button" class="btn btn-light">Load</button>
+                <button id="define-runtime" type="button" class="btn btn-light">Define Runtime</button>
+                <button id="run-mas" type="button" class="btn btn-primary">Run</button>
+              </div>
+              <div class="toolbox-tabs">
+                <ul id="tabs" class="nav nav-tabs">
+                  <li id="tab-button">
+                    <button id="add-new-tab" type="button" class="btn-light"> + </button>
+                  </li>
+                </ul>
+              </div>
               
-            </div>
-            <div class="blockly-buttons">
-              <button id="save-code" type="button" class="btn btn-light">Save</button>
-              <button id="load-code" type="button" class="btn btn-light">Load</button>
-              <button id="define-runtime" type="button" class="btn btn-light">Define Runtime</button>
-              <button id="run-mas" type="button" class="btn btn-primary">Run</button>
             </div>
         </div>
         <div id="blockly-relative">
