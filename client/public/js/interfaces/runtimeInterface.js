@@ -46,6 +46,14 @@ class RuntimeInterface {
     return res.data;
   }
 
+  async updateMasDefinition(id, agents){
+    var body = {
+      agents
+    }
+    var res = await this.client.put(`/mas/${id}`, body);
+    return res.data;
+  }
+
   async getMasDefinition(masId){
     var res = await this.client.get(`/mas/${masId}`);
     return res.data; 

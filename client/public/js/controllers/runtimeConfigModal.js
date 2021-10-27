@@ -1,4 +1,4 @@
-class RunModalController {
+class RuntimeConfigModal {
 
   _workspace = undefined
   _masArray = []
@@ -10,16 +10,15 @@ class RunModalController {
   $addAgentButton = $('#button-add-agent')
   $removeAgentButton = $('#button-remove-agent')
   $saveMasButton = $('#button-save-mas')
-  $runMasButton = $('#button-run-mas')
 
   $masSelect = $('#mas-template-select')
+  $masName = $('#mas-name')
 
   constructor(workspace){
     this._workspace = workspace
     this._agentsIdArray = []
     this._masArray = []
 
-    this.$runMasButton.click(e => this.runMas())
     this.$saveMasButton.click(e => this.saveMas())
 
     var controller = this;
@@ -33,6 +32,19 @@ class RunModalController {
     this.$modal.find('.btn-confirm').click(e => {
       this._modal.hide()
     })
+
+    this.$modal.on('hidden.bs.modal', e => this._reset())
+  }
+
+  _reset(){
+    this._agentsIdArray = []
+    this._masArray = []
+    //set one empty row
+    this.$modal.find('.agent-row:not(:first)').remove();
+    this._createRow();
+    this.$modal.find('.agent-row').first().remove();
+    this.$masSelect.val(undefined)
+    this.$masName.val(undefined)
   }
 
   async showMenu() {
@@ -66,13 +78,46 @@ class RunModalController {
   }
 
   async saveMas(){
-
+    //parse the fields to generate mas object
+    var id = this.$masName.val()
+    if(!id){
+      dashboard.showError(`Runtime has no id`)
+      return
+    }
+    var agents = []
+    this.$modal.find('.agent-row').each(function(index){
+      var name = $(this).find('input').val()
+      var type = $(this).find('select').val()
+      agents.push({name, type})
+    })
+    //validate
+    for(const a of agents)
+    if(a.name == ""){
+      dashboard.showError("Attempting to create agents with no name")
+      return
+    }
+    if(a.type == undefined){
+      dashboard.showError(`Agent ${a.name} has no type`)
+      return
+    }
+    //if overwrite template
+    try{
+      if(this.$masSelect.val() == id){
+        var confirm = await dashboard.waitConfirm(`Are you sure? This will overwrite runtime ${id}`)
+        if(!confirm){
+          return;
+        }
+        await runtimeInterface.updateMasDefinition(id, agents)
+      } else {
+        //save mas
+        await runtimeInterface.saveMasDefinition(id, agents)
+      }
+      dashboard.showSuccess(`Runtime ${id} saved`)
+    } catch (error){
+      dashboard.showError(`Unable to save runtime ${id}`)
+    }
+    
   }
-
-  async runMas(){
-    this._modal.show()
-  }
-
   _updateAgentSelect(){
     var controller = this;
     this.$modal.find('.agent-row').find('select').each(function(index){
