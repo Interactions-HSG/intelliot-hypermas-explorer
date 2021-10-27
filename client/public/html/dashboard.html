@@ -139,26 +139,29 @@
           </div>
           <div class="row agent-row mb-3">
             <div class="col-6">
-              <label for="agent-name-1">Agent name</label>
-              <input id="agent-name-1" type="text" class="form-control" placeholder="Name"> 
+              <label>Agent name</label>
+              <input type="text" class="form-control" placeholder="Name"> 
             </div>
             <div class="col-6">
-              <label for="agent-template-select">Agent type</label>
-              <select id="agent-template-select" class="form-select">
+              <label>Agent type</label>
+              <select class="form-select">
                 <option value="none">Choose a type...</option>
               </select>
             </div>
           </div>
-          <div class="row agent-row">
-            <div class="col">
+          <div class="button-row row">
+            <div class="col-6">
+              <button id="button-remove-agent" type="button" class="btn btn-light">-</button>
+            </div>
+            <div class="col-6">
               <button id="button-add-agent" type="button" class="btn btn-light">+</button>
             </div>
           </div>
           
         </div>
         <div class="modal-footer">
-          <button id="button-save" type="button" class="btn btn-primary btn-confirm">Save</button>
-          <button id="button-run" type="button" class="btn btn-danger btn-confirm">Run</button>
+          <button id="button-save-mas" type="button" class="btn btn-primary">Save</button>
+          <button id="button-run-mas" type="button" class="btn btn-danger btn-confirm">Run</button>
         </div>
       </div>
     </div>
@@ -198,7 +201,7 @@
   <script src="/js/interfaces/backendURL.js"></script>
   <script src="/js/interfaces/environmentInterface.js"></script>
   <script src="/js/interfaces/thingInterface.js"></script>
-  <script src="/js/interfaces/masInterface.js"></script>
+  <script src="/js/interfaces/runtimeInterface.js"></script>
 
   <!--Blockly-->
 
@@ -227,6 +230,7 @@
   <!-- Controllers -->
   <script src="/js/controllers/fileTabs.js"></script>
   <script src="/js/controllers/workspaceButtons.js"></script>
+  <script src="/js/controllers/runModal.js"></script>
   <script src="/js/controllers/blockly.js"></script>
   <script src="/js/controllers/environment.js"></script>
   <script src="/js/controllers/artifacts.js"></script>

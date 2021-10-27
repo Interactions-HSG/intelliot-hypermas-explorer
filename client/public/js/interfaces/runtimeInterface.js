@@ -1,4 +1,4 @@
-class MasInterface {
+class RuntimeInterface {
 
   client = null
 
@@ -62,4 +62,4 @@ class MasInterface {
 }
 
 //use as singleton
-var masInterface = new MasInterface(backendURL);
+var runtimeInterface = new RuntimeInterface(backendURL);

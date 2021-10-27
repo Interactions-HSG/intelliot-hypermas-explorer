@@ -10,25 +10,22 @@ class WorkspaceButtonsController {
   $loadModal = $('#load-chooser-modal')
   _loadModal = new bootstrap.Modal(document.getElementById('load-chooser-modal'))
 
-  $runModal = $('#mas-config-modal')
-  _runModal = new bootstrap.Modal(document.getElementById('mas-config-modal'))
+  _runModalController = undefined;
 
   constructor(workspace, fileTabController){
     this._workspace = workspace
     this._fileTabController = fileTabController
+    this._runModalController = new RunModalController(workspace)
+
     this.$saveButton.click(e => this.saveCode())
     this.$loadButton.click(e => this.showLoadMenu())
-    this.$runButton.click(e => this.runMas())
+    this.$runButton.click(e => this.showRunMenu())
     this._loadModal.hide()
 
     var $select = this.$loadModal.find('select')
     this.$loadModal.find('.btn-confirm').click(e => {
       this._loadCode($select.val())
       this._loadModal.hide()
-    })
-
-    this.$runModal.find('.btn-confirm').click(e => {
-      this._runModal.hide()
     })
   }
 
@@ -42,7 +39,7 @@ class WorkspaceButtonsController {
     var id = this._fileTabController.getCurrentAgent()
     var exists = false;
     try {
-      await masInterface.getAgentSource(id)
+      await runtimeInterface.getAgentSource(id)
       exists = true;
     } catch (error){
       exists = false;
@@ -51,11 +48,11 @@ class WorkspaceButtonsController {
       if(exists){
         var confirm = await dashboard.waitConfirm("Are you sure? This will overwrite the previously saved code")
         if(confirm){
-          await masInterface.updateAgentSource(id, code, xml)
+          await runtimeInterface.updateAgentSource(id, code, xml)
           dashboard.showSuccess(`Agent ${id} saved`)
         }
       } else {
-        await masInterface.createAgentSource(id, code, xml)
+        await runtimeInterface.createAgentSource(id, code, xml)
         dashboard.showSuccess(`Agent ${id} saved`)
       }
     }
@@ -66,7 +63,7 @@ class WorkspaceButtonsController {
 
   async showLoadMenu(){
     try{
-      var agentSources = await masInterface.getAvailableAgents();
+      var agentSources = await runtimeInterface.getAvailableAgents();
     } catch(error){
       dashboard.showError(error)
     }
@@ -76,6 +73,7 @@ class WorkspaceButtonsController {
       return
     }
     var $select = this.$loadModal.find('select')
+    $select.find('option').remove();
     for(const agent of agentSources){
       $select.append($('<option>', {
         value: agent.id,
@@ -87,14 +85,14 @@ class WorkspaceButtonsController {
 
   async _loadCode(id){
     try{
-      var agentSource = await masInterface.getAgentSource(id);
+      var agentSource = await runtimeInterface.getAgentSource(id);
       this._fileTabController.loadTab(agentSource.id, agentSource.xml)
     } catch(error){
       dashboard.showError(error)
     }
   }
 
-  async runMas(){
-    this._runModal.show()
+  async showRunMenu(){
+    await this._runModalController.showMenu();
   }
 }
