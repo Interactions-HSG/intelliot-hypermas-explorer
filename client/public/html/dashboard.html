@@ -105,7 +105,8 @@
   </div>
 
   <!--Modals-->
-  
+
+  <!--Load agent-->
   <div id="load-chooser-modal" class="modal fade" tabindex="-1">
     <div class="modal-dialog modal-dialog-centered">
       <div class="modal-content">
@@ -124,6 +125,7 @@
     </div>
   </div>
 
+  <!--Edit mas config-->
   <div id="mas-config-modal" class="modal fade">
     <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
       <div class="modal-content">
@@ -169,7 +171,26 @@
           
         </div>
         <div class="modal-footer">
-          <button id="button-save-mas" type="button" class="btn btn-primary">Save</button>
+          <button id="button-save-mas" type="button" class="btn btn-primary btn-confirm">Save</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!--Run mas-->
+  <div id="run-chooser-modal" class="modal fade" tabindex="-1">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">Run saved configuration</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <p>Select the runtime configuration that you want to deploy</p>
+          <select class="form-select" id="available-agents"></select>
+        </div>
+        <div class="modal-footer">
+          <button id='#button-run-mas' type="button" class="btn btn-primary btn-confirm">Run</button>
         </div>
       </div>
     </div>

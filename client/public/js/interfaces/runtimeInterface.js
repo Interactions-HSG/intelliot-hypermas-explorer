@@ -60,11 +60,12 @@ class RuntimeInterface {
   }
 
   async runMas(masId){
-    var res = await this.client.put(`/mas/${masId}/run`);
+    var res = await this.client.post(`/runtimes`, {masId});
+    console.log(res)
   }
 
-  async stopMas(masId){
-    var res = await this.client.put(`/mas/${masId}/stop`);
+  async stopMas(runtimeId){
+    var res = await this.client.delete(`/runtimes/${runtimeId}`);
   }
 
 }

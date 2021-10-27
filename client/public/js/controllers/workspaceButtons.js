@@ -12,6 +12,9 @@ class WorkspaceButtonsController {
   $loadModal = $('#load-chooser-modal')
   _loadModal = new bootstrap.Modal(document.getElementById('load-chooser-modal'))
 
+  $runModal = $('#run-chooser-modal')
+  _runModal = new bootstrap.Modal(document.getElementById('run-chooser-modal'))
+
   _configModalController = undefined;
 
   constructor(workspace, fileTabController){
@@ -21,13 +24,22 @@ class WorkspaceButtonsController {
 
     this.$saveButton.click(e => this.saveCode())
     this.$loadButton.click(e => this.showLoadMenu())
+    this.$runButton.click(e => this.showRunMenu())
     this.$defineButton.click(e => this.showConfigMenu())
+    
+    this._runModal.hide()
     this._loadModal.hide()
 
-    var $select = this.$loadModal.find('select')
+    var $selectLoad = this.$loadModal.find('select')
     this.$loadModal.find('.btn-confirm').click(e => {
-      this._loadCode($select.val())
+      this._loadCode($selectLoad.val())
       this._loadModal.hide()
+    })
+
+    var $selectRun = this.$runModal.find('select')
+    this.$runModal.find('.btn-confirm').click(e => {
+      this._runMas($selectRun.val())
+      this._runModal.hide()
     })
   }
 
@@ -69,7 +81,6 @@ class WorkspaceButtonsController {
     } catch(error){
       dashboard.showError(error)
     }
-    console.log(agentSources)
     if(agentSources.length == 0) {
       dashboard.showInfo("There are no agents to be loaded")
       return
@@ -89,6 +100,37 @@ class WorkspaceButtonsController {
     try{
       var agentSource = await runtimeInterface.getAgentSource(id);
       this._fileTabController.loadTab(agentSource.id, agentSource.xml)
+    } catch(error){
+      dashboard.showError(error)
+    }
+  }
+
+  async showRunMenu(){
+    try{
+      var masIds = await runtimeInterface.getAvailableMas();
+      masIds = masIds.map(x => x.id)
+    } catch(error){
+      dashboard.showError(error)
+    }
+    if(masIds.length == 0) {
+      dashboard.showInfo("Please first define a runtime configuration")
+      return
+    }
+    var $select = this.$runModal.find('select')
+    $select.find('option').remove();
+    for(const id of masIds){
+      $select.append($('<option>', {
+        value: id,
+        text: id
+      }));
+    }
+    this._runModal.show()
+  }
+
+  async _runMas(id){
+    console.log("Running mas... "+id)
+    try{
+      await runtimeInterface.runMas(id);
     } catch(error){
       dashboard.showError(error)
     }
