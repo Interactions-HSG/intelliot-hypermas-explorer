@@ -5,9 +5,9 @@ class WorkspaceButtonsController {
 
   $saveButton = $('#save-code')
   $loadButton = $('#load-code')
-
   $defineButton = $('#define-runtime')
   $runButton = $('#run-mas')
+  $inspectButton = $('#inspect-runtime')
 
   $loadModal = $('#load-chooser-modal')
   _loadModal = new bootstrap.Modal(document.getElementById('load-chooser-modal'))
@@ -16,16 +16,19 @@ class WorkspaceButtonsController {
   _runModal = new bootstrap.Modal(document.getElementById('run-chooser-modal'))
 
   _configModalController = undefined;
+  _inspectModalController = undefined;
 
   constructor(workspace, fileTabController){
     this._workspace = workspace
     this._fileTabController = fileTabController
     this._configModalController = new RuntimeConfigModal(workspace)
+    this._inspectModalController = new RuntimeInspectModal();
 
     this.$saveButton.click(e => this.saveCode())
     this.$loadButton.click(e => this.showLoadMenu())
     this.$runButton.click(e => this.showRunMenu())
     this.$defineButton.click(e => this.showConfigMenu())
+    this.$inspectButton.click(e => this.showInspectMenu());
     
     this._runModal.hide()
     this._loadModal.hide()
@@ -138,5 +141,9 @@ class WorkspaceButtonsController {
 
   async showConfigMenu(){
     await this._configModalController.showMenu();
+  }
+
+  async showInspectMenu(){
+    await this._inspectModalController.showMenu();
   }
 }

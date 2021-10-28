@@ -78,6 +78,7 @@
                 <button id="save-code" type="button" class="btn btn-light">Save</button>
                 <button id="load-code" type="button" class="btn btn-light">Load</button>
                 <button id="define-runtime" type="button" class="btn btn-light">Define Runtime</button>
+                <button id="inspect-runtime" type="button" class="btn btn-light">Inspect Runtime</button>
                 <button id="run-mas" type="button" class="btn btn-primary">Run</button>
               </div>
               <div class="toolbox-tabs">
@@ -133,45 +134,31 @@
           <h5 class="modal-title">Configure runtime</h5>
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
-        <div class="modal-body">
-          <div class="row mb-3">
-            <div class="col">
-              <label>Runtime name</label>
-              <input id="mas-name" type="text" class="form-control" placeholder="Name"> 
-            </div>
-          </div>
-          <div class="row mb-3">
-            <div class="col">
-              <label for="mas-template-select">Load a saved template</label>
-              <select id="mas-template-select" class="form-select">
-                <option value="none">none</option>
-              </select>
-            </div>
-          </div>
-          <div class="row agent-row mb-3">
-            <div class="col-6">
-              <label>Agent name</label>
-              <input type="text" class="form-control" placeholder="Name"> 
-            </div>
-            <div class="col-6">
-              <label>Agent type</label>
-              <select class="form-select">
-                <option value="none">Choose a type...</option>
-              </select>
-            </div>
-          </div>
-          <div class="button-row row">
-            <div class="col-6">
-              <button id="button-remove-agent" type="button" class="btn btn-light">-</button>
-            </div>
-            <div class="col-6">
-              <button id="button-add-agent" type="button" class="btn btn-light">+</button>
-            </div>
-          </div>
-          
-        </div>
+        <div class="modal-body"><!--fill by template--></div>
         <div class="modal-footer">
           <button id="button-save-mas" type="button" class="btn btn-primary btn-confirm">Save</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!--Inspect runtime-->
+  <div id="runtime-inspect-modal" class="modal fade" tabindex="-1">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">Active runtimes</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <div class="row inspect-title-row">
+            <p class="col">Id</p>
+            <p class="col">Host</p>
+            <p class="col">Action</p>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-primary btn-confirm">Done</button>
         </div>
       </div>
     </div>
@@ -259,6 +246,7 @@
   <!-- Controllers -->
   <script src="/js/controllers/fileTabs.js"></script>
   <script src="/js/controllers/workspaceButtons.js"></script>
+  <script src="/js/controllers/runtimeInspectModal.js"></script>
   <script src="/js/controllers/runtimeConfigModal.js"></script>
   <script src="/js/controllers/blockly.js"></script>
   <script src="/js/controllers/environment.js"></script>

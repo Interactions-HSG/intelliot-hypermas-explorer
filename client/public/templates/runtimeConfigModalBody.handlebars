@@ -1,0 +1,51 @@
+<div>
+  <div class="row mb-3">
+    <div class="col">
+      <label>Runtime name</label>
+      <input id="mas-name" type="text" class="form-control" placeholder="Name" {{#if masName }} value="{{masName}}" {{/if}}>
+    </div>
+  </div>
+  <div class="row mb-3">
+    <div class="col">
+      <label for="mas-template-select">Load a saved template</label>
+      <select id="mas-template-select" class="form-select">
+        <option>-----------</option>
+        {{#each masArray}}
+          {{#if_eq ../selectedMas this}}
+            <option value="{{this}}" selected="selected">{{this}}</option>
+          {{else}}
+            <option value="{{this}}">{{this}}</option>
+          {{/if_eq}}
+        {{/each}}
+      </select>
+    </div>
+  </div>
+  {{#each agents}}
+    <div class="row agent-row mb-3">
+      <div class="col-6">
+        <label>Agent name</label>
+        <input type="text" class="form-control" placeholder="Name" {{#if name}} value="{{name}}" {{/if}}>
+      </div>
+      <div class="col-6">
+        <label>Agent type</label>
+        <select class="form-select">
+          {{#each ../agentTypes}}
+            {{#if_eq this ../type}}
+              <option value="{{this}}" selected="selected">{{this}}</option>
+            {{else}}
+              <option value="{{this}}">{{this}}</option>
+            {{/if_eq}}
+          {{/each}}
+        </select>
+      </div>
+    </div>
+  {{/each}}
+  <div class="button-row row">
+    <div class="col-6">
+      <button id="button-remove-agent" type="button" class="btn btn-light">-</button>
+    </div>
+    <div class="col-6">
+      <button id="button-add-agent" type="button" class="btn btn-light">+</button>
+    </div>
+  </div>
+</div>

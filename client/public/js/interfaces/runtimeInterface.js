@@ -61,7 +61,6 @@ class RuntimeInterface {
 
   async runMas(masId){
     var res = await this.client.post(`/runtimes`, {masId});
-    console.log(res)
   }
 
   async stopMas(runtimeId){

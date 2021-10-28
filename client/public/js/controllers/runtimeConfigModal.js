@@ -2,60 +2,43 @@ class RuntimeConfigModal {
 
   _workspace = undefined
   _masArray = []
-  _agentsIdArray = []
+  _agentTypes = []
+  _agents = []
 
   $modal = $('#mas-config-modal')
   _modal = new bootstrap.Modal(document.getElementById('mas-config-modal'))
 
-  $addAgentButton = $('#button-add-agent')
-  $removeAgentButton = $('#button-remove-agent')
   $saveMasButton = $('#button-save-mas')
 
   $masSelect = $('#mas-template-select')
-  $masName = $('#mas-name')
 
   constructor(workspace){
     this._workspace = workspace
-    this._agentsIdArray = []
+    this._agentTypes = []
     this._masArray = []
+    this._agents = [{}]
 
     this.$saveMasButton.click(e => this.saveMas())
-
-    var controller = this;
-    this.$masSelect.change(function(){
-      controller._onMasSelect($(this).val());
-    })
-
-    this.$addAgentButton.click(e => this._addEmptyAgentRow())
-    this.$removeAgentButton.click(e => this._removeAgentRow())
-
-    this.$modal.find('.btn-confirm').click(e => {
-      this._modal.hide()
-    })
-
     this.$modal.on('hidden.bs.modal', e => this._reset())
   }
 
   _reset(){
-    this._agentsIdArray = []
+    this._agentTypes = []
     this._masArray = []
-    //set one empty row
-    this.$modal.find('.agent-row:not(:first)').remove();
-    this._createRow();
-    this.$modal.find('.agent-row').first().remove();
-    this.$masSelect.val(undefined)
-    this.$masName.val(undefined)
+    this._agents = [{}]
+    $("#mas-name").val(undefined)
+    this._setDom(undefined)
   }
 
   async showMenu() {
     try{
       //load all agents type
-      this._agentsIdArray = await runtimeInterface.getAvailableAgents()
-      this._agentsIdArray = this._agentsIdArray.map(x => x.id)
+      this._agentTypes = await runtimeInterface.getAvailableAgents()
+      this._agentTypes = this._agentTypes.map(x => x.id)
     } catch(error){
       dashboard.showError("Unable to retrieve saved agents ")
     }
-    if(this._agentsIdArray.length == 0){
+    if(this._agentTypes.length == 0){
       dashboard.showError("Please save some agents before attempting to run")
       return
     }
@@ -65,21 +48,15 @@ class RuntimeConfigModal {
     } catch(error){
       dashboard.showError("Unable to retrieve saved runtime configurations")
     }
-    //fill mas select
-    this.$masSelect.find('option').remove()
-    this.$masSelect.append(new Option("------", "none"));
-    for(const mas of this._masArray){
-      this.$masSelect.append(new Option(mas.id, mas.id))
-    }
 
-    this._updateAgentSelect()
+    this._setDom(undefined);
     //show modal
     this._modal.show()
   }
 
   async saveMas(){
     //parse the fields to generate mas object
-    var id = this.$masName.val()
+    var id = $('#mas-name').val()
     if(!id){
       dashboard.showError(`Runtime has no id`)
       return
@@ -91,21 +68,22 @@ class RuntimeConfigModal {
       agents.push({name, type})
     })
     //validate
-    for(const a of agents)
-    if(a.name == ""){
-      dashboard.showError("Attempting to create agents with no name")
-      return
-    }
-    if(a.type == undefined){
-      dashboard.showError(`Agent ${a.name} has no type`)
-      return
+    for(const a of agents){
+      if(a.name == ""){
+        dashboard.showError("Attempting to create agents with no name")
+        return
+      }
+      if(a.type == undefined){
+        dashboard.showError(`Agent ${a.name} has no type`)
+        return
+      }
     }
     //if overwrite template
     try{
-      if(this.$masSelect.val() == id){
+      if(this._masArray.some(x => x.id == id)){
         var confirm = await dashboard.waitConfirm(`Are you sure? This will overwrite runtime ${id}`)
         if(!confirm){
-          return;
+          return
         }
         await runtimeInterface.updateMasDefinition(id, agents)
       } else {
@@ -116,63 +94,64 @@ class RuntimeConfigModal {
     } catch (error){
       dashboard.showError(`Unable to save runtime ${id}`)
     }
-    
-  }
-  _updateAgentSelect(){
-    var controller = this;
-    this.$modal.find('.agent-row').find('select').each(function(index){
-      controller._loadAgentOptions(this)
-    })
+    this._modal.hide()
   }
 
-  _loadAgentOptions(select){
-    $(select).find('option').remove()
-    for(const a of this._agentsIdArray){
-      $(select).append(new Option(a, a))
-    }
+  _setDom(selectedMas){
+    var masName = $('#mas-name').val()
+    this.$modal.find('.modal-body').empty();
+    var $body = Handlebars.templates.runtimeConfigModalBody({
+      masArray: this._masArray.map(x => x.id),
+      selectedMas,
+      masName,
+      agentTypes: this._agentTypes,
+      agents: this._agents
+    });
+    this.$modal.find('.modal-body').append($body);
+    //attach handlers
+    var controller = this;
+    $('#mas-template-select').change(function(){
+      controller._onMasSelect($(this).val());
+    })
+
+    $('#button-add-agent').click(e => this._addAgentRow())
+    $('#button-remove-agent').click(e => this._removeAgentRow())
+
   }
 
   _onMasSelect(masId){
-    //clone an empty base row
-    this.$modal.find('.agent-row:not(:first)').remove();
-    var firstRow = this._createRow();
-    this.$modal.find('.agent-row').first().remove();
-    //find the selected mas
-    var mas = this._masArray.find(x => x.id == masId)
-    if(!mas) {
-      //if none return
-      return
+    if(masId){
+      this._agents = this._masArray.find(x => x.id == masId).agents
+    } else {
+      this._agents = [{}]
     }
-    //populate the agent fields
-    for(const a of mas.agents){
-      var row = this._createRow()
-      var select = $(row).find('select')
-      this._loadAgentOptions(select);
-      $(row).find('input').val(a.name);
-      $(select).val(a.type);
-      console.log(a)
-    }
-    //remove first template row
-    firstRow.remove();
+    this._setDom(masId)
+
   }
 
-  _addEmptyAgentRow(){
-    this._createRow()
-    this._updateAgentSelect();
-  }
-
-  _createRow(){
-    var newRow = this.$modal.find('.agent-row').first().clone()
-    $(newRow).find('input').val(undefined)
-    $(newRow).find('select').val(undefined)
-    this.$modal.find('.button-row').before(newRow);
-    return newRow
+  _addAgentRow(){
+    var agents = []
+    this.$modal.find('.agent-row').each(function(index){
+      var name = $(this).find('input').val()
+      var type = $(this).find('select').val()
+      agents.push({name, type})
+    })
+    this._agents = agents;
+    this._agents.push({})
+    var masId = this.$masSelect.find('select').val()
+    this._setDom(masId)
   }
 
   _removeAgentRow(){
-    var count = this.$modal.find('.agent-row').length
-    if(count > 1){
-      this.$modal.find('.agent-row').last().remove()
-    }
+    var agents = []
+    this.$modal.find('.agent-row').each(function(index){
+      var name = $(this).find('input').val()
+      var type = $(this).find('select').val()
+      agents.push({name, type})
+    })
+    this._agents = agents;
+    this._agents.pop()
+    var masId = this.$masSelect.find('select').val()
+    this._setDom(masId)
   }
 }

@@ -63,7 +63,7 @@ exports.startRuntime = async function (req) {
   }
   //start the mas on the remote runtime and provide all the sources
   try {
-    var URL = await runtimeService.startRuntime(mas, agentSources.map(a=> {
+    var URL = await runtimeService.startRuntime(masDTO(mas), agentSources.map(a=> {
       return {
         id: a.id, 
         code: a.code
