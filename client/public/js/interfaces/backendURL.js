@@ -1,1 +1,1 @@
-const backendURL = `http://${window.location.hostname}:${serverPort}`
+const backendURL = "http://localhost:8000";

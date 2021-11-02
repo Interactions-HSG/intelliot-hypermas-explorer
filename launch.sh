@@ -1,11 +1,11 @@
 #!/bin/bash
 
-echo "Deploying HyperMAS Explorer..."
+./launchMongoDB.sh &
 
 cd client
-./launchClient.sh &
-
+./launchClientStandalone.sh &
 cd ..
 
 cd server
-./launchServer.sh
+./launchServerStandalone.sh
+cd ..

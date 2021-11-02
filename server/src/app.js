@@ -6,12 +6,11 @@ const bodyParser = require('body-parser');
 const cors = require('cors');
 const path = require('path')
 
-exports.startServer = async function(options) {
+exports.startServer = async function(config) {
   console.log("Starting intelliot-hypermas-server...")
 
-  console.log('Connecting to mongodb...')
-  const url = process.env.MONGO_URL || 'mongodb://localhost:27017/masDB'
-  await mongoose.connect(url)
+  console.log('Connecting to mongodb... on '+config.mongoURL)
+  await mongoose.connect(config.mongoURL)
   console.log('Connected!')
 
   const app = express()
@@ -40,7 +39,7 @@ exports.startServer = async function(options) {
   })
 
   //routes to get data
-  require(path.join(options.srcDirectory, 'routes'))(app)
+  require(path.join(config.srcDirectory, 'routes'))(app)
 
   //notFound
   app.use(function(req, res) {
@@ -48,8 +47,8 @@ exports.startServer = async function(options) {
   })
 
   //start listening
-  server.listen(options.port, function() {
-    console.log(`Started on port ${options.port}!`)
+  server.listen(config.port, function() {
+    console.log(`Started on port ${config.port}!`)
   })
 
 }

@@ -252,6 +252,146 @@ templates['resultContent'] = template({"compiler":[8,">= 4.3.0"],"main":function
     + alias4((lookupProperty(helpers,"toString")||(depth0 && lookupProperty(depth0,"toString"))||alias2).call(alias1,(depth0 != null ? lookupProperty(depth0,"result") : depth0),{"name":"toString","hash":{},"data":data,"loc":{"start":{"line":8,"column":4},"end":{"line":8,"column":23}}}))
     + "\r\n  </div>\r\n</div>\r\n";
 },"useData":true});
+templates['runtimeConfigModalBody'] = template({"1":function(container,depth0,helpers,partials,data) {
+    var helper, lookupProperty = container.lookupProperty || function(parent, propertyName) {
+        if (Object.prototype.hasOwnProperty.call(parent, propertyName)) {
+          return parent[propertyName];
+        }
+        return undefined
+    };
+
+  return " value=\""
+    + container.escapeExpression(((helper = (helper = lookupProperty(helpers,"masName") || (depth0 != null ? lookupProperty(depth0,"masName") : depth0)) != null ? helper : container.hooks.helperMissing),(typeof helper === "function" ? helper.call(depth0 != null ? depth0 : (container.nullContext || {}),{"name":"masName","hash":{},"data":data,"loc":{"start":{"line":5,"column":103},"end":{"line":5,"column":114}}}) : helper)))
+    + "\" ";
+},"3":function(container,depth0,helpers,partials,data,blockParams,depths) {
+    var stack1, lookupProperty = container.lookupProperty || function(parent, propertyName) {
+        if (Object.prototype.hasOwnProperty.call(parent, propertyName)) {
+          return parent[propertyName];
+        }
+        return undefined
+    };
+
+  return ((stack1 = (lookupProperty(helpers,"if_eq")||(depth0 && lookupProperty(depth0,"if_eq"))||container.hooks.helperMissing).call(depth0 != null ? depth0 : (container.nullContext || {}),(depths[1] != null ? lookupProperty(depths[1],"selectedMas") : depths[1]),depth0,{"name":"if_eq","hash":{},"fn":container.program(4, data, 0, blockParams, depths),"inverse":container.program(6, data, 0, blockParams, depths),"data":data,"loc":{"start":{"line":14,"column":10},"end":{"line":18,"column":20}}})) != null ? stack1 : "");
+},"4":function(container,depth0,helpers,partials,data) {
+    var alias1=container.lambda, alias2=container.escapeExpression;
+
+  return "            <option value=\""
+    + alias2(alias1(depth0, depth0))
+    + "\" selected=\"selected\">"
+    + alias2(alias1(depth0, depth0))
+    + "</option>\r\n";
+},"6":function(container,depth0,helpers,partials,data) {
+    var alias1=container.lambda, alias2=container.escapeExpression;
+
+  return "            <option value=\""
+    + alias2(alias1(depth0, depth0))
+    + "\">"
+    + alias2(alias1(depth0, depth0))
+    + "</option>\r\n";
+},"8":function(container,depth0,helpers,partials,data,blockParams,depths) {
+    var stack1, alias1=depth0 != null ? depth0 : (container.nullContext || {}), lookupProperty = container.lookupProperty || function(parent, propertyName) {
+        if (Object.prototype.hasOwnProperty.call(parent, propertyName)) {
+          return parent[propertyName];
+        }
+        return undefined
+    };
+
+  return "    <div class=\"row agent-row mb-3\">\r\n      <div class=\"col-6\">\r\n        <label>Agent name</label>\r\n        <input type=\"text\" class=\"form-control\" placeholder=\"Name\" "
+    + ((stack1 = lookupProperty(helpers,"if").call(alias1,(depth0 != null ? lookupProperty(depth0,"name") : depth0),{"name":"if","hash":{},"fn":container.program(9, data, 0, blockParams, depths),"inverse":container.noop,"data":data,"loc":{"start":{"line":27,"column":67},"end":{"line":27,"column":104}}})) != null ? stack1 : "")
+    + ">\r\n      </div>\r\n      <div class=\"col-6\">\r\n        <label>Agent type</label>\r\n        <select class=\"form-select\">\r\n"
+    + ((stack1 = lookupProperty(helpers,"each").call(alias1,(depths[1] != null ? lookupProperty(depths[1],"agentTypes") : depths[1]),{"name":"each","hash":{},"fn":container.program(11, data, 0, blockParams, depths),"inverse":container.noop,"data":data,"loc":{"start":{"line":32,"column":10},"end":{"line":38,"column":19}}})) != null ? stack1 : "")
+    + "        </select>\r\n      </div>\r\n    </div>\r\n";
+},"9":function(container,depth0,helpers,partials,data) {
+    var helper, lookupProperty = container.lookupProperty || function(parent, propertyName) {
+        if (Object.prototype.hasOwnProperty.call(parent, propertyName)) {
+          return parent[propertyName];
+        }
+        return undefined
+    };
+
+  return " value=\""
+    + container.escapeExpression(((helper = (helper = lookupProperty(helpers,"name") || (depth0 != null ? lookupProperty(depth0,"name") : depth0)) != null ? helper : container.hooks.helperMissing),(typeof helper === "function" ? helper.call(depth0 != null ? depth0 : (container.nullContext || {}),{"name":"name","hash":{},"data":data,"loc":{"start":{"line":27,"column":87},"end":{"line":27,"column":95}}}) : helper)))
+    + "\" ";
+},"11":function(container,depth0,helpers,partials,data,blockParams,depths) {
+    var stack1, lookupProperty = container.lookupProperty || function(parent, propertyName) {
+        if (Object.prototype.hasOwnProperty.call(parent, propertyName)) {
+          return parent[propertyName];
+        }
+        return undefined
+    };
+
+  return ((stack1 = (lookupProperty(helpers,"if_eq")||(depth0 && lookupProperty(depth0,"if_eq"))||container.hooks.helperMissing).call(depth0 != null ? depth0 : (container.nullContext || {}),depth0,(depths[1] != null ? lookupProperty(depths[1],"type") : depths[1]),{"name":"if_eq","hash":{},"fn":container.program(12, data, 0, blockParams, depths),"inverse":container.program(14, data, 0, blockParams, depths),"data":data,"loc":{"start":{"line":33,"column":12},"end":{"line":37,"column":22}}})) != null ? stack1 : "");
+},"12":function(container,depth0,helpers,partials,data) {
+    var alias1=container.lambda, alias2=container.escapeExpression;
+
+  return "              <option value=\""
+    + alias2(alias1(depth0, depth0))
+    + "\" selected=\"selected\">"
+    + alias2(alias1(depth0, depth0))
+    + "</option>\r\n";
+},"14":function(container,depth0,helpers,partials,data) {
+    var alias1=container.lambda, alias2=container.escapeExpression;
+
+  return "              <option value=\""
+    + alias2(alias1(depth0, depth0))
+    + "\">"
+    + alias2(alias1(depth0, depth0))
+    + "</option>\r\n";
+},"compiler":[8,">= 4.3.0"],"main":function(container,depth0,helpers,partials,data,blockParams,depths) {
+    var stack1, alias1=depth0 != null ? depth0 : (container.nullContext || {}), lookupProperty = container.lookupProperty || function(parent, propertyName) {
+        if (Object.prototype.hasOwnProperty.call(parent, propertyName)) {
+          return parent[propertyName];
+        }
+        return undefined
+    };
+
+  return "<div>\r\n  <div class=\"row mb-3\">\r\n    <div class=\"col\">\r\n      <label>Runtime name</label>\r\n      <input id=\"mas-name\" type=\"text\" class=\"form-control\" placeholder=\"Name\" "
+    + ((stack1 = lookupProperty(helpers,"if").call(alias1,(depth0 != null ? lookupProperty(depth0,"masName") : depth0),{"name":"if","hash":{},"fn":container.program(1, data, 0, blockParams, depths),"inverse":container.noop,"data":data,"loc":{"start":{"line":5,"column":79},"end":{"line":5,"column":123}}})) != null ? stack1 : "")
+    + ">\r\n    </div>\r\n  </div>\r\n  <div class=\"row mb-3\">\r\n    <div class=\"col\">\r\n      <label for=\"mas-template-select\">Load a saved template</label>\r\n      <select id=\"mas-template-select\" class=\"form-select\">\r\n        <option>-----------</option>\r\n"
+    + ((stack1 = lookupProperty(helpers,"each").call(alias1,(depth0 != null ? lookupProperty(depth0,"masArray") : depth0),{"name":"each","hash":{},"fn":container.program(3, data, 0, blockParams, depths),"inverse":container.noop,"data":data,"loc":{"start":{"line":13,"column":8},"end":{"line":19,"column":17}}})) != null ? stack1 : "")
+    + "      </select>\r\n    </div>\r\n  </div>\r\n"
+    + ((stack1 = lookupProperty(helpers,"each").call(alias1,(depth0 != null ? lookupProperty(depth0,"agents") : depth0),{"name":"each","hash":{},"fn":container.program(8, data, 0, blockParams, depths),"inverse":container.noop,"data":data,"loc":{"start":{"line":23,"column":2},"end":{"line":42,"column":11}}})) != null ? stack1 : "")
+    + "  <div class=\"button-row row\">\r\n    <div class=\"col-6\">\r\n      <button id=\"button-remove-agent\" type=\"button\" class=\"btn btn-light\">-</button>\r\n    </div>\r\n    <div class=\"col-6\">\r\n      <button id=\"button-add-agent\" type=\"button\" class=\"btn btn-light\">+</button>\r\n    </div>\r\n  </div>\r\n</div>";
+},"useData":true,"useDepths":true});
+templates['runtimeInspectModalBody'] = template({"1":function(container,depth0,helpers,partials,data,blockParams,depths) {
+    var stack1, helper, alias1=depth0 != null ? depth0 : (container.nullContext || {}), alias2=container.hooks.helperMissing, alias3="function", alias4=container.escapeExpression, lookupProperty = container.lookupProperty || function(parent, propertyName) {
+        if (Object.prototype.hasOwnProperty.call(parent, propertyName)) {
+          return parent[propertyName];
+        }
+        return undefined
+    };
+
+  return "  <div class=\"accordion\" id=\"inspect-accordion\">\r\n    <div class=\"accordion-item\">\r\n      <div class=\"accordion-header inspect-header\">\r\n        <div class=\"runtime-id\">\r\n          ID: <span>"
+    + alias4(((helper = (helper = lookupProperty(helpers,"id") || (depth0 != null ? lookupProperty(depth0,"id") : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"id","hash":{},"data":data,"loc":{"start":{"line":7,"column":20},"end":{"line":7,"column":26}}}) : helper)))
+    + "</span>\r\n        </div>\r\n        <button class=\"btn btn-danger\" id=\"stop-runtime-"
+    + alias4(((helper = (helper = lookupProperty(helpers,"index") || (data && lookupProperty(data,"index"))) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"index","hash":{},"data":data,"loc":{"start":{"line":9,"column":56},"end":{"line":9,"column":66}}}) : helper)))
+    + "\">Stop</button>\r\n        <button class=\"accordion-button collapsed\" data-bs-toggle=\"collapse\" data-bs-target=\"#inspect-collapse-"
+    + alias4(((helper = (helper = lookupProperty(helpers,"index") || (data && lookupProperty(data,"index"))) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"index","hash":{},"data":data,"loc":{"start":{"line":10,"column":111},"end":{"line":10,"column":121}}}) : helper)))
+    + "\" aria-controls=\"inspect-collapse-1\"></button>\r\n      </div>\r\n      <div id=\"inspect-collapse-"
+    + alias4(((helper = (helper = lookupProperty(helpers,"index") || (data && lookupProperty(data,"index"))) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"index","hash":{},"data":data,"loc":{"start":{"line":12,"column":32},"end":{"line":12,"column":42}}}) : helper)))
+    + "\" class=\"accordion-collapse collapse\">\r\n        <div class=\"accordion-body\">\r\n          <h5>Add agent</h5>\r\n          <div class=\"row mb-3\">\r\n            <div class=\"col-4\">\r\n              <label>Agent name</label>\r\n              <input type=\"text\" class=\"form-control\" placeholder=\"Name\">\r\n            </div>\r\n            <div class=\"col-4\">\r\n              <label>Agent type</label>\r\n              <select class=\"form-select\">\r\n"
+    + ((stack1 = lookupProperty(helpers,"each").call(alias1,(depths[1] != null ? lookupProperty(depths[1],"agentTypes") : depths[1]),{"name":"each","hash":{},"fn":container.program(2, data, 0, blockParams, depths),"inverse":container.noop,"data":data,"loc":{"start":{"line":23,"column":16},"end":{"line":25,"column":25}}})) != null ? stack1 : "")
+    + "              </select>\r\n            </div>\r\n            <div class=\"col-4\">\r\n             <button class=\"btn btn-success\">Add</button>\r\n            </div>\r\n          </div>\r\n          <hr/>\r\n          <h5>Remove agent</h5>\r\n          <div class=\"row mb-3\">\r\n             <div class=\"col-6\">\r\n              <label>Agent name</label>\r\n              <input type=\"text\" class=\"form-control\" placeholder=\"Name\">\r\n            </div>\r\n            <div class=\"col-6\">\r\n              <button class=\"btn btn-danger\">Remove</button>\r\n            </div>\r\n          </div>\r\n        </div>\r\n      </div>\r\n    </div>\r\n  </div>\r\n";
+},"2":function(container,depth0,helpers,partials,data) {
+    var alias1=container.lambda, alias2=container.escapeExpression;
+
+  return "                  <option value=\""
+    + alias2(alias1(depth0, depth0))
+    + "\">"
+    + alias2(alias1(depth0, depth0))
+    + "</option>\r\n";
+},"compiler":[8,">= 4.3.0"],"main":function(container,depth0,helpers,partials,data,blockParams,depths) {
+    var stack1, lookupProperty = container.lookupProperty || function(parent, propertyName) {
+        if (Object.prototype.hasOwnProperty.call(parent, propertyName)) {
+          return parent[propertyName];
+        }
+        return undefined
+    };
+
+  return "<div>\r\n"
+    + ((stack1 = lookupProperty(helpers,"each").call(depth0 != null ? depth0 : (container.nullContext || {}),(depth0 != null ? lookupProperty(depth0,"runtimeArray") : depth0),{"name":"each","hash":{},"fn":container.program(1, data, 0, blockParams, depths),"inverse":container.noop,"data":data,"loc":{"start":{"line":2,"column":2},"end":{"line":47,"column":11}}})) != null ? stack1 : "")
+    + "</div>";
+},"useData":true,"useDepths":true});
 templates['schemaInput'] = template({"1":function(container,depth0,helpers,partials,data) {
     var stack1, helper, alias1=depth0 != null ? depth0 : (container.nullContext || {}), alias2=container.hooks.helperMissing, alias3="function", alias4=container.escapeExpression, lookupProperty = container.lookupProperty || function(parent, propertyName) {
         if (Object.prototype.hasOwnProperty.call(parent, propertyName)) {

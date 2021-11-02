@@ -1,11 +1,7 @@
-#!/usr/bin/env node
+var args = process.argv.slice(2);
+var configPath = args[0]
 
-/* Have a look at:
-    - dashboardContent for the UI stuff
-    - yggdrasilInterface for the Yggdrasil calls
-    - dashboard for initialization functions
-*/
-const config = require('./config')
+const config = require(configPath)
 
 var server  = require('./src/app')
 server.startServer(config)

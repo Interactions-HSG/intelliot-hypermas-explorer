@@ -9,6 +9,6 @@ COPY . .
 
 EXPOSE 80
 
-CMD ./launchServer.sh
+CMD ./launchServerDocker.sh
 
 

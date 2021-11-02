@@ -10,4 +10,4 @@ lessc --strict-imports $file ./public/css/${f%%.*}.css ;
 done
 
 echo "Launching client..."
-node app.js
+node app.js ./config/docker.js

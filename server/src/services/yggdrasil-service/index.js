@@ -1,5 +1,5 @@
-const config = require('../../../config')
-const useMock = true; //TODO change this to not use mock
+const config = require('../../../config/yggdrasil')
+const useMock = config.yggdrasilMock;
 
 const mocked = require('./mocked')
 const api = require('./API')

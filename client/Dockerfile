@@ -11,6 +11,6 @@ COPY . .
 
 EXPOSE 80
 
-CMD ./launchClient.sh
+CMD ./launchClientDocker.sh
 
 

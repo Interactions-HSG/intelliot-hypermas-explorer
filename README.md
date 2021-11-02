@@ -1,7 +1,7 @@
 # intelliot-hypermas-explorer
 A stub for the Web-based IDE for Hypermedia MAS in the IntellIoT project. 
 
-Allow the dynamic discovery of artifacts and produce [JASON](http://jason.sourceforge.net/wp/) code from a block language powered by [Blockly](https://github.com/google/blockly/)
+Allow the dynamic discovery of artifacts and produce [Jason](http://jason.sourceforge.net/wp/) code from a block language powered by [Blockly](https://github.com/google/blockly/)
 
 # Use this repository
 To use this repository you have open a shell in the root folder and execute the command

@@ -2,8 +2,6 @@ const express = require('express');
 const cors = require('cors');
 const fs = require('fs');
 
-const config = require('./config');
-
 
 function notFound(req, res){
   if (req.accepts('html')) {
@@ -12,7 +10,10 @@ function notFound(req, res){
   }
 }
 
-exports.startServer = async function(options) {
+exports.startServer = async function(config) {
+  //Writing config files
+  fs.writeFileSync('./public/js/interfaces/backendURL.js', `const backendURL = "${config.backendURL}";`);
+
   console.log("Starting intelliot-hypermas-client...")
 
   const app = express()
@@ -33,19 +34,21 @@ exports.startServer = async function(options) {
   app.get('/html*', notFound)
 
   //enable static serving of files
-  app.use(express.static(options.staticDirectory))
+  app.use(express.static(config.staticDirectory))
 
   //Not found catcher
   app.use(notFound)
 
   //start listening
-  server.listen(options.port, function() {
-    console.log(`Started on port ${options.port}!`)
+  server.listen(config.port, function() {
+    console.log(`Started on port ${config.port}!`)
   })
 
 }
 
 //Start the server
-var port = process.env.SERVER_PORT || 8000
-fs.writeFileSync('./public/js/config.js', `const serverPort = ${port};`);
+var args = process.argv.slice(2);
+var configPath = args[0]
+
+const config = require(configPath)
 this.startServer(config);
