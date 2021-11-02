@@ -43,8 +43,19 @@ class RuntimeInspectModal {
       dashboard.showError("No runtimes are running at the moment")
       //return
     }
-    //fill accordion(?)
+    var $body = Handlebars.templates.runtimeInspectModalBody({
+      runtimeArray: this._runtimeArray
+    });
+
+    this.$modal.find('.modal-body').empty();
+    this.$modal.find('.modal-body').append($body);
     
+    //add stop handler
+    this.$modal.find('.modal-body').find('#stop-runtime-1').click( e => {
+      console.log("Stop")
+      e.stopPropagation();
+    })
+
     //show modal
     this._modal.show()
   }
