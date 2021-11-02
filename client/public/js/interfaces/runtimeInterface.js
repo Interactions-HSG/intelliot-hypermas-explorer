@@ -59,6 +59,11 @@ class RuntimeInterface {
     return res.data; 
   }
 
+  async getRuntimes(){
+    var res = await this.client.get(`/runtimes`);
+    return res.data;
+  }
+
   async runMas(masId){
     var res = await this.client.post(`/runtimes`, {masId});
   }

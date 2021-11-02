@@ -35,28 +35,37 @@ class RuntimeInspectModal {
     }
     try{
       //load all runtimes
-      this._runtimeArray = []//getRuntimes
+      this._runtimeArray = await runtimeInterface.getRuntimes();
     } catch(error){
       dashboard.showError("Unable to retrieve runtimes")
     }
     if(this._runtimeArray.length == 0){
       dashboard.showError("No runtimes are running at the moment")
-      //return
+      return
     }
+
     var $body = Handlebars.templates.runtimeInspectModalBody({
-      runtimeArray: this._runtimeArray
+      runtimeArray: this._runtimeArray,
+      agentTypes: this._agentsIdArray,
     });
 
     this.$modal.find('.modal-body').empty();
     this.$modal.find('.modal-body').append($body);
     
     //add stop handler
-    this.$modal.find('.modal-body').find('#stop-runtime-1').click( e => {
-      console.log("Stop")
+    var controller = this;
+    this.$modal.find('.modal-body').find('button').filter(function() {
+      return this.id.includes('stop-runtime');
+    }).click( e => {
+      controller._stopRuntime()
       e.stopPropagation();
     })
 
     //show modal
     this._modal.show()
+  }
+
+  async _stopRuntime(){
+    console.log("Stop handler")
   }
 }

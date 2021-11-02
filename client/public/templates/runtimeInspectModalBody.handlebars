@@ -1,18 +1,48 @@
 <div>
+  {{#each runtimeArray}}
   <div class="accordion" id="inspect-accordion">
     <div class="accordion-item">
       <div class="accordion-header inspect-header">
         <div class="runtime-id">
-          ID: <p></p>
+          ID: <span>{{id}}</span>
         </div>
-        <button class="btn btn-danger" id="stop-runtime-1">Stop</button>
-        <button class="accordion-button collapsed" data-bs-toggle="collapse" data-bs-target="#inspect-collapse-1" aria-controls="inspect-collapse-1"></button>
+        <button class="btn btn-danger" id="stop-runtime-{{@index}}">Stop</button>
+        <button class="accordion-button collapsed" data-bs-toggle="collapse" data-bs-target="#inspect-collapse-{{@index}}" aria-controls="inspect-collapse-1"></button>
       </div>
-      <div id="inspect-collapse-1" class="accordion-collapse collapse">
+      <div id="inspect-collapse-{{@index}}" class="accordion-collapse collapse">
         <div class="accordion-body">
-          <p>BODY</p>
+          <h5>Add agent</h5>
+          <div class="row mb-3">
+            <div class="col-4">
+              <label>Agent name</label>
+              <input type="text" class="form-control" placeholder="Name">
+            </div>
+            <div class="col-4">
+              <label>Agent type</label>
+              <select class="form-select">
+                {{#each ../agentTypes}}
+                  <option value="{{this}}">{{this}}</option>
+                {{/each}}
+              </select>
+            </div>
+            <div class="col-4">
+             <button class="btn btn-success">Add</button>
+            </div>
+          </div>
+          <hr/>
+          <h5>Remove agent</h5>
+          <div class="row mb-3">
+             <div class="col-6">
+              <label>Agent name</label>
+              <input type="text" class="form-control" placeholder="Name">
+            </div>
+            <div class="col-6">
+              <button class="btn btn-danger">Remove</button>
+            </div>
+          </div>
         </div>
       </div>
     </div>
   </div>
+  {{/each}}
 </div>
