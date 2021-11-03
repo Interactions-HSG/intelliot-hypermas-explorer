@@ -4,7 +4,7 @@ A stub for the Web-based IDE for Hypermedia MAS in the IntellIoT project.
 Allow the dynamic discovery of artifacts and produce [Jason](http://jason.sourceforge.net/wp/) code from a block language powered by [Blockly](https://github.com/google/blockly/)
 Manages the definition of agent source files and the deployment of MAS configurations to a runtime environment implemented by the [MAS REST Runtime](https://github.com/samubura/mas-rest-runtime)
 
-# Setup
+## Setup
 1. To start using this repository you have open a shell in the root folder and execute the command
 `./setup.sh`
 
@@ -17,5 +17,5 @@ To run yggdrasil execute the command `./gradlew run`. If you don't want to use y
 
 4. This application depends on the [MAS REST Runtime](https://github.com/samubura/mas-rest-runtime) to execute the agents programmed trhough the web app. Be sure to clone the repository and launch that setting up the proper configuration values in the server config files.
 
-# Run the application
+## Run the application
 The application can be launched as a docker application by running `./launchDocker.sh` or as a standalone application by running `./launchStandalone.sh` from the root folder of the project. We suggest using the Chrome browser to navigate the frontend app.
