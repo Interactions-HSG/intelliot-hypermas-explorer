@@ -11,7 +11,7 @@ Manages the definition of agent source files and the deployment of MAS configura
 2. Then you either need to setup docker on your machine or to setup a mongoDB instance either locally or remote if you prefer to launch the application without virtualization.
 (The standalone launch script launches the mongoDB instance locally through the `mongod` command)
 
-3. This application use an experimental version of [yggdrasil](https://github.com/Interactions-HSG/yggdrasil). In order to have that properly set up you need to clone the yggdrasil repository and update the submodule of the **wot-td-library** to point to [this](https://github.com/samubura/wot-td-java) repository.
+3. This application use an experimental version of [yggdrasil](https://github.com/samubura/yggdrasil). In order to have that properly set up you need to clone the yggdrasil repository and update the submodule of the **wot-td-library** to point to [this](https://github.com/samubura/wot-td-java) repository.
 Then you need to have an instance running (on your machine or anywhere else) and setup the proper configuration in the server config file. 
 To run yggdrasil execute the command `./gradlew run`. If you don't want to use yggdrasil you can modify the mock already implemented for testing purposes in the *server/src/services/yggdrasil-service* folder.
 
