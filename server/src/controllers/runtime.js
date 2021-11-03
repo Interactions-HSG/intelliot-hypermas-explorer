@@ -1,6 +1,6 @@
 const runtimeService = require('../services/runtime-service');
 const {MASDefinition, AgentSource, Runtime} = require('../models');
-const { ok, badRequest, failedDependency, notFound, created } = require('../utils/action-results');
+const { ok, badRequest, failedDependency, notFound, created, internalServerError } = require('../utils/action-results');
 
 
 function localRuntimeDTO(runtime){
@@ -110,14 +110,17 @@ exports.stopRuntime = async function (req) {
   //stop the remote runtime
   try {
     await runtimeService.stopRuntime(runtime.runtimeURL)
-    
+
+  } catch (error){
+    //return failedDependency(error)
+  }
+  try{
     //delete the runtime from local db
     await Runtime.deleteOne({_id: req.params.id})
 
     return ok(localRuntimeDTO(runtime))
-
-  } catch (error){
-    return failedDependency(error)
+  } catch (error) {
+    return internalServerError()
   }
 }
 

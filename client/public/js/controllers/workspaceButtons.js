@@ -130,10 +130,10 @@ class WorkspaceButtonsController {
     this._runModal.show()
   }
 
-  async _runMas(id){
-    console.log("Running mas... "+id)
+  async _runMas(masId){
+    console.log("Running mas... "+masId)
     try{
-      await runtimeInterface.runMas(id);
+      await runtimeInterface.startRuntime(masId);
     } catch(error){
       dashboard.showError(error)
     }

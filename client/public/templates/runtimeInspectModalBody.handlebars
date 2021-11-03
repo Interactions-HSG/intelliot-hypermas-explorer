@@ -4,21 +4,26 @@
     <div class="accordion-item">
       <div class="accordion-header inspect-header">
         <div class="runtime-id">
-          ID: <span>{{id}}</span>
+          {{id}}
         </div>
         <button class="btn btn-danger" id="stop-runtime-{{@index}}">Stop</button>
         <button class="accordion-button collapsed" data-bs-toggle="collapse" data-bs-target="#inspect-collapse-{{@index}}" aria-controls="inspect-collapse-1"></button>
       </div>
       <div id="inspect-collapse-{{@index}}" class="accordion-collapse collapse">
         <div class="accordion-body">
+          <h5>Current agents</h5>
+          <div class="row mb-3">
+            <div class="col">
+              {{toString agents}}
+            </div>
+          </div>
+          <hr/>
           <h5>Add agent</h5>
           <div class="row mb-3">
             <div class="col-4">
-              <label>Agent name</label>
               <input type="text" class="form-control" placeholder="Name">
             </div>
             <div class="col-4">
-              <label>Agent type</label>
               <select class="form-select">
                 {{#each ../agentTypes}}
                   <option value="{{this}}">{{this}}</option>
@@ -30,13 +35,11 @@
             </div>
           </div>
           <hr/>
-          <h5>Remove agent</h5>
           <div class="row mb-3">
-             <div class="col-6">
-              <label>Agent name</label>
+            <div class="col-8">
               <input type="text" class="form-control" placeholder="Name">
             </div>
-            <div class="col-6">
+            <div class="col-4">
               <button class="btn btn-danger">Remove</button>
             </div>
           </div>

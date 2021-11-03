@@ -44,6 +44,16 @@ class RuntimeInspectModal {
       return
     }
 
+    for(const r of this._runtimeArray){
+      var agents = []
+      try{
+        agents = await runtimeInterface.getRuntimeAgents(r.id)
+      } catch (error){
+        console.log(error)
+      }
+      r.agents = agents
+    }
+
     var $body = Handlebars.templates.runtimeInspectModalBody({
       runtimeArray: this._runtimeArray,
       agentTypes: this._agentsIdArray,
@@ -57,7 +67,8 @@ class RuntimeInspectModal {
     this.$modal.find('.modal-body').find('button').filter(function() {
       return this.id.includes('stop-runtime');
     }).click( e => {
-      controller._stopRuntime()
+      var index = $(e.target)[0].id.slice(-1)
+      controller._stopRuntime(index)
       e.stopPropagation();
     })
 
@@ -65,7 +76,12 @@ class RuntimeInspectModal {
     this._modal.show()
   }
 
-  async _stopRuntime(){
-    console.log("Stop handler")
+  async _stopRuntime(index){
+    console.log("Stopping "+this._runtimeArray[index].id)
+    try {
+      await runtimeInterface.stopRuntime(this._runtimeArray[index].id)
+    } catch(error){
+      dashboard.showError("Unable to stop runtime "+this._runtimeArray[index].id)
+    }
   }
 }

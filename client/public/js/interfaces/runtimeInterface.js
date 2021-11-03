@@ -64,12 +64,17 @@ class RuntimeInterface {
     return res.data;
   }
 
-  async runMas(masId){
-    var res = await this.client.post(`/runtimes`, {masId});
+  async getRuntimeAgents(runtimeId){
+    var res = await this.client.get(`/runtimes/${runtimeId}/agents`);
+    return res.data;
   }
 
-  async stopMas(runtimeId){
-    var res = await this.client.delete(`/runtimes/${runtimeId}`);
+  async stopRuntime(runtimeId){
+    await this.client.delete(`/runtimes/${runtimeId}`)
+  }
+
+  async startRuntime(masId){
+    var res = await this.client.post(`/runtimes`, {masId});
   }
 
 }
