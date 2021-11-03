@@ -2,16 +2,20 @@
 A stub for the Web-based IDE for Hypermedia MAS in the IntellIoT project. 
 
 Allow the dynamic discovery of artifacts and produce [Jason](http://jason.sourceforge.net/wp/) code from a block language powered by [Blockly](https://github.com/google/blockly/)
+Manages the definition of agent source files and the deployment of MAS configurations to a runtime environment implemented by the [MAS REST Runtime](https://github.com/samubura/mas-rest-runtime)
 
-# Use this repository
-To use this repository you have open a shell in the root folder and execute the command
+## Setup
+1. To start using this repository you have open a shell in the root folder and execute the command
 `./setup.sh`
 
-This application depends on an experimental version of [yggdrasil](https://github.com/Interactions-HSG/yggdrasil). In order to have that properly set up you need to clone the yggdrasil repository and update the submodule of the **wot-td-library** to point to [this](https://github.com/samubura/wot-td-java) repository.
+2. Then you either need to setup docker on your machine or to setup a mongoDB instance either locally or remote if you prefer to launch the application without virtualization.
+(The standalone launch script launches the mongoDB instance locally through the `mongod` command)
 
-Then you need to have an instance running (on your machine or anywhere else) and setup the proper configuration in the *server/config.js* file. 
+3. This application use an experimental version of [yggdrasil](https://github.com/Interactions-HSG/yggdrasil). In order to have that properly set up you need to clone the yggdrasil repository and update the submodule of the **wot-td-library** to point to [this](https://github.com/samubura/wot-td-java) repository.
+Then you need to have an instance running (on your machine or anywhere else) and setup the proper configuration in the *server/config/yggdrasil.js* file. 
+To run yggdrasil execute the command `./gradlew run`. If you don't want to use yggdrasil you can modify the mock already implemented for testing purposes in the *server/src/services/yggdrasil-service* folder.
 
-To run yggdrasil execute the command `./gradlew run`
+4. This application depends on the [MAS REST Runtime](https://github.com/samubura/mas-rest-runtime) to execute the agents programmed trhough the web app. Be sure to clone the repository and launch that setting up the proper configuration values in the server config files.
 
-Then to launch the backend application you need to execute the command 
-`./launchFrontend.sh`
+## Run the application
+The application can be launched as a docker application by running `./launchDocker.sh` or as a standalone application by running `./launchStandalone.sh` from the root folder of the project. We suggest using the Chrome browser to navigate the frontend app.
