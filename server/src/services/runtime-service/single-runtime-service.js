@@ -1,7 +1,4 @@
 const axios = require('axios');
-const protocol = "http"
-const hostname = "host.docker.internal" //TODO change this
-const port = "8088"
 
 class SingleRuntimeService {
 
@@ -75,4 +72,4 @@ class SingleRuntimeService {
 
 }
 
-module.exports = new SingleRuntimeService(protocol, hostname, port)
+module.exports = (protocol, hostname, port) => new SingleRuntimeService(protocol, hostname, port)

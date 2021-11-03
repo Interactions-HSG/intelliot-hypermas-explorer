@@ -69,4 +69,4 @@ class MockedRuntimeService {
 
 }
 
-module.exports = new MockedRuntimeService();
+module.exports = () => new MockedRuntimeService();

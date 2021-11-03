@@ -1,7 +1,5 @@
-var args = process.argv.slice(2);
-var configPath = args[0]
-
-const config = require(configPath)
+var {getConfig} = require('./get-config')
 
 var server  = require('./src/app')
-server.startServer(config)
+server.startServer(getConfig())
+

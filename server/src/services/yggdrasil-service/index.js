@@ -1,4 +1,4 @@
-const config = require('../../../config/yggdrasil')
+const config = require('../../../get-config').getConfig()
 const useMock = config.yggdrasilMock;
 
 const mocked = require('./mocked')
