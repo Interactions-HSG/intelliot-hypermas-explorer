@@ -61,8 +61,8 @@ class RuntimeInspectModal {
     this.$modal.find('.modal-body').empty();
     this.$modal.find('.modal-body').append($body);
     
-    //add stop handler
     var controller = this;
+    //add stop handler
     this.$modal.find('.modal-body').find('button').filter(function() {
       return this.id.includes('stop-runtime');
     }).click( e => {
@@ -70,6 +70,37 @@ class RuntimeInspectModal {
       controller._stopRuntime(index)
       e.stopPropagation();
     })
+
+    
+    //add add handler
+    this.$modal.find('.modal-body').find(".row")
+      .filter(function() {
+        return this.id.includes('add-runtime-agent');
+      })
+      .each(function(index) {
+        var parent = $(this)
+        $(this).find('button').click( e => {
+          var name = $(parent).find('input').val()
+          var type = $(parent).find('select').val()
+          controller._addRuntimeAgent(index, name, type)
+          e.stopPropagation();
+        })
+      })
+
+    //add remove handler
+    this.$modal.find('.modal-body').find("div.row")
+      .filter(function() {
+        return this.id.includes('remove-runtime-agent');
+      })
+      .each(function(index) {
+        var parent = $(this)
+        $(this).find('button').click( e => {
+          var name = $(parent).find('select').val()
+          controller._removeRuntimeAgent(index, name)
+          e.stopPropagation();
+        })
+      })
+      
   }
 
   async showMenu() {
@@ -95,6 +126,36 @@ class RuntimeInspectModal {
 
     } catch(error){
       dashboard.showError("Unable to stop runtime "+this._runtimeArray[index].id)
+    }
+  }
+
+  async _addRuntimeAgent(index, name, type){
+    console.log(`add agent ${name} of type ${type} in runtime ${index}`)
+    try {
+      await runtimeInterface.addRuntimeAgent(this._runtimeArray[index].id, name, type)
+      try{
+        await this._loadMenuData();
+      } catch(e){
+        this._modal.hide()
+      }
+
+    } catch(error){
+      dashboard.showError("Unable to add agent to "+this._runtimeArray[index].id)
+    }
+  }
+
+  async _removeRuntimeAgent(index, name){
+    console.log(`remove agent ${name} in runtime ${index}`)
+    try {
+      await runtimeInterface.deleteRuntimeAgent(this._runtimeArray[index].id, name)
+      try{
+        await this._loadMenuData();
+      } catch(e){
+        this._modal.hide()
+      }
+
+    } catch(error){
+      dashboard.showError("Unable to remove agent from "+this._runtimeArray[index].id)
     }
   }
 }
