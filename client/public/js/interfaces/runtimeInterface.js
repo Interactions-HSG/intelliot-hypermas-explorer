@@ -63,20 +63,31 @@ class RuntimeInterface {
     var res = await this.client.get(`/runtimes`);
     return res.data;
   }
-
+  
+  async startRuntime(masId){
+    var res = await this.client.post(`/runtimes`, {masId});
+    return res.data
+  }
+  
+  async stopRuntime(runtimeId){
+    await this.client.delete(`/runtimes/${runtimeId}`)
+  }
+  
   async getRuntimeAgents(runtimeId){
     var res = await this.client.get(`/runtimes/${runtimeId}/agents`);
     return res.data;
   }
 
-  async stopRuntime(runtimeId){
-    await this.client.delete(`/runtimes/${runtimeId}`)
+  async addRuntimeAgent(runtimeId, agentName, agentType){
+    var res = await this.client.post(`/runtimes/${runtimeId}/agents`, {name: agentName, type: agentType})
+    return res.data
   }
 
-  async startRuntime(masId){
-    var res = await this.client.post(`/runtimes`, {masId});
+  async deleteRuntimeAgent(runtimeId, agentName){
+    var res = await this.client.delete(`/runtimes/${runtimeId}/agents/${agentName}`)
+    return res.data
   }
-
+  
 }
 
 //use as singleton

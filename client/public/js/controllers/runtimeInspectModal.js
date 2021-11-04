@@ -22,7 +22,7 @@ class RuntimeInspectModal {
     //reset graphics
   }
 
-  async showMenu() {
+  async _loadMenuData(){
     try{
       //load all agents type
       this._agentsIdArray = await runtimeInterface.getAvailableAgents()
@@ -40,8 +40,7 @@ class RuntimeInspectModal {
       dashboard.showError("Unable to retrieve runtimes")
     }
     if(this._runtimeArray.length == 0){
-      dashboard.showError("No runtimes are running at the moment")
-      return
+      throw "stop"
     }
 
     for(const r of this._runtimeArray){
@@ -71,7 +70,15 @@ class RuntimeInspectModal {
       controller._stopRuntime(index)
       e.stopPropagation();
     })
+  }
 
+  async showMenu() {
+    try{
+      await this._loadMenuData()
+    } catch (error){
+      dashboard.showError("No runtimes are running at the moment")
+      return;
+    }
     //show modal
     this._modal.show()
   }
@@ -80,6 +87,12 @@ class RuntimeInspectModal {
     console.log("Stopping "+this._runtimeArray[index].id)
     try {
       await runtimeInterface.stopRuntime(this._runtimeArray[index].id)
+      try{
+        await this._loadMenuData();
+      } catch(e){
+        this._modal.hide()
+      }
+
     } catch(error){
       dashboard.showError("Unable to stop runtime "+this._runtimeArray[index].id)
     }
