@@ -361,17 +361,29 @@ templates['runtimeInspectModalBody'] = template({"1":function(container,depth0,h
         return undefined
     };
 
-  return "  <div class=\"accordion\" id=\"inspect-accordion\">\r\n    <div class=\"accordion-item\">\r\n      <div class=\"accordion-header inspect-header\">\r\n        <div class=\"runtime-id\">\r\n          ID: <span>"
-    + alias4(((helper = (helper = lookupProperty(helpers,"id") || (depth0 != null ? lookupProperty(depth0,"id") : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"id","hash":{},"data":data,"loc":{"start":{"line":7,"column":20},"end":{"line":7,"column":26}}}) : helper)))
-    + "</span>\r\n        </div>\r\n        <button class=\"btn btn-danger\" id=\"stop-runtime-"
+  return "  <div class=\"accordion\" id=\"inspect-accordion\">\r\n    <div class=\"accordion-item\">\r\n      <div class=\"accordion-header inspect-header\">\r\n        <div class=\"runtime-id\">\r\n          "
+    + alias4(((helper = (helper = lookupProperty(helpers,"id") || (depth0 != null ? lookupProperty(depth0,"id") : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"id","hash":{},"data":data,"loc":{"start":{"line":7,"column":10},"end":{"line":7,"column":16}}}) : helper)))
+    + "\r\n        </div>\r\n        <button class=\"btn btn-danger\" id=\"stop-runtime-"
     + alias4(((helper = (helper = lookupProperty(helpers,"index") || (data && lookupProperty(data,"index"))) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"index","hash":{},"data":data,"loc":{"start":{"line":9,"column":56},"end":{"line":9,"column":66}}}) : helper)))
     + "\">Stop</button>\r\n        <button class=\"accordion-button collapsed\" data-bs-toggle=\"collapse\" data-bs-target=\"#inspect-collapse-"
     + alias4(((helper = (helper = lookupProperty(helpers,"index") || (data && lookupProperty(data,"index"))) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"index","hash":{},"data":data,"loc":{"start":{"line":10,"column":111},"end":{"line":10,"column":121}}}) : helper)))
     + "\" aria-controls=\"inspect-collapse-1\"></button>\r\n      </div>\r\n      <div id=\"inspect-collapse-"
     + alias4(((helper = (helper = lookupProperty(helpers,"index") || (data && lookupProperty(data,"index"))) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"index","hash":{},"data":data,"loc":{"start":{"line":12,"column":32},"end":{"line":12,"column":42}}}) : helper)))
-    + "\" class=\"accordion-collapse collapse\">\r\n        <div class=\"accordion-body\">\r\n          <h5>Add agent</h5>\r\n          <div class=\"row mb-3\">\r\n            <div class=\"col-4\">\r\n              <label>Agent name</label>\r\n              <input type=\"text\" class=\"form-control\" placeholder=\"Name\">\r\n            </div>\r\n            <div class=\"col-4\">\r\n              <label>Agent type</label>\r\n              <select class=\"form-select\">\r\n"
-    + ((stack1 = lookupProperty(helpers,"each").call(alias1,(depths[1] != null ? lookupProperty(depths[1],"agentTypes") : depths[1]),{"name":"each","hash":{},"fn":container.program(2, data, 0, blockParams, depths),"inverse":container.noop,"data":data,"loc":{"start":{"line":23,"column":16},"end":{"line":25,"column":25}}})) != null ? stack1 : "")
-    + "              </select>\r\n            </div>\r\n            <div class=\"col-4\">\r\n             <button class=\"btn btn-success\">Add</button>\r\n            </div>\r\n          </div>\r\n          <hr/>\r\n          <h5>Remove agent</h5>\r\n          <div class=\"row mb-3\">\r\n             <div class=\"col-6\">\r\n              <label>Agent name</label>\r\n              <input type=\"text\" class=\"form-control\" placeholder=\"Name\">\r\n            </div>\r\n            <div class=\"col-6\">\r\n              <button class=\"btn btn-danger\">Remove</button>\r\n            </div>\r\n          </div>\r\n        </div>\r\n      </div>\r\n    </div>\r\n  </div>\r\n";
+    + "\" class=\"accordion-collapse collapse\">\r\n        <div class=\"accordion-body\">\r\n          <h5>Current agents</h5>\r\n          <div class=\"row mb-3\">\r\n            <div class=\"col\">\r\n              "
+    + alias4((lookupProperty(helpers,"toString")||(depth0 && lookupProperty(depth0,"toString"))||alias2).call(alias1,(depth0 != null ? lookupProperty(depth0,"agents") : depth0),{"name":"toString","hash":{},"data":data,"loc":{"start":{"line":17,"column":14},"end":{"line":17,"column":33}}}))
+    + "\r\n            </div>\r\n          </div>\r\n          <hr/>\r\n          <h5>Add agent</h5>\r\n          <div class=\"row mb-3\" id=\"add-runtime-agent-"
+    + alias4(((helper = (helper = lookupProperty(helpers,"index") || (data && lookupProperty(data,"index"))) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"index","hash":{},"data":data,"loc":{"start":{"line":22,"column":54},"end":{"line":22,"column":64}}}) : helper)))
+    + "\">\r\n            <div class=\"col-4\">\r\n              <input type=\"text\" name=\"name\" class=\"form-control\" placeholder=\"Name\">\r\n            </div>\r\n            <div class=\"col-4\">\r\n              <select class=\"form-select\">\r\n"
+    + ((stack1 = lookupProperty(helpers,"each").call(alias1,(depths[1] != null ? lookupProperty(depths[1],"agentTypes") : depths[1]),{"name":"each","hash":{},"fn":container.program(2, data, 0, blockParams, depths),"inverse":container.noop,"data":data,"loc":{"start":{"line":28,"column":16},"end":{"line":30,"column":25}}})) != null ? stack1 : "")
+    + "              </select>\r\n            </div>\r\n            <div class=\"col-4\">\r\n             <button class=\"btn btn-success\">Add</button>\r\n            </div>\r\n          </div>\r\n          <hr/>\r\n          <div class=\"row mb-3\"  id=\"remove-runtime-agent-"
+    + alias4(((helper = (helper = lookupProperty(helpers,"index") || (data && lookupProperty(data,"index"))) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"index","hash":{},"data":data,"loc":{"start":{"line":38,"column":58},"end":{"line":38,"column":68}}}) : helper)))
+    + "\">\r\n            <h5>Remove agent</h5>\r\n            <div class=\"col-8\">\r\n              <select class=\"form-select\">\r\n"
+    + ((stack1 = lookupProperty(helpers,"each").call(alias1,(depth0 != null ? lookupProperty(depth0,"agents") : depth0),{"name":"each","hash":{},"fn":container.program(4, data, 0, blockParams, depths),"inverse":container.noop,"data":data,"loc":{"start":{"line":42,"column":16},"end":{"line":44,"column":25}}})) != null ? stack1 : "")
+    + "              </select>\r\n            </div>\r\n            <div class=\"col-4\">\r\n              <button class=\"btn btn-danger\">Remove</button>\r\n            </div>\r\n          </div>\r\n          <hr/>\r\n          <div class=\"row mb-3\">\r\n            <div class=\"col\">\r\n              Hosted on: "
+    + alias4(((helper = (helper = lookupProperty(helpers,"runtimeURL") || (depth0 != null ? lookupProperty(depth0,"runtimeURL") : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"runtimeURL","hash":{},"data":data,"loc":{"start":{"line":54,"column":25},"end":{"line":54,"column":39}}}) : helper)))
+    + "\r\n            </div>\r\n          </div>\r\n          <div class=\"row mb-3\">\r\n            <div class=\"col\">\r\n              Template: "
+    + alias4(((helper = (helper = lookupProperty(helpers,"masId") || (depth0 != null ? lookupProperty(depth0,"masId") : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"masId","hash":{},"data":data,"loc":{"start":{"line":59,"column":24},"end":{"line":59,"column":33}}}) : helper)))
+    + "\r\n            </div>\r\n          </div>\r\n        </div>\r\n      </div>\r\n    </div>\r\n  </div>\r\n";
 },"2":function(container,depth0,helpers,partials,data) {
     var alias1=container.lambda, alias2=container.escapeExpression;
 
@@ -379,6 +391,19 @@ templates['runtimeInspectModalBody'] = template({"1":function(container,depth0,h
     + alias2(alias1(depth0, depth0))
     + "\">"
     + alias2(alias1(depth0, depth0))
+    + "</option>\r\n";
+},"4":function(container,depth0,helpers,partials,data) {
+    var helper, alias1=depth0 != null ? depth0 : (container.nullContext || {}), alias2=container.hooks.helperMissing, alias3="function", alias4=container.escapeExpression, lookupProperty = container.lookupProperty || function(parent, propertyName) {
+        if (Object.prototype.hasOwnProperty.call(parent, propertyName)) {
+          return parent[propertyName];
+        }
+        return undefined
+    };
+
+  return "                <option value=\""
+    + alias4(((helper = (helper = lookupProperty(helpers,"name") || (depth0 != null ? lookupProperty(depth0,"name") : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"name","hash":{},"data":data,"loc":{"start":{"line":43,"column":31},"end":{"line":43,"column":39}}}) : helper)))
+    + "\">"
+    + alias4(((helper = (helper = lookupProperty(helpers,"name") || (depth0 != null ? lookupProperty(depth0,"name") : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"name","hash":{},"data":data,"loc":{"start":{"line":43,"column":41},"end":{"line":43,"column":49}}}) : helper)))
     + "</option>\r\n";
 },"compiler":[8,">= 4.3.0"],"main":function(container,depth0,helpers,partials,data,blockParams,depths) {
     var stack1, lookupProperty = container.lookupProperty || function(parent, propertyName) {
@@ -389,7 +414,7 @@ templates['runtimeInspectModalBody'] = template({"1":function(container,depth0,h
     };
 
   return "<div>\r\n"
-    + ((stack1 = lookupProperty(helpers,"each").call(depth0 != null ? depth0 : (container.nullContext || {}),(depth0 != null ? lookupProperty(depth0,"runtimeArray") : depth0),{"name":"each","hash":{},"fn":container.program(1, data, 0, blockParams, depths),"inverse":container.noop,"data":data,"loc":{"start":{"line":2,"column":2},"end":{"line":47,"column":11}}})) != null ? stack1 : "")
+    + ((stack1 = lookupProperty(helpers,"each").call(depth0 != null ? depth0 : (container.nullContext || {}),(depth0 != null ? lookupProperty(depth0,"runtimeArray") : depth0),{"name":"each","hash":{},"fn":container.program(1, data, 0, blockParams, depths),"inverse":container.noop,"data":data,"loc":{"start":{"line":2,"column":2},"end":{"line":66,"column":11}}})) != null ? stack1 : "")
     + "</div>";
 },"useData":true,"useDepths":true});
 templates['schemaInput'] = template({"1":function(container,depth0,helpers,partials,data) {
