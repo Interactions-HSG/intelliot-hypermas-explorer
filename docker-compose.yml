@@ -14,10 +14,6 @@ services:
     build:
       context: ./server
       dockerfile: Dockerfile
-    deploy:
-      restart_policy:
-        delay: 5s
-        max_attempts: 3
     environment:
       - "MONGO_URL=${MONGO_URL}"
     ports:

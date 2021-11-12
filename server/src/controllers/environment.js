@@ -1,5 +1,5 @@
 const {ok} = require('../utils/action-results')
-const yggdrasilService = require('../services/yggdrasil-service')
+const environmentService = require('../services/environment-service')
 
 function EnvironmentDto(id, uri, workspaces){
   return {
@@ -37,30 +37,30 @@ function ArtifactDto(workspaceId, workspaceUri, id, thingDescription) {
 
 exports.getEnvironmentInfo = async function(req){
   var id = req.params.environmentId
-  var workspaces = await yggdrasilService.getWorkspacesInEnvironment(id)
-  var uri = yggdrasilService.getEnvironmentURI(id)
+  var workspaces = await environmentService.getWorkspacesInEnvironment(id)
+  var uri = environmentService.getEnvironmentURI(id)
   return ok(EnvironmentDto(id, uri, workspaces))
 }
 
 exports.getWorkspacesInEnvironment = async function(req) {
   var id = req.params.environmentId
-  var workspaces = await yggdrasilService.getWorkspacesInEnvironment(id)
+  var workspaces = await environmentService.getWorkspacesInEnvironment(id)
   return ok(WorkspacesDTO(workspaces))
 }
 
 exports.getWorkspaceInfo = async function(req){
   var envId = req.params.environmentId
   var id = req.params.workspaceId
-  var artifacts = await yggdrasilService.getArtifactsInWorkspace(envId, id)
-  var parentURI = yggdrasilService.getEnvironmentURI(envId)
-  var uri = yggdrasilService.getWorkspaceURI(envId, id)
+  var artifacts = await environmentService.getArtifactsInWorkspace(envId, id)
+  var parentURI = environmentService.getEnvironmentURI(envId)
+  var uri = environmentService.getWorkspaceURI(envId, id)
   return ok(WorkspaceDto(envId, parentURI, id, uri, artifacts))
 }
 
 exports.getArtifactsInWorkspace = async function(req) {
   var envId = req.params.environmentId
   var id = req.params.workspaceId
-  var artifacts = await yggdrasilService.getArtifactsInWorkspace(envId, id)
+  var artifacts = await environmentService.getArtifactsInWorkspace(envId, id)
   return ok(ArtifactsDTO(artifacts))
 }
 
@@ -68,7 +68,7 @@ exports.getArtifact = async function(req){
   var envId = req.params.environmentId
   var workId = req.params.workspaceId
   var artifactId = req.params.artifactId
-  var parentUri = yggdrasilService.getWorkspaceURI(envId, workId);
-  var artifactTD = await yggdrasilService.getArtifactTD(envId, workId, artifactId)
+  var parentUri = environmentService.getWorkspaceURI(envId, workId);
+  var artifactTD = await environmentService.getArtifactTD(envId, workId, artifactId)
   return ok(ArtifactDto(workId, parentUri, artifactId, artifactTD));
 }

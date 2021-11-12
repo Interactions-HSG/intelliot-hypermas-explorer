@@ -8,8 +8,8 @@ module.exports = {
   runtimePort: 8088,
   runtimeMock: false,
 
-  yggdrasilProtocol: "http",
-  yggdrasilHostName: "localhost",
-  yggdrasilPort: 8087,
-  yggdrasilMock: true
+  environmentProtocol: "http",
+  environmentHostName: "localhost",
+  environmentPort: 3000,
+  environmentInterface: "spockbot"
 }

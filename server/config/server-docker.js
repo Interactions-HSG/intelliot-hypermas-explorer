@@ -8,8 +8,8 @@ module.exports = {
   runtimePort: 8088,
   runtimeMock: false,
 
-  yggdrasilProtocol: "http",
-  yggdrasilHostName: "host.docker.internal",
-  yggdrasilPort: 8087,
-  yggdrasilMock: true
+  environmentProtocol: "http",
+  environmentHostName: "host.docker.internal",
+  environmentPort: 3000,
+  environmentInterface: "simulator"
 }

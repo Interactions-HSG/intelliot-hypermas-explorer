@@ -1,7 +1,6 @@
-class MockedYggdrasil {
+class SpockbotMock {
 
   baseURL = undefined
-
 
   constructor(protocol, hostname, port) {
     this.baseURL = `${protocol}://${hostname}:${port}`
@@ -19,16 +18,15 @@ class MockedYggdrasil {
     return `${this.baseURL}/environments/${environmentId}/workspaces/${workspaceId}/artifacts/${artifactId}`
   }
 
-
   async getWorkspacesInEnvironment(environmentId) {
     var id="uc-agriculture"
-    var uri="http://localhost:8080/environments/intelliot/workspaces/uc-agriculture"
+    var uri="mocked"
     return Promise.resolve([{id, uri}])
   }
 
   async getArtifactsInWorkspace(environmentId, workspaceId) {
     var id="spockbot"
-    var uri="http://localhost:8080/environments/intelliot/workspaces/uc-agriculture/artifacts/spockbot"
+    var uri="mocked"
     return  Promise.resolve([{id, uri}])
   }
 
@@ -38,7 +36,7 @@ class MockedYggdrasil {
   }
 }
 
-module.exports = (protocol, hostname, port) => new MockedYggdrasil(protocol, hostname, port)
+module.exports = (protocol, hostname, port) => new SpockbotMock(protocol, hostname, port)
 
 
 const spockBotTD={
@@ -56,7 +54,7 @@ const spockBotTD={
       }
   ],
   "title": "Smart tractor",
-  "id": "http://localhost:8080/environments/intelliot/workspaces/uc-agriculture/artifacts/spockbot",
+  "id": "spockbot",
   "@type": [
       "eve:Artifact",
       "http://semantics.interactions.ics.unisg.ch/hackathon21#Robot",
