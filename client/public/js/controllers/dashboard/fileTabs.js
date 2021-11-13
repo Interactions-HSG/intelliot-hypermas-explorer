@@ -38,6 +38,7 @@ class FileTabsController {
     definition.setDeletable(false)
     definition.initSvg()
     this._workspace.render();
+    this._workspace.clearUndo()
 
     //add key in block storage
     this._currentStorageKey = validName
@@ -63,6 +64,7 @@ class FileTabsController {
       //render a new tab
       this._addTabDom(agentId)  
     }
+    this._workspace.clearUndo()
   }
 
   _loadXml(id, xml){
