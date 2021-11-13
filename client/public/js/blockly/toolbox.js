@@ -1,6 +1,7 @@
 const toolboxDefinition = {
   "kind": "categoryToolbox",
-  "contents": [{
+  "contents": [
+    {
       "kind": "category",
       "name": "Basics",
       "toolboxitemid": "Basics",
@@ -49,7 +50,7 @@ const toolboxDefinition = {
             "</block>"
         },
         {
-          "kind": "block", 
+          "kind": "block",
           "type": "rule_body"
         },
         {
@@ -82,8 +83,7 @@ const toolboxDefinition = {
       "kind": "category",
       "name": "Agent Initialization",
       "toolboxitemid": "Agent_Initialization",
-      "contents": [
-        {
+      "contents": [{
           "kind": "block",
           //"type": "init_belief",
           "blockxml": "<block type='init_belief'>" +
@@ -171,11 +171,11 @@ const toolboxDefinition = {
             "</block>"
         },
         {
-          "kind": "block", 
+          "kind": "block",
           "type": "predicate"
         },
         {
-          "kind": "block", 
+          "kind": "block",
           "type": "rule_body"
         },
       ]
@@ -284,13 +284,14 @@ const toolboxDefinition = {
     },
     {
       "kind": "toolboxTitle",
-      "text": "Things"
-    }
+      "text": "Things",
+      "toolboxitemid": "Things"
+    },
   ]
 }
 
 class ToolboxTitle extends Blockly.ToolboxItem {
-  
+
   title = undefined
 
   constructor(toolboxItemDef, parentToolbox) {
@@ -299,18 +300,20 @@ class ToolboxTitle extends Blockly.ToolboxItem {
 
   init() {
     // Create the title.
+    $('#'+this.toolboxItemDef_['toolboxitemid']).remove() //ugly fix for not making it appear twice (?)
     this.title = document.createElement('div');
     // Set the name.
     var $title = $(this.title)
+    $title.attr('id',  this.toolboxItemDef_['toolboxitemid'])
     $title.text(this.toolboxItemDef_['text']).addClass('toolbox-title')
   }
-  
+
   getDiv() {
     return this.title;
   }
 }
 
 Blockly.registry.register(
-    Blockly.registry.Type.TOOLBOX_ITEM,
-    'toolboxTitle',
-    ToolboxTitle);
+  Blockly.registry.Type.TOOLBOX_ITEM,
+  'toolboxTitle',
+  ToolboxTitle);
