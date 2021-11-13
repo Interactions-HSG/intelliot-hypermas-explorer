@@ -3,9 +3,6 @@ class BlocklyController {
 
   _workspace = undefined
   _toolbox = undefined
-  _propertyCategory = undefined
-  _actionCategory = undefined
-  _eventCategory = undefined
   _flyout = undefined
 
   _tabsController = undefined;
@@ -43,9 +40,6 @@ class BlocklyController {
     }
     this._workspace = Blockly.inject(this.$blocklyInjection[0], options);
     this._toolbox = this._workspace.getToolbox();
-    this._propertyCategory = this._toolbox.getToolboxItemById('Properties');
-    this._actionCategory = this._toolbox.getToolboxItemById('Actions');
-    this._eventCategory = this._toolbox.getToolboxItemById('Events');
     this._flyout = this._toolbox.getFlyout();
 
     this._tabsController = new FileTabsController(this._workspace)
@@ -63,16 +57,22 @@ class BlocklyController {
       this.hideLauncher();
       this.showArea(this.$agentNameInput.val())
     })
+
+    //TESTS
+
   }
 
   loadArtifact(artifact) {
     var propertyBlocks = this._generatePropertyBlocks(artifact.thingDescription.properties, artifact.id)
     var actionBlocks = this._generateActionBlocks(artifact.thingDescription.actions, artifact.id)
     var eventBlocks = this._generateEventBlocks(artifact.thingDescription.events, artifact.id)
-
-    this._propertyCategory.updateFlyoutContents(propertyBlocks)
-    this._actionCategory.updateFlyoutContents(actionBlocks)
-    this._eventCategory.updateFlyoutContents(eventBlocks)
+    console.log(artifact)
+    var thingCategory = {
+      kind: "category"
+    }
+    //toolboxDefinition.push(thingCategory)
+    this._workspace.updateToolbox(toolboxDefinition);
+    
   }
 
   isEmpty() {
@@ -80,9 +80,7 @@ class BlocklyController {
   }
 
   clearIDE() {
-    this._propertyCategory.updateFlyoutContents([])
-    this._actionCategory.updateFlyoutContents([])
-    this._eventCategory.updateFlyoutContents([])
+    
     this._tabsController.clearAll();
   }
 

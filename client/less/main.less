@@ -77,19 +77,25 @@
 }
 
 #container {
+  overflow:hidden;
   position: absolute;
-  padding: 20px;
   width:100%;
   box-sizing: border-box;
   top: @header_height;
   display: flex;
   flex-flow: column;
-  height: calc(~"100vh - @{header_height}");
+  height: calc(~"100vh - @{header_height}"); //TODO quick fix
   background: @c_interactions_snow;
 }
 
 .row-body {
   height: 100%;
+  margin:0px;
+}
+
+.row-body>*{
+  margin:0px;
+  padding:0px;
 }
 
 #artifacts-container, #affordances-container {

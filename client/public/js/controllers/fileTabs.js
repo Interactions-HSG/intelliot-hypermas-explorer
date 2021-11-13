@@ -196,6 +196,7 @@ class FileTabsController {
 
     this._workspace.clearUndo()
     this._workspace.trashcan.emptyContents();
+    this._workspace.scroll(0,0)
   }
 
   _setSelected(name){

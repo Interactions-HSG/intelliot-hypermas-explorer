@@ -19,8 +19,6 @@ class ArtifactsController {
     try {
       var artifacts = await environmentInterface.fetchArtifacts(environmentId, workspaceId);
       log.fine(`Workspace contained ${artifacts.length} artifact(s)!`);
-      //fetch affordances
-      //TODO better error handling
       for (var artifact of artifacts) {
         try {
           var artifactDescription = await environmentInterface.getArtifactDescription(environmentId, workspaceId, artifact.id)
@@ -29,7 +27,7 @@ class ArtifactsController {
           log.error(error)
         }
       }
-      this.showArtifactsBar();
+      //this.showArtifactsBar();
       return Promise.resolve(this.currentArtifacts);
     } catch (error) {
       return Promise.reject(error);
