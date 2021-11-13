@@ -6,7 +6,6 @@ const dashboard = new Dashboard();
 
 const main = {
   init: function () {
-    log.debug('init dashboard');
     helpers.registerHelpers();
     dashboard.init();
   }

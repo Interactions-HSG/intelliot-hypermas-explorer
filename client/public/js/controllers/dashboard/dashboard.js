@@ -1,9 +1,6 @@
 class Dashboard {
-
   environmentId = "intelliot"
-  //component controllers
   environmentController = new EnvironmentController(this.environmentId);
-  artifactsController = new ArtifactsController();
   blocklyController = new BlocklyController();
 
   // jquery shortcuts
@@ -14,15 +11,13 @@ class Dashboard {
 
   async init() {
     log.fine('Initializing the dashboard and loading data');
-    // Load Environment
     this.$container.hide()
+    this.blocklyController.initialize();
     try {
       await this.environmentController.fetchWorkspaces();
-      await this.revealDashboard();
     } catch (error) {
       this.showError(error)
     }
-    this.blocklyController.initialize();
   }
 
   //returns a promise whose value resolve to:
@@ -32,10 +27,6 @@ class Dashboard {
     switch (event.type) {
       case EnvironmentController.selectWorkspaceEvent:
         return await this.handleSelectWorkspaceEvent(event.data)
-      case ArtifactsController.selectArtifactEvent:
-        return await this.handleArtifactSelectedEvent(event.data)
-      case ArtifactsController.testAffordanceEvent:
-        return await this.handleTestAffordanceEvent(event.data)
       default:
         log.error(`Unrecognized event of type ${event.type}`)
         return new Promise.resolve(false);
@@ -48,44 +39,21 @@ class Dashboard {
       var res = await this.waitConfirm("Are you sure? You will lose all your blocks")
     }
     if(res){
-      this.artifactsController.clearArtifactsBar();
-      this.artifactsController.clearAffordancesBar();
       this.blocklyController.clearIDE();
       this.blocklyController.hideArea();
-      this.blocklyController.hideLauncher();
-      if (workspaceData.uri != "empty") {
-        try {
-          await this.artifactsController.reloadArtifactsFromWorkspace(workspaceData.parent, workspaceData.id);
-        } catch (error) {
-          this.showError(error)
-          return Promise.resolve(false) //abort change
+      try {
+        var artifacts = await this.environmentController.reloadArtifactsFromWorkspace(workspaceData.parent, workspaceData.id);
+        for(const a of artifacts){
+          this.blocklyController.loadArtifact(a)
         }
-        this.blocklyController.showLauncher();
+      } catch (error) {
+        this.showError(error)
+        return Promise.resolve(false) //abort change
       }
+      await this.revealDashboard();
+      this.blocklyController.showArea("new_agent")
     }
     return Promise.resolve(res)
-  }
-
-  async handleArtifactSelectedEvent(artifactData) {
-      try {
-        this.artifactsController.showArtifactAffordances(artifactData.id);
-        this.blocklyController.hideMenu();
-        this.blocklyController.loadArtifact(artifactData);
-        return Promise.resolve(true);
-      } catch (error) {
-        this.showError(error);
-        return Promise.resolve(false);
-      }
-    }
-
-  async handleTestAffordanceEvent(affordanceData) {
-    try {
-      await this.artifactsController.testAffordance(affordanceData.id, affordanceData.type, affordanceData.input);
-      return Promise.resolve(true);
-    } catch (error) {
-      this.showError(error);
-      return Promise.resolve(false);
-    }
   }
 
   waitConfirm(message){

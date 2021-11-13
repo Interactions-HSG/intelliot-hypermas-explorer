@@ -281,6 +281,36 @@ const toolboxDefinition = {
     {
       "kind": "sep",
       "toolboxitemid": "separator"
+    },
+    {
+      "kind": "toolboxTitle",
+      "text": "Things"
     }
   ]
 }
+
+class ToolboxTitle extends Blockly.ToolboxItem {
+  
+  title = undefined
+
+  constructor(toolboxItemDef, parentToolbox) {
+    super(toolboxItemDef, parentToolbox);
+  }
+
+  init() {
+    // Create the title.
+    this.title = document.createElement('div');
+    // Set the name.
+    var $title = $(this.title)
+    $title.text(this.toolboxItemDef_['text']).addClass('toolbox-title')
+  }
+  
+  getDiv() {
+    return this.title;
+  }
+}
+
+Blockly.registry.register(
+    Blockly.registry.Type.TOOLBOX_ITEM,
+    'toolboxTitle',
+    ToolboxTitle);
