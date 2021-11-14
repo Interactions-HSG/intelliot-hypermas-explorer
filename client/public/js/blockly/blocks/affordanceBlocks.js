@@ -1,5 +1,5 @@
 const property_block_json = {
-  "message0": "ask %1 %2 %3",
+  "message0": "%1 to set %2 in %3 ",
   "args0": [
     {
       "type": "field_label_serializable",
@@ -50,7 +50,7 @@ Blockly.Blocks['property_affordance'] = {
 const action_block_json =
 {
   "type": "action_affordance",
-  "message0": "use %1 %2 %3 input %4 result %5",
+  "message0": "%1 to %2",
   "args0": [
     {
       "type": "field_label_serializable",
@@ -62,27 +62,7 @@ const action_block_json =
       "name": "affordanceName",
       "text": "action"
     },
-    {
-      "type": "input_dummy"
-    },
-    {
-      "type": "input_value",
-      "name": "input",
-      "check": [
-        "object",
-        "variable"
-      ],
-      "align": "RIGHT"
-    },
-    {
-      "type": "input_value",
-      "name": "result",
-      "check": [
-        "object",
-        "variable"
-      ],
-      "align": "RIGHT"
-    }
+    
   ],
   "output": "affordance",
   "style": "action_block_style",
@@ -95,6 +75,8 @@ Blockly.Blocks['action_affordance'] = {
     this.jsonInit(action_block_json)
     this.method = "method"
     this.url = "url"
+    this.hasInput = false
+    this.hasOutput = false
     //this.setMutator(new Blockly.Mutator());
   },
 
@@ -102,12 +84,29 @@ Blockly.Blocks['action_affordance'] = {
     var container = document.createElement('mutation')
     container.setAttribute('method', this.method)
     container.setAttribute('url', this.url)
+    container.setAttribute('input', this.hasInput)
+    container.setAttribute('output', this.hasOutput)
     return container;
   },
 
   domToMutation: function(xmlElement) {
     this.method = xmlElement.getAttribute('method')
     this.url = xmlElement.getAttribute('url')
+    this.hasInput = xmlElement.getAttribute('input') === 'true'
+    this.hasOutput = xmlElement.getAttribute('output') === 'true'
+    if(this.hasInput){
+      this.appendValueInput('input')
+            .appendField("input")
+            .setAlign(Blockly.ALIGN_RIGHT)
+            .setCheck(['variable', 'object']);
+    }
+
+    if(this.hasOutput){
+      this.appendValueInput('output')
+            .appendField("output")
+            .setAlign(Blockly.ALIGN_RIGHT)
+            .setCheck(['variable', 'object']);
+    }
   }
 }
 
@@ -150,12 +149,24 @@ const affordanceBlockUtils = {
     var method = propertyDescription.forms[0]['htv:methodName']
     method = method? method : this._protocolBindings(propertyDescription.forms[0].op[0])
     var url = propertyDescription.forms[0].href
+
+    var resultBlock = this._getSchemaBlocks(propertyDescription)
+   
     var blockString = 
-    `<block type='property_affordance'> 
-      <mutation method="${method}" url="${url}"></mutation>
-      <field name="artifactName">${artifactName}</field>
-      <field name="affordanceName">${propertyName}</field>
-    </block>`
+    `
+    <block type="use_affordance">
+      <value name="affordance">
+      <block type='property_affordance'> 
+        <mutation method="${method}" url="${url}"></mutation>
+        <field name="artifactName">${artifactName}</field>
+        <field name="affordanceName">${propertyName}</field>
+        <value name="result">
+          ${resultBlock}
+        </value>
+      </block>
+      </value>
+    </block>
+    `
     return {kind: "block", blockxml:blockString}
   },
 
@@ -163,12 +174,87 @@ const affordanceBlockUtils = {
     var method = actionDescription.forms[0]['htv:methodName'] 
     method = method? method : this._protocolBindings(actionDescription.forms[0].op[0])
     var url = actionDescription.forms[0].href
+
+    var actionType = "action_affordance"
+
+    var inputBlocks = ""
+    var hasInput = false
+    if(actionDescription.input){
+      inputBlocks = this._getSchemaBlocks(actionDescription.input)
+      hasInput = true
+      inputBlocks = `<value name="input">${inputBlocks}</value>`
+    }
+
+    
+
+    var outputBlocks = ""
+    var hasOutput = false
+    if(actionDescription.output){
+      hasOutput = true
+      outputBlocks = this._getSchemaBlocks(actionDescription.output)
+      outputBlocks = `<value name="output">${outputBlocks}</value>`
+    }
+
     var blockString = 
-    `<block type='action_affordance'>
-      <mutation method="${method}" url="${url}"></mutation>
-      <field name="artifactName">${artifactName}</field>
-      <field name="affordanceName">${actionName}</field>
-    </block>`
+    `
+    <block type="use_affordance">
+      <value name="affordance">
+        <block type='${actionType}'>
+          <mutation method="${method}" url="${url}" input="${hasInput}" output="${hasOutput}"></mutation>
+          <field name="artifactName">${artifactName}</field>
+          <field name="affordanceName">${actionName}</field>
+          ${inputBlocks}
+          ${outputBlocks}
+        </block>
+      </value>
+    </block>
+    `
     return {kind: "block", blockxml:blockString}
+  },
+
+  _getSchemaBlocks: function(schema){
+    var resultBlock = 
+    `<block type="variable">
+      <field name="value">Result</field>
+    </block>`
+    if(schema.type == "object"){
+      var props = schema.properties
+      var statements = []
+      for(p in props){
+        var propField = `
+        <block type="object_field">
+          <field name="key">${p}</field>
+          <value name="value">
+            <block type="variable">
+            <field name="value">${utils.capitalize(p)}</field>
+            </block>
+          </value>
+        </block>
+        `
+        statements.push(propField)
+      }
+      
+      var statementString = statements.slice(1).reduce((b1, b2) => b1.slice(0, b1.lastIndexOf('</block>')) + '<next>' + b2, statements[0])
+      
+      for (let i = 0; i < statements.length-1; i++) {
+        statementString = statementString + '</next>\n</block>\n'
+      }
+      resultBlock = 
+      `<block type="create_object">
+        <value name="variable">
+          <block type="variable">
+            <field name="value">Result</field>
+          </block>
+        </value>
+        <statement name="fields">
+        ${statementString}
+        </statement>
+      </block>`
+     
+    } else if(schema.type == "array"){
+      console.error("Array are not supported at the moment")
+    }
+    
+    return resultBlock;
   }
 }

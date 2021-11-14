@@ -11,5 +11,5 @@ module.exports = {
   environmentProtocol: "http",
   environmentHostName: "localhost",
   environmentPort: 3000,
-  environmentInterface: "spockbot"
+  environmentInterface: "simulator"
 }

@@ -1,10 +1,15 @@
 Blockly.defineBlocksWithJsonArray([
   {
     "type": "create_object",
-    "message0": "new object %1 %2",
+    "message0": "object %1 %2 %3",
     "args0": [
       {
         "type": "input_dummy"
+      },
+      {
+        "type": "input_value",
+        "name": "variable",
+        "check": "variable"
       },
       {
         "type": "input_statement",
@@ -12,6 +17,7 @@ Blockly.defineBlocksWithJsonArray([
         "check": "object_field"
       }
     ],
+    "inputsInline": true,
     "output": "object",
     "colour": 165,
     "tooltip": "",

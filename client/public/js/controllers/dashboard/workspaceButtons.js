@@ -19,6 +19,9 @@ class WorkspaceButtonsController {
   _inspectModalController = undefined;
 
   constructor(workspace, fileTabController){
+    //TODO remove
+    $('#debug').click(e => console.log(Blockly.Xml.domToPrettyText(Blockly.Xml.workspaceToDom(workspace, true))))
+    
     this._workspace = workspace
     this._fileTabController = fileTabController
     this._configModalController = new RuntimeConfigModal(workspace)
@@ -47,7 +50,13 @@ class WorkspaceButtonsController {
   }
 
   async saveCode() {
-    var code = JasonGenerator.generate(this._workspace)
+    var code = null
+    try{
+       JasonGenerator.generate(this._workspace)
+    } catch(error){
+      dashboard.showError(error);
+      return;
+    }
     if(!code){
       dashboard.showError(`Code for agent ${id} is not well written`);
       return;

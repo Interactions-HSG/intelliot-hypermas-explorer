@@ -88,7 +88,11 @@ const toolboxDefinition = {
           //"type": "init_belief",
           "blockxml": "<block type='init_belief'>" +
             "<value name='belief'>" +
-            "<shadow type='belief'></shadow>" +
+            "<block type='belief'>"+
+              "<value name='atom0'>" +
+                "<block type='atom'></block>" +
+              "</value>" +
+            "</block>" +
             "</value>" +
             "</block>"
         },
@@ -113,7 +117,11 @@ const toolboxDefinition = {
           //"type": "init_goal",
           "blockxml": "<block type='init_goal'>" +
             "<value name='goal'>" +
-            "<shadow type='belief'></shadow>" +
+            "<block type='belief'>"+
+              "<value name='atom0'>" +
+                "<block type='atom'></block>" +
+              "</value>" +
+            "</block>" +
             "</value>" +
             "</block>"
         },
@@ -266,11 +274,11 @@ const toolboxDefinition = {
         },
         {
           "kind": "block",
-          "type": "add_fields"
+          "type": "object_field"
         },
         {
           "kind": "block",
-          "type": "object_field"
+          "type": "add_fields"
         },
         {
           "kind": "block",

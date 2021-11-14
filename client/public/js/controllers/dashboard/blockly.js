@@ -49,7 +49,6 @@ class BlocklyController {
     var eventBlocks = this._generateEventBlocks(artifact.thingDescription.events, artifact.id)
 
     var blocks = propertyBlocks.concat(actionBlocks, eventBlocks);
-    console.log(artifact)
     var thingCategory = {
       kind: "category",
       name: artifact.id,

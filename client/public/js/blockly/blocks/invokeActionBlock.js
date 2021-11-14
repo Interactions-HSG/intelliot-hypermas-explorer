@@ -11,8 +11,7 @@ Blockly.Blocks['invoke_action'] = {
     this.jsonInit(invoke_action_block);
     this._arguments = 1;
     this.appendDummyInput()
-      .appendField('invoke ')
-      .appendField(new Blockly.FieldTextInput('name'),'actionName')
+      .appendField(new Blockly.FieldTextInput('action'),'actionName')
       .appendField('(')
     this._updateShape();
     this.setMutator(new Blockly.Mutator(['mutator_block_input']));

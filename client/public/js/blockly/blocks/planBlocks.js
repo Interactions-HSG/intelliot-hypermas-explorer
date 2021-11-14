@@ -219,11 +219,11 @@ Blockly.defineBlocksWithJsonArray([
   },
   {
     "type": "use_affordance",
-    "message0": "use affordance %1",
+    "message0": "ask thing %1",
     "args0": [
       {
         "type": "input_value",
-        "name": "action",
+        "name": "affordance",
         "check": "affordance"
       }
     ],
