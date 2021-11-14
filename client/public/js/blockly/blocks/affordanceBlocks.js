@@ -150,7 +150,7 @@ const affordanceBlockUtils = {
     method = method? method : this._protocolBindings(propertyDescription.forms[0].op[0])
     var url = propertyDescription.forms[0].href
 
-    var resultBlock = this._getSchemaBlocks(propertyDescription)
+    var resultBlock = this._getSchemaBlocks(propertyDescription, "Result")
    
     var blockString = 
     `
@@ -180,7 +180,7 @@ const affordanceBlockUtils = {
     var inputBlocks = ""
     var hasInput = false
     if(actionDescription.input){
-      inputBlocks = this._getSchemaBlocks(actionDescription.input)
+      inputBlocks = this._getSchemaBlocks(actionDescription.input, "Input")
       hasInput = true
       inputBlocks = `<value name="input">${inputBlocks}</value>`
     }
@@ -191,7 +191,7 @@ const affordanceBlockUtils = {
     var hasOutput = false
     if(actionDescription.output){
       hasOutput = true
-      outputBlocks = this._getSchemaBlocks(actionDescription.output)
+      outputBlocks = this._getSchemaBlocks(actionDescription.output, "Output")
       outputBlocks = `<value name="output">${outputBlocks}</value>`
     }
 
@@ -212,10 +212,10 @@ const affordanceBlockUtils = {
     return {kind: "block", blockxml:blockString}
   },
 
-  _getSchemaBlocks: function(schema){
+  _getSchemaBlocks: function(schema, objName="Result"){
     var resultBlock = 
     `<block type="variable">
-      <field name="value">Result</field>
+      <field name="value">${objName}</field>
     </block>`
     if(schema.type == "object"){
       var props = schema.properties
@@ -243,7 +243,7 @@ const affordanceBlockUtils = {
       `<block type="create_object">
         <value name="variable">
           <block type="variable">
-            <field name="value">Result</field>
+            <field name="value">${objName}</field>
           </block>
         </value>
         <statement name="fields">
