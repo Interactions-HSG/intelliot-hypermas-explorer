@@ -44,10 +44,23 @@ class BlocklyController {
   }
 
   loadArtifact(artifact) {
-    var loginBlock = this._generateLoginBlock(artifact.thingDescription, artifact.id)
-    var propertyBlocks = this._generatePropertyBlocks(artifact.thingDescription.properties, artifact.id)
-    var actionBlocks = this._generateActionBlocks(artifact.thingDescription.actions, artifact.id)
-    var eventBlocks = this._generateEventBlocks(artifact.thingDescription.events, artifact.id)
+    var td = artifact.thingDescription;
+    if(td.base){
+      //preparse the thing description completing forms hrefs
+      for(const p in td.properties){
+        td.properties[p].forms.forEach(f => f.href = td.base + f.href)
+      }
+      for(const a in td.actions){
+        td.actions[a].forms.forEach(f => f.href = td.base + f.href)
+      }
+      for(const e in td.events){
+        //TODO support events(?)
+      }
+    }
+    var loginBlock = this._generateLoginBlock(td, artifact.id)
+    var propertyBlocks = this._generatePropertyBlocks(td.properties, artifact.id)
+    var actionBlocks = this._generateActionBlocks(td.actions, artifact.id)
+    var eventBlocks = this._generateEventBlocks(td.events, artifact.id)
 
     var blocks = loginBlock.concat(propertyBlocks, actionBlocks, eventBlocks);
     var thingCategory = {
