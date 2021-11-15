@@ -44,11 +44,12 @@ class BlocklyController {
   }
 
   loadArtifact(artifact) {
+    var loginBlock = this._generateLoginBlock(artifact.thingDescription, artifact.id)
     var propertyBlocks = this._generatePropertyBlocks(artifact.thingDescription.properties, artifact.id)
     var actionBlocks = this._generateActionBlocks(artifact.thingDescription.actions, artifact.id)
     var eventBlocks = this._generateEventBlocks(artifact.thingDescription.events, artifact.id)
 
-    var blocks = propertyBlocks.concat(actionBlocks, eventBlocks);
+    var blocks = loginBlock.concat(propertyBlocks, actionBlocks, eventBlocks);
     var thingCategory = {
       kind: "category",
       name: artifact.id,
@@ -106,6 +107,11 @@ class BlocklyController {
     }
   }
 
+  _generateLoginBlock(td, artifactId){
+    var blocks = loginBlockUtils.defineLoginBlock(td, artifactId)
+    return blocks;
+  }
+  
   _generatePropertyBlocks(properties, artifactId) {
     var blocks = []
     utils.toList(properties).forEach(p => {
