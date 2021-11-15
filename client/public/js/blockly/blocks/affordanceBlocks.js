@@ -3,8 +3,8 @@ const property_block_json = {
   "args0": [
     {
       "type": "field_label_serializable",
-      "name": "artifactName",
-      "text": "artifact"
+      "name": "thingId",
+      "text": "thing"
     },
     {
       "type": "field_label_serializable",
@@ -54,7 +54,7 @@ const action_block_json =
   "args0": [
     {
       "type": "field_label_serializable",
-      "name": "artifactName",
+      "name": "thingId",
       "text": "artifact"
     },
     {
@@ -115,7 +115,7 @@ Blockly.Blocks['action_affordance'] = {
 {
   type: "block",
   blockxml: "<block type='property_affordance'> 
-              <field name='artifactName'>ARTIFACT_NAME</field>
+              <field name='thingId'>ARTIFACT_NAME</field>
               <field name='affordanceName'>AFFORDANCE_NAME</field>
               //output??
               <mutation method='GET', url='www.yggdrasil/artifact/affordance'> 
@@ -145,7 +145,7 @@ const affordanceBlockUtils = {
     }
   },
 
-  definePropertyBlock: function (propertyName, propertyDescription, artifactName) {
+  definePropertyBlock: function (propertyName, propertyDescription, thingId) {
     var method = propertyDescription.forms[0]['htv:methodName']
     method = method? method : this._protocolBindings(propertyDescription.forms[0].op[0])
     var url = propertyDescription.forms[0].href
@@ -158,7 +158,7 @@ const affordanceBlockUtils = {
       <value name="affordance">
       <block type='property_affordance'> 
         <mutation method="${method}" url="${url}"></mutation>
-        <field name="artifactName">${artifactName}</field>
+        <field name="thingId">${thingId}</field>
         <field name="affordanceName">${propertyName}</field>
         <value name="result">
           ${resultBlock}
@@ -170,7 +170,7 @@ const affordanceBlockUtils = {
     return {kind: "block", blockxml:blockString}
   },
 
-  defineActionBlock: function (actionName, actionDescription, artifactName) {
+  defineActionBlock: function (actionName, actionDescription, thingId) {
     var method = actionDescription.forms[0]['htv:methodName'] 
     method = method? method : this._protocolBindings(actionDescription.forms[0].op[0])
     var url = actionDescription.forms[0].href
@@ -201,7 +201,7 @@ const affordanceBlockUtils = {
       <value name="affordance">
         <block type='${actionType}'>
           <mutation method="${method}" url="${url}" input="${hasInput}" output="${hasOutput}"></mutation>
-          <field name="artifactName">${artifactName}</field>
+          <field name="thingId">${thingId}</field>
           <field name="affordanceName">${actionName}</field>
           ${inputBlocks}
           ${outputBlocks}
@@ -212,22 +212,22 @@ const affordanceBlockUtils = {
     return {kind: "block", blockxml:blockString}
   },
 
-  _getSchemaBlocks: function(schema, objName="Result"){
+  _getSchemaBlocks: function(schema, varName){
     var resultBlock = 
     `<block type="variable">
-      <field name="value">${objName}</field>
+      <field name="value">${varName}</field>
     </block>`
     if(schema.type == "object"){
       var props = schema.properties
       var statements = []
-      for(p in props){
+      for(const p in props){
+        var value = this._getSchemaBlocks(props[p], p)
         var propField = `
         <block type="object_field">
           <field name="key">${p}</field>
+          <field name="type">${props[p].type ? props[p].type : "_"}</field>
           <value name="value">
-            <block type="variable">
-            <field name="value">${utils.capitalize(p)}</field>
-            </block>
+          ${value}
           </value>
         </block>
         `
@@ -241,11 +241,6 @@ const affordanceBlockUtils = {
       }
       resultBlock = 
       `<block type="create_object">
-        <value name="variable">
-          <block type="variable">
-            <field name="value">${objName}</field>
-          </block>
-        </value>
         <statement name="fields">
         ${statementString}
         </statement>

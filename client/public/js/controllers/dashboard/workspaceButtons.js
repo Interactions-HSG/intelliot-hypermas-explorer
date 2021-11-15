@@ -20,8 +20,8 @@ class WorkspaceButtonsController {
 
   constructor(workspace, fileTabController){
     //TODO remove
-    $('#debug').click(e => console.log(Blockly.Xml.domToPrettyText(Blockly.Xml.workspaceToDom(workspace, true))))
-    
+    $('#debug').click(e => console.log(JasonGenerator.workspaceToCode(this._workspace)))
+    $('#debug').click(e =>console.log(Blockly.Xml.domToPrettyText(Blockly.Xml.workspaceToDom(this._workspace, true))))
     this._workspace = workspace
     this._fileTabController = fileTabController
     this._configModalController = new RuntimeConfigModal(workspace)
@@ -50,9 +50,12 @@ class WorkspaceButtonsController {
   }
 
   async saveCode() {
+
+    var id = this._fileTabController.getCurrentAgent()
+    var xml = Blockly.Xml.domToPrettyText(Blockly.Xml.workspaceToDom(this._workspace, true))
     var code = null
     try{
-       JasonGenerator.generate(this._workspace)
+      code = JasonGenerator.generate(this._workspace)
     } catch(error){
       dashboard.showError(error);
       return;
@@ -61,8 +64,7 @@ class WorkspaceButtonsController {
       dashboard.showError(`Code for agent ${id} is not well written`);
       return;
     }
-    var xml = Blockly.Xml.domToPrettyText(Blockly.Xml.workspaceToDom(this._workspace, true))
-    var id = this._fileTabController.getCurrentAgent()
+
     var exists = false;
     try {
       await runtimeInterface.getAgentSource(id)

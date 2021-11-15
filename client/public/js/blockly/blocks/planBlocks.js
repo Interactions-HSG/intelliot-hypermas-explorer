@@ -1,15 +1,8 @@
 Blockly.defineBlocksWithJsonArray([
   {
     "type": "define_plan",
-    "message0": "Define plan %1 %2 when %3 if %4 do %5",
-    "args0": [{
-        "type": "field_input",
-        "name": "label",
-        "text": "name"
-      },
-      {
-        "type": "input_dummy"
-      },
+    "message0": "When %1 if %2 do %3",
+    "args0": [
       {
         "type": "input_value",
         "name": "trigger",

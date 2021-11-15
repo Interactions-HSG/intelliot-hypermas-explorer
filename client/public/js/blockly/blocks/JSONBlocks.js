@@ -1,15 +1,10 @@
 Blockly.defineBlocksWithJsonArray([
   {
     "type": "create_object",
-    "message0": "object %1 %2 %3",
+    "message0": "object %1 %2",
     "args0": [
       {
         "type": "input_dummy"
-      },
-      {
-        "type": "input_value",
-        "name": "variable",
-        "check": "variable"
       },
       {
         "type": "input_statement",
@@ -23,17 +18,14 @@ Blockly.defineBlocksWithJsonArray([
     "tooltip": "",
     "helpUrl": ""
   },
-{
+  {
   "type": "object_field",
-  "message0": "%1 → %2 %3",
+  "message0": "%1 as %3 %2",
   "args0": [
     {
       "type": "field_input",
       "name": "key",
       "text": "key"
-    },
-    {
-      "type": "input_dummy"
     },
     {
       "type": "input_value",
@@ -44,6 +36,36 @@ Blockly.defineBlocksWithJsonArray([
         "operation",
         "object",
         "statement"
+      ]
+    },
+    {
+      "type": "field_dropdown",
+      "name": "type",
+      "options": [
+        [
+          "string",
+          "string"
+        ],
+        [
+          "boolean",
+          "boolean"
+        ],
+        [
+          "number",
+          "number"
+        ],
+        [
+          "object",
+          "object"
+        ],
+        [
+          "array",
+          "array"
+        ],
+        [
+          "_",
+          "_"
+        ]
       ]
     }
   ],

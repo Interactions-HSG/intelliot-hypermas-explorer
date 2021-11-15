@@ -1,4 +1,4 @@
-const JasonGenerator = new Blockly.Generator('JASON');
+const JasonGenerator = new Blockly.Generator('Jason');
 JasonGenerator.INDENT = ""
 JasonGenerator.BASIC_INDENT = "\n  "
 JasonGenerator.THREE_INDENT = "   "
@@ -198,7 +198,7 @@ JasonGenerator['opposite_init_belief'] = function(block){
 JasonGenerator['init_agent'] = function(block){
   var name = block.getFieldValue('name');
   var start_comment = `//This is the initial state of agent ${name}\n`
-  var end_comment = `//Plan library:\n`
+  var end_comment = `\n//Plan library:`
   var statements = generationUtils.getStackCode(generationUtils.getRootStatement(block), '\n');
   var code = `${start_comment}${statements ? statements : ""}\n${end_comment}`
   return code;
@@ -222,7 +222,6 @@ JasonGenerator['init_rule'] = function(block){
 //Agent Plan Blocks
 
 JasonGenerator['define_plan'] = function(block) {
-  var label = `@${block.getFieldValue('label')}`;
   var trigger = JasonGenerator.valueToCode(block, 'trigger', JasonGenerator.NO_PRECEDENCE)
   var context = JasonGenerator.valueToCode(block, 'context', JasonGenerator.NO_PRECEDENCE)
   var body = generationUtils.getStackCode(generationUtils.getRootStatement(block), JasonGenerator.BASIC_INDENT+JasonGenerator.THREE_INDENT);
@@ -230,7 +229,7 @@ JasonGenerator['define_plan'] = function(block) {
   if(body.slice(-1) == ';'){
     body=body.slice(0,-1);
   }
-  var code = `${label}\n${trigger+JasonGenerator.BASIC_INDENT}:  ${context+JasonGenerator.BASIC_INDENT}<- ${body}.`
+  var code = `${trigger+JasonGenerator.BASIC_INDENT}:  ${context+JasonGenerator.BASIC_INDENT}<- ${body}.`
   return code;
 }
 
@@ -305,12 +304,6 @@ JasonGenerator['invoke_action'] = function(block){
   return code
 }
 
-JasonGenerator['use_affordance'] = function(block){
-  var affordance = JasonGenerator.valueToCode(block, 'affordance', JasonGenerator.NO_PRECEDENCE)
-  var code = `${affordance};`
-  return code
-}
-
 JasonGenerator['assign_variable'] = function(block){
   var variable = JasonGenerator.valueToCode(block, 'variable', JasonGenerator.NO_PRECEDENCE)
   var operation = JasonGenerator.valueToCode(block, 'operation', JasonGenerator.NO_PRECEDENCE)
@@ -318,9 +311,70 @@ JasonGenerator['assign_variable'] = function(block){
   return code
 }
 
+//Json Objects Manipulation
+
+//Affordances
+JasonGenerator['use_affordance'] = function(block){
+  var affordance = JasonGenerator.valueToCode(block, 'affordance', JasonGenerator.NO_PRECEDENCE)
+  var code = `${affordance};`
+  return code
+}
+
+JasonGenerator['property_affordance'] = function(block){
+  var indent = "  "+JasonGenerator.THREE_INDENT
+  var thingId = block.getFieldValue('thingId');
+  var url = block.url;
+  var resultBlock = block.getInputTargetBlock('result')
+  var resultVar = undefined;
+  var extractCode = undefined
+  if(resultBlock.type == "variable"){
+    resultVar = JasonGenerator.valueToCode(block, 'result', JasonGenerator.NO_PRECEDENCE);
+  } else {
+    resultVar = "X_result_1"
+    extractCode = generationUtils.getObjectExtractCode(generationUtils.getRootStatement(resultBlock), indent, resultVar)
+  }
+  var getArtifact = `?xx_get_client(${thingId}, Xx_ID);`
+  var useProperty = `${indent}readProperty("${url}", ${resultVar}) [artifact_id(Xx_ID)]`
+  var code = `${getArtifact}\n${useProperty}${extractCode ? "\n"+indent+extractCode: ""}`
+  return [code, JasonGenerator.NO_PRECEDENCE]
+}
+
+JasonGenerator['action_affordance'] = function(block){
+  var indent = "  "+JasonGenerator.THREE_INDENT
+  var thingId = block.getFieldValue('thingId');
+  var url = block.url;
+  var inputBlock = block.getInputTargetBlock('input')
+  var inputVar = "_"
+  var composeCode = undefined
+  if(inputBlock){
+    if(inputBlock.type == "variable"){
+      inputVar = JasonGenerator.valueToCode(block, 'output', JasonGenerator.NO_PRECEDENCE);
+    } else {
+      inputVar = "X_in_1"
+      composeCode = generationUtils.getObjectComposeCode(generationUtils.getRootStatement(inputBlock), indent, inputVar)[0]
+      composeCode = `json.create_empty_object(${inputVar})\n${composeCode}`
+    }
+  }
+
+  var outputBlock = block.getInputTargetBlock('output')
+  var outputVar = undefined
+  var extractCode = undefined
+  if(outputBlock){
+    if(outputBlock.type == "variable"){
+      outputVar = JasonGenerator.valueToCode(block, 'output', JasonGenerator.NO_PRECEDENCE);
+    } else {
+      outputVar = "X_out_1"
+      extractCode = generationUtils.getObjectExtractCode(generationUtils.getRootStatement(outputBlock), indent, outputVar)
+    }
+  }
+  var getArtifact = `?xx_get_client(${thingId}, Xx_ID);`
+  var useAction = `${indent}invokeAction("${url}", ${inputVar}, ${outputVar}) [artifact_id(Xx_ID)]`
+  var code = `${composeCode ? composeCode+"\n"+indent: ""}${getArtifact}\n${useAction}${extractCode ? "\n"+indent+extractCode: ""}`
+  return [code, JasonGenerator.NO_PRECEDENCE]
+}
 
 
-
+//login
 
 
 
@@ -354,5 +408,70 @@ const generationUtils = {
       newCode = indent + this.getStackCode(nextBlock, indent)
     }
     return code + newCode;
+  },
+
+  //TODO complete with correct syntax
+  getObjectExtractCode: function(block, indent, object){
+    if(!block) {
+      return null
+    }
+    var key = block.getFieldValue('key');
+    var type = block.getFieldValue('type')
+    type = type == '_' ? type : `"${type}"`
+    var valueBlock = block.getInputTargetBlock('value')
+    var value = ""
+
+    if(valueBlock.type == 'create_object'){
+      value = object.slice(0,-1) + (parseInt(object.slice(-1))+1)
+      var extractCode = generationUtils.getObjectExtractCode(generationUtils.getRootStatement(valueBlock), indent, value)
+    } else {
+      value = JasonGenerator.blockToCode(valueBlock)[0]
+    }
+    //TODO replace with real code syntax
+    var code = `json.get(${object}, ${type}, "${key}", ${value})\n${extractCode ? indent+extractCode: ""}`
+    const nextBlock = block.nextConnection && block.nextConnection.targetBlock();
+    var newCode='';
+    if(nextBlock) {
+      newCode = indent + this.getObjectExtractCode(nextBlock, indent, object)
+    }
+    return code + newCode;
+  },
+
+
+  getObjectComposeCode: function(block, indent, object, offset=0){
+    if(!block) {
+      return null
+    }
+    var newOffset = 0;
+    var key = block.getFieldValue('key');
+    var type = block.getFieldValue('type')
+    type = type == '_' ? type : `"${type}"`
+    var valueBlock = block.getInputTargetBlock('value')
+    var value = ""
+
+    if(valueBlock.type == 'create_object'){
+      value = object.slice(0,-1) + (parseInt(object.slice(-1))+1+offset)
+      var res = generationUtils.getObjectComposeCode(generationUtils.getRootStatement(valueBlock), indent, value)
+      var composeCode = res[0]
+      var composeOffset = res[1]
+      composeCode = `json.create_empty_object(${value})\n${composeCode}`
+      newOffset +=1;
+      newOffset += composeOffset;
+    } else {
+      value = JasonGenerator.blockToCode(valueBlock)[0]
+    }
+    //TODO replace with real code syntax
+    var code = `${composeCode ? composeCode: ""}json.set(${object}, "${key}", ${value})\n`
+    const nextBlock = block.nextConnection && block.nextConnection.targetBlock();
+    var newCode='';
+    if(nextBlock) {
+      newCode = this.getObjectComposeCode(nextBlock, indent, object, offset+newOffset)[0]
+    }
+    return [code + newCode, offset+newOffset];
+    
+  },
+
+  getArtifactCreationPlans: function(){
+
   }
 }
