@@ -23,7 +23,8 @@ Blockly.defineBlocksWithJsonArray([
 ]);
 
 const login_block_json = {
-  "message0": "set login info %1 %2",
+  //type: thing_login
+  "message0": "set login for %1 %2",
   "args0": [
     {
       "type": "field_label_serializable",
@@ -52,22 +53,22 @@ const login_block_json = {
 Blockly.Blocks['thing_login'] = {
   init: function() {
     this.jsonInit(login_block_json)
-    this.name = "key"
-    this.in = "header"
+    this.keyName = "key"
+    this.location = "header"
     this.scheme = "nosec"
   },
 
   mutationToDom: function() {
     var container = document.createElement('mutation')
-    container.setAttribute('name', this.name)
-    container.setAttribute('in', this.in)
+    container.setAttribute('keyName', this.keyName)
+    container.setAttribute('location', this.location)
     container.setAttribute('scheme', this.scheme)
     return container;
   },
 
   domToMutation: function(xmlElement) {
-    this.name = xmlElement.getAttribute('name')
-    this.in = xmlElement.getAttribute('in')
+    this.keyName = xmlElement.getAttribute('keyName')
+    this.location = xmlElement.getAttribute('location')
     this.scheme = xmlElement.getAttribute('scheme')
   }
 }
@@ -90,7 +91,7 @@ const loginBlockUtils = {
         case 'basic':
           var blockString = `
           <block type="thing_login">
-            <mutation name="${secObj.name}" in="${secObj.in}" scheme="${secObj.scheme}"></mutation>
+            <mutation keyName="${secObj.name}" location="${secObj.in}" scheme="${secObj.scheme}"></mutation>
             <field name="thing">${artifactId}</field>
             <value name="key">
               <block type="username_password">

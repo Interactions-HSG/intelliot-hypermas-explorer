@@ -64,6 +64,9 @@ JasonGenerator.generate = function(workspace){
   code = code.replace(/^\s+\n/, '');
   code = code.replace(/\n\s+$/, '\n');
   code = code.replace(/[ \t]+\n/g, '\n');
+
+  //MODIFIED add default test plans to create artifact
+  code = code + "\n\n//Auto generated plans:\n" +generationUtils.getArtifactCreationPlans()
   return code;
 };
 
@@ -373,8 +376,25 @@ JasonGenerator['action_affordance'] = function(block){
   return [code, JasonGenerator.NO_PRECEDENCE]
 }
 
-
 //login
+
+JasonGenerator['thing_login'] = function(block){
+  var key = JasonGenerator.valueToCode(block, 'key',JasonGenerator.NO_PRECEDENCE)
+  var thing = block.getFieldValue('thing')
+  var keyName = block.keyName;
+  var location = block.location;
+  var scheme = block.scheme;
+  var code = `+x_thing_login(${thing}, "${scheme}", "${location}", "${keyName}", ${key})`
+  return code;
+}
+
+JasonGenerator['username_password'] = function(block){
+  var username = JasonGenerator.valueToCode(block, 'username', JasonGenerator.NO_PRECEDENCE).replace(/['"]+/g, '')
+  var password = JasonGenerator.valueToCode(block, 'password', JasonGenerator.NO_PRECEDENCE).replace(/['"]+/g, '')
+  var credentialString = username+":"+password
+  var code = `"${btoa(credentialString)}"`
+  return [code, JasonGenerator.NO_PRECEDENCE]
+}
 
 
 
@@ -410,7 +430,6 @@ const generationUtils = {
     return code + newCode;
   },
 
-  //TODO complete with correct syntax
   getObjectExtractCode: function(block, indent, object){
     if(!block) {
       return null
@@ -427,7 +446,6 @@ const generationUtils = {
     } else {
       value = JasonGenerator.blockToCode(valueBlock)[0]
     }
-    //TODO replace with real code syntax
     var code = `json.get(${object}, ${type}, "${key}", ${value})\n${extractCode ? indent+extractCode: ""}`
     const nextBlock = block.nextConnection && block.nextConnection.targetBlock();
     var newCode='';
@@ -460,7 +478,7 @@ const generationUtils = {
     } else {
       value = JasonGenerator.blockToCode(valueBlock)[0]
     }
-    //TODO replace with real code syntax
+
     var code = `${composeCode ? composeCode: ""}json.set(${object}, "${key}", ${value})\n`
     const nextBlock = block.nextConnection && block.nextConnection.targetBlock();
     var newCode='';
@@ -473,5 +491,7 @@ const generationUtils = {
 
   getArtifactCreationPlans: function(){
 
+    //TODO work here to add plans
+    return "CIAO"
   }
 }

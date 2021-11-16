@@ -275,14 +275,6 @@ const toolboxDefinition = {
         {
           "kind": "block",
           "type": "object_field"
-        },
-        {
-          "kind": "block",
-          "type": "add_fields"
-        },
-        {
-          "kind": "block",
-          "type": "get_object_value"
         }
       ]
     },

@@ -74,7 +74,7 @@ Blockly.Blocks['predicate'] = {
       this.removeInput('end')
     }
     ComposerUtils.addInputFields(this, 'term', this._terms, ['atom', 'variable', 'operation'])
-    var endMessage = (this._terms ? ')' : '') + ' is true'
+    var endMessage = (this._terms ? ')' : '') //+ ' is true'
     this.appendDummyInput('end')
       .appendField(new Blockly.FieldLabelSerializable(endMessage), 'END');
   }

@@ -34,9 +34,15 @@ class FileTabsController {
 
     //add the top block
     var definition = this._workspace.newBlock("init_agent")
+    definition.moveBy(10, 10)
     definition.setFieldValue(validName, "name")
     definition.setDeletable(false)
     definition.initSvg()
+
+    var plan = this._workspace.newBlock("define_plan")
+    plan.moveBy(10, 90)
+    plan.setDeletable(false)
+    plan.initSvg()
     this._workspace.render();
     this._workspace.clearUndo()
 

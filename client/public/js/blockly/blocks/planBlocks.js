@@ -228,12 +228,12 @@ Blockly.defineBlocksWithJsonArray([
   },
   {
     "type": "check_expression",
-    "message0": "continue if %1 is true",
+    "message0": "continue if %1",
     "args0": [
       {
         "type": "input_value",
         "name": "statement",
-        "check": "statement"
+        "check": ["statement", "variable"]
       }
     ],
     "inputsInline": true,

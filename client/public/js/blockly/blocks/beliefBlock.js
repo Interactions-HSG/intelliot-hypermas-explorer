@@ -74,7 +74,7 @@ Blockly.Blocks['belief'] = {
       this.removeInput('end')
     }
     ComposerUtils.addInputFields(this, 'atom', this._atoms, 'atom')
-    var endMessage = (this._atoms ? ')' : '') + ' is true'
+    var endMessage = (this._atoms ? ')' : '') //+' is true'
     this.appendDummyInput('end')
       .appendField(new Blockly.FieldLabelSerializable(endMessage), 'END');
   }
