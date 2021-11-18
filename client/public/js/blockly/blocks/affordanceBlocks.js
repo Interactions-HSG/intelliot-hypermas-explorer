@@ -31,6 +31,7 @@ Blockly.Blocks['property_affordance'] = {
     this.jsonInit(property_block_json)
     this.method = "method"
     this.url = "url"
+    this.outputType = "object"
     //this.setMutator(new Blockly.Mutator());
   },
 
@@ -38,12 +39,14 @@ Blockly.Blocks['property_affordance'] = {
     var container = document.createElement('mutation')
     container.setAttribute('method', this.method)
     container.setAttribute('url', this.url)
+    container.setAttribute('output_type', this.outputType)
     return container;
   },
 
   domToMutation: function(xmlElement) {
     this.method = xmlElement.getAttribute('method')
     this.url = xmlElement.getAttribute('url')
+    this.outputType = xmlElement.getAttribute('output_type')
   }
 }
 
@@ -75,6 +78,7 @@ Blockly.Blocks['action_affordance'] = {
     this.jsonInit(action_block_json)
     this.method = "method"
     this.url = "url"
+    this.outputType = "object"
     this.hasInput = false
     this.hasOutput = false
     //this.setMutator(new Blockly.Mutator());
@@ -84,14 +88,17 @@ Blockly.Blocks['action_affordance'] = {
     var container = document.createElement('mutation')
     container.setAttribute('method', this.method)
     container.setAttribute('url', this.url)
+    container.setAttribute('output_type', this.outputType)
     container.setAttribute('input', this.hasInput)
     container.setAttribute('output', this.hasOutput)
+    
     return container;
   },
 
   domToMutation: function(xmlElement) {
     this.method = xmlElement.getAttribute('method')
     this.url = xmlElement.getAttribute('url')
+    this.outputType = xmlElement.getAttribute('output_type')
     this.hasInput = xmlElement.getAttribute('input') === 'true'
     this.hasOutput = xmlElement.getAttribute('output') === 'true'
     if(this.hasInput){
@@ -149,6 +156,7 @@ const affordanceBlockUtils = {
     var method = propertyDescription.forms[0]['htv:methodName']
     method = method? method : this._protocolBindings(propertyDescription.forms[0].op[0])
     var url = propertyDescription.forms[0].href
+    var type = propertyDescription.type
 
     var resultBlock = this._getSchemaBlocks(propertyDescription, "Result")
    
@@ -157,7 +165,7 @@ const affordanceBlockUtils = {
     <block type="use_affordance">
       <value name="affordance">
       <block type='property_affordance'> 
-        <mutation method="${method}" url="${url}"></mutation>
+        <mutation method="${method}" url="${url}" output_type="${type}"></mutation>
         <field name="thingId">${thingId}</field>
         <field name="affordanceName">${propertyName}</field>
         <value name="result">
@@ -174,6 +182,7 @@ const affordanceBlockUtils = {
     var method = actionDescription.forms[0]['htv:methodName'] 
     method = method? method : this._protocolBindings(actionDescription.forms[0].op[0])
     var url = actionDescription.forms[0].href
+    
 
     var actionType = "action_affordance"
 
@@ -184,12 +193,11 @@ const affordanceBlockUtils = {
       hasInput = true
       inputBlocks = `<value name="input">${inputBlocks}</value>`
     }
-
     
-
     var outputBlocks = ""
     var hasOutput = false
     if(actionDescription.output){
+      var outputType = `output_type="${actionDescription.output.type}"`
       hasOutput = true
       outputBlocks = this._getSchemaBlocks(actionDescription.output, "Output")
       outputBlocks = `<value name="output">${outputBlocks}</value>`
@@ -200,7 +208,7 @@ const affordanceBlockUtils = {
     <block type="use_affordance">
       <value name="affordance">
         <block type='${actionType}'>
-          <mutation method="${method}" url="${url}" input="${hasInput}" output="${hasOutput}"></mutation>
+          <mutation method="${method}" url="${url}" ${outputType} input="${hasInput}" output="${hasOutput}"></mutation>
           <field name="thingId">${thingId}</field>
           <field name="affordanceName">${actionName}</field>
           ${inputBlocks}
