@@ -21,8 +21,8 @@ class WorkspaceButtonsController {
   constructor(workspace, fileTabController){
     //TODO remove
     $('#debug').click(e => console.log(JasonGenerator.generate(this._workspace)))
-    $('#debug').click(e => console.log(JasonGenerator.workspaceToCode(this._workspace)))
-    $('#debug').click(e =>console.log(Blockly.Xml.domToPrettyText(Blockly.Xml.workspaceToDom(this._workspace, true))))
+    //$('#debug').click(e => console.log(JasonGenerator.workspaceToCode(this._workspace)))
+    //$('#debug').click(e =>console.log(Blockly.Xml.domToPrettyText(Blockly.Xml.workspaceToDom(this._workspace, true))))
     this._workspace = workspace
     this._fileTabController = fileTabController
     this._configModalController = new RuntimeConfigModal(workspace)

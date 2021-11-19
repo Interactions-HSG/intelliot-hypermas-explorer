@@ -196,6 +196,7 @@ const affordanceBlockUtils = {
     
     var outputBlocks = ""
     var hasOutput = false
+    var outputType = ""
     if(actionDescription.output){
       var outputType = `output_type="${actionDescription.output.type}"`
       hasOutput = true
@@ -229,7 +230,7 @@ const affordanceBlockUtils = {
       var props = schema.properties
       var statements = []
       for(const p in props){
-        var value = this._getSchemaBlocks(props[p], p)
+        var value = this._getSchemaBlocks(props[p], p+"_"+varName)
         var propField = `
         <block type="object_field">
           <field name="key">${p}</field>

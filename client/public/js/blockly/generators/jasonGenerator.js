@@ -8,6 +8,8 @@ JasonGenerator.OPERATION = 1;
 //Code from blockly repository
 //This is the same as workspaceToCode but enforce the order of top blocks as needed
 JasonGenerator.generate = function(workspace){
+  //reset variable count 
+  generationUtils.variableId = 0;
   var code = [];
   this.init(workspace);
   var blocks = workspace.getTopBlocks(true);
@@ -145,7 +147,7 @@ JasonGenerator['false'] = function(_){
 
 
 JasonGenerator['not'] = function(block){
-  var code = "not "+ JasonGenerator.valueToCode(block, 'value', JasonGenerator.OPERATION)
+  var code = "(not "+ JasonGenerator.valueToCode(block, 'value', JasonGenerator.OPERATION)+")"
   return [code, JasonGenerator.NO_PRECEDENCE] 
 }
 
@@ -231,6 +233,9 @@ JasonGenerator['define_plan'] = function(block) {
   body = body ? body : "true"
   if(body.slice(-1) == ';'){
     body=body.slice(0,-1);
+  }
+  if(body.slice(-1) == '\n'){
+    body=body.slice(0,-2);
   }
   var code = `${trigger+JasonGenerator.BASIC_INDENT}:  ${context+JasonGenerator.BASIC_INDENT}<- ${body}.`
   return code;
@@ -331,8 +336,12 @@ JasonGenerator['property_affordance'] = function(block){
   var url = block.url;
   var outputType = block.outputType;
   var resultBlock = block.getInputTargetBlock('result')
-  var resultVar = "X_result_1";
   var extractCode = undefined
+
+  var clientId = generationUtils.getVariable()
+  var affordanceResult = generationUtils.getVariable()
+  var resultVar = generationUtils.getVariable();
+
 
   //generating code to process the result
   if(resultBlock.type == "variable"){
@@ -347,9 +356,9 @@ JasonGenerator['property_affordance'] = function(block){
   }
 
   //generate code to use the affordance
-  var getArtifact = `?xx_get_client(${thingId}, Xx_ID);\n`
-  var useAffordance = `${indent}readProperty("${url}", X_result_string)[artifact_id(Xx_ID)];\n`
-  var parseJson = `${indent}json.parse(X_result_string, ${resultVar})`
+  var getArtifact = `?xx_get_client("${thingId}",${clientId});\n`
+  var useAffordance = `${indent}readProperty("${url}", ${affordanceResult})[artifact_id(${clientId})];\n`
+  var parseJson = `${indent}json.parse(${affordanceResult}, ${resultVar})`
 
   //composing and return
   var code = `${getArtifact}${useAffordance}${parseJson}${extractCode ? ";\n"+extractCode : ""}`
@@ -366,23 +375,27 @@ JasonGenerator['action_affordance'] = function(block){
 
   //process input
   var inputBlock = block.getInputTargetBlock('input')
-  var inputVar = "_"
+  var inputVar = undefined
   var composeCode = undefined
   if(inputBlock){
     if(inputBlock.type == "variable"){
       inputVar = JasonGenerator.valueToCode(block, 'output', JasonGenerator.NO_PRECEDENCE);
     } else {
-      inputVar = "X_in_1"
+      inputVar = generationUtils.getVariable()
       composeCode = generationUtils.getObjectComposeCode(generationUtils.getRootStatement(inputBlock), indent, inputVar)[0]
       composeCode = `json.create_empty_object(${inputVar});\n${indent}${composeCode}${indent}`
     }
   }
 
+  var clientId = generationUtils.getVariable()
+  var affordanceResult = generationUtils.getVariable();
+
   //process output
   var outputBlock = block.getInputTargetBlock('output')
-  var resultVar = "X_out_1"
+  var resultVar = undefined
   var extractCode = undefined
   if(outputBlock){
+    resultVar = generationUtils.getVariable()
     if(outputBlock.type == "variable"){
       var outputVar = JasonGenerator.valueToCode(block, 'output', JasonGenerator.NO_PRECEDENCE);
       if(outputType == "object" || outputType == "array"){
@@ -396,9 +409,10 @@ JasonGenerator['action_affordance'] = function(block){
   }
   
   //code to use the affordance
-  var getArtifact = `?xx_get_client(${thingId}, Xx_ID);\n`
-  var useAction = `${indent}invokeAction("${url}", ${inputVar}, X_result_string)[artifact_id(Xx_ID)];\n`
-  var parseJson = `${indent}json.parse(X_result_string, ${resultVar})[artifact_id(Xx_ID)]`
+
+  var getArtifact = `?xx_get_client("${thingId}", ${clientId});\n`
+  var useAction = `${indent}invokeAction("${url}", ${inputBlock ? inputVar+', ' : ""} ${outputBlock ? affordanceResult: "_"})[artifact_id(${clientId})];\n`
+  var parseJson = outputBlock ? `${indent}json.parse(${affordanceResult}, ${resultVar})` : "";
   var code = `${composeCode ? composeCode: ""}${getArtifact}${useAction}${parseJson}${extractCode ? ";\n"+extractCode: ""}`
   return [code, JasonGenerator.NO_PRECEDENCE]
 }
@@ -411,7 +425,7 @@ JasonGenerator['thing_login'] = function(block){
   var keyName = block.keyName;
   var location = block.location;
   var scheme = block.scheme;
-  var code = `+x_thing_login(${thing}, "${scheme}", "${location}", "${keyName}", ${key})`
+  var code = `+x_thing_login("${thing}", "${scheme}", "${location}", "${keyName}", ${key})`
   return code;
 }
 
@@ -427,6 +441,14 @@ JasonGenerator['username_password'] = function(block){
 
 //Utils
 const generationUtils = {
+
+  variableId: 0,
+
+  getVariable: function(){
+    this.variableId +=1;
+    return "X_var_"+this.variableId;
+  },
+  
   getItems: function(block, itemName, itemCount, separator=','){
     var itemArray = []
     for (let i = 0; i < itemCount; i++) {
@@ -468,7 +490,7 @@ const generationUtils = {
     var value = ""
 
     if(valueBlock.type == 'create_object'){
-      value = object.slice(0,-1) + (parseInt(object.slice(-1))+1)
+      value = this.getVariable()
       var extractCode = generationUtils.getObjectExtractCode(generationUtils.getRootStatement(valueBlock), indent, value)
     } else {
       value = JasonGenerator.blockToCode(valueBlock)[0]
@@ -495,7 +517,7 @@ const generationUtils = {
     var value = ""
 
     if(valueBlock.type == 'create_object'){
-      value = object.slice(0,-1) + (parseInt(object.slice(-1))+1+offset)
+      value = this.getVariable()
       var res = generationUtils.getObjectComposeCode(generationUtils.getRootStatement(valueBlock), indent, value)
       var composeCode = res[0]
       var composeOffset = res[1]
