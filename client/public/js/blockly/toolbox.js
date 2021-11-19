@@ -248,7 +248,7 @@ const toolboxDefinition = {
         },
         {
           "kind": "block",
-          "type": "invoke_action"
+          "type": "jason_statement"
         },
         {
           "kind": "block",

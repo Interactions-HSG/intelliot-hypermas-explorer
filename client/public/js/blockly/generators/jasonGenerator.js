@@ -305,7 +305,7 @@ JasonGenerator['check_expression'] = function(block) {
   return code
 }
 
-JasonGenerator['invoke_action'] = function(block){
+JasonGenerator['jason_statement'] = function(block){
   var actionName = block.getFieldValue('actionName');
   var arguments = generationUtils.getItems(block, 'argument', block._arguments)
   var code = `${actionName}(${arguments ? arguments : ""});`

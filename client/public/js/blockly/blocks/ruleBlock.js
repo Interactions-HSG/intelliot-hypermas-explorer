@@ -15,7 +15,6 @@ Blockly.Blocks['rule'] = {
       .setCheck('rule_body')
     this.appendDummyInput()
       .appendField(new Blockly.FieldTextInput('name'),'functor')
-      .appendField('(')
     this._updateShape();
     this.setMutator(new Blockly.Mutator(['mutator_block_input']));
   },
@@ -69,12 +68,19 @@ Blockly.Blocks['rule'] = {
   },
 
   _updateShape: function(){
+    if(this._variables == 0 && this.getInput('start')) {
+      this.removeInput('start')
+    } else if(this._variables > 0 && !this.getInput('start')){
+      this.appendDummyInput('start')
+        .appendField('(')
+    }
     if(this.getInput('end')){
       this.removeInput('end')
     }
     ComposerUtils.addInputFields(this, 'variable', this._variables, 'variable')
+    var endMessage = (this._variables ? ')' : '') + ' is true'
     this.appendDummyInput('end')
-      .appendField(') is true');
+      .appendField(endMessage);
     this.moveInputBefore('rule_body', null)
   }
 }

@@ -1,4 +1,4 @@
-const invoke_action_block = {
+const jason_statement_block = {
   "inputsInline":true,
   "previousStatement": "body_block",
   "nextStatement": "body_block",
@@ -6,9 +6,9 @@ const invoke_action_block = {
   "tooltip": "Invoke the affordance",
 }
 
-Blockly.Blocks['invoke_action'] = {
+Blockly.Blocks['jason_statement'] = {
   init: function(){
-    this.jsonInit(invoke_action_block);
+    this.jsonInit(jason_statement_block);
     this._arguments = 1;
     this.appendDummyInput()
       .appendField(new Blockly.FieldTextInput('action'),'actionName')
