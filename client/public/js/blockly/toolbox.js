@@ -248,10 +248,6 @@ const toolboxDefinition = {
         },
         {
           "kind": "block",
-          "type": "jason_statement"
-        },
-        {
-          "kind": "block",
           "type": "use_affordance",
         },
         {
@@ -261,6 +257,28 @@ const toolboxDefinition = {
         {
           "kind": "block",
           "type": "assign_variable"
+        },
+        {
+          "kind": "block",
+          //"type": "print_action"
+          "blockxml": "<block type='print_action'>" +
+            "<value name='message'>" +
+            "<block type='string'></block>" +
+            "</value>" +
+            "</block>"
+        },
+        {
+          "kind": "block",
+          //"type": "wait_action"
+          "blockxml": "<block type='wait_action'>" +
+            "<value name='seconds'>" +
+            "<block type='number'></block>" +
+            "</value>" +
+            "</block>"
+        },
+        {
+          "kind": "block",
+          "type": "jason_statement"
         },
       ]
     },

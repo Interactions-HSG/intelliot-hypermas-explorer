@@ -3,7 +3,7 @@ const jason_statement_block = {
   "previousStatement": "body_block",
   "nextStatement": "body_block",
   "colour": 15,
-  "tooltip": "Invoke the affordance",
+  "tooltip": "write a jason internal action or an artifact invocation here",
 }
 
 Blockly.Blocks['jason_statement'] = {
