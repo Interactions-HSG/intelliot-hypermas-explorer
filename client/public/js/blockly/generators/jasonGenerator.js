@@ -372,7 +372,7 @@ JasonGenerator['property_affordance'] = function(block){
   }
 
   //generate code to use the affordance
-  var getArtifact = `?xx_get_client("${thingId}",${clientId});\n`
+  var getArtifact = `?xx_wot_client("${thingId}",${clientId});\n`
   var useAffordance = `${indent}readProperty("${url}", ${affordanceResult})[artifact_id(${clientId})];\n`
   var parseJson = `${indent}json.parse(${affordanceResult}, ${resultVar})`
 
@@ -426,7 +426,7 @@ JasonGenerator['action_affordance'] = function(block){
   
   //code to use the affordance
 
-  var getArtifact = `?xx_get_client("${thingId}", ${clientId});\n`
+  var getArtifact = `?xx_wot_client("${thingId}", ${clientId});\n`
   var useAction = `${indent}invokeAction("${url}", ${inputBlock ? inputVar+', ' : ""} ${outputBlock ? affordanceResult: "_"})[artifact_id(${clientId})];\n`
   var parseJson = outputBlock ? `${indent}json.parse(${affordanceResult}, ${resultVar})` : "";
   var code = `${composeCode ? composeCode: ""}${getArtifact}${useAction}${parseJson}${extractCode ? ";\n"+indent+extractCode: ""}`
@@ -555,21 +555,6 @@ const generationUtils = {
   },
 
   getArtifactCreationPlans: function(){
-
-    return `
-+?xx_get_client(Thing, ID) : x_thing_login(Thing, Scheme, Location, KeyName, Value)
-<-  println("Thing with login");
-    .my_name(N);
-    .concat(N, "_", Thing, "_client", A);
-    makeArtifact(A,"wot.WotHttpClientArtifact",[N],ID);
-    authorizeWithKey(Location, KeyName, Value)[artifact_id(ID)];
-    +xx_get_client(Thing, ID).
-
-
-+?xx_get_client(Thing, ID) : true
-<-  .my_name(N);
-    .concat(N, "_", Thing, "_client", A);
-    makeArtifact(A,"wot.WotHttpClientArtifact",[N],ID);
-    +xx_get_client(Thing, ID).`
+    return `{include("./templates/wot.asl")}`
   }
 }
