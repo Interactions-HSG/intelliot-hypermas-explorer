@@ -75,7 +75,7 @@ templates['affordancesList'] = template({"1":function(container,depth0,helpers,p
   return ((stack1 = lookupProperty(helpers,"if").call(alias1,(depths[1] != null ? lookupProperty(depths[1],"animate") : depths[1]),{"name":"if","hash":{},"fn":container.program(11, data, 0, blockParams, depths),"inverse":container.program(13, data, 0, blockParams, depths),"data":data,"loc":{"start":{"line":38,"column":6},"end":{"line":42,"column":13}}})) != null ? stack1 : "")
     + "          <form id=\"form_"
     + alias4(((helper = (helper = lookupProperty(helpers,"id") || (depth0 != null ? lookupProperty(depth0,"id") : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"id","hash":{},"data":data,"loc":{"start":{"line":43,"column":25},"end":{"line":43,"column":31}}}) : helper)))
-    + "\" name=\"action\">\r\n            <div class=\"card-header action-color-reverse\">\r\n              <div class=\"card-title\">"
+    + "\" class=\"affordance-form\" name=\"action\">\r\n            <div class=\"card-header action-color-reverse\">\r\n              <div class=\"card-title\">"
     + alias4(((helper = (helper = lookupProperty(helpers,"id") || (depth0 != null ? lookupProperty(depth0,"id") : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"id","hash":{},"data":data,"loc":{"start":{"line":45,"column":38},"end":{"line":45,"column":44}}}) : helper)))
     + "</div>\r\n              <button type=\"submit\" form=\"form_"
     + alias4(((helper = (helper = lookupProperty(helpers,"id") || (depth0 != null ? lookupProperty(depth0,"id") : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"id","hash":{},"data":data,"loc":{"start":{"line":46,"column":47},"end":{"line":46,"column":53}}}) : helper)))
@@ -145,7 +145,7 @@ templates['artifactsList'] = template({"1":function(container,depth0,helpers,par
         return undefined
     };
 
-  return "<div class=\"artifact-header scroll-header\">\r\n  <h4 class=\"artifact-color slide-in-left\">Artifacts </h4>\r\n</div>\r\n<div class=\"scroll-container\">\r\n"
+  return "<div class=\"artifact-header scroll-header\">\r\n  <h4 class=\"artifact-color slide-in-left\">Things </h4>\r\n</div>\r\n<div class=\"scroll-container\">\r\n"
     + ((stack1 = lookupProperty(helpers,"each").call(depth0 != null ? depth0 : (container.nullContext || {}),(depth0 != null ? lookupProperty(depth0,"currentArtifacts") : depth0),{"name":"each","hash":{},"fn":container.program(2, data, 0, blockParams, depths),"inverse":container.noop,"data":data,"loc":{"start":{"line":6,"column":2},"end":{"line":25,"column":11}}})) != null ? stack1 : "")
     + "</div>\r\n\r\n";
 },"2":function(container,depth0,helpers,partials,data,blockParams,depths) {

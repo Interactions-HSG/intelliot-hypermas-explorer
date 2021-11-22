@@ -30,7 +30,7 @@ exports.startServer = async function(config) {
     res.sendFile('dashboard.html', {root: './public/html'})
   })
 
-  app.get('/explorer/:workspace', function(req, res){
+  app.get('/explorer/:env/:workspace', function(req, res){
     res.sendFile('explorer.html', {root: './public/html'})
   })
 

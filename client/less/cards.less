@@ -62,12 +62,17 @@
 
 .dashcard {
   color:black;
+  border:none;
   background-color: @c_interactions_snow;
   visibility: hidden;
   box-shadow: 0px 5px 10px 0px rgba(0, 0, 0, 0.2);
   margin-bottom: 10px;
   &:hover{
       box-shadow: 0px 5px 10px 0px rgba(0, 0, 0, 0.5);
+  }
+
+  &.selected{
+    background-color: #f5d5dd;
   }
 
   .card-header {

@@ -59,12 +59,15 @@
 }
 #settings {
   flex-grow: 1;
+  label {
+    font-size: @font-size--impressum;
+  }
 }
 
 #workspace {
-  div {
-    font-size: @font-size--impressum;
-  }
+  display:flex;
+  align-items:baseline;
+
   select {
     font-size: 15px;
     background: transparent;
@@ -73,6 +76,14 @@
     option {
       background-color: @c_interactions_blue;
     }
+  }
+  .btn {
+    margin-left: 10px;
+    font-size: 15px;
+    padding: 0px 5px;
+    background-color: @c_interactions_blue;
+    border: 2px solid white;
+    color:white;
   }
 }
 

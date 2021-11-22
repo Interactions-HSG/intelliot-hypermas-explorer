@@ -6,7 +6,7 @@ class ArtifactsController {
   currentArtifacts = []
   selectedArtifact = undefined
   selectedThing = undefined
-  maxToastShown = 5
+  maxToastShown = 7
 
   //jquery shortcuts
   $artifactsContainer = $('#artifacts-container')
@@ -18,13 +18,27 @@ class ArtifactsController {
     log.fine(`Fetching artifacts in workspace ${workspaceId}`);
     try {
       var artifacts = await environmentInterface.fetchArtifacts(environmentId, workspaceId);
-      log.fine(`Workspace contained ${artifacts.length} artifact(s)!`);
-      for (var artifact of artifacts) {
-        try {
-          var artifactDescription = await environmentInterface.getArtifactDescription(environmentId, workspaceId, artifact.id)
-          this.currentArtifacts.push(artifactDescription)
-        } catch (error) {
-          log.error(error)
+      if(artifacts.length){
+        log.fine(`Workspace contained ${artifacts.length} artifact(s)!`);
+        for (var artifact of artifacts) {
+          try {
+            var artifactDescription = await environmentInterface.getArtifactDescription(environmentId, workspaceId, artifact.id)
+            if(artifactDescription.thingDescription.base){
+              //preparse the thing description completing forms hrefs
+              for(const p in artifactDescription.thingDescription.properties){
+                artifactDescription.thingDescription.properties[p].forms.forEach(f => f.href = artifactDescription.thingDescription.base + f.href)
+              }
+              for(const a in artifactDescription.thingDescription.actions){
+                artifactDescription.thingDescription.actions[a].forms.forEach(f => f.href = artifactDescription.thingDescription.base + f.href)
+              }
+              for(const e in artifactDescription.thingDescription.events){
+                //TODO support events(?)
+              }
+            }
+            this.currentArtifacts.push(artifactDescription)
+          } catch (error) {
+            log.error(error)
+          }
         }
       }
       //this.showArtifactsBar();
@@ -54,11 +68,11 @@ class ArtifactsController {
 
     //add click handler
     this.currentArtifacts.forEach(artifact => {
-      var event = {
-        data: artifact,
-        type: ArtifactsController.selectArtifactEvent
-      };
-      $(`div[id='${artifact.id}']`).click(async () => await dashboard.handleEvent(event));
+      $(`div[id='${artifact.id}']`).click(e => this.showArtifactAffordances(artifact.id));
+      $(`div[id='${artifact.id}']`).click(function(){
+        $('.dashcard').removeClass('selected');
+        $(this).addClass('selected');
+      })
     });
   }
 
@@ -116,21 +130,15 @@ class ArtifactsController {
       }
       return inputData;
     }
+    var controller = this
     $('form.affordance-form').each(function () {
       $(this).submit(async (e) => {
         e.preventDefault();
+        e.stopPropagation();
         var id = this.id.split("_")[1]
         var input = getSchema($(this).find('.input-schema'))['Input:']
         var type = this.name
-        var event = {
-          data: {
-            type,
-            id,
-            input
-          },
-          type: ArtifactsController.testAffordanceEvent
-        }
-        await dashboard.handleEvent(event);
+        await controller.testAffordance(id, type, input);
       })
     })
   }

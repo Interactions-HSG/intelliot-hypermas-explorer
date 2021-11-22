@@ -8,11 +8,13 @@ class EnvironmentController {
   currentValue = null;
   //jquery shortcuts
   $workspaceChooser = $('#workspace-chooser')
+  $exploreButton = $('#explore-button')
 
   constructor(environmentId){
     this.environmentId = environmentId;
     this.workspaces = [];
     this.currentValue = "empty"
+    this.$exploreButton.hide();
 
     this.$workspaceChooser.change(async function () {
       var event = {
@@ -66,6 +68,13 @@ class EnvironmentController {
     }
   }
 
+  showExploreButton(envId, workspaceId){
+    this.$exploreButton.show();
+    var location = window.location.href.slice(0,window.location.href.lastIndexOf('/'))
+      +'/explorer/'+envId+'/'+workspaceId
+    console.log(location)
+    this.$exploreButton.attr('href', location)
+  }
   
   async reloadArtifactsFromWorkspace(environmentId, workspaceId) {
     var currentArtifacts = []
@@ -81,7 +90,7 @@ class EnvironmentController {
           log.error(error)
         }
       }
-      //this.showArtifactsBar();
+      this.showExploreButton(environmentId, workspaceId)
       return Promise.resolve(currentArtifacts);
     } catch (error) {
       return Promise.reject(error);
