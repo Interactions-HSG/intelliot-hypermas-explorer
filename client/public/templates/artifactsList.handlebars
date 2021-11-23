@@ -9,7 +9,13 @@
   {{else}}
     <div id="{{id}}" class="card dashcard clickable">
       {{/if}}
-      <div class="card-header artifact-color-reverse">{{id}}</div>
+      <div class="card-header artifact-color-reverse">{{id}}
+        {{#if hasSecurity}}
+        <button id="login-{{id}}" class="clickable rounded-pill badge login-thing">
+                Login
+        </button>
+        {{/if}}
+      </div>
       <div class="card-body">
         {{#if propertiesNum}}
         <p class="card-text">{{propertiesNum}} properties</p>

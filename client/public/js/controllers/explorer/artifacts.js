@@ -23,18 +23,6 @@ class ArtifactsController {
         for (var artifact of artifacts) {
           try {
             var artifactDescription = await environmentInterface.getArtifactDescription(environmentId, workspaceId, artifact.id)
-            if(artifactDescription.thingDescription.base){
-              //preparse the thing description completing forms hrefs
-              for(const p in artifactDescription.thingDescription.properties){
-                artifactDescription.thingDescription.properties[p].forms.forEach(f => f.href = artifactDescription.thingDescription.base + f.href)
-              }
-              for(const a in artifactDescription.thingDescription.actions){
-                artifactDescription.thingDescription.actions[a].forms.forEach(f => f.href = artifactDescription.thingDescription.base + f.href)
-              }
-              for(const e in artifactDescription.thingDescription.events){
-                //TODO support events(?)
-              }
-            }
             this.currentArtifacts.push(artifactDescription)
           } catch (error) {
             log.error(error)
@@ -48,6 +36,11 @@ class ArtifactsController {
     }
   }
 
+  _hasSecurity(td){
+    var value = td.security && td.securityDefinitions[td.security].scheme != "nosec"
+    return value;
+  }
+
   showArtifactsBar() {
     //select information to display
     var displayList = this.currentArtifacts.map(a => {
@@ -55,14 +48,15 @@ class ArtifactsController {
         id: a.id,
         propertiesNum: a.thingDescription.properties ? Object.keys(a.thingDescription.properties).length : undefined,
         actionsNum: a.thingDescription.actions ? Object.keys(a.thingDescription.actions).length : undefined,
-        eventsNum: a.thingDescription.events ? Object.keys(a.thingDescription.events).length : undefined
+        eventsNum: a.thingDescription.events ? Object.keys(a.thingDescription.events).length : undefined,
+        hasSecurity: this._hasSecurity(a.thingDescription)
       }
     });
 
     //generate DOM elements
     var $artifactsContent = Handlebars.templates.artifactsList({
       currentArtifacts: displayList,
-      animate: true
+      animate: true,
     });
     this.$artifactsContainer.append($artifactsContent);
 
@@ -74,6 +68,18 @@ class ArtifactsController {
         $(this).addClass('selected');
       })
     });
+
+    var controller = this;
+    $('.login-thing').click(function(e){
+      var artifactId = $(this).attr('id').replace("login-", "")
+      var artifact = controller.currentArtifacts.find(a => a.id == artifactId);
+      var td = artifact.thingDescription
+      if(controller._hasSecurity(td)){
+        var def = td.securityDefinitions[td.security]
+        var key = prompt(`Set authentication key.\nScheme: ${def.scheme}\nIn: ${def.in}\nName: ${def.name}`)
+        artifact.key = key;
+      }
+    })
   }
 
   clearArtifactsBar() {
@@ -83,7 +89,11 @@ class ArtifactsController {
 
   async showArtifactAffordances(artifactId) {
     this.selectedArtifact = this.currentArtifacts.find(a => a.id == artifactId);
-    this.selectedThing = new ThingInterface(this.selectedArtifact.thingDescription);
+    var td = this.selectedArtifact.thingDescription
+    if(controller._hasSecurity(td) && !this.selectedArtifact.key){
+      alert("You may require to login before using the affordances.")
+    }
+    this.selectedThing = new ThingInterface(this.selectedArtifact.thingDescription, this.selectedArtifact.key);
     await this.selectedThing.loadThing();
     this.clearAffordancesBar()
     this.showAffordancesBar()

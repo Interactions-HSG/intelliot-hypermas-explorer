@@ -1,6 +1,7 @@
 class ThingInterface {
 
   td = "";
+  key = undefined;
   properties = []
   actions = []
   events = []
@@ -8,14 +9,35 @@ class ThingInterface {
   _servient = undefined
   _thing = undefined
 
-  constructor(thingDescription) {
+  constructor(thingDescription, key) {
     this.td = thingDescription;
+    this.key = key;
     this._servient = new Wot.Core.Servient();
     this._servient.addClientFactory(new Wot.Http.HttpClientFactory());
     this._servient.addClientFactory(new Wot.Http.HttpsClientFactory());
   }
 
+  //This method was painful to write never change it cause node-wot
+  getCredentialDefinition(td, key){
+    switch(td.securityDefinitions[td.security].scheme){
+      case 'apikey': return {apiKey: key}
+      case 'basic': 
+      var username = key.split(':')[0]
+      var password = key.split(':')[1]
+      console.log(username,password)
+      return{ username, password }
+      default :return undefined;
+    }
+  }
+
   async loadThing(){
+    if(this.td.id && this.key){
+      var credentials = {
+        [this.td.id]: this.getCredentialDefinition(this.td, this.key)
+      }
+      this._servient.addCredentials(credentials)
+      this._servient.getCredentials(this.td.id)
+    }
     var factory = await this._servient.start();
     this._thing = await factory.consume(this.td)
     this.properties = this._generatePropertyList(this._thing.properties)
@@ -29,6 +51,7 @@ class ThingInterface {
     try {
       var res = await this._thing.readProperty(property);
     } catch (error) {
+      console.log(error)
       res = {error: error.message}
     }
     return res;
