@@ -427,9 +427,11 @@ JasonGenerator['action_affordance'] = function(block){
   //code to use the affordance
 
   var getArtifact = `?xx_wot_client("${thingId}", ${clientId});\n`
-  var useAction = `${indent}invokeAction("${url}", ${inputBlock ? inputVar+', ' : ""} ${outputBlock ? affordanceResult: "_"})[artifact_id(${clientId})];\n`
-  var parseJson = outputBlock ? `${indent}json.parse(${affordanceResult}, ${resultVar})` : "";
+  var method = block.method
+  var useAction = `${indent}invokeAction("${url}","${method}", ${inputBlock ? inputVar+', ' : ""} ${outputBlock ? affordanceResult: "_"})[artifact_id(${clientId})]`
+  var parseJson = outputBlock ? `;\n${indent}json.parse(${affordanceResult}, ${resultVar})` : "";
   var code = `${composeCode ? composeCode: ""}${getArtifact}${useAction}${parseJson}${extractCode ? ";\n"+indent+extractCode: ""}`
+
   return [code, JasonGenerator.NO_PRECEDENCE]
 }
 
@@ -543,8 +545,8 @@ const generationUtils = {
     } else {
       value = JasonGenerator.blockToCode(valueBlock)[0]
     }
-
-    var code = `${composeCode ? composeCode+indent: ""}json.set(${object}, "${key}", ${value});\n`
+    
+    var code = `${composeCode ? composeCode+indent: ""}json.set(${object},${type}, "${key}", ${value});\n`
     const nextBlock = block.nextConnection && block.nextConnection.targetBlock();
     var newCode='';
     if(nextBlock) {

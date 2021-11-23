@@ -72,7 +72,6 @@ class EnvironmentController {
     this.$exploreButton.show();
     var location = window.location.href.slice(0,window.location.href.lastIndexOf('/'))
       +'/explorer/'+envId+'/'+workspaceId
-    console.log(location)
     this.$exploreButton.attr('href', location)
   }
   

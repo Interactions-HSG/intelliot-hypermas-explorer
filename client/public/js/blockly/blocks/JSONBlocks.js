@@ -55,6 +55,10 @@ Blockly.defineBlocksWithJsonArray([
           "number"
         ],
         [
+          "integer",
+          "integer"
+        ],
+        [
           "object",
           "object"
         ],

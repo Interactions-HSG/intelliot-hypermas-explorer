@@ -60,14 +60,14 @@ Blockly.Blocks['thing_login'] = {
 
   mutationToDom: function() {
     var container = document.createElement('mutation')
-    container.setAttribute('keyName', this.keyName)
+    container.setAttribute('keyname', this.keyName)
     container.setAttribute('location', this.location)
     container.setAttribute('scheme', this.scheme)
     return container;
   },
 
   domToMutation: function(xmlElement) {
-    this.keyName = xmlElement.getAttribute('keyName')
+    this.keyName = xmlElement.getAttribute('keyname')
     this.location = xmlElement.getAttribute('location')
     this.scheme = xmlElement.getAttribute('scheme')
   }
@@ -91,7 +91,7 @@ const loginBlockUtils = {
         case 'basic':
           var blockString = `
           <block type="thing_login">
-            <mutation keyName="${secObj.name}" location="${secObj.in}" scheme="${secObj.scheme}"></mutation>
+            <mutation keyname="${secObj.name}" location="${secObj.in}" scheme="${secObj.scheme}"></mutation>
             <field name="thing">${artifactId}</field>
             <value name="key">
               <block type="username_password">
@@ -111,10 +111,10 @@ const loginBlockUtils = {
           `
           blocks.push({kind: "block", blockxml:blockString})
           break;
-        case 'api-key': 
+        case 'apikey': 
           var blockString = `
           <block type="thing_login">
-            <mutation name="${secObj.name}" in="${secObj.in}" scheme="${secObj.scheme}"></mutation>
+            <mutation keyname="${secObj.name}" location="${secObj.in}" scheme="${secObj.scheme}"></mutation>
             <field name="thing">${artifactId}</field>
             <value name="key">
               <block type="string">
