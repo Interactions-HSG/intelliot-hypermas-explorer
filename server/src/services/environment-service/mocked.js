@@ -25,7 +25,7 @@ class SpockbotMock {
   }
 
   async getArtifactsInWorkspace(environmentId, workspaceId) {
-    var id="leubot1"
+    var id="leubot2"
     var uri="mocked"
     return  Promise.resolve([{id, uri}])
   }
@@ -53,8 +53,8 @@ const TD={
             "saref": "https://w3id.org/saref#"
         }
     ],
-    "title": "leubot1",
-    "id": "http://localhost:8080/environments/intelliot/workspaces/uc-industry/artifacts/leubot1",
+    "title": "leubot2",
+    "id": "http://localhost:8080/environments/intelliot/workspaces/uc-industry/artifacts/leubot2",
     "@type": [
         "eve:Artifact",
         "Thing",
@@ -79,7 +79,7 @@ const TD={
             ],
             "forms": [
                 {
-                    "href": "https://api.interactions.ics.unisg.ch/leubot1/v1.3.0/posture",
+                    "href": "https://api.interactions.ics.unisg.ch/leubot2/v1.3.4/posture",
                     "contentType": "application/json",
                     "op": [
                         "readproperty",
@@ -142,7 +142,7 @@ const TD={
             ],
             "forms": [
                 {
-                    "href": "https://api.interactions.ics.unisg.ch/leubot1/v1.3.0/base",
+                    "href": "https://api.interactions.ics.unisg.ch/leubot2/v1.3.4/base",
                     "contentType": "application/json",
                     "op": [
                         "readproperty",
@@ -177,7 +177,7 @@ const TD={
             ],
             "forms": [
                 {
-                    "href": "https://api.interactions.ics.unisg.ch/leubot1/v1.3.0/gripper",
+                    "href": "https://api.interactions.ics.unisg.ch/leubot2/v1.3.4/gripper",
                     "contentType": "application/json",
                     "op": [
                         "readproperty",
@@ -212,7 +212,7 @@ const TD={
             ],
             "forms": [
                 {
-                    "href": "https://api.interactions.ics.unisg.ch/leubot1/v1.3.0/elbow",
+                    "href": "https://api.interactions.ics.unisg.ch/leubot2/v1.3.4/elbow",
                     "contentType": "application/json",
                     "op": [
                         "readproperty",
@@ -247,7 +247,7 @@ const TD={
             ],
             "forms": [
                 {
-                    "href": "https://api.interactions.ics.unisg.ch/leubot1/v1.3.0/wrist/angle",
+                    "href": "https://api.interactions.ics.unisg.ch/leubot2/v1.3.4/wrist/angle",
                     "contentType": "application/json",
                     "op": [
                         "readproperty",
@@ -282,7 +282,7 @@ const TD={
             ],
             "forms": [
                 {
-                    "href": "https://api.interactions.ics.unisg.ch/leubot1/v1.3.0/shoulder",
+                    "href": "https://api.interactions.ics.unisg.ch/leubot2/v1.3.4/shoulder",
                     "contentType": "application/json",
                     "op": [
                         "readproperty",
@@ -317,7 +317,7 @@ const TD={
             ],
             "forms": [
                 {
-                    "href": "https://api.interactions.ics.unisg.ch/leubot1/v1.3.0/wrist/rotation",
+                    "href": "https://api.interactions.ics.unisg.ch/leubot2/v1.3.4/wrist/rotation",
                     "contentType": "application/json",
                     "op": [
                         "readproperty",
@@ -353,7 +353,7 @@ const TD={
             ],
             "forms": [
                 {
-                    "href": "https://api.interactions.ics.unisg.ch/leubot1/v1.3.0/shoulder",
+                    "href": "https://api.interactions.ics.unisg.ch/leubot2/v1.3.4/shoulder",
                     "contentType": "application/json",
                     "op": [
                         "invokeaction"
@@ -387,7 +387,7 @@ const TD={
             ],
             "forms": [
                 {
-                    "href": "https://api.interactions.ics.unisg.ch/leubot1/v1.3.0/wrist/rotation",
+                    "href": "https://api.interactions.ics.unisg.ch/leubot2/v1.3.4/wrist/rotation",
                     "contentType": "application/json",
                     "op": [
                         "invokeaction"
@@ -421,7 +421,7 @@ const TD={
             ],
             "forms": [
                 {
-                    "href": "https://api.interactions.ics.unisg.ch/leubot1/v1.3.0/wrist/angle",
+                    "href": "https://api.interactions.ics.unisg.ch/leubot2/v1.3.4/wrist/angle",
                     "contentType": "application/json",
                     "op": [
                         "invokeaction"
@@ -455,7 +455,7 @@ const TD={
             ],
             "forms": [
                 {
-                    "href": "https://api.interactions.ics.unisg.ch/leubot1/v1.3.0/reset",
+                    "href": "https://api.interactions.ics.unisg.ch/leubot2/v1.3.4/reset",
                     "contentType": "application/json",
                     "op": [
                         "invokeaction"
@@ -471,7 +471,7 @@ const TD={
             ],
             "forms": [
                 {
-                    "href": "https://api.interactions.ics.unisg.ch/leubot1/v1.3.0/gripper",
+                    "href": "https://api.interactions.ics.unisg.ch/leubot2/v1.3.4/gripper",
                     "contentType": "application/json",
                     "op": [
                         "invokeaction"
@@ -505,7 +505,7 @@ const TD={
             ],
             "forms": [
                 {
-                    "href": "https://api.interactions.ics.unisg.ch/leubot1/v1.3.0/elbow",
+                    "href": "https://api.interactions.ics.unisg.ch/leubot2/v1.3.4/elbow",
                     "contentType": "application/json",
                     "op": [
                         "invokeaction"
@@ -539,7 +539,7 @@ const TD={
             ],
             "forms": [
                 {
-                    "href": "https://api.interactions.ics.unisg.ch/leubot1/v1.3.0/base",
+                    "href": "https://api.interactions.ics.unisg.ch/leubot2/v1.3.4/base",
                     "contentType": "application/json",
                     "op": [
                         "invokeaction"
@@ -594,7 +594,7 @@ const TD={
                                 },
                                 "hasForm": {
                                     "hctl:hasOperationType": "invokeAction",
-                                    "hctl:hasTarget": "https://api.interactions.ics.unisg.ch/leubot1/v1.3.0/elbow",
+                                    "hctl:hasTarget": "https://api.interactions.ics.unisg.ch/leubot2/v1.3.4/elbow",
                                     "htv:methodName": "PUT",
                                     "hctl:forContentType": "application/json"
                                 }
@@ -609,7 +609,7 @@ const TD={
                                     "htv:methodName": "PUT",
                                     "hctl:forContentType": "application/json",
                                     "hctl:hasOperationType": "invokeAction",
-                                    "hctl:hasTarget": "https://api.interactions.ics.unisg.ch/leubot1/v1.3.0/shoulder"
+                                    "hctl:hasTarget": "https://api.interactions.ics.unisg.ch/leubot2/v1.3.4/shoulder"
                                 },
                                 "hasInputSchema": {
                                     "@type": [
@@ -636,7 +636,7 @@ const TD={
                                 "htv:methodName": "PUT",
                                 "hctl:forContentType": "application/json",
                                 "hctl:hasOperationType": "invokeAction",
-                                "hctl:hasTarget": "https://api.interactions.ics.unisg.ch/leubot1/v1.3.0/reset"
+                                "hctl:hasTarget": "https://api.interactions.ics.unisg.ch/leubot2/v1.3.4/reset"
                             }
                         }
                     ],
@@ -649,7 +649,7 @@ const TD={
                             "htv:methodName": "PUT",
                             "hctl:forContentType": "application/json",
                             "hctl:hasOperationType": "invokeAction",
-                            "hctl:hasTarget": "https://api.interactions.ics.unisg.ch/leubot1/v1.3.0/wrist/angle"
+                            "hctl:hasTarget": "https://api.interactions.ics.unisg.ch/leubot2/v1.3.4/wrist/angle"
                         },
                         "hasInputSchema": {
                             "@type": [
@@ -677,7 +677,7 @@ const TD={
                         "htv:methodName": "PUT",
                         "hctl:forContentType": "application/json",
                         "hctl:hasOperationType": "invokeAction",
-                        "hctl:hasTarget": "https://api.interactions.ics.unisg.ch/leubot1/v1.3.0/wrist/rotation"
+                        "hctl:hasTarget": "https://api.interactions.ics.unisg.ch/leubot2/v1.3.4/wrist/rotation"
                     },
                     "hasInputSchema": {
                         "@type": [
@@ -717,7 +717,7 @@ const TD={
                     "htv:methodName": "PUT",
                     "hctl:forContentType": "application/json",
                     "hctl:hasOperationType": "invokeAction",
-                    "hctl:hasTarget": "https://api.interactions.ics.unisg.ch/leubot1/v1.3.0/gripper"
+                    "hctl:hasTarget": "https://api.interactions.ics.unisg.ch/leubot2/v1.3.4/gripper"
                 }
             }
         ],
@@ -742,7 +742,7 @@ const TD={
             "name": "Set Base",
             "hasForm": {
                 "hctl:hasOperationType": "invokeAction",
-                "hctl:hasTarget": "https://api.interactions.ics.unisg.ch/leubot1/v1.3.0/base",
+                "hctl:hasTarget": "https://api.interactions.ics.unisg.ch/leubot2/v1.3.4/base",
                 "htv:methodName": "PUT",
                 "hctl:forContentType": "application/json"
             }
@@ -780,7 +780,7 @@ const TD={
                                     }
                                 ],
                                 "hasForm": {
-                                    "hctl:hasTarget": "https://api.interactions.ics.unisg.ch/leubot1/v1.3.0/gripper"
+                                    "hctl:hasTarget": "https://api.interactions.ics.unisg.ch/leubot2/v1.3.4/gripper"
                                 }
                             },
                             {
@@ -809,7 +809,7 @@ const TD={
                                     }
                                 ],
                                 "hasForm": {
-                                    "hctl:hasTarget": "https://api.interactions.ics.unisg.ch/leubot1/v1.3.0/wrist/angle"
+                                    "hctl:hasTarget": "https://api.interactions.ics.unisg.ch/leubot2/v1.3.4/wrist/angle"
                                 }
                             }
                         ],
@@ -839,7 +839,7 @@ const TD={
                             ],
                             "name": "Get Wrist Rotation",
                             "hasForm": {
-                                "hctl:hasTarget": "https://api.interactions.ics.unisg.ch/leubot1/v1.3.0/wrist/rotation"
+                                "hctl:hasTarget": "https://api.interactions.ics.unisg.ch/leubot2/v1.3.4/wrist/rotation"
                             }
                         }
                     ],
@@ -868,7 +868,7 @@ const TD={
                             }
                         ],
                         "hasForm": {
-                            "hctl:hasTarget": "https://api.interactions.ics.unisg.ch/leubot1/v1.3.0/base"
+                            "hctl:hasTarget": "https://api.interactions.ics.unisg.ch/leubot2/v1.3.4/base"
                         },
                         "name": "Get Base"
                     }
@@ -899,7 +899,7 @@ const TD={
                         }
                     ],
                     "hasForm": {
-                        "hctl:hasTarget": "https://api.interactions.ics.unisg.ch/leubot1/v1.3.0/elbow"
+                        "hctl:hasTarget": "https://api.interactions.ics.unisg.ch/leubot2/v1.3.4/elbow"
                     }
                 }
             ],
@@ -928,7 +928,7 @@ const TD={
                     }
                 ],
                 "hasForm": {
-                    "hctl:hasTarget": "https://api.interactions.ics.unisg.ch/leubot1/v1.3.0/shoulder"
+                    "hctl:hasTarget": "https://api.interactions.ics.unisg.ch/leubot2/v1.3.4/shoulder"
                 },
                 "name": "Get Shoulder"
             }
@@ -942,7 +942,7 @@ const TD={
                 "https://ci.mines-stetienne.fr/kg/ontology#Posture"
             ],
             "hasForm": {
-                "hctl:hasTarget": "https://api.interactions.ics.unisg.ch/leubot1/v1.3.0/posture"
+                "hctl:hasTarget": "https://api.interactions.ics.unisg.ch/leubot2/v1.3.4/posture"
             },
             "js:properties": [
                 [
@@ -999,7 +999,7 @@ const TD={
             "name": "Get Posture"
         }
     ],
-    "dct:title": "leubot1",
+    "dct:title": "leubot2",
     "hasSecurityConfiguration": {
         "@type": "wotsec:APIKeySecurityScheme",
         "wotsec:name": "X-API-Key",
