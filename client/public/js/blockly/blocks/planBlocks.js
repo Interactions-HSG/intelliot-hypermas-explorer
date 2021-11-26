@@ -1,7 +1,7 @@
 Blockly.defineBlocksWithJsonArray([
   {
     "type": "define_plan",
-    "message0": "When %1 if %2 do %3",
+    "message0": "When %1 then %2 do %3",
     "args0": [
       {
         "type": "input_value",
@@ -12,11 +12,7 @@ Blockly.defineBlocksWithJsonArray([
       {
         "type": "input_value",
         "name": "context",
-        "check": [
-          "statement",
-          "predicate",
-          "rule_body"
-        ],
+        "check": "context",
         "align": "RIGHT"
       },
       {
@@ -31,8 +27,35 @@ Blockly.defineBlocksWithJsonArray([
     "helpUrl": ""
   },
   {
+    "type": "context_if",
+    "message0": "if %1",
+    "args0": [
+      {
+        "type": "input_value",
+        "name": "context",
+        "check": [
+          "statement",
+          "predicate"
+        ]
+      }
+    ],
+    "inputsInline": true,
+    "output": "context",
+    "colour": 15,
+    "tooltip": "",
+    "helpUrl": ""
+  },
+  {
+    "type": "context_always",
+    "message0": "always",
+    "output": "context",
+    "colour": 15,
+    "tooltip": "",
+    "helpUrl": ""
+  },
+  {
     "type": "belief_add_remove_trigger",
-    "message0": "agent %1 %2 believing %3",
+    "message0": "agent %1 %2 remembering %3",
     "args0": [{
         "type": "field_dropdown",
         "name": "option",
@@ -59,7 +82,7 @@ Blockly.defineBlocksWithJsonArray([
     "inputsInline": true,
     "output": "trigger",
     "colour": 330,
-    "tooltip": "When an agent starts or stops believing something new. Accepts a predicate as input",
+    "tooltip": "When an agent starts or stops remembering something new. Accepts a predicate as input",
     "helpUrl": ""
   },
   {

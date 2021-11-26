@@ -2,17 +2,12 @@ Blockly.defineBlocksWithJsonArray(
   [
     {
       "type": "init_agent",
-      "message0": "When agent%1%2%3is born %4 it %5",
-      "args0": [{
-          "type": "input_dummy"
-        },
+      "message0": "When %1 starts %2 it %3",
+      "args0": [
         {
           "type": "field_label_serializable",
           "name": "name",
           "text": "new_agent"
-        },
-        {
-          "type": "input_dummy"
         },
         {
           "type": "input_dummy"
@@ -68,7 +63,7 @@ Blockly.defineBlocksWithJsonArray(
     },
     {
       "type": "init_belief",
-      "message0": "believes %1 %2",
+      "message0": "remembers %1 %2",
       "args0": [{
           "type": "input_dummy"
         },
@@ -87,7 +82,7 @@ Blockly.defineBlocksWithJsonArray(
     },
     {
       "type": "init_goal",
-      "message0": "decides its goal is to work until %1 %2",
+      "message0": "decides to achieve %1 %2",
       "args0": [{
           "type": "input_dummy"
         },

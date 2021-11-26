@@ -240,7 +240,7 @@ const atom_block_json = {
   "args0": [{
     "type": "field_input",
     "name": "value",
-    "text": "atom"
+    "text": "value"
   }],
   "output": "atom",
   "colour": 190,
@@ -272,7 +272,7 @@ const string_block_json = {
   "args0": [{
     "type": "field_input",
     "name": "value",
-    "text": "string"
+    "text": "text"
   }],
   "output": "atom",
   "colour": 200,

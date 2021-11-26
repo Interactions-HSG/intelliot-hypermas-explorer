@@ -1,5 +1,5 @@
 const property_block_json = {
-  "message0": "%1 to set %2 in %3 ",
+  "message0": "%1 to put property %2 in %3 ",
   "args0": [
     {
       "type": "field_label_serializable",
