@@ -55,7 +55,7 @@ Blockly.defineBlocksWithJsonArray([
       }
     ],
     "output": "operation",
-    "colour": 230,
+    "colour": 200,
     "tooltip": "Returns the output of the operation",
     "helpUrl": ""
   },
@@ -219,16 +219,16 @@ Blockly.defineBlocksWithJsonArray([
   {
     "type": "true",
     "message0": "true",
-    "output": "statement",
-    "colour": 230,
+    "output": "atom",
+    "colour": 190,
     "tooltip": "Make something be always true.",
     "helpUrl": ""
   },
   {
     "type": "false",
     "message0": "false",
-    "output": "statement",
-    "colour": 230,
+    "output": "atom",
+    "colour": 190,
     "tooltip": "Make something be always false.",
     "helpUrl": ""
   },
@@ -255,6 +255,7 @@ Blockly.Blocks['atom'] = {
     this.getField('value').setValidator(function(newValue){
       var value = newValue.trim();
       if(value){
+        value = value.replaceAll("\"", "")
         value = value.replaceAll(" ", "_")
         value = utils.uncapitalize(value)
         block.setWarningText();
@@ -275,7 +276,7 @@ const string_block_json = {
     "text": "text"
   }],
   "output": "atom",
-  "colour": 200,
+  "colour": 190,
   "tooltip": "A string",
   "helpUrl": ""
 }
@@ -299,7 +300,7 @@ const number_block_json = {
     "text": "0"
   }],
   "output": "atom",
-  "colour": 200,
+  "colour": 190,
   "tooltip": "A number",
   "helpUrl": ""
 }

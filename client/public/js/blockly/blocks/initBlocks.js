@@ -21,7 +21,7 @@ Blockly.defineBlocksWithJsonArray(
         }
       ],
       "inputsInline": true,
-      "colour": 30,
+      "colour": 60,
       "tooltip": "Configure the initial state of an agent",
       "helpUrl": ""
     },
@@ -76,7 +76,7 @@ Blockly.defineBlocksWithJsonArray(
       "inputsInline": true,
       "previousStatement": "init_block",
       "nextStatement": "init_block",
-      "colour": 30,
+      "colour": 60,
       "tooltip": "Add a belief to the agent mind",
       "helpUrl": ""
     },
@@ -95,7 +95,7 @@ Blockly.defineBlocksWithJsonArray(
       "inputsInline": true,
       "previousStatement": "init_block",
       "nextStatement": "init_block",
-      "colour": 30,
+      "colour": 60,
       "tooltip": "Add the goal for the agent",
       "helpUrl": ""
     },
@@ -115,7 +115,7 @@ Blockly.defineBlocksWithJsonArray(
       "inputsInline": true,
       "previousStatement": "init_block",
       "nextStatement": "init_block",
-      "colour": 30,
+      "colour": 60,
       "tooltip": "Add knowledge of a rule to the agent mind",
       "helpUrl": ""
     },

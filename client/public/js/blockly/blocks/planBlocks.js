@@ -28,7 +28,7 @@ Blockly.defineBlocksWithJsonArray([
   },
   {
     "type": "context_if",
-    "message0": "if %1",
+    "message0": "only if %1",
     "args0": [
       {
         "type": "input_value",
@@ -81,7 +81,7 @@ Blockly.defineBlocksWithJsonArray([
     ],
     "inputsInline": true,
     "output": "trigger",
-    "colour": 330,
+    "colour": 15,
     "tooltip": "When an agent starts or stops remembering something new. Accepts a predicate as input",
     "helpUrl": ""
   },
@@ -113,7 +113,7 @@ Blockly.defineBlocksWithJsonArray([
     ],
     "inputsInline": true,
     "output": "trigger",
-    "colour": 330,
+    "colour": 15,
     "tooltip": "When an agent starts or stop pursuing a goal. Accepts a predicate as input",
     "helpUrl": ""
   },
@@ -145,7 +145,7 @@ Blockly.defineBlocksWithJsonArray([
     ],
     "inputsInline": true,
     "output": "trigger",
-    "colour": 330,
+    "colour": 15,
     "tooltip": "When an agent try or fail to check a condition. Accepts a predicate as input",
     "helpUrl": ""
   },

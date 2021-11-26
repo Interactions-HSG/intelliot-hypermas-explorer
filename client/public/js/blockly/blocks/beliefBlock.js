@@ -1,7 +1,7 @@
 const belief_block_json = {
   "inputsInline": true,
   "output": "belief",
-  "colour": 120,
+  "colour": 105,
   "tooltip": "Define a fact which is true in the agent mind",
   "helpUrl": "",
 }

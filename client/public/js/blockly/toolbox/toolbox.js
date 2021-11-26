@@ -2,6 +2,7 @@ const toolboxDefinition = {
   "kind": "categoryToolbox",
   "contents": [
     basic_toolbox_category,
+    operations_toolbox_category,
     initialization_toolbox_category,
     plan_definition_toolbox_category,
     plan_body_toolbox_category,

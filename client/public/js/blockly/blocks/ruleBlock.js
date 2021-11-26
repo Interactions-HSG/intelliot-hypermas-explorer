@@ -1,7 +1,7 @@
 const rule_block_json = {
   "inputsInline": true,
   "output": "rule",
-  "colour": 270,
+  "colour": 285,
   "tooltip": "Define a rule that holds when the statement holds",
   "helpUrl": ""
 }
@@ -87,7 +87,7 @@ Blockly.Blocks['rule'] = {
 
 const rule_body_block_json = {
   "output": "rule_body",
-  "colour": 270,
+  "colour": 285,
   "tooltip": "Define the body of a rule, accept statements as input",
   "helpUrl": ""
 }

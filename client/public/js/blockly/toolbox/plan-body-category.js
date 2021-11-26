@@ -58,10 +58,6 @@ const plan_body_toolbox_category =      {
     },
     {
       "kind": "block",
-      "type": "use_affordance",
-    },
-    {
-      "kind": "block",
       "type": "check_expression"
     },
     {

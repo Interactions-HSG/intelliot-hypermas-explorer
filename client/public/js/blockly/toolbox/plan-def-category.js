@@ -54,11 +54,28 @@ const plan_definition_toolbox_category =
     },
     {
       "kind": "block",
+      //"type": "context_if"
+      "blockxml": "<block type='context_if'>" +
+        "<value name='context'>" +
+        "<block type='and_or_statement'></block>" +
+        "</value>" +
+        "</block>"
+    },
+    {
+      "kind": "block",
       "type": "context_always"
     },
     {
       "kind": "block",
       "type": "predicate"
+    },
+    {
+      "kind": "block",
+      "type": "no_predicate"
+    },
+    {
+      "kind": "block",
+      "type": "opposite_predicate"
     }
   ]
 }
