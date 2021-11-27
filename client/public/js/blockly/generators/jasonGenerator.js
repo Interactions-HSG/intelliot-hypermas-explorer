@@ -25,7 +25,7 @@ JasonGenerator.generate = function(workspace){
   }
   ordered_blocks.push(init[0]);
   var total = blocks.filter(b => b.type != 'init_agent').length;
-  blocks = blocks.filter(b => b.type == 'define_plan') //ignore any dangling blocks
+  blocks = blocks.filter(b => b.type == 'plan_define') //ignore any dangling blocks
   var ignored = total - blocks.length;
   if(blocks.length == 0){
     console.warn("The agent has no defined plans");
