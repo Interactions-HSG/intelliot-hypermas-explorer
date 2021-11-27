@@ -47,14 +47,14 @@ Blockly.Blocks['affordance_action'] = {
     this.hasOutput = xmlElement.getAttribute('output') === 'true'
     if(this.hasInput){
       this.appendValueInput('input')
-            .appendField("input")
+            .appendField("Input")
             .setAlign(Blockly.ALIGN_RIGHT)
             .setCheck(['variable', 'object']);
     }
 
     if(this.hasOutput){
       this.appendValueInput('output')
-            .appendField("output")
+            .appendField("Result")
             .setAlign(Blockly.ALIGN_RIGHT)
             .setCheck(['variable', 'object']);
     }

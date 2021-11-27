@@ -176,14 +176,14 @@ Blockly.Blocks['affordance_action'] = {
     this.hasOutput = xmlElement.getAttribute('output') === 'true'
     if(this.hasInput){
       this.appendValueInput('input')
-            .appendField("input")
+            .appendField("Input")
             .setAlign(Blockly.ALIGN_RIGHT)
             .setCheck(['variable', 'object']);
     }
 
     if(this.hasOutput){
       this.appendValueInput('output')
-            .appendField("output")
+            .appendField("Result")
             .setAlign(Blockly.ALIGN_RIGHT)
             .setCheck(['variable', 'object']);
     }
@@ -247,7 +247,7 @@ JasonGenerator['affordance_action'] = function(block){
 Blockly.Blocks['affordance_property'] = {
   init: function() {
     this.jsonInit({
-      "message0": "%1 to put property %2 in %3 ",
+      "message0": "%1 to tell me the value of %2 %3 Result %4 ",
       "args0": [
         {
           "type": "field_label_serializable",
@@ -260,8 +260,12 @@ Blockly.Blocks['affordance_property'] = {
           "text": "property"
         },
         {
+          "type": "input_dummy"
+        },
+        {
           "type": "input_value",
           "name": "result",
+          "align": "RIGHT",
           "check": [
             "object",
             "variable"
@@ -580,7 +584,7 @@ JasonGenerator['belief_update'] = function (block) {
 }
 Blockly.defineBlocksWithJsonArray([{
   "type": "check_expression",
-  "message0": "continue if %1",
+  "message0": "continue if %1 otherwise fail",
   "args0": [
     {
       "type": "input_value",
@@ -610,6 +614,10 @@ Blockly.defineBlocksWithJsonArray([{
 }]);
 
 //TODO generator for this block 
+JasonGenerator['context_always'] = function (block){
+  code = `true`
+  return [code, JasonGenerator.NO_PRECEDENCE]
+}
 Blockly.defineBlocksWithJsonArray([{
   "type": "context_if",
   "message0": "only if %1",
@@ -631,6 +639,11 @@ Blockly.defineBlocksWithJsonArray([{
 }]);
 
 //TODO generator for this block
+JasonGenerator['context_if'] = function (block){
+  var context = JasonGenerator.valueToCode(block, 'context', JasonGenerator.NO_PRECEDENCE)
+  var code = context; 
+  return [code, JasonGenerator.NO_PRECEDENCE]
+}
 Blockly.defineBlocksWithJsonArray([{
   "type": "goal_add",
   "message0": "wait and work until  %1",
@@ -673,7 +686,7 @@ JasonGenerator['goal_add_parallel'] = function(block) {
 }
 Blockly.defineBlocksWithJsonArray([{
   "type": "goal_add_test",
-  "message0": "check if %1",
+  "message0": "check if I know %1",
   "args0": [{
     "type": "input_value",
     "name": "goal",
@@ -962,7 +975,7 @@ Blockly.defineBlocksWithJsonArray([{
   ],
   "inputsInline": true,
   "output": "belief",
-  "colour": 120,
+  "colour": 105,
   "tooltip": "Weakly negates the belief",
   "helpUrl": ""
 }]);
@@ -1050,8 +1063,12 @@ JasonGenerator['number'] = function(block){
 }
 Blockly.defineBlocksWithJsonArray([{
   "type": "object_create",
-  "message0": "object %1",
+  "message0": "object %1 %2",
   "args0": [
+    {
+      //do not remove
+      "type": "input_dummy"
+    },
     {
       "type": "input_statement",
       "name": "fields",
@@ -1204,7 +1221,7 @@ Blockly.defineBlocksWithJsonArray([{
   ],
   "inputsInline": true,
   "output": "belief",
-  "colour": 120,
+  "colour": 105,
   "tooltip": "Strongly negate the belief",
   "helpUrl": ""
 }]);

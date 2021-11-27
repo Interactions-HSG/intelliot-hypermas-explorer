@@ -19,3 +19,8 @@ Blockly.defineBlocksWithJsonArray([{
 }]);
 
 //TODO generator for this block
+JasonGenerator['context_if'] = function (block){
+  var context = JasonGenerator.valueToCode(block, 'context', JasonGenerator.NO_PRECEDENCE)
+  var code = context; 
+  return [code, JasonGenerator.NO_PRECEDENCE]
+}

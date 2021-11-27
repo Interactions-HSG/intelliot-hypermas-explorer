@@ -1,7 +1,11 @@
 Blockly.defineBlocksWithJsonArray([{
   "type": "object_create",
-  "message0": "object %1",
+  "message0": "object %1 %2",
   "args0": [
+    {
+      //do not remove
+      "type": "input_dummy"
+    },
     {
       "type": "input_statement",
       "name": "fields",
