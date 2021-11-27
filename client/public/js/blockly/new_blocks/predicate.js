@@ -1,14 +1,12 @@
-const predicate_block_json = {
-  "inputsInline": true,
-  "output": "predicate",
-  "colour": 285,
-  "tooltip": "Define a predicate that can accept both variables to be grounded or atoms",
-  "helpUrl": ""
-}
-
 Blockly.Blocks['predicate'] = {
   init: function(){
-    this.jsonInit(predicate_block_json);
+    this.jsonInit({
+      "inputsInline": true,
+      "output": "predicate",
+      "colour": 285,
+      "tooltip": "Define a predicate that can accept both variables to be grounded or atoms",
+      "helpUrl": ""
+    });
     this._terms = 1;
     this.appendDummyInput()
       .appendField(new Blockly.FieldTextInput('name'),'functor')
@@ -78,4 +76,14 @@ Blockly.Blocks['predicate'] = {
     this.appendDummyInput('end')
       .appendField(new Blockly.FieldLabelSerializable(endMessage), 'END');
   }
+}
+
+JasonGenerator['predicate'] = function(block) {
+  var functor = block.getFieldValue('functor');
+  var termString = generationUtils.getItems(block, 'term', block._terms)
+  var code = functor
+  if(termString) {
+    code = `${functor}(${termString})`
+  }
+  return [code, JasonGenerator.NO_PRECEDENCE]
 }

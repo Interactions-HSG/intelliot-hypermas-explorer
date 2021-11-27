@@ -1,14 +1,12 @@
-const rule_block_json = {
-  "inputsInline": true,
-  "output": "rule",
-  "colour": 285,
-  "tooltip": "Define a rule that holds when the statement holds",
-  "helpUrl": ""
-}
-
 Blockly.Blocks['rule'] = {
   init: function(){
-    this.jsonInit(rule_block_json);
+    this.jsonInit({
+      "inputsInline": true,
+      "output": "rule",
+      "colour": 285,
+      "tooltip": "Define a rule that holds when the statement holds",
+      "helpUrl": ""
+    });
     this._variables = 1;
     this.appendValueInput('rule_body')
       .appendField('when')
@@ -85,70 +83,10 @@ Blockly.Blocks['rule'] = {
   }
 }
 
-const rule_body_block_json = {
-  "output": "rule_body",
-  "colour": 285,
-  "tooltip": "Define the body of a rule, accept statements as input",
-  "helpUrl": ""
-}
-
-Blockly.Blocks['rule_body'] = {
-  init: function(){
-    this.jsonInit(rule_body_block_json);
-    this._statements = 2;
-    this._updateShape();
-    this.setMutator(new Blockly.Mutator(['mutator_block_input']));
-  },
-
-  saveExtraState: function() {
-    return {
-      'statements': this._statements
-    };
-  },
-
-  loadExtraState: function(state) {
-    this._statements = state['statements'];
-    this._updateShape();
-  },
-
-  mutationToDom: function() {
-    var container = Blockly.utils.xml.createElement('mutation');
-    container.setAttribute('statements', this._statements);
-    return container;
-  },
-
-  domToMutation: function(xmlElement) {
-    this._statements = parseInt(xmlElement.getAttribute('statements'), 10);
-    this._updateShape();
-  },
-
-  decompose: function(workspace) {
-    return ComposerUtils.initUIBlocks(workspace, this._statements)
-  },
-
-  compose: function(containerBlock) {
-    var itemBlock = containerBlock.getInputTargetBlock('inputs');
-    ComposerUtils.forbidZeroItems(itemBlock);
-    var connections = ComposerUtils.getConnections(itemBlock);
-    ComposerUtils.disconnectChildren(this, connections, 'statement', this._statements);
-    this._statements = connections.length
-    this._updateShape();
-    ComposerUtils.connectChildren(this, connections, 'statement', this._statements)
-  },
-  
-  saveConnections: function(containerBlock) {
-    var itemBlock = containerBlock.getInputTargetBlock('inputs');
-    var i = 0;
-    while (itemBlock) {
-      var input = this.getInput('statement' + i);
-      itemBlock.valueConnection_ = input && input.connection.targetConnection;
-      i++;
-      itemBlock = itemBlock.nextConnection &&
-          itemBlock.nextConnection.targetBlock();
-    }
-  },
-
-  _updateShape: function(){
-    ComposerUtils.addInputFields(this, 'statement', this._statements, ['statement', 'predicate'], 'and')
-  }
+JasonGenerator['rule'] = function(block){
+  var functor = block.getFieldValue('functor');
+  var variables = generationUtils.getItems(block, 'variable', block._variables)
+  var rule_body = JasonGenerator.valueToCode(block, 'rule_body', JasonGenerator.NO_PRECEDENCE)
+  var code = `${functor}(${variables})${JasonGenerator.BASIC_INDENT}:- ${rule_body}`
+  return [code, JasonGenerator.NO_PRECEDENCE]
 }

@@ -1,14 +1,12 @@
-const belief_block_json = {
-  "inputsInline": true,
-  "output": "belief",
-  "colour": 105,
-  "tooltip": "Define a fact which is true in the agent mind",
-  "helpUrl": "",
-}
-
 Blockly.Blocks['belief'] = {
   init: function(){
-    this.jsonInit(belief_block_json);
+    this.jsonInit({
+      "inputsInline": true,
+      "output": "belief",
+      "colour": 105,
+      "tooltip": "Define a fact which is true in the agent mind",
+      "helpUrl": "",
+    });
     this._atoms = 1;
     this.appendDummyInput()
       .appendField(new Blockly.FieldTextInput('name'),'functor')
@@ -78,4 +76,14 @@ Blockly.Blocks['belief'] = {
     this.appendDummyInput('end')
       .appendField(new Blockly.FieldLabelSerializable(endMessage), 'END');
   }
+}
+
+JasonGenerator['belief'] = function (block){
+  var functor = block.getFieldValue('functor');
+  var atomString = generationUtils.getItems(block, 'atom', block._atoms)
+  var code = functor
+  if(atomString) {
+    code = `${functor}(${atomString})`
+  }
+  return [code, JasonGenerator.NO_PRECEDENCE]
 }

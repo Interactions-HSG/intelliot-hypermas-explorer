@@ -1,14 +1,12 @@
-const jason_statement_block = {
-  "inputsInline":true,
-  "previousStatement": "body_block",
-  "nextStatement": "body_block",
-  "colour": 15,
-  "tooltip": "write a jason internal action or an artifact invocation here",
-}
-
-Blockly.Blocks['jason_statement'] = {
+Blockly.Blocks['action_jason_custom'] = {
   init: function(){
-    this.jsonInit(jason_statement_block);
+    this.jsonInit({
+      "inputsInline":true,
+      "previousStatement": "body_block",
+      "nextStatement": "body_block",
+      "colour": 15,
+      "tooltip": "write a jason internal action or an artifact invocation here",
+    });
     this._arguments = 1;
     this.appendDummyInput()
       .appendField(new Blockly.FieldTextInput('action'),'actionName')
@@ -73,4 +71,11 @@ Blockly.Blocks['jason_statement'] = {
     this.appendDummyInput('end')
       .appendField(new Blockly.FieldLabelSerializable(')'), 'END');
   }
+}
+
+JasonGenerator['action_jason_custom'] = function(block){
+  var actionName = block.getFieldValue('actionName');
+  var arguments = generationUtils.getItems(block, 'argument', block._arguments)
+  var code = `${actionName}(${arguments ? arguments : ""});`
+  return code
 }

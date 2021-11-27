@@ -1,58 +1,30 @@
-
-Blockly.defineBlocksWithJsonArray([
-  {
-    "type": "username_password",
-    "message0": "username %1 password %2",
-    "args0": [
-      {
-        "type": "input_value",
-        "name": "username",
-        "check": ["atom", "variable"]
-      },
-      {
-        "type": "input_value",
-        "name": "password",
-        "check": ["atom", "variable"]
-      }
-    ],
-    "output": "username_password",
-    "colour": 195,
-    "tooltip": "",
-    "helpUrl": ""
-  }
-]);
-
-const login_block_json = {
-  //type: thing_login
-  "message0": "set login for %1 %2",
-  "args0": [
-    {
-      "type": "field_label_serializable",
-      "name": "thing",
-      "text": "thing"
-    },
-    {
-      "type": "input_value",
-      "name": "key",
-      "check": [
-        "variable",
-        "atom",
-        "username_password"
-      ]
-    }
-  ],
-  "inputsInline": true,
-  "previousStatement": "body_block",
-  "nextStatement": "body_block",
-  "colour": 15,
-  "tooltip": "",
-  "helpUrl": ""
-}
-
-
-Blockly.Blocks['thing_login'] = {
+Blockly.Blocks['login_thing'] = {
   init: function() {
-    this.jsonInit(login_block_json)
+    this.jsonInit({
+      "message0": "set login for %1 %2",
+      "args0": [
+        {
+          "type": "field_label_serializable",
+          "name": "thing",
+          "text": "thing"
+        },
+        {
+          "type": "input_value",
+          "name": "key",
+          "check": [
+            "variable",
+            "atom",
+            "username_password"
+          ]
+        }
+      ],
+      "inputsInline": true,
+      "previousStatement": "body_block",
+      "nextStatement": "body_block",
+      "colour": 15,
+      "tooltip": "",
+      "helpUrl": ""
+    })
     this.keyName = "key"
     this.location = "header"
     this.scheme = "nosec"
@@ -133,4 +105,15 @@ const loginBlockUtils = {
 
     return blocks;
   }
+}
+
+
+JasonGenerator['login_thing'] = function(block){
+  var key = JasonGenerator.valueToCode(block, 'key',JasonGenerator.NO_PRECEDENCE)
+  var thing = block.getFieldValue('thing')
+  var keyName = block.keyName;
+  var location = block.location;
+  var scheme = block.scheme;
+  var code = `+x_thing_login("${thing}", "${scheme}", "${location}", "${keyName}", ${key})`
+  return code;
 }

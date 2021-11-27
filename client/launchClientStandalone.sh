@@ -9,5 +9,12 @@ f=`basename $file`
 lessc --strict-imports $file ./public/css/${f%%.*}.css ; 
 done
 
+
+cd ./public/js/blockly/new_blocks
+cat *.js > ../blocks.js
+
+cd ../../../../
+
+
 echo "Launching client..."
 node app.js ./config/standalone.js

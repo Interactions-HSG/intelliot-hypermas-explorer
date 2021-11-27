@@ -1,24 +1,4 @@
-Blockly.defineBlocksWithJsonArray([
-  {
-    "type": "create_object",
-    "message0": "object %1 %2",
-    "args0": [
-      {
-        "type": "input_dummy"
-      },
-      {
-        "type": "input_statement",
-        "name": "fields",
-        "check": "object_field"
-      }
-    ],
-    "inputsInline": true,
-    "output": "object",
-    "colour": 165,
-    "tooltip": "",
-    "helpUrl": ""
-  },
-  {
+Blockly.defineBlocksWithJsonArray([{
   "type": "object_field",
   "message0": "%1 as %3 %2",
   "args0": [
@@ -79,5 +59,6 @@ Blockly.defineBlocksWithJsonArray([
   "colour": 165,
   "tooltip": "Define a field of a json object",
   "helpUrl": ""
-},
-]);
+}]);
+
+//This block will never have a code validation on it's own since it can be used only with the object_create block

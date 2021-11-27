@@ -66,8 +66,8 @@ const plan_body_toolbox_category =      {
     },
     {
       "kind": "block",
-      //"type": "print_action"
-      "blockxml": "<block type='print_action'>" +
+      //"type": "action_print"
+      "blockxml": "<block type='action_print'>" +
         "<value name='message'>" +
         "<block type='string'></block>" +
         "</value>" +
@@ -75,8 +75,8 @@ const plan_body_toolbox_category =      {
     },
     {
       "kind": "block",
-      //"type": "wait_action"
-      "blockxml": "<block type='wait_action'>" +
+      //"type": "action_wait"
+      "blockxml": "<block type='action_wait'>" +
         "<value name='seconds'>" +
         "<block type='number'></block>" +
         "</value>" +
@@ -84,7 +84,7 @@ const plan_body_toolbox_category =      {
     },
     {
       "kind": "block",
-      "type": "jason_statement"
+      "type": "jason_action"
     },
   ]
 }

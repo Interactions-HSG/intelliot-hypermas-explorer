@@ -1,139 +1,3 @@
-const property_block_json = {
-  "message0": "%1 to put property %2 in %3 ",
-  "args0": [
-    {
-      "type": "field_label_serializable",
-      "name": "thingId",
-      "text": "thing"
-    },
-    {
-      "type": "field_label_serializable",
-      "name": "affordanceName",
-      "text": "property"
-    },
-    {
-      "type": "input_value",
-      "name": "result",
-      "check": [
-        "object",
-        "variable"
-      ]
-    }
-  ],
-  "output": "affordance",
-  "style": "property_block_style",
-  "tooltip": "Get the current value of a property in the result variable or object",
-  "helpUrl": ""
-}
-
-Blockly.Blocks['property_affordance'] = {
-  init: function() {
-    this.jsonInit(property_block_json)
-    this.method = "method"
-    this.url = "url"
-    this.outputType = "object"
-    //this.setMutator(new Blockly.Mutator());
-  },
-
-  mutationToDom: function() {
-    var container = document.createElement('mutation')
-    container.setAttribute('method', this.method)
-    container.setAttribute('url', this.url)
-    container.setAttribute('output_type', this.outputType)
-    return container;
-  },
-
-  domToMutation: function(xmlElement) {
-    this.method = xmlElement.getAttribute('method')
-    this.url = xmlElement.getAttribute('url')
-    this.outputType = xmlElement.getAttribute('output_type')
-  }
-}
-
-const action_block_json =
-{
-  "type": "action_affordance",
-  "message0": "%1 to %2",
-  "args0": [
-    {
-      "type": "field_label_serializable",
-      "name": "thingId",
-      "text": "artifact"
-    },
-    {
-      "type": "field_label_serializable",
-      "name": "affordanceName",
-      "text": "action"
-    },
-    
-  ],
-  "output": "affordance",
-  "style": "action_block_style",
-  "tooltip": "Invoke an action on an artifact and store the result in a variable or object",
-  "helpUrl": ""
-}
-
-Blockly.Blocks['action_affordance'] = {
-  init: function() {
-    this.jsonInit(action_block_json)
-    this.method = "method"
-    this.url = "url"
-    this.outputType = "object"
-    this.hasInput = false
-    this.hasOutput = false
-    //this.setMutator(new Blockly.Mutator());
-  },
-
-  mutationToDom: function() {
-    var container = document.createElement('mutation')
-    container.setAttribute('method', this.method)
-    container.setAttribute('url', this.url)
-    container.setAttribute('output_type', this.outputType)
-    container.setAttribute('input', this.hasInput)
-    container.setAttribute('output', this.hasOutput)
-    
-    return container;
-  },
-
-  domToMutation: function(xmlElement) {
-    this.method = xmlElement.getAttribute('method')
-    this.url = xmlElement.getAttribute('url')
-    this.outputType = xmlElement.getAttribute('output_type')
-    this.hasInput = xmlElement.getAttribute('input') === 'true'
-    this.hasOutput = xmlElement.getAttribute('output') === 'true'
-    if(this.hasInput){
-      this.appendValueInput('input')
-            .appendField("input")
-            .setAlign(Blockly.ALIGN_RIGHT)
-            .setCheck(['variable', 'object']);
-    }
-
-    if(this.hasOutput){
-      this.appendValueInput('output')
-            .appendField("output")
-            .setAlign(Blockly.ALIGN_RIGHT)
-            .setCheck(['variable', 'object']);
-    }
-  }
-}
-
-
-/*the solution appears to be to generate a block like this:
-{
-  type: "block",
-  blockxml: "<block type='property_affordance'> 
-              <field name='thingId'>ARTIFACT_NAME</field>
-              <field name='affordanceName'>AFFORDANCE_NAME</field>
-              //output??
-              <mutation method='GET', url='www.yggdrasil/artifact/affordance'> 
-              </mutation> 
-            </block>"
-}
-and then return that to be added in the toolbox
-*/
-
-
-
 const affordanceBlockUtils = {
   _protocolBindings: function(operation){
     switch (operation) {
@@ -162,9 +26,9 @@ const affordanceBlockUtils = {
    
     var blockString = 
     `
-    <block type="use_affordance">
+    <block type="affordance_use">
       <value name="affordance">
-      <block type='property_affordance'> 
+      <block type='affordance_property'> 
         <mutation method="${method}" url="${url}" output_type="${type}"></mutation>
         <field name="thingId">${thingId}</field>
         <field name="affordanceName">${propertyName}</field>
@@ -184,7 +48,7 @@ const affordanceBlockUtils = {
     var url = actionDescription.forms[0].href
     
 
-    var actionType = "action_affordance"
+    var actionType = "affordance_action"
 
     var inputBlocks = ""
     var hasInput = false
@@ -206,7 +70,7 @@ const affordanceBlockUtils = {
 
     var blockString = 
     `
-    <block type="use_affordance">
+    <block type="affordance_use">
       <value name="affordance">
         <block type='${actionType}'>
           <mutation method="${method}" url="${url}" ${outputType} input="${hasInput}" output="${hasOutput}"></mutation>
@@ -249,7 +113,7 @@ const affordanceBlockUtils = {
         statementString = statementString + '</next>\n</block>\n'
       }
       resultBlock = 
-      `<block type="create_object">
+      `<block type="object_create">
         <statement name="fields">
         ${statementString}
         </statement>
