@@ -9,8 +9,8 @@ f=`basename $file`
 lessc --strict-imports $file ./public/css/${f%%.*}.css ; 
 done
 
-cd ./public/js/blockly/new_blocks
-cat *.js > ../block_compressed.js
+cd ./public/js/blockly/blocks
+cat *.js > ../blocks_compressed.js
 
 cd ../../../../
 

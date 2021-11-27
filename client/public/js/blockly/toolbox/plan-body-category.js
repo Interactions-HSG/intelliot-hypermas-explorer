@@ -4,8 +4,7 @@ const plan_body_toolbox_category =      {
   "toolboxitemid": "Agent_Plan_Body",
   "contents": [{
       "kind": "block",
-      //"type": "add_belief",
-      "blockxml": "<block type='add_belief'>" +
+      "blockxml": "<block type='belief_add'>" +
         "<value name='belief'>" +
         "<block type='predicate'></block>" +
         "</value>" +
@@ -13,8 +12,7 @@ const plan_body_toolbox_category =      {
     },
     {
       "kind": "block",
-      //"type": "remove_belief",
-      "blockxml": "<block type='remove_belief'>" +
+      "blockxml": "<block type='belief_remove'>" +
         "<value name='belief'>" +
         "<block type='predicate'></block>" +
         "</value>" +
@@ -22,8 +20,7 @@ const plan_body_toolbox_category =      {
     },
     {
       "kind": "block",
-      //"type": "update_belief"
-      "blockxml": "<block type='update_belief'>" +
+      "blockxml": "<block type='belief_update'>" +
         "<value name='belief'>" +
         "<block type='predicate'></block>" +
         "</value>" +
@@ -31,8 +28,7 @@ const plan_body_toolbox_category =      {
     },
     {
       "kind": "block",
-      //"type": "add_goal",
-      "blockxml": "<block type='add_goal'>" +
+      "blockxml": "<block type='goal_add'>" +
         "<value name='goal'>" +
         "<block type='predicate'></block>" +
         "</value>" +
@@ -40,8 +36,7 @@ const plan_body_toolbox_category =      {
     },
     {
       "kind": "block",
-      //"type": "add_parallel_goal",
-      "blockxml": "<block type='add_parallel_goal'>" +
+      "blockxml": "<block type='goal_add_parallel'>" +
         "<value name='goal'>" +
         "<block type='predicate'></block>" +
         "</value>" +
@@ -49,8 +44,7 @@ const plan_body_toolbox_category =      {
     },
     {
       "kind": "block",
-      //"type": "add_test_goal",
-      "blockxml": "<block type='add_test_goal'>" +
+      "blockxml": "<block type='goal_add_test'>" +
         "<value name='goal'>" +
         "<block type='predicate'></block>" +
         "</value>" +
@@ -66,7 +60,6 @@ const plan_body_toolbox_category =      {
     },
     {
       "kind": "block",
-      //"type": "action_print"
       "blockxml": "<block type='action_print'>" +
         "<value name='message'>" +
         "<block type='string'></block>" +
@@ -75,7 +68,6 @@ const plan_body_toolbox_category =      {
     },
     {
       "kind": "block",
-      //"type": "action_wait"
       "blockxml": "<block type='action_wait'>" +
         "<value name='seconds'>" +
         "<block type='number'></block>" +
@@ -84,7 +76,7 @@ const plan_body_toolbox_category =      {
     },
     {
       "kind": "block",
-      "type": "jason_action"
+      "type": "action_jason_custom"
     },
   ]
 }

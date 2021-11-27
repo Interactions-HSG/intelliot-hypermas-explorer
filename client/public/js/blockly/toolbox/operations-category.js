@@ -13,7 +13,7 @@ const operations_toolbox_category = {
     },
     {
       "kind":"block",
-      "type": "and_or_statement"
+      "type": "statement_and_or"
     },
     {
       "kind":"block",

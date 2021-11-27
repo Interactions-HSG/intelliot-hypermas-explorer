@@ -1,14 +1,12 @@
 Blockly.defineBlocksWithJsonArray([{
-  "type": "statement",
-  "message0": "%1 %2 %3",
+  "type": "statement_and_or",
+  "message0": "%1 %2 %3 %4",
   "args0": [{
       "type": "input_value",
       "name": "statement1",
       "check": [
-        "atom",
-        "variable",
-        "operation",
-        "statement"
+        "statement",
+        "predicate"
       ]
     },
     {
@@ -16,49 +14,35 @@ Blockly.defineBlocksWithJsonArray([{
       "name": "symbol",
       "options": [
         [
-          "==",
-          "=="
+          "and",
+          "&"
         ],
         [
-          "≠",
-          "\\=="
-        ],
-        [
-          ">",
-          ">"
-        ],
-        [
-          "<",
-          "<"
-        ],
-        [
-          "≥",
-          ">="
-        ],
-        [
-          "≤",
-          "<="
+          "or",
+          "|"
         ]
       ]
+    },
+    {
+      "type": "input_dummy"
+      //do not remove
     },
     {
       "type": "input_value",
       "name": "statement2",
       "check": [
-        "atom",
-        "variable",
-        "operation",
-        "statement"
+        "statement",
+        "predicate"
       ]
     }
   ],
   "output": "statement",
   "colour": 230,
-  "tooltip": "Provides conditions over variables and atoms",
+  "tooltip": "Provides and/or conditions to compose statements or predicates",
   "helpUrl": ""
 }]);
 
-JasonGenerator['statement'] = function(block) {
+JasonGenerator['statement_and_o'] = function(block) {
   var statement1 = JasonGenerator.valueToCode(block, 'statement1', JasonGenerator.NO_PRECEDENCE)
   var statment2 = JasonGenerator.valueToCode(block, 'statement2', JasonGenerator.NO_PRECEDENCE)
   var symbol = block.getFieldValue('symbol')

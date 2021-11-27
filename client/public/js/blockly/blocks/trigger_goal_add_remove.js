@@ -1,5 +1,5 @@
 Blockly.defineBlocksWithJsonArray([{
-  "type": "goal_add_remove_trigger",
+  "type": "trigger_goal_add_remove",
   "message0": "agent %1 %2 to achieve %3",
   "args0": [{
       "type": "field_dropdown",
@@ -31,7 +31,7 @@ Blockly.defineBlocksWithJsonArray([{
   "helpUrl": ""
 }]);
 
-JasonGenerator['goal_add_remove_trigger'] = function(block) {
+JasonGenerator['trigger_goal_add_remove'] = function(block) {
   var symbol = block.getFieldValue('option')
   var goal = JasonGenerator.valueToCode(block, 'goal', JasonGenerator.NO_PRECEDENCE)
   var code = symbol+goal

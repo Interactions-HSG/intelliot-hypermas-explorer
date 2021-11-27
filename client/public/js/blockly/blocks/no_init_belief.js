@@ -1,9 +1,7 @@
 Blockly.defineBlocksWithJsonArray([{
   "type": "no_init_belief",
-  "message0": "it doesn't know if %1 %2",
-  "args0": [{
-      "type": "input_dummy"
-    },
+  "message0": "it doesn't know if %1",
+  "args0": [
     {
       "type": "input_value",
       "name": "belief",

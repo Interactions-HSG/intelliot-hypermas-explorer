@@ -1,5 +1,5 @@
 Blockly.defineBlocksWithJsonArray([{
-  "type": "wait_action",
+  "type": "action_wait",
   "message0": "wait %1 seconds",
   "args0": [
     {

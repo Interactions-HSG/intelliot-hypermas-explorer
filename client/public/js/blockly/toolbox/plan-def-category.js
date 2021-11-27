@@ -5,12 +5,11 @@ const plan_definition_toolbox_category =
   "toolboxitemid": "Agent_Plan_Definition",
   "contents": [{
       "kind": "block",
-      "type": "define_plan"
+      "type": "plan_define"
     },
     {
       "kind": "block",
-      //"type": "belief_add_remove_trigger"
-      "blockxml": "<block type='belief_add_remove_trigger'>" +
+      "blockxml": "<block type='trigger_belief_add_remove'>" +
         "<value name='belief'>" +
         "<block type='predicate'></block>" +
         "</value>" +
@@ -18,8 +17,7 @@ const plan_definition_toolbox_category =
     },
     {
       "kind": "block",
-      //"type": "goal_add_remove_trigger"
-      "blockxml": "<block type='goal_add_remove_trigger'>" +
+      "blockxml": "<block type='trigger_goal_add_remove'>" +
         "<value name='goal'>" +
         "<block type='predicate'></block>" +
         "</value>" +
@@ -27,8 +25,7 @@ const plan_definition_toolbox_category =
     },
     {
       "kind": "block",
-      //"type": "test_add_remove_trigger"
-      "blockxml": "<block type='test_add_remove_trigger'>" +
+      "blockxml": "<block type='trigger_test_add_remove'>" +
         "<value name='test'>" +
         "<block type='predicate'></block>" +
         "</value>" +
@@ -36,7 +33,6 @@ const plan_definition_toolbox_category =
     },
     {
       "kind": "block",
-      //"type": "context_if"
       "blockxml": "<block type='context_if'>" +
         "<value name='context'>" +
         "<block type='predicate'></block>" +
@@ -45,7 +41,6 @@ const plan_definition_toolbox_category =
     },
     {
       "kind": "block",
-      //"type": "context_if"
       "blockxml": "<block type='context_if'>" +
         "<value name='context'>" +
         "<block type='statement'></block>" +
@@ -54,10 +49,9 @@ const plan_definition_toolbox_category =
     },
     {
       "kind": "block",
-      //"type": "context_if"
       "blockxml": "<block type='context_if'>" +
         "<value name='context'>" +
-        "<block type='and_or_statement'></block>" +
+        "<block type='statement_and_or'></block>" +
         "</value>" +
         "</block>"
     },

@@ -39,7 +39,7 @@ class FileTabsController {
     definition.setDeletable(false)
     definition.initSvg()
 
-    var plan = this._workspace.newBlock("define_plan")
+    var plan = this._workspace.newBlock("plan_define")
     plan.moveBy(10, 90)
     plan.setDeletable(false)
     plan.initSvg()

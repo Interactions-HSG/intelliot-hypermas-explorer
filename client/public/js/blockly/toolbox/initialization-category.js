@@ -4,7 +4,6 @@ const initialization_toolbox_category =     {
   "toolboxitemid": "Agent_Initialization",
   "contents": [{
       "kind": "block",
-      //"type": "init_belief",
       "blockxml": "<block type='init_belief'>" +
         "<value name='belief'>" +
         "<block type='belief'>"+
@@ -17,7 +16,6 @@ const initialization_toolbox_category =     {
     },
     {
       "kind": "block",
-      //"type": "init_rule",
       "blockxml": "<block type='init_rule'>" +
         "<value name='rule'>" +
         "<block type='rule'>" +
@@ -33,7 +31,6 @@ const initialization_toolbox_category =     {
     },
     {
       "kind": "block",
-      //"type": "init_goal",
       "blockxml": "<block type='init_goal'>" +
         "<value name='goal'>" +
         "<block type='belief'>"+

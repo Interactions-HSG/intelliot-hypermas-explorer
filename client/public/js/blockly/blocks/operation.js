@@ -1,6 +1,6 @@
 Blockly.defineBlocksWithJsonArray([{
   "type": "operation",
-  "message0": "%1 %2 %3",
+  "message0": "%1 %2 %3 %4",
   "args0": [
     {
       "type": "input_value",
@@ -32,6 +32,10 @@ Blockly.defineBlocksWithJsonArray([{
           "/"
         ]
       ]
+    },
+    {
+      //do not remove
+      "type": "input_dummy"
     },
     {
       "type": "input_value",
