@@ -13,7 +13,7 @@ const loginBlockUtils = {
           break; 
         case 'basic':
           var blockString = `
-          <block type="thing_login">
+          <block type="login_thing">
             <mutation keyname="${secObj.name}" location="${secObj.in}" scheme="${secObj.scheme}"></mutation>
             <field name="thing">${artifactId}</field>
             <value name="key">
@@ -36,7 +36,7 @@ const loginBlockUtils = {
           break;
         case 'apikey': 
           var blockString = `
-          <block type="thing_login">
+          <block type="login_thing">
             <mutation keyname="${secObj.name}" location="${secObj.in}" scheme="${secObj.scheme}"></mutation>
             <field name="thing">${artifactId}</field>
             <value name="key">
