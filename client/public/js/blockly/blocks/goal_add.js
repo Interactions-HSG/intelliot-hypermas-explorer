@@ -1,6 +1,6 @@
 Blockly.defineBlocksWithJsonArray([{
   "type": "goal_add",
-  "message0": "wait and work until  %1",
+  "message0": "wants to wait and achieve %1 first",
   "args0": [{
     "type": "input_value",
     "name": "goal",

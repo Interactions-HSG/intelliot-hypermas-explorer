@@ -1,6 +1,6 @@
 Blockly.defineBlocksWithJsonArray([{
   "type": "plan_define",
-  "message0": "When %1 then %2 do %3",
+  "message0": "When %1 then %2 it %3",
   "args0": [
     {
       "type": "input_value",

@@ -9,6 +9,7 @@ Blockly.Blocks['action_jason_custom'] = {
     });
     this._arguments = 1;
     this.appendDummyInput()
+      .appendField('executes')
       .appendField(new Blockly.FieldTextInput('action'),'actionName')
       .appendField('(')
     this._updateShape();
@@ -81,7 +82,7 @@ JasonGenerator['action_jason_custom'] = function(block){
 }
 Blockly.defineBlocksWithJsonArray([{
   "type": "action_print",
-  "message0": "say %1",
+  "message0": "says %1",
   "args0": [
     {
       "type": "input_value",
@@ -106,7 +107,7 @@ JasonGenerator['action_print'] = function(block){
 }
 Blockly.defineBlocksWithJsonArray([{
   "type": "action_wait",
-  "message0": "wait %1 seconds",
+  "message0": "waits %1 seconds",
   "args0": [
     {
       "type": "input_value",
@@ -337,7 +338,7 @@ JasonGenerator['affordance_property'] = function(block){
 }
 Blockly.defineBlocksWithJsonArray([{
   "type": "affordance_use",
-  "message0": "ask thing %1",
+  "message0": "asks thing %1",
   "args0": [
     {
       "type": "input_value",
@@ -371,7 +372,7 @@ JasonGenerator['any_variable'] = function(block) {
 }
 Blockly.defineBlocksWithJsonArray([{
   "type": "assign_variable",
-  "message0": "set %1 = %2",
+  "message0": "sets %1 = %2",
   "args0": [
     {
       "type": "input_value",
@@ -524,7 +525,7 @@ JasonGenerator['belief'] = function (block){
 }
 Blockly.defineBlocksWithJsonArray([{
   "type": "belief_add",
-  "message0": "start believing %1",
+  "message0": "starts remembering %1",
   "args0": [{
     "type": "input_value",
     "name": "belief",
@@ -544,7 +545,7 @@ JasonGenerator['belief_add'] = function(block) {
 }
 Blockly.defineBlocksWithJsonArray([{
   "type": "belief_remove",
-  "message0": "don't believe %1 anymore",
+  "message0": "stops remembering %1",
   "args0": [{
     "type": "input_value",
     "name": "belief",
@@ -564,7 +565,7 @@ JasonGenerator['belief_remove'] = function(block) {
 }
 Blockly.defineBlocksWithJsonArray([{
   "type": "belief_update",
-  "message0": "update belief, now %1",
+  "message0": "changes what to remember, now %1",
   "args0": [{
     "type": "input_value",
     "name": "belief",
@@ -584,7 +585,7 @@ JasonGenerator['belief_update'] = function (block) {
 }
 Blockly.defineBlocksWithJsonArray([{
   "type": "check_expression",
-  "message0": "continue if %1 otherwise fail",
+  "message0": "goes on if %1 otherwise fails",
   "args0": [
     {
       "type": "input_value",
@@ -646,7 +647,7 @@ JasonGenerator['context_if'] = function (block){
 }
 Blockly.defineBlocksWithJsonArray([{
   "type": "goal_add",
-  "message0": "wait and work until  %1",
+  "message0": "wants to wait and achieve %1 first",
   "args0": [{
     "type": "input_value",
     "name": "goal",
@@ -666,7 +667,7 @@ JasonGenerator['goal_add'] = function(block) {
 }
 Blockly.defineBlocksWithJsonArray([{
   "type": "goal_add_parallel",
-  "message0": "work until  %1 but don't wait",
+  "message0": "wants to try to achieve also %1 simultaneously",
   "args0": [{
     "type": "input_value",
     "name": "goal",
@@ -686,7 +687,7 @@ JasonGenerator['goal_add_parallel'] = function(block) {
 }
 Blockly.defineBlocksWithJsonArray([{
   "type": "goal_add_test",
-  "message0": "check if I know %1",
+  "message0": "wants to check if it knows %1",
   "args0": [{
     "type": "input_value",
     "name": "goal",
@@ -765,10 +766,8 @@ JasonGenerator['init_belief'] = function (block) {
 }
 Blockly.defineBlocksWithJsonArray([{
   "type": "init_goal",
-  "message0": "decides to achieve %1 %2",
-  "args0": [{
-      "type": "input_dummy"
-    },
+  "message0": "wants to try to achieve %1",
+  "args0": [
     {
       "type": "input_value",
       "name": "goal",
@@ -815,7 +814,7 @@ JasonGenerator['init_rule'] = function(block){
 Blockly.Blocks['login_thing'] = {
   init: function() {
     this.jsonInit({
-      "message0": "set login for %1 %2",
+      "message0": "authenticates on %1 with %2",
       "args0": [
         {
           "type": "field_label_serializable",
@@ -987,7 +986,7 @@ JasonGenerator['no_init_belief'] = function(block){
 }
 Blockly.defineBlocksWithJsonArray([{
     "type": "no_predicate",
-    "message0": "agent doesn't know if %1",
+    "message0": "it doesn't know if %1",
     "args0": [
       {
         "type": "input_value",
@@ -1233,7 +1232,7 @@ JasonGenerator['opposite_init_belief'] = function(block){
 }
 Blockly.defineBlocksWithJsonArray([{
   "type": "opposite_predicate",
-  "message0": "is false that %1",
+  "message0": "it's false that %1",
   "args0": [
     {
       "type": "input_value",
@@ -1255,7 +1254,7 @@ JasonGenerator['opposite_predicate'] = function(block){
 }
 Blockly.defineBlocksWithJsonArray([{
   "type": "plan_define",
-  "message0": "When %1 then %2 do %3",
+  "message0": "When %1 then %2 it %3",
   "args0": [
     {
       "type": "input_value",

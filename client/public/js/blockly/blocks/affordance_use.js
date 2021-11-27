@@ -1,6 +1,6 @@
 Blockly.defineBlocksWithJsonArray([{
   "type": "affordance_use",
-  "message0": "ask thing %1",
+  "message0": "asks thing %1",
   "args0": [
     {
       "type": "input_value",

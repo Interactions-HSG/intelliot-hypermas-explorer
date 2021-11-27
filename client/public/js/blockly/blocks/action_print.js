@@ -1,6 +1,6 @@
 Blockly.defineBlocksWithJsonArray([{
   "type": "action_print",
-  "message0": "say %1",
+  "message0": "says %1",
   "args0": [
     {
       "type": "input_value",

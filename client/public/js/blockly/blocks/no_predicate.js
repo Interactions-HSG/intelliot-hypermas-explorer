@@ -1,6 +1,6 @@
 Blockly.defineBlocksWithJsonArray([{
     "type": "no_predicate",
-    "message0": "agent doesn't know if %1",
+    "message0": "it doesn't know if %1",
     "args0": [
       {
         "type": "input_value",

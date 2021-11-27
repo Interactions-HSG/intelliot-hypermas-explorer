@@ -1,6 +1,6 @@
 Blockly.defineBlocksWithJsonArray([{
   "type": "opposite_predicate",
-  "message0": "is false that %1",
+  "message0": "it's false that %1",
   "args0": [
     {
       "type": "input_value",

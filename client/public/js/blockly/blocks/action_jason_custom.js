@@ -9,6 +9,7 @@ Blockly.Blocks['action_jason_custom'] = {
     });
     this._arguments = 1;
     this.appendDummyInput()
+      .appendField('executes')
       .appendField(new Blockly.FieldTextInput('action'),'actionName')
       .appendField('(')
     this._updateShape();

@@ -52,11 +52,19 @@ const plan_body_toolbox_category =      {
     },
     {
       "kind": "block",
-      "type": "check_expression"
+      "blockxml": "<block type='check_expression'>" +
+      "<value name='statement'>" +
+      "<block type='statement'></block>" +
+      "</value>" +
+      "</block>"
     },
     {
       "kind": "block",
-      "type": "assign_variable"
+      "blockxml": "<block type='assign_variable'>" +
+      "<value name='variable'>" +
+      "<block type='variable'></block>" +
+      "</value>" +
+      "</block>"
     },
     {
       "kind": "block",

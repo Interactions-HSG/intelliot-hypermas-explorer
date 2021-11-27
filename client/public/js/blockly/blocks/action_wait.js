@@ -1,6 +1,6 @@
 Blockly.defineBlocksWithJsonArray([{
   "type": "action_wait",
-  "message0": "wait %1 seconds",
+  "message0": "waits %1 seconds",
   "args0": [
     {
       "type": "input_value",
