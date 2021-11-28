@@ -1,6 +1,6 @@
 Blockly.defineBlocksWithJsonArray([{
   "type": "init_goal",
-  "message0": "wants to try to achieve %1",
+  "message0": "wants to achieve %1",
   "args0": [
     {
       "type": "input_value",

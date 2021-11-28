@@ -1,6 +1,6 @@
 Blockly.defineBlocksWithJsonArray([{
   "type": "goal_add_parallel",
-  "message0": "wants to try to achieve also %1 simultaneously",
+  "message0": "wants to achieve also %1 simultaneously",
   "args0": [{
     "type": "input_value",
     "name": "goal",
