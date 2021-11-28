@@ -51,10 +51,6 @@ const initialization_toolbox_category =     {
     },
     {
       "kind": "block",
-      "type": "no_init_belief"
-    },
-    {
-      "kind": "block",
       "type": "opposite_init_belief"
     },
   ]

@@ -112,7 +112,7 @@ Blockly.defineBlocksWithJsonArray([{
     {
       "type": "input_value",
       "name": "seconds",
-      "check": "atom"
+      "check": ["atom", "variable"]
     }
   ],
   "previousStatement": "body_block",
@@ -124,7 +124,7 @@ Blockly.defineBlocksWithJsonArray([{
 
 JasonGenerator['action_wait'] = function(block){
   var seconds = JasonGenerator.valueToCode(block, 'seconds', JasonGenerator.NO_PRECEDENCE)
-  var milliseconds = parseFloat(seconds)*1000;
+  var milliseconds = seconds+"*1000";
   var code = `.wait(${milliseconds});`
   return code
 }
@@ -667,7 +667,7 @@ JasonGenerator['goal_add'] = function(block) {
 }
 Blockly.defineBlocksWithJsonArray([{
   "type": "goal_add_parallel",
-  "message0": "wants to try to achieve also %1 simultaneously",
+  "message0": "wants to achieve also %1 simultaneously",
   "args0": [{
     "type": "input_value",
     "name": "goal",
@@ -766,7 +766,7 @@ JasonGenerator['init_belief'] = function (block) {
 }
 Blockly.defineBlocksWithJsonArray([{
   "type": "init_goal",
-  "message0": "wants to try to achieve %1",
+  "message0": "wants to achieve %1",
   "args0": [
     {
       "type": "input_value",
@@ -961,28 +961,6 @@ const ComposerUtils = {
       itemBlock = itemBlock.nextConnection && itemBlock.nextConnection.targetBlock();
     }
   }
-}
-Blockly.defineBlocksWithJsonArray([{
-  "type": "no_init_belief",
-  "message0": "it doesn't know if %1",
-  "args0": [
-    {
-      "type": "input_value",
-      "name": "belief",
-      "check": "belief"
-    }
-  ],
-  "inputsInline": true,
-  "output": "belief",
-  "colour": 105,
-  "tooltip": "Weakly negates the belief",
-  "helpUrl": ""
-}]);
-
-JasonGenerator['no_init_belief'] = function(block){
-  var predicate = JasonGenerator.valueToCode(block, 'belief', JasonGenerator.NO_PRECEDENCE)
-  var code = `not ${predicate}`
-  return [code, JasonGenerator.NO_PRECEDENCE]
 }
 Blockly.defineBlocksWithJsonArray([{
     "type": "no_predicate",
@@ -1254,7 +1232,7 @@ JasonGenerator['opposite_predicate'] = function(block){
 }
 Blockly.defineBlocksWithJsonArray([{
   "type": "plan_define",
-  "message0": "When %1 then %2 it %3",
+  "message0": "When %1 then %2 it %3 then it's done!",
   "args0": [
     {
       "type": "input_value",

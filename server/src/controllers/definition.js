@@ -9,6 +9,12 @@ function agentSourceDTO(agent){
   }
 }
 
+function agentIdDTO(agent){
+  return {
+    id: agent.id
+  }
+}
+
 function masDTO(mas){
   return {
     id: mas.id,
@@ -19,7 +25,7 @@ function masDTO(mas){
 //TODO paginate
 exports.getAllAgents = async function (req) {
   var agents = await AgentSource.find({})
-  return ok(agents.map(a => agentSourceDTO(a)))
+  return ok(agents.map(a => agentIdDTO(a)))
 }
 
 //TODO paginate

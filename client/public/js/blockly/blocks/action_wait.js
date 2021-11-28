@@ -5,7 +5,7 @@ Blockly.defineBlocksWithJsonArray([{
     {
       "type": "input_value",
       "name": "seconds",
-      "check": "atom"
+      "check": ["atom", "variable"]
     }
   ],
   "previousStatement": "body_block",
@@ -17,7 +17,7 @@ Blockly.defineBlocksWithJsonArray([{
 
 JasonGenerator['action_wait'] = function(block){
   var seconds = JasonGenerator.valueToCode(block, 'seconds', JasonGenerator.NO_PRECEDENCE)
-  var milliseconds = parseFloat(seconds)*1000;
+  var milliseconds = seconds+"*1000";
   var code = `.wait(${milliseconds});`
   return code
 }

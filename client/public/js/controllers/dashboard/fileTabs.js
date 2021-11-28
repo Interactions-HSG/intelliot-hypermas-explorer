@@ -41,7 +41,6 @@ class FileTabsController {
 
     var plan = this._workspace.newBlock("plan_define")
     plan.moveBy(10, 90)
-    plan.setDeletable(false)
     plan.initSvg()
     this._workspace.render();
     this._workspace.clearUndo()
