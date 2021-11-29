@@ -1,11 +1,15 @@
 const loginBlockUtils = {
   defineLoginBlock: function(td, artifactId){
     var blocks = []
-    if(td.security.length == 0){
+    var security = []
+    if(typeof td.security === 'string') {
+      security = [td.security];
+    }
+    if(security.length == 0){
       return [];
     }
 
-    for(s of td.security){
+    for(s of security){
       var secObj = td.securityDefinitions[s]
       switch (secObj.scheme){
         case 'nosec': 
