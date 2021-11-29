@@ -522,7 +522,7 @@ JasonGenerator['belief'] = function (block){
 }
 Blockly.defineBlocksWithJsonArray([{
   "type": "belief_add",
-  "message0": "make a new note: %1",
+  "message0": "add a new note: %1",
   "args0": [{
     "type": "input_value",
     "name": "belief",
@@ -542,7 +542,7 @@ JasonGenerator['belief_add'] = function(block) {
 }
 Blockly.defineBlocksWithJsonArray([{
   "type": "belief_remove",
-  "message0": "delete note: %1",
+  "message0": "remove note: %1",
   "args0": [{
     "type": "input_value",
     "name": "belief",
@@ -562,7 +562,7 @@ JasonGenerator['belief_remove'] = function(block) {
 }
 Blockly.defineBlocksWithJsonArray([{
   "type": "belief_update",
-  "message0": "change the previous note with: %1",
+  "message0": "remove all similar notes and add: %1",
   "args0": [{
     "type": "input_value",
     "name": "belief",
@@ -738,7 +738,7 @@ JasonGenerator['init_agent'] = function(block){
 }
 Blockly.defineBlocksWithJsonArray([{
   "type": "init_belief",
-  "message0": "add note: %1 %2",
+  "message0": "add a new note: %1 %2",
   "args0": [{
       "type": "input_dummy"
     },
@@ -1670,17 +1670,17 @@ JasonGenerator['string'] = function(block){
 }
 Blockly.defineBlocksWithJsonArray([{
   "type": "trigger_belief_add_remove",
-  "message0": "agent %1 %2 remembering %3",
+  "message0": "agent %1 %2 note %3",
   "args0": [{
       "type": "field_dropdown",
       "name": "option",
       "options": [
         [
-          "starts",
+          "add",
           "+"
         ],
         [
-          "stops",
+          "remove",
           "-"
         ]
       ]

@@ -39,9 +39,22 @@ class FileTabsController {
     definition.setDeletable(false)
     definition.initSvg()
 
+    /*
     var plan = this._workspace.newBlock("plan_define")
     plan.moveBy(10, 90)
     plan.initSvg()
+    */
+    var xml = 
+    `<xml xmlns="https://developers.google.com/blockly/xml">
+    <block type="plan_define" x="10" y="90">
+      <value name='context'>
+        <block type='context_always'>
+        </block>
+      </value>
+    </block>
+    </xml>`
+    Blockly.Xml.appendDomToWorkspace(Blockly.Xml.textToDom(xml), this._workspace)
+
     this._workspace.render();
     this._workspace.clearUndo()
 

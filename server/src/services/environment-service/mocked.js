@@ -40,54 +40,116 @@ module.exports = (protocol, hostname, port) => new SpockbotMock(protocol, hostna
 
 
 const TD={
-    "@context": "https://www.w3.org/2019/wot/td/v1",
-    "title": "Smart tractor",
-    "id": "urn:tractorbot_spock",
-    "base": "http://10.2.2.100/",
-    "securityDefinitions": {
-      "nosec_sc": {
-        "scheme": "nosec"
-      }
+  "@context": "https://www.w3.org/2019/wot/td/v1",
+  "title": "Smart tractor",
+  "id": "urn:tractorbot_spock",
+  "base": "http://10.2.2.100/",
+  "securityDefinitions": {
+    "nosec_sc": {
+      "scheme": "nosec"
+    }
+  },
+  "security": "nosec_sc",
+  "properties": {
+    "batteryVoltage": {
+      "title": "Battery voltage",
+      "observable": false,
+      "readOnly": true,
+      "type": "number",
+      "forms": [
+        {
+          "op": [
+            "readproperty"
+          ],
+          "href": "/properties/batteryvoltage"
+        }
+      ]
     },
-    "security": "nosec_sc",
-    "properties": {
-      "batteryVoltage": {
-        "title": "batteryVoltage",
-        "observable": false,
-        "readOnly": true,
-        "type": "number",
-        "forms": [
-          {
-            "op": [
-              "readproperty"
-            ],
-            "href": "/properties/batteryVoltage"
-          }
-        ]
-      }
+    "soilCondition": {
+      "title": "Battery voltage",
+      "observable": false,
+      "readOnly": true,
+      "type": "object",
+	  "properties":{
+		"ph":{"type":"integer", "minimum":0, "maximum":255},
+		"moisture":{"type":"integer", "minimum":0, "maximum":255},
+		"density":{"type":"integer", "minimum":0, "maximum":255},
+		"nitrate":{"type":"integer", "minimum":0, "maximum":255},
+	  },	 
+      "forms": [
+        {
+          "op": [
+            "readproperty"
+          ],
+          "href": "/properties/soilCondition"
+        }
+      ]
+    },	
+    "waterLevel": {
+      "title": "Water level",
+      "observable": false,
+      "readOnly": true,
+      "type": "number",
+      "forms": [
+        {
+          "op": [
+            "readproperty"
+          ],
+          "href": "/properties/waterlevel"
+        }
+      ]
+    }	
+  },
+  "actions": {
+    "wheelControl": {
+      "title": "wheelControl",
+	  "input":{
+		  "type": "object",
+		  "properties":{
+			"axis":{"type":"integer", "minimum":0, "maximum":2},
+			"speed":{"type":"integer", "minimum":-7, "maximum":7},
+			"duration":{"type":"integer", "minimum":0, "maximum":5000}
+		  }
+	  },
+	  "required": ["axis", "speed", "duration"],
+      "forms": [
+        {
+          "op": [
+            "invokeaction"
+          ],
+          "href": "/actions/wheelcontrol"
+        }
+      ]
     },
-    "actions": {
-      "wheelControl": {
-        "title": "wheelControl",
-        "description": "Command the wheel motors",
-        "input": {
-            "type": "object",
-            "properties":{
-            "axis":{"type":"integer", "minimum":0, "maximum":2},
-            "speed":{"type":"integer", "minimum":-7, "maximum":7},
-            "duration":{"type":"integer", "minimum":0, "maximum":5000}
-            },
-            "required": ["axis", "speed", "duration"],
-        },
-        "forms": [
-          {
-            "op": [
-              "invokeaction"
-            ],
-            "href": "/actions/wheelControl"
-          }
-        ]
-      }
-      },
-    "events": {}
-  }
+    "irrigate": {
+      "title": "Irrigate",
+	  "input":{
+		  "type": "object",
+		  "properties":{
+			"duration":{"type":"integer", "minimum":0, "maximum":5}
+		  }
+	  },
+	  "required": ["duration"],
+      "forms": [
+        {
+          "op": [
+            "invokeaction"
+          ],
+          "href": "/actions/irrigate"
+        }
+      ]
+    },
+    "refillWater": {
+      "title": "Refill water",
+      "forms": [
+        {
+          "op": [
+            "invokeaction"
+          ],
+          "href": "/actions/refillwater"
+        }
+      ]
+    }	
+	},
+  "events": {}
+}
