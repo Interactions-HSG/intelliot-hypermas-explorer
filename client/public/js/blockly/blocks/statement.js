@@ -16,27 +16,27 @@ Blockly.defineBlocksWithJsonArray([{
       "name": "symbol",
       "options": [
         [
-          "==",
+          "is",
           "=="
         ],
         [
-          "≠",
+          "is not",
           "\\=="
         ],
         [
-          ">",
+          "is greater than",
           ">"
         ],
         [
-          "<",
+          "is less than",
           "<"
         ],
         [
-          "≥",
+          "is greater than or equal",
           ">="
         ],
         [
-          "≤",
+          "is less than or equal",
           "<="
         ]
       ]

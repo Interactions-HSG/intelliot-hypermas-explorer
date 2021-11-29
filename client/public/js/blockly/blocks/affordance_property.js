@@ -1,7 +1,7 @@
 Blockly.Blocks['affordance_property'] = {
   init: function() {
     this.jsonInit({
-      "message0": "%1 to tell me the value of %2 %3 Result %4 ",
+      "message0": "%1 to tell me the %2 is %3 ",
       "args0": [
         {
           "type": "field_label_serializable",
@@ -12,9 +12,6 @@ Blockly.Blocks['affordance_property'] = {
           "type": "field_label_serializable",
           "name": "affordanceName",
           "text": "property"
-        },
-        {
-          "type": "input_dummy"
         },
         {
           "type": "input_value",

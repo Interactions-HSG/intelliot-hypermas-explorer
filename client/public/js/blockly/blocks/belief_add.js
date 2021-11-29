@@ -1,6 +1,6 @@
 Blockly.defineBlocksWithJsonArray([{
   "type": "belief_add",
-  "message0": "starts remembering %1",
+  "message0": "make a new note: %1",
   "args0": [{
     "type": "input_value",
     "name": "belief",

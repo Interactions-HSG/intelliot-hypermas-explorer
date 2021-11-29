@@ -248,7 +248,7 @@ JasonGenerator['affordance_action'] = function(block){
 Blockly.Blocks['affordance_property'] = {
   init: function() {
     this.jsonInit({
-      "message0": "%1 to tell me the value of %2 %3 Result %4 ",
+      "message0": "%1 to tell me the %2 is %3 ",
       "args0": [
         {
           "type": "field_label_serializable",
@@ -259,9 +259,6 @@ Blockly.Blocks['affordance_property'] = {
           "type": "field_label_serializable",
           "name": "affordanceName",
           "text": "property"
-        },
-        {
-          "type": "input_dummy"
         },
         {
           "type": "input_value",
@@ -372,7 +369,7 @@ JasonGenerator['any_variable'] = function(block) {
 }
 Blockly.defineBlocksWithJsonArray([{
   "type": "assign_variable",
-  "message0": "sets %1 = %2",
+  "message0": "set %1 to the value of %2",
   "args0": [
     {
       "type": "input_value",
@@ -525,7 +522,7 @@ JasonGenerator['belief'] = function (block){
 }
 Blockly.defineBlocksWithJsonArray([{
   "type": "belief_add",
-  "message0": "starts remembering %1",
+  "message0": "make a new note: %1",
   "args0": [{
     "type": "input_value",
     "name": "belief",
@@ -545,7 +542,7 @@ JasonGenerator['belief_add'] = function(block) {
 }
 Blockly.defineBlocksWithJsonArray([{
   "type": "belief_remove",
-  "message0": "stops remembering %1",
+  "message0": "delete note: %1",
   "args0": [{
     "type": "input_value",
     "name": "belief",
@@ -565,7 +562,7 @@ JasonGenerator['belief_remove'] = function(block) {
 }
 Blockly.defineBlocksWithJsonArray([{
   "type": "belief_update",
-  "message0": "changes what to remember, now %1",
+  "message0": "change the previous note with: %1",
   "args0": [{
     "type": "input_value",
     "name": "belief",
@@ -585,7 +582,7 @@ JasonGenerator['belief_update'] = function (block) {
 }
 Blockly.defineBlocksWithJsonArray([{
   "type": "check_expression",
-  "message0": "goes on if %1 otherwise fails",
+  "message0": "continue if %1 otherwise fails",
   "args0": [
     {
       "type": "input_value",
@@ -647,7 +644,7 @@ JasonGenerator['context_if'] = function (block){
 }
 Blockly.defineBlocksWithJsonArray([{
   "type": "goal_add",
-  "message0": "wants to wait and achieve %1 first",
+  "message0": "to continue first achieve %1",
   "args0": [{
     "type": "input_value",
     "name": "goal",
@@ -667,7 +664,7 @@ JasonGenerator['goal_add'] = function(block) {
 }
 Blockly.defineBlocksWithJsonArray([{
   "type": "goal_add_parallel",
-  "message0": "wants to achieve also %1 simultaneously",
+  "message0": "wants also to achieve %1",
   "args0": [{
     "type": "input_value",
     "name": "goal",
@@ -687,7 +684,7 @@ JasonGenerator['goal_add_parallel'] = function(block) {
 }
 Blockly.defineBlocksWithJsonArray([{
   "type": "goal_add_test",
-  "message0": "wants to check if it knows %1",
+  "message0": "wants to check if it already knows %1",
   "args0": [{
     "type": "input_value",
     "name": "goal",
@@ -741,7 +738,7 @@ JasonGenerator['init_agent'] = function(block){
 }
 Blockly.defineBlocksWithJsonArray([{
   "type": "init_belief",
-  "message0": "remembers %1 %2",
+  "message0": "add note: %1 %2",
   "args0": [{
       "type": "input_dummy"
     },
@@ -1542,27 +1539,27 @@ Blockly.defineBlocksWithJsonArray([{
       "name": "symbol",
       "options": [
         [
-          "==",
+          "is",
           "=="
         ],
         [
-          "≠",
+          "is not",
           "\\=="
         ],
         [
-          ">",
+          "is greater than",
           ">"
         ],
         [
-          "<",
+          "is less than",
           "<"
         ],
         [
-          "≥",
+          "is greater than or equal",
           ">="
         ],
         [
-          "≤",
+          "is less than or equal",
           "<="
         ]
       ]
@@ -1751,17 +1748,17 @@ JasonGenerator['trigger_goal_add_remove'] = function(block) {
 }
 Blockly.defineBlocksWithJsonArray([{
   "type": "trigger_test_add_remove",
-  "message0": "agent %1 %2 to check %3",
+  "message0": "agent %1 %2 %3",
   "args0": [{
       "type": "field_dropdown",
       "name": "option",
       "options": [
         [
-          "wants",
+          "doesn't already knows",
           "+?"
         ],
         [
-          "failed",
+          "failed to check if it knew",
           "-?"
         ]
       ]

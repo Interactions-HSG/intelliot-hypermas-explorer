@@ -5,7 +5,11 @@ const plan_definition_toolbox_category =
   "toolboxitemid": "Agent_Plan_Definition",
   "contents": [{
       "kind": "block",
-      "type": "plan_define"
+      "blockxml": "<block type='plan_define'>" +
+        "<value name='context'>" +
+        "<block type='context_always'></block>" +
+        "</value>" +
+        "</block>"
     },
     {
       "kind": "block",
