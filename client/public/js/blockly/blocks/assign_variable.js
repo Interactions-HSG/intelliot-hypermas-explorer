@@ -1,6 +1,6 @@
 Blockly.defineBlocksWithJsonArray([{
   "type": "assign_variable",
-  "message0": "set %1 to the value of %2",
+  "message0": "stores in %1 the value of %2",
   "args0": [
     {
       "type": "input_value",

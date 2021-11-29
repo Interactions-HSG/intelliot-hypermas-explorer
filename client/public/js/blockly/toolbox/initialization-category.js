@@ -1,6 +1,6 @@
 const initialization_toolbox_category =     {
   "kind": "category",
-  "name": "Agent Initialization",
+  "name": "Initialization",
   "toolboxitemid": "Agent_Initialization",
   "contents": [{
       "kind": "block",

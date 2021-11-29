@@ -369,7 +369,7 @@ JasonGenerator['any_variable'] = function(block) {
 }
 Blockly.defineBlocksWithJsonArray([{
   "type": "assign_variable",
-  "message0": "set %1 to the value of %2",
+  "message0": "stores in %1 the value of %2",
   "args0": [
     {
       "type": "input_value",
@@ -522,7 +522,7 @@ JasonGenerator['belief'] = function (block){
 }
 Blockly.defineBlocksWithJsonArray([{
   "type": "belief_add",
-  "message0": "add a new note: %1",
+  "message0": "adds a new note: %1",
   "args0": [{
     "type": "input_value",
     "name": "belief",
@@ -542,7 +542,7 @@ JasonGenerator['belief_add'] = function(block) {
 }
 Blockly.defineBlocksWithJsonArray([{
   "type": "belief_remove",
-  "message0": "remove note: %1",
+  "message0": "removes note: %1",
   "args0": [{
     "type": "input_value",
     "name": "belief",
@@ -562,7 +562,7 @@ JasonGenerator['belief_remove'] = function(block) {
 }
 Blockly.defineBlocksWithJsonArray([{
   "type": "belief_update",
-  "message0": "remove all similar notes and add: %1",
+  "message0": "removes all similar notes and adds: %1",
   "args0": [{
     "type": "input_value",
     "name": "belief",
@@ -582,7 +582,7 @@ JasonGenerator['belief_update'] = function (block) {
 }
 Blockly.defineBlocksWithJsonArray([{
   "type": "check_expression",
-  "message0": "continue if %1 otherwise fails",
+  "message0": "continues if %1 otherwise fails",
   "args0": [
     {
       "type": "input_value",
@@ -644,7 +644,7 @@ JasonGenerator['context_if'] = function (block){
 }
 Blockly.defineBlocksWithJsonArray([{
   "type": "goal_add",
-  "message0": "to continue first achieve %1",
+  "message0": "decides to achieve %1 first then continue",
   "args0": [{
     "type": "input_value",
     "name": "goal",
@@ -664,7 +664,7 @@ JasonGenerator['goal_add'] = function(block) {
 }
 Blockly.defineBlocksWithJsonArray([{
   "type": "goal_add_parallel",
-  "message0": "wants also to achieve %1",
+  "message0": "decides to also achieve %1",
   "args0": [{
     "type": "input_value",
     "name": "goal",
@@ -684,7 +684,7 @@ JasonGenerator['goal_add_parallel'] = function(block) {
 }
 Blockly.defineBlocksWithJsonArray([{
   "type": "goal_add_test",
-  "message0": "wants to check if it already knows %1",
+  "message0": "checks if it already knows %1",
   "args0": [{
     "type": "input_value",
     "name": "goal",
@@ -738,7 +738,7 @@ JasonGenerator['init_agent'] = function(block){
 }
 Blockly.defineBlocksWithJsonArray([{
   "type": "init_belief",
-  "message0": "add a new note: %1 %2",
+  "message0": "adds a new note: %1 %2",
   "args0": [{
       "type": "input_dummy"
     },
@@ -763,7 +763,7 @@ JasonGenerator['init_belief'] = function (block) {
 }
 Blockly.defineBlocksWithJsonArray([{
   "type": "init_goal",
-  "message0": "wants to achieve %1",
+  "message0": "decides to achieve %1",
   "args0": [
     {
       "type": "input_value",

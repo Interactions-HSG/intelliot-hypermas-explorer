@@ -1,6 +1,6 @@
 const plan_body_toolbox_category =      {
   "kind": "category",
-  "name": "Agent Plan Body",
+  "name": "Actions",
   "toolboxitemid": "Agent_Plan_Body",
   "contents": [{
       "kind": "block",

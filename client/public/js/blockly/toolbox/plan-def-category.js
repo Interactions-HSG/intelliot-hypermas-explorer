@@ -1,7 +1,7 @@
 const plan_definition_toolbox_category =     
 {
   "kind": "category",
-  "name": "Agent Plan Definition",
+  "name": "Plan definition",
   "toolboxitemid": "Agent_Plan_Definition",
   "contents": [{
       "kind": "block",
