@@ -12,6 +12,20 @@ Blockly.Blocks['predicate'] = {
       .appendField(new Blockly.FieldTextInput('name'),'functor')
     this._updateShape();
     this.setMutator(new Blockly.Mutator(['mutator_block_input']));
+    var block = this;
+    this.getField('functor').setValidator(function(newValue){
+      var value = newValue.trim();
+      if(value){
+        value = value.replaceAll("\"", "")
+        value = value.replaceAll(" ", "_")
+        value = utils.uncapitalize(value)
+        block.setWarningText();
+        return value;
+      } else {
+        block.setWarningText("Must not be empty")
+        return value;
+      }
+    })
   },
   
   saveExtraState: function() {
