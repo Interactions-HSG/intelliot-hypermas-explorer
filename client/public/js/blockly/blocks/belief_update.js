@@ -1,6 +1,6 @@
 Blockly.defineBlocksWithJsonArray([{
   "type": "belief_update",
-  "message0": "removes all similar notes and adds: %1",
+  "message0": "replace all similar notes with: %1",
   "args0": [{
     "type": "input_value",
     "name": "belief",

@@ -6,6 +6,7 @@ const toolboxDefinition = {
     initialization_toolbox_category,
     plan_definition_toolbox_category,
     plan_body_toolbox_category,
+    communication_toolbox_category,
     {
       "kind": "sep",
       "toolboxitemid": "separator"

@@ -6,11 +6,11 @@ Blockly.defineBlocksWithJsonArray([{
       "name": "option",
       "options": [
         [
-          "add",
+          "adds",
           "+"
         ],
         [
-          "remove",
+          "removes",
           "-"
         ]
       ]

@@ -562,7 +562,7 @@ JasonGenerator['belief_remove'] = function(block) {
 }
 Blockly.defineBlocksWithJsonArray([{
   "type": "belief_update",
-  "message0": "removes all similar notes and adds: %1",
+  "message0": "replace all similar notes with: %1",
   "args0": [{
     "type": "input_value",
     "name": "belief",
@@ -1522,6 +1522,49 @@ JasonGenerator['rule_body'] = function(block){
   return [code, JasonGenerator.NO_PRECEDENCE]
 }
 Blockly.defineBlocksWithJsonArray([{
+  "type": "send_agent_message",
+  "message0": "Sends message to %1 : %2 %3",
+  "args0": [
+    {
+      "type": "field_input",
+      "name": "receiver",
+      "text": "agent_name"
+    },
+    {
+      "type": "field_dropdown",
+      "name": "illocutionary_force",
+      "options": [
+        [
+          "make note",
+          "tell"
+        ],
+        [
+          "achieve",
+          "achieve"
+        ]
+      ]
+    },
+    {
+      "type": "input_value",
+      "name": "message",
+      "check": ["predicate"]
+    }
+  ],
+  "previousStatement": "body_block",
+  "nextStatement": "body_block",
+  "colour": 15,
+  "tooltip": "",
+  "helpUrl": ""
+}]);
+
+JasonGenerator["send_agent_message"] = function(block) {
+  var receiver = block.getFieldValue('receiver')
+  var illocutionaryForce = block.getFieldValue('illocutionary_force')
+  var message = JasonGenerator.valueToCode(block, 'message', JasonGenerator.NO_PRECEDENCE)
+  var code = `.send(${receiver}, ${illocutionaryForce}, ${message});`;
+  return code
+}
+Blockly.defineBlocksWithJsonArray([{
   "type": "statement",
   "message0": "%1 %2 %3 %4",
   "args0": [{
@@ -1636,7 +1679,7 @@ Blockly.defineBlocksWithJsonArray([{
   "helpUrl": ""
 }]);
 
-JasonGenerator['statement_and_o'] = function(block) {
+JasonGenerator['statement_and_or'] = function(block) {
   var statement1 = JasonGenerator.valueToCode(block, 'statement1', JasonGenerator.NO_PRECEDENCE)
   var statment2 = JasonGenerator.valueToCode(block, 'statement2', JasonGenerator.NO_PRECEDENCE)
   var symbol = block.getFieldValue('symbol')
@@ -1676,11 +1719,11 @@ Blockly.defineBlocksWithJsonArray([{
       "name": "option",
       "options": [
         [
-          "add",
+          "adds",
           "+"
         ],
         [
-          "remove",
+          "removes",
           "-"
         ]
       ]

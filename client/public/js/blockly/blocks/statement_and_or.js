@@ -42,7 +42,7 @@ Blockly.defineBlocksWithJsonArray([{
   "helpUrl": ""
 }]);
 
-JasonGenerator['statement_and_o'] = function(block) {
+JasonGenerator['statement_and_or'] = function(block) {
   var statement1 = JasonGenerator.valueToCode(block, 'statement1', JasonGenerator.NO_PRECEDENCE)
   var statment2 = JasonGenerator.valueToCode(block, 'statement2', JasonGenerator.NO_PRECEDENCE)
   var symbol = block.getFieldValue('symbol')
