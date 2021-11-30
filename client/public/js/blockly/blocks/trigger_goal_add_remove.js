@@ -6,7 +6,7 @@ Blockly.defineBlocksWithJsonArray([{
       "name": "option",
       "options": [
         [
-          "wants",
+          "decides",
           "+!"
         ],
         [

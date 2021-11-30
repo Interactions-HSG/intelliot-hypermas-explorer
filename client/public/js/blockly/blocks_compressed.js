@@ -504,7 +504,7 @@ Blockly.Blocks['belief'] = {
     if(this.getInput('end')){
       this.removeInput('end')
     }
-    ComposerUtils.addInputFields(this, 'atom', this._atoms, 'atom')
+    ComposerUtils.addInputFields(this, 'atom', this._atoms, ['atom', 'belief'])
     var endMessage = (this._atoms ? ')' : '') //+' is true'
     this.appendDummyInput('end')
       .appendField(new Blockly.FieldLabelSerializable(endMessage), 'END');
@@ -1342,7 +1342,7 @@ Blockly.Blocks['predicate'] = {
     if(this.getInput('end')){
       this.removeInput('end')
     }
-    ComposerUtils.addInputFields(this, 'term', this._terms, ['atom', 'variable', 'operation'])
+    ComposerUtils.addInputFields(this, 'term', this._terms, ['atom', 'variable', 'operation', 'predicate'])
     var endMessage = (this._terms ? ')' : '') //+ ' is true'
     this.appendDummyInput('end')
       .appendField(new Blockly.FieldLabelSerializable(endMessage), 'END');
@@ -1758,7 +1758,7 @@ Blockly.defineBlocksWithJsonArray([{
       "name": "option",
       "options": [
         [
-          "wants",
+          "decides",
           "+!"
         ],
         [
