@@ -15,7 +15,7 @@ Blockly.Blocks['number'] = {
     var block = this;
     this.getField('value').setValidator(function(newValue){
       //TODO check validation for numbers
-      var regex = new RegExp("^[0-9]+(\.[0-9])?[0-9]*$", 'g')
+      var regex = new RegExp("^-?[0-9]+(\.[0-9])?[0-9]*$", 'g')
       if(!regex.test(newValue)){
         block.setWarningText("Not a valid number");
         return newValue;

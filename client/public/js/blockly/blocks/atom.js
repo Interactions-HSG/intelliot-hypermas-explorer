@@ -20,11 +20,16 @@ Blockly.Blocks['atom'] = {
         value = value.replaceAll(" ", "_")
         value = utils.uncapitalize(value)
         block.setWarningText();
-        return value;
       } else {
-        block.setWarningText("An atom must not be empty")
+        block.setWarningText("Must not be empty")
+      }
+      var regex = new RegExp("^[a-zA-Z0-9_]*$", 'g')
+      if(!regex.test(value)){
+        block.setWarningText("Name must be lowercase, no spaces and no special characters allowed (except from _ )");
         return value;
       }
+      block.setWarningText();
+      return value;
     })
   }
 }

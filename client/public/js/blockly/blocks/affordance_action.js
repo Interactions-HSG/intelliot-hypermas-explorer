@@ -76,7 +76,9 @@ JasonGenerator['affordance_action'] = function(block){
   var composeCode = undefined
   if(inputBlock){
     if(inputBlock.type == "variable"){
-      inputVar = JasonGenerator.valueToCode(block, 'output', JasonGenerator.NO_PRECEDENCE);
+      let userVar = JasonGenerator.valueToCode(block, 'input', JasonGenerator.NO_PRECEDENCE);
+      inputVar = generationUtils.getVariable()
+      composeCode = `json.parse(${userVar}, ${inputVar});\n${indent}`
     } else {
       inputVar = generationUtils.getVariable()
       composeCode = generationUtils.getObjectComposeCode(generationUtils.getRootStatement(inputBlock), indent, inputVar)[0]
@@ -111,7 +113,7 @@ JasonGenerator['affordance_action'] = function(block){
   var method = block.method
   var useAction = `${indent}invokeAction("${url}","${method}", ${inputBlock ? inputVar+', ' : ""} ${outputBlock ? affordanceResult: "_"})[artifact_id(${clientId})]`
   var parseJson = outputBlock ? `;\n${indent}json.parse(${affordanceResult}, ${resultVar})` : "";
-  var code = `${composeCode ? composeCode: ""}${getArtifact}${useAction}${parseJson}${extractCode ? ";\n"+indent+extractCode: ""}`
+  var code = `${composeCode ? composeCode: ""}${getArtifact}${useAction}${parseJson}${extractCode ? ";\n"+extractCode: ""}`
 
   return [code, JasonGenerator.NO_PRECEDENCE]
 }

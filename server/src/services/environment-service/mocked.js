@@ -43,7 +43,7 @@ const TD={
   "@context": "https://www.w3.org/2019/wot/td/v1",
   "title": "Smart tractor",
   "id": "urn:tractorbot_spock",
-  "base": "http://10.2.2.100/",
+  "base": "http://10.2.2.157/",
   "securityDefinitions": {
     "nosec_sc": {
       "scheme": "nosec"
@@ -81,7 +81,7 @@ const TD={
           "op": [
             "readproperty"
           ],
-          "href": "/properties/soilCondition"
+          "href": "/properties/soilcondition"
         }
       ]
     },	

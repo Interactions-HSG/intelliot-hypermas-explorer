@@ -20,11 +20,16 @@ Blockly.Blocks['predicate'] = {
         value = value.replaceAll(" ", "_")
         value = utils.uncapitalize(value)
         block.setWarningText();
-        return value;
       } else {
         block.setWarningText("Must not be empty")
+      }
+      var regex = new RegExp("^[a-zA-Z0-9_]*$", 'g')
+      if(!regex.test(value)){
+        block.setWarningText("Not a valid name");
         return value;
       }
+      block.setWarningText();
+      return value;
     })
   },
   

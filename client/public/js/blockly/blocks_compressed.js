@@ -206,7 +206,9 @@ JasonGenerator['affordance_action'] = function(block){
   var composeCode = undefined
   if(inputBlock){
     if(inputBlock.type == "variable"){
-      inputVar = JasonGenerator.valueToCode(block, 'output', JasonGenerator.NO_PRECEDENCE);
+      let userVar = JasonGenerator.valueToCode(block, 'input', JasonGenerator.NO_PRECEDENCE);
+      inputVar = generationUtils.getVariable()
+      composeCode = `json.parse(${userVar}, ${inputVar});\n${indent}`
     } else {
       inputVar = generationUtils.getVariable()
       composeCode = generationUtils.getObjectComposeCode(generationUtils.getRootStatement(inputBlock), indent, inputVar)[0]
@@ -241,7 +243,7 @@ JasonGenerator['affordance_action'] = function(block){
   var method = block.method
   var useAction = `${indent}invokeAction("${url}","${method}", ${inputBlock ? inputVar+', ' : ""} ${outputBlock ? affordanceResult: "_"})[artifact_id(${clientId})]`
   var parseJson = outputBlock ? `;\n${indent}json.parse(${affordanceResult}, ${resultVar})` : "";
-  var code = `${composeCode ? composeCode: ""}${getArtifact}${useAction}${parseJson}${extractCode ? ";\n"+indent+extractCode: ""}`
+  var code = `${composeCode ? composeCode: ""}${getArtifact}${useAction}${parseJson}${extractCode ? ";\n"+extractCode: ""}`
 
   return [code, JasonGenerator.NO_PRECEDENCE]
 }
@@ -418,11 +420,16 @@ Blockly.Blocks['atom'] = {
         value = value.replaceAll(" ", "_")
         value = utils.uncapitalize(value)
         block.setWarningText();
-        return value;
       } else {
-        block.setWarningText("An atom must not be empty")
+        block.setWarningText("Must not be empty")
+      }
+      var regex = new RegExp("^[a-zA-Z0-9_]*$", 'g')
+      if(!regex.test(value)){
+        block.setWarningText("Name must be lowercase, no spaces and no special characters allowed (except from _ )");
         return value;
       }
+      block.setWarningText();
+      return value;
     })
   }
 }
@@ -453,11 +460,16 @@ Blockly.Blocks['belief'] = {
         value = value.replaceAll(" ", "_")
         value = utils.uncapitalize(value)
         block.setWarningText();
-        return value;
       } else {
         block.setWarningText("Must not be empty")
+      }
+      var regex = new RegExp("^[a-zA-Z0-9_]*$", 'g')
+      if(!regex.test(value)){
+        block.setWarningText("Not a valid name");
         return value;
       }
+      block.setWarningText();
+      return value;
     })
   },
   
@@ -1034,7 +1046,7 @@ Blockly.Blocks['number'] = {
     var block = this;
     this.getField('value').setValidator(function(newValue){
       //TODO check validation for numbers
-      var regex = new RegExp("^[0-9]+(\.[0-9])?[0-9]*$", 'g')
+      var regex = new RegExp("^-?[0-9]+(\.[0-9])?[0-9]*$", 'g')
       if(!regex.test(newValue)){
         block.setWarningText("Not a valid number");
         return newValue;
@@ -1305,11 +1317,16 @@ Blockly.Blocks['predicate'] = {
         value = value.replaceAll(" ", "_")
         value = utils.uncapitalize(value)
         block.setWarningText();
-        return value;
       } else {
         block.setWarningText("Must not be empty")
+      }
+      var regex = new RegExp("^[a-zA-Z0-9_]*$", 'g')
+      if(!regex.test(value)){
+        block.setWarningText("Not a valid name");
         return value;
       }
+      block.setWarningText();
+      return value;
     })
   },
   
@@ -1403,6 +1420,25 @@ Blockly.Blocks['rule'] = {
       .appendField(new Blockly.FieldTextInput('name'),'functor')
     this._updateShape();
     this.setMutator(new Blockly.Mutator(['mutator_block_input']));
+    var block = this;
+    this.getField('functor').setValidator(function(newValue){
+      var value = newValue.trim();
+      if(value){
+        value = value.replaceAll("\"", "")
+        value = value.replaceAll(" ", "_")
+        value = utils.uncapitalize(value)
+        block.setWarningText();
+      } else {
+        block.setWarningText("Must not be empty")
+      }
+      var regex = new RegExp("^[a-zA-Z0-9_]*$", 'g')
+      if(!regex.test(value)){
+        block.setWarningText("Name must be lowercase, no spaces and no special characters allowed (except from _ )");
+        return value;
+      }
+      block.setWarningText();
+      return value;
+    })
   },
   
   saveExtraState: function() {

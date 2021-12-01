@@ -18,7 +18,11 @@ const affordanceBlockUtils = {
 
   definePropertyBlock: function (propertyName, propertyDescription, thingId) {
     var method = propertyDescription.forms[0]['htv:methodName']
-    method = method? method : this._protocolBindings(propertyDescription.forms[0].op[0])
+    var op = propertyDescription.forms[0].op
+    if(typeof op === 'string') {
+      op = [op];
+    }
+    method = method ? method : this._protocolBindings(op[0])
     var url = propertyDescription.forms[0].href
     var type = propertyDescription.type
 
@@ -44,7 +48,11 @@ const affordanceBlockUtils = {
 
   defineActionBlock: function (actionName, actionDescription, thingId) {
     var method = actionDescription.forms[0]['htv:methodName'] 
-    method = method? method : this._protocolBindings(actionDescription.forms[0].op[0])
+    var op = actionDescription.forms[0].op
+    if(typeof op === 'string') {
+      op = [op];
+    }
+    method = method? method : this._protocolBindings(op[0])
     var url = actionDescription.forms[0].href
     
 

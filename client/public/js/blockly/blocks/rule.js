@@ -15,6 +15,25 @@ Blockly.Blocks['rule'] = {
       .appendField(new Blockly.FieldTextInput('name'),'functor')
     this._updateShape();
     this.setMutator(new Blockly.Mutator(['mutator_block_input']));
+    var block = this;
+    this.getField('functor').setValidator(function(newValue){
+      var value = newValue.trim();
+      if(value){
+        value = value.replaceAll("\"", "")
+        value = value.replaceAll(" ", "_")
+        value = utils.uncapitalize(value)
+        block.setWarningText();
+      } else {
+        block.setWarningText("Must not be empty")
+      }
+      var regex = new RegExp("^[a-zA-Z0-9_]*$", 'g')
+      if(!regex.test(value)){
+        block.setWarningText("Name must be lowercase, no spaces and no special characters allowed (except from _ )");
+        return value;
+      }
+      block.setWarningText();
+      return value;
+    })
   },
   
   saveExtraState: function() {

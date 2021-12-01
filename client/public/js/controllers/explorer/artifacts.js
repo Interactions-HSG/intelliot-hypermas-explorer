@@ -119,7 +119,7 @@ class ArtifactsController {
   _addAffordancesTestHandler() {
     var getSchema = function (rootObj) {
       var inputData = {}
-      for (const element of rootObj.children('input, select, div.object-schema')) {
+      for (const element of rootObj.find('input, select, div.object-schema')) {
         if ($(element).is('div')) {
           var propName = $(element).children('p.key').text()
           inputData[propName] = {}
@@ -154,6 +154,7 @@ class ArtifactsController {
   }
 
   async testAffordance(affordanceId, type, data) {
+    console.log(data)
     log.fine(`Testing ${affordanceId} ${type}`);
     var res = {}
     switch (type) {
