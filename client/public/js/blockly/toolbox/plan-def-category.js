@@ -6,6 +6,15 @@ const plan_definition_toolbox_category =
   "contents": [{
       "kind": "block",
       "blockxml": "<block type='plan_define'>" +
+        "<value name='trigger'>" +
+        "<block type='trigger_goal_add_remove'>"+
+        "<value name='goal'>" +
+          "<block type='predicate'>"+
+          "<field name='functor'>goal_name</field>"+
+          "</block>" +
+          "</value>"+
+        "</block>" +
+        "</value>" +
         "<value name='context'>" +
         "<block type='context_always'></block>" +
         "</value>" +
