@@ -5,11 +5,11 @@ Blockly.Blocks['variable'] = {
       "args0": [{
         "type": "field_input",
         "name": "value",
-        "text": "Variable"
+        "text": "Variable_Name"
       }],
       "output": "variable",
       "colour": 0,
-      "tooltip": "A variable is a string that starts with an uppercase letter, it can store a value of any type.",
+      "tooltip": "A variable is a named \"box\" where you can store a value.",
       "helpUrl": ""
     });
     var block = this;

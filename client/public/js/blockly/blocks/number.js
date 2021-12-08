@@ -9,7 +9,7 @@ Blockly.Blocks['number'] = {
       }],
       "output": "atom",
       "colour": 190,
-      "tooltip": "A number",
+      "tooltip": "A number.",
       "helpUrl": ""
     });
     var block = this;

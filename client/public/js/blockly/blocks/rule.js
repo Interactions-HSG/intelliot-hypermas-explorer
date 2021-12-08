@@ -4,7 +4,7 @@ Blockly.Blocks['rule'] = {
       "inputsInline": true,
       "output": "rule",
       "colour": 285,
-      "tooltip": "Define a rule that holds when the statement holds",
+      "tooltip": "Define a rule that the agent can remember to check complex conditions later.",
       "helpUrl": ""
     });
     this._variables = 1;
@@ -12,7 +12,7 @@ Blockly.Blocks['rule'] = {
       .appendField('when')
       .setCheck('rule_body')
     this.appendDummyInput()
-      .appendField(new Blockly.FieldTextInput('name'),'functor')
+      .appendField(new Blockly.FieldTextInput('rule_name'),'functor')
     this._updateShape();
     this.setMutator(new Blockly.Mutator(['mutator_block_input']));
     var block = this;

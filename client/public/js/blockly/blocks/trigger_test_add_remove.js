@@ -27,7 +27,7 @@ Blockly.defineBlocksWithJsonArray([{
   "inputsInline": true,
   "output": "trigger",
   "colour": 15,
-  "tooltip": "When an agent try or fail to check a condition. Accepts a predicate as input",
+  "tooltip": "",
   "helpUrl": ""
 }]);
 

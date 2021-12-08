@@ -3,7 +3,7 @@ Blockly.defineBlocksWithJsonArray([{
   "message0": "true",
   "output": "atom",
   "colour": 190,
-  "tooltip": "Make something be always true.",
+  "tooltip": "The true value, to use in conditions.",
   "helpUrl": ""
 },
 {
@@ -11,7 +11,7 @@ Blockly.defineBlocksWithJsonArray([{
   "message0": "false",
   "output": "atom",
   "colour": 190,
-  "tooltip": "Make something be always false.",
+  "tooltip": "The false value, to use in conditions.",
   "helpUrl": ""
 }]);
 

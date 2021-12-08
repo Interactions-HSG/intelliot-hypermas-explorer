@@ -20,7 +20,7 @@ Blockly.defineBlocksWithJsonArray([{
   ],
   "inputsInline": true,
   "colour": 60,
-  "tooltip": "Configure the initial state of an agent",
+  "tooltip": "Configure the initial mental state of an agent",
   "helpUrl": ""
 }]);
 

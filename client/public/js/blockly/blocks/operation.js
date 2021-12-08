@@ -49,7 +49,7 @@ Blockly.defineBlocksWithJsonArray([{
   ],
   "output": "operation",
   "colour": 200,
-  "tooltip": "Returns the output of the operation",
+  "tooltip": "Returns the output of an arithmetic operation between numbers",
   "helpUrl": ""
 }]);
 

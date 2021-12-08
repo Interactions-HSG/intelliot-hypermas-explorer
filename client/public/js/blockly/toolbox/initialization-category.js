@@ -7,6 +7,7 @@ const initialization_toolbox_category =     {
       "blockxml": "<block type='init_belief'>" +
         "<value name='belief'>" +
         "<block type='belief'>"+
+          "<field name='functor'>note_name</field>"+
           "<value name='atom0'>" +
             "<block type='atom'></block>" +
           "</value>" +
@@ -34,6 +35,7 @@ const initialization_toolbox_category =     {
       "blockxml": "<block type='init_goal'>" +
         "<value name='goal'>" +
         "<block type='belief'>"+
+          "<field name='functor'>goal_name</field>"+
           "<value name='atom0'>" +
             "<block type='atom'></block>" +
           "</value>" +
@@ -41,14 +43,14 @@ const initialization_toolbox_category =     {
         "</value>" +
         "</block>"
     },
-    {
+    /*{
       "kind": "block",
       "blockxml": "<block type='belief'>" +
         "<value name='atom0'>" +
         "<block type='atom'></block>" +
         "</value>" +
         "</block>"
-    },
+    },*/
     {
       "kind": "block",
       "type": "opposite_init_belief"

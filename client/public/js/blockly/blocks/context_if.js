@@ -14,7 +14,7 @@ Blockly.defineBlocksWithJsonArray([{
   "inputsInline": true,
   "output": "context",
   "colour": 15,
-  "tooltip": "",
+  "tooltip": "Express the context of when a plan is applicable.",
   "helpUrl": ""
 }]);
 

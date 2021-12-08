@@ -23,19 +23,19 @@ Blockly.defineBlocksWithJsonArray([{
       "name": "type",
       "options": [
         [
-          "string",
+          "text",
           "string"
         ],
         [
-          "boolean",
+          "true/false",
           "boolean"
         ],
         [
-          "number",
+          "decimal number",
           "number"
         ],
         [
-          "integer",
+          "natural number",
           "integer"
         ],
         [

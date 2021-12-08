@@ -14,24 +14,66 @@ const plan_definition_toolbox_category =
     {
       "kind": "block",
       "blockxml": "<block type='trigger_belief_add_remove'>" +
+        "<field name='option'>+</field>"+
         "<value name='belief'>" +
-        "<block type='predicate'></block>" +
+        "<block type='predicate'>"+
+        "<field name='functor'>note_name</field>"+
+        "</block>" +
+        "</value>" +
+        "</block>"
+    },
+    {
+      "kind": "block",
+      "blockxml": "<block type='trigger_belief_add_remove'>" +
+        "<field name='option'>-</field>"+
+        "<value name='belief'>" +
+        "<block type='predicate'>"+
+        "<field name='functor'>note_name</field>"+
+        "</block>" +
         "</value>" +
         "</block>"
     },
     {
       "kind": "block",
       "blockxml": "<block type='trigger_goal_add_remove'>" +
+        "<field name='option'>+!</field>"+
         "<value name='goal'>" +
-        "<block type='predicate'></block>" +
+        "<block type='predicate'>"+
+        "<field name='functor'>goal_name</field>"+
+        "</block>" +
+        "</value>" +
+        "</block>"
+    },
+    {
+      "kind": "block",
+      "blockxml": "<block type='trigger_goal_add_remove'>" +
+        "<field name='option'>-!</field>"+
+        "<value name='goal'>" +
+        "<block type='predicate'>"+
+        "<field name='functor'>goal_name</field>"+
+        "</block>" +
         "</value>" +
         "</block>"
     },
     {
       "kind": "block",
       "blockxml": "<block type='trigger_test_add_remove'>" +
+        "<field name='option'>+?</field>"+
         "<value name='test'>" +
-        "<block type='predicate'></block>" +
+        "<block type='predicate'>"+
+        "<field name='functor'>note_name</field>"+
+        "</block>" +
+        "</value>" +
+        "</block>"
+    },
+    {
+      "kind": "block",
+      "blockxml": "<block type='trigger_test_add_remove'>" +
+        "<field name='option'>-?</field>"+
+        "<value name='test'>" +
+        "<block type='predicate'>"+
+        "<field name='functor'>note_name</field>"+
+        "</block>" +
         "</value>" +
         "</block>"
     },
@@ -39,7 +81,9 @@ const plan_definition_toolbox_category =
       "kind": "block",
       "blockxml": "<block type='context_if'>" +
         "<value name='context'>" +
-        "<block type='predicate'></block>" +
+        "<block type='predicate'>"+
+        "<field name='functor'>note_name</field>"+
+        "</block>" +
         "</value>" +
         "</block>"
     },

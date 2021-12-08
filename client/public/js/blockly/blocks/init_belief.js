@@ -14,7 +14,7 @@ Blockly.defineBlocksWithJsonArray([{
   "previousStatement": "init_block",
   "nextStatement": "init_block",
   "colour": 60,
-  "tooltip": "Add a belief to the agent mind",
+  "tooltip": "Add a note into the agent mind",
   "helpUrl": ""
 }]);
 

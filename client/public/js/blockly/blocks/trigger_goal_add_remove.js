@@ -27,7 +27,7 @@ Blockly.defineBlocksWithJsonArray([{
   "inputsInline": true,
   "output": "trigger",
   "colour": 15,
-  "tooltip": "When an agent starts or stop pursuing a goal. Accepts a predicate as input",
+  "tooltip": "",
   "helpUrl": ""
 }]);
 

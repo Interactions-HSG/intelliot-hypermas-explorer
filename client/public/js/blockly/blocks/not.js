@@ -13,7 +13,7 @@ Blockly.defineBlocksWithJsonArray([{
     }],
   "output": "statement",
   "colour": 230,
-  "tooltip": "Returns the logic opposite of the input value",
+  "tooltip": "Returns the logic opposite of the input value. If true then false and if false then true.",
 }]);
 
 JasonGenerator['not'] = function(block){

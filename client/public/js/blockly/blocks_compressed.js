@@ -96,7 +96,7 @@ Blockly.defineBlocksWithJsonArray([{
   "previousStatement": "body_block",
   "nextStatement": "body_block",
   "colour": 15,
-  "tooltip": "",
+  "tooltip": "Say some text, it can be read from the console to understand what the agent is doing.",
   "helpUrl": ""
 }]);
 
@@ -118,7 +118,7 @@ Blockly.defineBlocksWithJsonArray([{
   "previousStatement": "body_block",
   "nextStatement": "body_block",
   "colour": 15,
-  "tooltip": "",
+  "tooltip": "Wait for a number of seconds.",
   "helpUrl": ""
 }]);
 
@@ -557,7 +557,7 @@ Blockly.defineBlocksWithJsonArray([{
   "previousStatement": "body_block",
   "nextStatement": "body_block",
   "colour": 15,
-  "tooltip": "",
+  "tooltip": "Add a new note.",
   "helpUrl": ""
 }]);
 
@@ -577,7 +577,7 @@ Blockly.defineBlocksWithJsonArray([{
   "previousStatement": "body_block",
   "nextStatement": "body_block",
   "colour": 15,
-  "tooltip": "",
+  "tooltip": "Remove a matching note.",
   "helpUrl": ""
 }]);
 
@@ -597,7 +597,7 @@ Blockly.defineBlocksWithJsonArray([{
   "previousStatement": "body_block",
   "nextStatement": "body_block",
   "colour": 15,
-  "tooltip": "",
+  "tooltip": "Replace all the mental notes with the same root with the new one.",
   "helpUrl": ""
 }]);
 
@@ -633,7 +633,7 @@ Blockly.defineBlocksWithJsonArray([{
   "message0": "always",
   "output": "context",
   "colour": 15,
-  "tooltip": "",
+  "tooltip": "The plan is always applicable.",
   "helpUrl": ""
 }]);
 
@@ -658,7 +658,7 @@ Blockly.defineBlocksWithJsonArray([{
   "inputsInline": true,
   "output": "context",
   "colour": 15,
-  "tooltip": "",
+  "tooltip": "Express the context of when a plan is applicable.",
   "helpUrl": ""
 }]);
 
@@ -699,7 +699,7 @@ Blockly.defineBlocksWithJsonArray([{
   "previousStatement": "body_block",
   "nextStatement": "body_block",
   "colour": 15,
-  "tooltip": "Adds a new goal that the agent will try to pursue but it won't suspend the current execution of the plan.",
+  "tooltip": "Adds a new goal that the agent will try to pursue in parallel with the current execution of the plan.",
   "helpUrl": ""
 }]);
 
@@ -719,7 +719,7 @@ Blockly.defineBlocksWithJsonArray([{
   "previousStatement": "body_block",
   "nextStatement": "body_block",
   "colour": 15,
-  "tooltip": "Ask the agent to resolve a predicate, if possible within the agent beliefs otherwise trigger a test plan",
+  "tooltip": "Ask the agent to check some information, if possible within the agent notes otherwise trigger an appropriate plan to retrieve the information.",
   "helpUrl": ""
 }]);
 
@@ -750,7 +750,7 @@ Blockly.defineBlocksWithJsonArray([{
   ],
   "inputsInline": true,
   "colour": 60,
-  "tooltip": "Configure the initial state of an agent",
+  "tooltip": "Configure the initial mental state of an agent",
   "helpUrl": ""
 }]);
 
@@ -778,7 +778,7 @@ Blockly.defineBlocksWithJsonArray([{
   "previousStatement": "init_block",
   "nextStatement": "init_block",
   "colour": 60,
-  "tooltip": "Add a belief to the agent mind",
+  "tooltip": "Add a note into the agent mind",
   "helpUrl": ""
 }]);
 
@@ -801,7 +801,7 @@ Blockly.defineBlocksWithJsonArray([{
   "previousStatement": "init_block",
   "nextStatement": "init_block",
   "colour": 60,
-  "tooltip": "Add the goal for the agent",
+  "tooltip": "Add a goal that the agent wants to achieve as soon as it's started",
   "helpUrl": ""
 }]);
 
@@ -1022,7 +1022,7 @@ Blockly.defineBlocksWithJsonArray([{
     }],
   "output": "statement",
   "colour": 230,
-  "tooltip": "Returns the logic opposite of the input value",
+  "tooltip": "Returns the logic opposite of the input value. If true then false and if false then true.",
 }]);
 
 JasonGenerator['not'] = function(block){
@@ -1040,7 +1040,7 @@ Blockly.Blocks['number'] = {
       }],
       "output": "atom",
       "colour": 190,
-      "tooltip": "A number",
+      "tooltip": "A number.",
       "helpUrl": ""
     });
     var block = this;
@@ -1108,19 +1108,19 @@ Blockly.defineBlocksWithJsonArray([{
       "name": "type",
       "options": [
         [
-          "string",
+          "text",
           "string"
         ],
         [
-          "boolean",
+          "true/false",
           "boolean"
         ],
         [
-          "number",
+          "decimal number",
           "number"
         ],
         [
-          "integer",
+          "natural number",
           "integer"
         ],
         [
@@ -1198,7 +1198,7 @@ Blockly.defineBlocksWithJsonArray([{
   ],
   "output": "operation",
   "colour": 200,
-  "tooltip": "Returns the output of the operation",
+  "tooltip": "Returns the output of an arithmetic operation between numbers",
   "helpUrl": ""
 }]);
 
@@ -1277,7 +1277,7 @@ Blockly.defineBlocksWithJsonArray([{
   ],
   "inputsInline": false,
   "colour": 15,
-  "tooltip": "Define an agent plan which is used when the trigger condition verifies and the context is true. Accept a statment or a predicate as context.",
+  "tooltip": "Define a plan that the agent can use when the triggering condition happens, and the context is valid.",
   "helpUrl": ""
 }]);
 
@@ -1409,7 +1409,7 @@ Blockly.Blocks['rule'] = {
       "inputsInline": true,
       "output": "rule",
       "colour": 285,
-      "tooltip": "Define a rule that holds when the statement holds",
+      "tooltip": "Define a rule that the agent can remember to check complex conditions later.",
       "helpUrl": ""
     });
     this._variables = 1;
@@ -1417,7 +1417,7 @@ Blockly.Blocks['rule'] = {
       .appendField('when')
       .setCheck('rule_body')
     this.appendDummyInput()
-      .appendField(new Blockly.FieldTextInput('name'),'functor')
+      .appendField(new Blockly.FieldTextInput('rule_name'),'functor')
     this._updateShape();
     this.setMutator(new Blockly.Mutator(['mutator_block_input']));
     var block = this;
@@ -1519,7 +1519,7 @@ Blockly.Blocks['rule_body'] = {
     this.jsonInit({
       "output": "rule_body",
       "colour": 285,
-      "tooltip": "Define the body of a rule, accept statements as input",
+      "tooltip": "Define the body of a rule, accept statements as input.",
       "helpUrl": ""
     });
     this._statements = 2;
@@ -1617,7 +1617,7 @@ Blockly.defineBlocksWithJsonArray([{
   "previousStatement": "body_block",
   "nextStatement": "body_block",
   "colour": 15,
-  "tooltip": "",
+  "tooltip": "Send another agent a message, this can mean ordering the agent to achieve something or share a note with it.",
   "helpUrl": ""
 }]);
 
@@ -1688,7 +1688,7 @@ Blockly.defineBlocksWithJsonArray([{
   ],
   "output": "statement",
   "colour": 230,
-  "tooltip": "Provides conditions over variables and atoms",
+  "tooltip": "A logic condition between values.",
   "helpUrl": ""
 }]);
 
@@ -1739,7 +1739,7 @@ Blockly.defineBlocksWithJsonArray([{
   ],
   "output": "statement",
   "colour": 230,
-  "tooltip": "Provides and/or conditions to compose statements or predicates",
+  "tooltip": "When two conditions are in and the result is true if both are true. When two conditions are in or the result is true if at least one is true.",
   "helpUrl": ""
 }]);
 
@@ -1761,7 +1761,7 @@ Blockly.Blocks['string'] = {
       }],
       "output": "atom",
       "colour": 190,
-      "tooltip": "A string",
+      "tooltip": "Some text, it can contain spaces.",
       "helpUrl": ""
     });
     this.getField('value').setValidator(function(newValue){
@@ -1804,7 +1804,7 @@ Blockly.defineBlocksWithJsonArray([{
   "inputsInline": true,
   "output": "trigger",
   "colour": 15,
-  "tooltip": "When an agent starts or stops remembering something new. Accepts a predicate as input",
+  "tooltip": "",
   "helpUrl": ""
 }]);
 
@@ -1843,7 +1843,7 @@ Blockly.defineBlocksWithJsonArray([{
   "inputsInline": true,
   "output": "trigger",
   "colour": 15,
-  "tooltip": "When an agent starts or stop pursuing a goal. Accepts a predicate as input",
+  "tooltip": "",
   "helpUrl": ""
 }]);
 
@@ -1882,7 +1882,7 @@ Blockly.defineBlocksWithJsonArray([{
   "inputsInline": true,
   "output": "trigger",
   "colour": 15,
-  "tooltip": "When an agent try or fail to check a condition. Accepts a predicate as input",
+  "tooltip": "",
   "helpUrl": ""
 }]);
 
@@ -1897,7 +1897,7 @@ Blockly.defineBlocksWithJsonArray([{
   "message0": "true",
   "output": "atom",
   "colour": 190,
-  "tooltip": "Make something be always true.",
+  "tooltip": "The true value, to use in conditions.",
   "helpUrl": ""
 },
 {
@@ -1905,7 +1905,7 @@ Blockly.defineBlocksWithJsonArray([{
   "message0": "false",
   "output": "atom",
   "colour": 190,
-  "tooltip": "Make something be always false.",
+  "tooltip": "The false value, to use in conditions.",
   "helpUrl": ""
 }]);
 
@@ -1955,11 +1955,11 @@ Blockly.Blocks['variable'] = {
       "args0": [{
         "type": "field_input",
         "name": "value",
-        "text": "Variable"
+        "text": "Variable_Name"
       }],
       "output": "variable",
       "colour": 0,
-      "tooltip": "A variable is a string that starts with an uppercase letter, it can store a value of any type.",
+      "tooltip": "A variable is a named \"box\" where you can store a value.",
       "helpUrl": ""
     });
     var block = this;

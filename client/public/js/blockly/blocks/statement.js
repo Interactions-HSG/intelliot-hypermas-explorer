@@ -58,7 +58,7 @@ Blockly.defineBlocksWithJsonArray([{
   ],
   "output": "statement",
   "colour": 230,
-  "tooltip": "Provides conditions over variables and atoms",
+  "tooltip": "A logic condition between values.",
   "helpUrl": ""
 }]);
 

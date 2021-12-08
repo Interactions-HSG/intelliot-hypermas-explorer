@@ -3,7 +3,7 @@ Blockly.Blocks['rule_body'] = {
     this.jsonInit({
       "output": "rule_body",
       "colour": 285,
-      "tooltip": "Define the body of a rule, accept statements as input",
+      "tooltip": "Define the body of a rule, accept statements as input.",
       "helpUrl": ""
     });
     this._statements = 2;

@@ -22,7 +22,7 @@ Blockly.defineBlocksWithJsonArray([{
   ],
   "inputsInline": false,
   "colour": 15,
-  "tooltip": "Define an agent plan which is used when the trigger condition verifies and the context is true. Accept a statment or a predicate as context.",
+  "tooltip": "Define a plan that the agent can use when the triggering condition happens, and the context is valid.",
   "helpUrl": ""
 }]);
 

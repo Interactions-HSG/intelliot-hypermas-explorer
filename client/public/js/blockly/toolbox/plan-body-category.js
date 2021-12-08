@@ -6,7 +6,9 @@ const plan_body_toolbox_category =      {
       "kind": "block",
       "blockxml": "<block type='belief_add'>" +
         "<value name='belief'>" +
-        "<block type='predicate'></block>" +
+        "<block type='predicate'>"+
+        "<field name='functor'>note_name</field>"+
+        "</block>" +
         "</value>" +
         "</block>"
     },
@@ -14,7 +16,9 @@ const plan_body_toolbox_category =      {
       "kind": "block",
       "blockxml": "<block type='belief_remove'>" +
         "<value name='belief'>" +
-        "<block type='predicate'></block>" +
+        "<block type='predicate'>"+
+        "<field name='functor'>note_name</field>"+
+        "</block>" +
         "</value>" +
         "</block>"
     },
@@ -22,7 +26,9 @@ const plan_body_toolbox_category =      {
       "kind": "block",
       "blockxml": "<block type='belief_update'>" +
         "<value name='belief'>" +
-        "<block type='predicate'></block>" +
+        "<block type='predicate'>"+
+        "<field name='functor'>note_name</field>"+
+        "</block>" +
         "</value>" +
         "</block>"
     },
@@ -30,7 +36,9 @@ const plan_body_toolbox_category =      {
       "kind": "block",
       "blockxml": "<block type='goal_add'>" +
         "<value name='goal'>" +
-        "<block type='predicate'></block>" +
+        "<block type='predicate'>"+
+        "<field name='functor'>goal_name</field>"+
+        "</block>" +
         "</value>" +
         "</block>"
     },
@@ -38,7 +46,9 @@ const plan_body_toolbox_category =      {
       "kind": "block",
       "blockxml": "<block type='goal_add_parallel'>" +
         "<value name='goal'>" +
-        "<block type='predicate'></block>" +
+        "<block type='predicate'>"+
+        "<field name='functor'>goal_name</field>"+
+        "</block>" +
         "</value>" +
         "</block>"
     },
@@ -46,7 +56,9 @@ const plan_body_toolbox_category =      {
       "kind": "block",
       "blockxml": "<block type='goal_add_test'>" +
         "<value name='goal'>" +
-        "<block type='predicate'></block>" +
+        "<block type='predicate'>"+
+        "<field name='functor'>note_name</field>"+
+        "</block>" +
         "</value>" +
         "</block>"
     },

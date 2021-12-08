@@ -9,7 +9,7 @@ Blockly.Blocks['string'] = {
       }],
       "output": "atom",
       "colour": 190,
-      "tooltip": "A string",
+      "tooltip": "Some text, it can contain spaces.",
       "helpUrl": ""
     });
     this.getField('value').setValidator(function(newValue){

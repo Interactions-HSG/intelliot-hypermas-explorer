@@ -14,7 +14,7 @@ Blockly.defineBlocksWithJsonArray([{
   "previousStatement": "body_block",
   "nextStatement": "body_block",
   "colour": 15,
-  "tooltip": "",
+  "tooltip": "Say some text, it can be read from the console to understand what the agent is doing.",
   "helpUrl": ""
 }]);
 

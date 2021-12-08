@@ -38,7 +38,7 @@ Blockly.defineBlocksWithJsonArray([{
   ],
   "output": "statement",
   "colour": 230,
-  "tooltip": "Provides and/or conditions to compose statements or predicates",
+  "tooltip": "When two conditions are in and the result is true if both are true. When two conditions are in or the result is true if at least one is true.",
   "helpUrl": ""
 }]);
 

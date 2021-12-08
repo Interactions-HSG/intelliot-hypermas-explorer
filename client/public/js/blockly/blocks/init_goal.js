@@ -12,7 +12,7 @@ Blockly.defineBlocksWithJsonArray([{
   "previousStatement": "init_block",
   "nextStatement": "init_block",
   "colour": 60,
-  "tooltip": "Add the goal for the agent",
+  "tooltip": "Add a goal that the agent wants to achieve as soon as it's started",
   "helpUrl": ""
 }]);
 
