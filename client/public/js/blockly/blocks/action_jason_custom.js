@@ -4,7 +4,7 @@ Blockly.Blocks['action_jason_custom'] = {
       "inputsInline":true,
       "previousStatement": "body_block",
       "nextStatement": "body_block",
-      "colour": 15,
+      "style": "body_block_style",
       "tooltip": "write a jason internal action or an artifact invocation here",
     });
     this._arguments = 1;

@@ -8,7 +8,7 @@ Blockly.defineBlocksWithJsonArray([{
   }],
   "previousStatement": "body_block",
   "nextStatement": "body_block",
-  "colour": 15,
+  "style": "body_block_style",
   "tooltip": "Adds a new goal that the agent will try to pursue in parallel with the current execution of the plan.",
   "helpUrl": ""
 }]);

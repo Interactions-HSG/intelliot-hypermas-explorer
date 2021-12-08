@@ -21,7 +21,7 @@ Blockly.Blocks['login_thing'] = {
       "inputsInline": true,
       "previousStatement": "body_block",
       "nextStatement": "body_block",
-      "colour": 15,
+      "style": "body_block_style",
       "tooltip": "",
       "helpUrl": ""
     })

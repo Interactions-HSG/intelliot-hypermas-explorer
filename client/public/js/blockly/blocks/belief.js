@@ -3,7 +3,7 @@ Blockly.Blocks['belief'] = {
     this.jsonInit({
       "inputsInline": true,
       "output": "belief",
-      "colour": 105,
+      "style": "belief_block_style",
       "tooltip": "Define a fact which is true in the agent mind",
       "helpUrl": "",
     });

@@ -11,7 +11,7 @@ Blockly.defineBlocksWithJsonArray([{
   "inputsInline": true,
   "previousStatement": "body_block",
   "nextStatement": "body_block",
-  "colour": 15,
+  "style": "body_block_style",
   "tooltip": "Check a statement and continue the execution of a plan only if it is true ",
   "helpUrl": ""
 }]);

@@ -29,7 +29,7 @@ Blockly.defineBlocksWithJsonArray([{
   ],
   "previousStatement": "body_block",
   "nextStatement": "body_block",
-  "colour": 15,
+  "style": "body_block_style",
   "tooltip": "Send another agent a message, this can mean ordering the agent to achieve something or share a note with it.",
   "helpUrl": ""
 }]);

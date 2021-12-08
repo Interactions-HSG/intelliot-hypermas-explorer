@@ -2,10 +2,14 @@ const baseColor = "#244482"
 const baseColorLight = "#EAEEF5"
 const whiteColor = "#ffffff"
 
-const actionColor = "#f2cb42"
+const actionColor = "#efbe12"
 const propertyColor = "#2e91a3"
 const eventColor = "#7a2ea3"
-const triggerColor = "#ce7e00"
+const triggerColor = "#a45f72"
+const contextColor = "#6f5fa4"
+const initColor = "#94a45f"
+const bodyColor = "#a46f5f"
+const beliefColor = "#5fa46f"
 
 const categoryStyles = {
   properties_category: {
@@ -23,8 +27,20 @@ const categoryStyles = {
 }
 
 const blockStyles = {
+  belief_block_style: {
+    colourPrimary: beliefColor,
+  },
   trigger_block_style: {
     colourPrimary: triggerColor,
+  },
+  body_block_style: {
+    colourPrimary: bodyColor,
+  },
+  context_block_style: {
+    colourPrimary: contextColor,
+  },
+  init_block_style: {
+    colourPrimary: initColor,
   },
   property_block_style: {
     colourPrimary: propertyColor,

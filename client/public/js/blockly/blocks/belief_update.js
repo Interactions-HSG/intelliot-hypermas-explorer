@@ -8,7 +8,7 @@ Blockly.defineBlocksWithJsonArray([{
   }],
   "previousStatement": "body_block",
   "nextStatement": "body_block",
-  "colour": 15,
+  "style": "body_block_style",
   "tooltip": "Replace all the mental notes with the same root with the new one.",
   "helpUrl": ""
 }]);

@@ -10,7 +10,7 @@ Blockly.defineBlocksWithJsonArray([{
   ],
   "inputsInline": true,
   "output": "belief",
-  "colour": 105,
+  "style": "belief_block_style",
   "tooltip": "Strongly negate the belief",
   "helpUrl": ""
 }]);

@@ -8,7 +8,7 @@ Blockly.defineBlocksWithJsonArray([{
   }],
   "previousStatement": "body_block",
   "nextStatement": "body_block",
-  "colour": 15,
+  "style": "body_block_style",
   "tooltip": "Ask the agent to check some information, if possible within the agent notes otherwise trigger an appropriate plan to retrieve the information.",
   "helpUrl": ""
 }]);

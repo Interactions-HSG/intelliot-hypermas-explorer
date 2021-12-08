@@ -4,7 +4,7 @@ Blockly.Blocks['action_jason_custom'] = {
       "inputsInline":true,
       "previousStatement": "body_block",
       "nextStatement": "body_block",
-      "colour": 15,
+      "style": "body_block_style",
       "tooltip": "write a jason internal action or an artifact invocation here",
     });
     this._arguments = 1;
@@ -95,7 +95,7 @@ Blockly.defineBlocksWithJsonArray([{
   ],
   "previousStatement": "body_block",
   "nextStatement": "body_block",
-  "colour": 15,
+  "style": "body_block_style",
   "tooltip": "Say some text, it can be read from the console to understand what the agent is doing.",
   "helpUrl": ""
 }]);
@@ -117,7 +117,7 @@ Blockly.defineBlocksWithJsonArray([{
   ],
   "previousStatement": "body_block",
   "nextStatement": "body_block",
-  "colour": 15,
+  "style": "body_block_style",
   "tooltip": "Wait for a number of seconds.",
   "helpUrl": ""
 }]);
@@ -347,7 +347,7 @@ Blockly.defineBlocksWithJsonArray([{
   ],
   "previousStatement": "body_block",
   "nextStatement": "body_block",
-  "colour": 15,
+  "style": "body_block_style",
   "tooltip": "Invoke the affordance",
   "helpUrl": ""
 }]);
@@ -387,7 +387,7 @@ Blockly.defineBlocksWithJsonArray([{
   "inputsInline": true,
   "previousStatement": "body_block",
   "nextStatement": "body_block",
-  "colour": 15,
+  "style": "body_block_style",
   "tooltip": "Assign the result of an operation to a variable",
   "helpUrl": ""
 }]);
@@ -443,7 +443,7 @@ Blockly.Blocks['belief'] = {
     this.jsonInit({
       "inputsInline": true,
       "output": "belief",
-      "colour": 105,
+      "style": "belief_block_style",
       "tooltip": "Define a fact which is true in the agent mind",
       "helpUrl": "",
     });
@@ -556,7 +556,7 @@ Blockly.defineBlocksWithJsonArray([{
   }],
   "previousStatement": "body_block",
   "nextStatement": "body_block",
-  "colour": 15,
+  "style": "body_block_style",
   "tooltip": "Add a new note.",
   "helpUrl": ""
 }]);
@@ -576,7 +576,7 @@ Blockly.defineBlocksWithJsonArray([{
   }],
   "previousStatement": "body_block",
   "nextStatement": "body_block",
-  "colour": 15,
+  "style": "body_block_style",
   "tooltip": "Remove a matching note.",
   "helpUrl": ""
 }]);
@@ -596,7 +596,7 @@ Blockly.defineBlocksWithJsonArray([{
   }],
   "previousStatement": "body_block",
   "nextStatement": "body_block",
-  "colour": 15,
+  "style": "body_block_style",
   "tooltip": "Replace all the mental notes with the same root with the new one.",
   "helpUrl": ""
 }]);
@@ -619,7 +619,7 @@ Blockly.defineBlocksWithJsonArray([{
   "inputsInline": true,
   "previousStatement": "body_block",
   "nextStatement": "body_block",
-  "colour": 15,
+  "style": "body_block_style",
   "tooltip": "Check a statement and continue the execution of a plan only if it is true ",
   "helpUrl": ""
 }]);
@@ -632,7 +632,7 @@ Blockly.defineBlocksWithJsonArray([{
   "type": "context_always",
   "message0": "always",
   "output": "context",
-  "colour": 15,
+  "style": "context_block_style",
   "tooltip": "The plan is always applicable.",
   "helpUrl": ""
 }]);
@@ -657,7 +657,7 @@ Blockly.defineBlocksWithJsonArray([{
   ],
   "inputsInline": true,
   "output": "context",
-  "colour": 15,
+  "style": "context_block_style",
   "tooltip": "Express the context of when a plan is applicable.",
   "helpUrl": ""
 }]);
@@ -678,7 +678,7 @@ Blockly.defineBlocksWithJsonArray([{
   }],
   "previousStatement": "body_block",
   "nextStatement": "body_block",
-  "colour": 15,
+  "style": "body_block_style",
   "tooltip": "Adds a new goal that the agent will try to pursue immediately only to resume the current plan when the goal is reached.",
   "helpUrl": ""
 }]);
@@ -698,7 +698,7 @@ Blockly.defineBlocksWithJsonArray([{
   }],
   "previousStatement": "body_block",
   "nextStatement": "body_block",
-  "colour": 15,
+  "style": "body_block_style",
   "tooltip": "Adds a new goal that the agent will try to pursue in parallel with the current execution of the plan.",
   "helpUrl": ""
 }]);
@@ -718,7 +718,7 @@ Blockly.defineBlocksWithJsonArray([{
   }],
   "previousStatement": "body_block",
   "nextStatement": "body_block",
-  "colour": 15,
+  "style": "body_block_style",
   "tooltip": "Ask the agent to check some information, if possible within the agent notes otherwise trigger an appropriate plan to retrieve the information.",
   "helpUrl": ""
 }]);
@@ -749,7 +749,7 @@ Blockly.defineBlocksWithJsonArray([{
     }
   ],
   "inputsInline": true,
-  "colour": 60,
+  "style": "init_block_style",
   "tooltip": "Configure the initial mental state of an agent",
   "helpUrl": ""
 }]);
@@ -777,7 +777,7 @@ Blockly.defineBlocksWithJsonArray([{
   "inputsInline": true,
   "previousStatement": "init_block",
   "nextStatement": "init_block",
-  "colour": 60,
+  "style": "init_block_style",
   "tooltip": "Add a note into the agent mind",
   "helpUrl": ""
 }]);
@@ -800,7 +800,7 @@ Blockly.defineBlocksWithJsonArray([{
   "inputsInline": true,
   "previousStatement": "init_block",
   "nextStatement": "init_block",
-  "colour": 60,
+  "style": "init_block_style",
   "tooltip": "Add a goal that the agent wants to achieve as soon as it's started",
   "helpUrl": ""
 }]);
@@ -825,7 +825,7 @@ Blockly.defineBlocksWithJsonArray([{
   "inputsInline": true,
   "previousStatement": "init_block",
   "nextStatement": "init_block",
-  "colour": 60,
+  "style": "init_block_style",
   "tooltip": "Add knowledge of a rule to the agent mind",
   "helpUrl": ""
 }]);
@@ -857,7 +857,7 @@ Blockly.Blocks['login_thing'] = {
       "inputsInline": true,
       "previousStatement": "body_block",
       "nextStatement": "body_block",
-      "colour": 15,
+      "style": "body_block_style",
       "tooltip": "",
       "helpUrl": ""
     })
@@ -1221,7 +1221,7 @@ Blockly.defineBlocksWithJsonArray([{
   ],
   "inputsInline": true,
   "output": "belief",
-  "colour": 105,
+  "style": "belief_block_style",
   "tooltip": "Strongly negate the belief",
   "helpUrl": ""
 }]);
@@ -1276,7 +1276,7 @@ Blockly.defineBlocksWithJsonArray([{
     }
   ],
   "inputsInline": false,
-  "colour": 15,
+  "style": "body_block_style",
   "tooltip": "Define a plan that the agent can use when the triggering condition happens, and the context is valid.",
   "helpUrl": ""
 }]);
@@ -1616,7 +1616,7 @@ Blockly.defineBlocksWithJsonArray([{
   ],
   "previousStatement": "body_block",
   "nextStatement": "body_block",
-  "colour": 15,
+  "style": "body_block_style",
   "tooltip": "Send another agent a message, this can mean ordering the agent to achieve something or share a note with it.",
   "helpUrl": ""
 }]);
@@ -1803,7 +1803,7 @@ Blockly.defineBlocksWithJsonArray([{
   ],
   "inputsInline": true,
   "output": "trigger",
-  "colour": 15,
+  "style": "trigger_block_style",
   "tooltip": "",
   "helpUrl": ""
 }]);
@@ -1842,7 +1842,7 @@ Blockly.defineBlocksWithJsonArray([{
   ],
   "inputsInline": true,
   "output": "trigger",
-  "colour": 15,
+  "style": "trigger_block_style",
   "tooltip": "",
   "helpUrl": ""
 }]);
@@ -1881,7 +1881,7 @@ Blockly.defineBlocksWithJsonArray([{
   ],
   "inputsInline": true,
   "output": "trigger",
-  "colour": 15,
+  "style": "trigger_block_style",
   "tooltip": "",
   "helpUrl": ""
 }]);

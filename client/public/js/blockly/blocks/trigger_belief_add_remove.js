@@ -26,7 +26,7 @@ Blockly.defineBlocksWithJsonArray([{
   ],
   "inputsInline": true,
   "output": "trigger",
-  "colour": 15,
+  "style": "trigger_block_style",
   "tooltip": "",
   "helpUrl": ""
 }]);

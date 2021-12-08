@@ -21,7 +21,7 @@ Blockly.defineBlocksWithJsonArray([{
     }
   ],
   "inputsInline": false,
-  "colour": 15,
+  "style": "body_block_style",
   "tooltip": "Define a plan that the agent can use when the triggering condition happens, and the context is valid.",
   "helpUrl": ""
 }]);

@@ -2,7 +2,7 @@ Blockly.defineBlocksWithJsonArray([{
   "type": "context_always",
   "message0": "always",
   "output": "context",
-  "colour": 15,
+  "style": "context_block_style",
   "tooltip": "The plan is always applicable.",
   "helpUrl": ""
 }]);

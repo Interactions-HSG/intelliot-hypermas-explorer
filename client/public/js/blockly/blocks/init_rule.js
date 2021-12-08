@@ -14,7 +14,7 @@ Blockly.defineBlocksWithJsonArray([{
   "inputsInline": true,
   "previousStatement": "init_block",
   "nextStatement": "init_block",
-  "colour": 60,
+  "style": "init_block_style",
   "tooltip": "Add knowledge of a rule to the agent mind",
   "helpUrl": ""
 }]);
