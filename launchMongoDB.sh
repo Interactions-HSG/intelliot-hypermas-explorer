@@ -1,2 +1,2 @@
 #!/bin/bash
-mongod --dbpath="c:\data\user_test"
+mongod --dbpath="c:\data\\$1"
