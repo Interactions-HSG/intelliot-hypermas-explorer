@@ -9,7 +9,7 @@ module.exports = {
   runtimeMock: false,
 
   environmentProtocol: "http",
-  environmentHostName: "localhost",
+  environmentHostName: "10.2.2.187",
   environmentPort: 3000,
-  environmentInterface: "mocked"
+  environmentInterface: "simulator"
 }

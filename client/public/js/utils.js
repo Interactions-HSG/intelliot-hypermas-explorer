@@ -1,5 +1,8 @@
 const utils = {
   toList: function(object) {
+    if(!object){
+      return []
+    }
     var list = Object.keys(object).map(x => {
       return {
         key: x,
