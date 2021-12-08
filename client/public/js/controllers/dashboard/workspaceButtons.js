@@ -20,7 +20,7 @@ class WorkspaceButtonsController {
 
   constructor(workspace, fileTabController){
     //TODO remove
-    //$('#debug').hide()
+    $('#debug').hide()
     $('#debug').click(e => console.log(JasonGenerator.generate(this._workspace)))
     //$('#debug').click(e => console.log(JasonGenerator.workspaceToCode(this._workspace)))
     $('#debug').click(e =>console.log(Blockly.Xml.domToPrettyText(Blockly.Xml.workspaceToDom(this._workspace, true))))

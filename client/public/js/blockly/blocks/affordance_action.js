@@ -49,7 +49,7 @@ Blockly.Blocks['affordance_action'] = {
       this.appendValueInput('input')
             .appendField("Input")
             .setAlign(Blockly.ALIGN_RIGHT)
-            .setCheck(['variable', 'object']);
+            .setCheck(['atom', 'variable', 'object']);
     }
 
     if(this.hasOutput){

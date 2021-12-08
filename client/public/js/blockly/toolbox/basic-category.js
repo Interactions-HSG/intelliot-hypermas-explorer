@@ -16,11 +16,17 @@ const basic_toolbox_category = {
     },
     {
       "kind": "block",
-      "type": "true"
+      //"type": "true_false"
+      "blockxml": "<block type='true_false'>"+
+      "<field name='value'>true</field>"+
+      "</block>"
     },
     {
       "kind": "block",
-      "type": "false"
+      //"type": "true_false"
+      "blockxml": "<block type='true_false'>"+
+      "<field name='value'>false</field>"+
+      "</block>"
     },
     {
       "kind": "block",

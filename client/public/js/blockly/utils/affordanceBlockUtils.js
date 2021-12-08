@@ -61,7 +61,7 @@ const affordanceBlockUtils = {
     var inputBlocks = ""
     var hasInput = false
     if(actionDescription.input){
-      inputBlocks = this._getSchemaBlocks(actionDescription.input, "Input")
+      inputBlocks = this._getSchemaBlocks(actionDescription.input, "Input", true)
       hasInput = true
       inputBlocks = `<value name="input">${inputBlocks}</value>`
     }
@@ -93,16 +93,32 @@ const affordanceBlockUtils = {
     return {kind: "block", blockxml:blockString}
   },
 
-  _getSchemaBlocks: function(schema, varName){
+  _getSchemaBlocks: function(schema, varName, isInput = false){
     var resultBlock = 
     `<block type="variable">
       <field name="value">${varName}</field>
     </block>`
+    if(isInput){
+      switch(schema.type){
+        case "string": 
+        resultBlock = `<block type="string"></block>`
+        break;
+        case "number":
+        case "integer": 
+        resultBlock = `<block type="number"></block>`
+        break;
+        case "boolean": 
+        resultBlock = resultBlock = `<block type="true_false"></block>`
+        break;
+        //don't catch object and arrays which are managed below
+        default: break;
+      }
+    }
     if(schema.type == "object"){
       var props = schema.properties
       var statements = []
       for(const p in props){
-        var value = this._getSchemaBlocks(props[p], p+"_"+varName)
+        var value = this._getSchemaBlocks(props[p], p+"_"+varName, isInput)
         var propField = `
         <block type="object_field">
           <field name="key">${p}</field>

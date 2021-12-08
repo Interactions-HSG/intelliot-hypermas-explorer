@@ -1,26 +1,29 @@
 Blockly.defineBlocksWithJsonArray([{
-  "type": "true",
-  "message0": "true",
+  "type": "true_false",
+  "message0": "%1",
+  "args0": [
+    {
+      "type": "field_dropdown",
+      "name": "value",
+      "options": [
+        [
+          "true",
+          "true"
+        ],
+        [
+          "false",
+          "false"
+        ]
+      ]
+    }
+  ],
   "output": "atom",
   "colour": 190,
   "tooltip": "The true value, to use in conditions.",
   "helpUrl": ""
-},
-{
-  "type": "false",
-  "message0": "false",
-  "output": "atom",
-  "colour": 190,
-  "tooltip": "The false value, to use in conditions.",
-  "helpUrl": ""
 }]);
 
-JasonGenerator['true'] = function(_){
-  var code = "true"
-  return [code, JasonGenerator.NO_PRECEDENCE] 
-}
-
-JasonGenerator['false'] = function(_){
-  var code = "false"
+JasonGenerator['true_false'] = function(block){
+  var code = block.getFieldValue('value')
   return [code, JasonGenerator.NO_PRECEDENCE] 
 }
