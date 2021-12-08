@@ -710,7 +710,7 @@ JasonGenerator['goal_add_parallel'] = function(block) {
 }
 Blockly.defineBlocksWithJsonArray([{
   "type": "goal_add_test",
-  "message0": "checks if it already knows %1",
+  "message0": "checks if it already know %1",
   "args0": [{
     "type": "input_value",
     "name": "goal",
@@ -1861,7 +1861,7 @@ Blockly.defineBlocksWithJsonArray([{
       "name": "option",
       "options": [
         [
-          "doesn't already knows",
+          "doesn't already know",
           "+?"
         ],
         [

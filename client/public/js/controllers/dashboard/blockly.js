@@ -28,7 +28,7 @@ class BlocklyController {
       zoom: {
         startScale: 0.8,
         controls: true,
-        wheel: true
+        //wheel: true
       },
       trashcan: true
     }

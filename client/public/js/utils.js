@@ -13,10 +13,14 @@ const utils = {
   },
 
   capitalize: function(string) {
-    return string[0].toUpperCase() + string.slice(1)
+    if(string){
+      return string[0].toUpperCase() + string.slice(1)
+    }
   },
 
   uncapitalize: function(string) {
-    return string[0].toLowerCase() + string.slice(1)
+    if(string){
+      return string[0].toLowerCase() + string.slice(1)
+    }
   }
 }

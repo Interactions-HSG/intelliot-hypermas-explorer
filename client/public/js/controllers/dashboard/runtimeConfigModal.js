@@ -58,7 +58,7 @@ class RuntimeConfigModal {
     //parse the fields to generate mas object
     var id = $('#mas-name').val()
     if(!id){
-      dashboard.showError(`Runtime has no id`)
+      dashboard.showError(`Runtime has no name!`)
       return
     }
     var agents = []
@@ -114,8 +114,15 @@ class RuntimeConfigModal {
       controller._onMasSelect($(this).val());
     })
 
-    $('#button-add-agent').click(e => this._addAgentRow())
-    $('#button-remove-agent').click(e => this._removeAgentRow())
+    this.$modal.find('.agent-row').each(function(index){
+      $(this).find('input').keyup(function(){
+        let value = $(this).val()
+        $(this).val(utils.uncapitalize(value))
+      })
+    })
+
+    $('#button-add-agent').click(e => this._addAgentRow(selectedMas))
+    $('#button-remove-agent').click(e => this._removeAgentRow(selectedMas))
 
   }
 
@@ -129,7 +136,7 @@ class RuntimeConfigModal {
 
   }
 
-  _addAgentRow(){
+  _addAgentRow(masId){
     var agents = []
     this.$modal.find('.agent-row').each(function(index){
       var name = $(this).find('input').val()
@@ -138,11 +145,10 @@ class RuntimeConfigModal {
     })
     this._agents = agents;
     this._agents.push({})
-    var masId = this.$masSelect.find('select').val()
     this._setDom(masId)
   }
 
-  _removeAgentRow(){
+  _removeAgentRow(masId){
     var agents = []
     this.$modal.find('.agent-row').each(function(index){
       var name = $(this).find('input').val()
@@ -151,7 +157,6 @@ class RuntimeConfigModal {
     })
     this._agents = agents;
     this._agents.pop()
-    var masId = this.$masSelect.find('select').val()
     this._setDom(masId)
   }
 }

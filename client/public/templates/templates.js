@@ -275,7 +275,7 @@ templates['runtimeConfigModalBody'] = template({"1":function(container,depth0,he
 
   return " value=\""
     + container.escapeExpression(((helper = (helper = lookupProperty(helpers,"masName") || (depth0 != null ? lookupProperty(depth0,"masName") : depth0)) != null ? helper : container.hooks.helperMissing),(typeof helper === "function" ? helper.call(depth0 != null ? depth0 : (container.nullContext || {}),{"name":"masName","hash":{},"data":data,"loc":{"start":{"line":5,"column":103},"end":{"line":5,"column":114}}}) : helper)))
-    + "\" ";
+    + "\"";
 },"3":function(container,depth0,helpers,partials,data,blockParams,depths) {
     var stack1, lookupProperty = container.lookupProperty || function(parent, propertyName) {
         if (Object.prototype.hasOwnProperty.call(parent, propertyName)) {
@@ -359,8 +359,8 @@ templates['runtimeConfigModalBody'] = template({"1":function(container,depth0,he
     };
 
   return "<div>\r\n  <div class=\"row mb-3\">\r\n    <div class=\"col\">\r\n      <label>Runtime name</label>\r\n      <input id=\"mas-name\" type=\"text\" class=\"form-control\" placeholder=\"Name\" "
-    + ((stack1 = lookupProperty(helpers,"if").call(alias1,(depth0 != null ? lookupProperty(depth0,"masName") : depth0),{"name":"if","hash":{},"fn":container.program(1, data, 0, blockParams, depths),"inverse":container.noop,"data":data,"loc":{"start":{"line":5,"column":79},"end":{"line":5,"column":123}}})) != null ? stack1 : "")
-    + ">\r\n    </div>\r\n  </div>\r\n  <div class=\"row mb-3\">\r\n    <div class=\"col\">\r\n      <label for=\"mas-template-select\">Load a saved template</label>\r\n      <select id=\"mas-template-select\" class=\"form-select\">\r\n        <option>-----------</option>\r\n"
+    + ((stack1 = lookupProperty(helpers,"if").call(alias1,(depth0 != null ? lookupProperty(depth0,"masName") : depth0),{"name":"if","hash":{},"fn":container.program(1, data, 0, blockParams, depths),"inverse":container.noop,"data":data,"loc":{"start":{"line":5,"column":79},"end":{"line":5,"column":122}}})) != null ? stack1 : "")
+    + " >\r\n    </div>\r\n  </div>\r\n  <div class=\"row mb-3\">\r\n    <div class=\"col\">\r\n      <label for=\"mas-template-select\">Load a saved template</label>\r\n      <select id=\"mas-template-select\" class=\"form-select\">\r\n        <option>-----------</option>\r\n"
     + ((stack1 = lookupProperty(helpers,"each").call(alias1,(depth0 != null ? lookupProperty(depth0,"masArray") : depth0),{"name":"each","hash":{},"fn":container.program(3, data, 0, blockParams, depths),"inverse":container.noop,"data":data,"loc":{"start":{"line":13,"column":8},"end":{"line":19,"column":17}}})) != null ? stack1 : "")
     + "      </select>\r\n    </div>\r\n  </div>\r\n"
     + ((stack1 = lookupProperty(helpers,"each").call(alias1,(depth0 != null ? lookupProperty(depth0,"agents") : depth0),{"name":"each","hash":{},"fn":container.program(8, data, 0, blockParams, depths),"inverse":container.noop,"data":data,"loc":{"start":{"line":23,"column":2},"end":{"line":42,"column":11}}})) != null ? stack1 : "")
