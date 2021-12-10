@@ -1,7 +1,4 @@
 #!/bin/bash
-
-mkdir c:/data/$1
-
 ./launchMongoDB.sh $1 &
 
 cd client
