@@ -26,7 +26,7 @@ const affordanceBlockUtils = {
     var url = propertyDescription.forms[0].href
     var type = propertyDescription.type
 
-    var resultBlock = this._getSchemaBlocks(propertyDescription, "Result")
+    var resultBlock = this._getSchemaBlocks(propertyDescription, "Variable_name")
    
     var blockString = 
     `

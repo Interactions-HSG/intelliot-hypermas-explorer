@@ -1,7 +1,7 @@
 Blockly.Blocks['affordance_property'] = {
   init: function() {
     this.jsonInit({
-      "message0": "%1 to tell me the %2 is %3 ",
+      "message0": "%1 to store the value of its current %2 in %3",
       "args0": [
         {
           "type": "field_label_serializable",

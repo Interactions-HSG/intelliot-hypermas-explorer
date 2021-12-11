@@ -205,7 +205,7 @@ JasonGenerator['affordance_action'] = function(block){
   var inputVar = undefined
   var composeCode = undefined
   if(inputBlock){
-    if(inputBlock.type == "variable"){
+    if(inputBlock.type != "object_create"){
       let userVar = JasonGenerator.valueToCode(block, 'input', JasonGenerator.NO_PRECEDENCE);
       inputVar = generationUtils.getVariable()
       composeCode = `json.parse(${userVar}, ${inputVar});\n${indent}`
@@ -250,7 +250,7 @@ JasonGenerator['affordance_action'] = function(block){
 Blockly.Blocks['affordance_property'] = {
   init: function() {
     this.jsonInit({
-      "message0": "%1 to tell me the %2 is %3 ",
+      "message0": "%1 to store the value of its current %2 in %3",
       "args0": [
         {
           "type": "field_label_serializable",

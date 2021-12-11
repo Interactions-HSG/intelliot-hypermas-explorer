@@ -75,7 +75,7 @@ JasonGenerator['affordance_action'] = function(block){
   var inputVar = undefined
   var composeCode = undefined
   if(inputBlock){
-    if(inputBlock.type == "variable"){
+    if(inputBlock.type != "object_create"){
       let userVar = JasonGenerator.valueToCode(block, 'input', JasonGenerator.NO_PRECEDENCE);
       inputVar = generationUtils.getVariable()
       composeCode = `json.parse(${userVar}, ${inputVar});\n${indent}`

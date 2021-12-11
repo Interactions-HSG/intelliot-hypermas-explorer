@@ -41,8 +41,14 @@ class FileTabsController {
         <block type="init_goal">
           <value name="goal">
             <block type="belief">
-              <mutation atoms="0"></mutation>
-              <field name="functor">say_hello</field>
+              <mutation atoms="1"></mutation>
+              <field name="functor">greet</field>
+              <field name="END">)</field>
+              <value name="atom0">
+                <block type="string">
+                  <field name="value">Hello!</field>
+                </block>
+              </value>
             </block>
           </value>
         </block>
@@ -62,29 +68,37 @@ class FileTabsController {
     */
     var plan_xml = 
     `<xml xmlns="https://developers.google.com/blockly/xml">
-    <block type="plan_define" x="10" y="115">
-      <value name='trigger'>
-        <block type='trigger_goal_add_remove'>
-          <value name='goal'>
-            <block type='predicate'>
-              <mutation terms="0"></mutation>
-              <field name='functor'>say_hello</field>
-            </block>
-          </value>
-        </block>
-      </value>
-      <value name='context'>
-        <block type='context_always'>
-        </block>
-      </value>
-      <statement name='body'>
-        <block type='action_print'>
-          <value name='message'>
-          <block type='string'><field name='value'>Hello!</field></block>
-          </value>
-        </block>
-      </statement>
-    </block>
+    <block type="plan_define" x="10" y="111">
+    <value name="trigger">
+      <block type="trigger_goal_add_remove">
+        <field name="option">+!</field>
+        <value name="goal">
+          <block type="predicate">
+            <mutation terms="1"></mutation>
+            <field name="functor">greet</field>
+            <field name="END">)</field>
+            <value name="term0">
+              <block type="variable">
+                <field name="value">Message</field>
+              </block>
+            </value>
+          </block>
+        </value>
+      </block>
+    </value>
+    <value name="context">
+      <block type="context_always"></block>
+    </value>
+    <statement name="body">
+      <block type="action_print">
+        <value name="message">
+          <block type="variable">
+            <field name="value">Message</field>
+          </block>
+        </value>
+      </block>
+    </statement>
+  </block>
     </xml>`
     Blockly.Xml.appendDomToWorkspace(Blockly.Xml.textToDom(plan_xml), this._workspace)
     this._workspace.render();

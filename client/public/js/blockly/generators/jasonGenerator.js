@@ -168,7 +168,6 @@ const generationUtils = {
       newCode = indent+this.getObjectComposeCode(nextBlock, indent, object, offset+newOffset)[0]
     }
     return [code + newCode, offset+newOffset];
-    
   },
 
   getArtifactCreationPlans: function(){
