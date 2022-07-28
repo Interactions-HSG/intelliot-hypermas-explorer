@@ -154,7 +154,6 @@ class ArtifactsController {
   }
 
   async testAffordance(affordanceId, type, data) {
-    console.log(data)
     log.fine(`Testing ${affordanceId} ${type}`);
     var res = {}
     switch (type) {

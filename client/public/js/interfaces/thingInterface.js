@@ -24,7 +24,6 @@ class ThingInterface {
       case 'basic': 
       var username = key.split(':')[0]
       var password = key.split(':')[1]
-      console.log(username,password)
       return{ username, password }
       default :return undefined;
     }
@@ -54,7 +53,7 @@ class ThingInterface {
       console.log(error)
       res = {error: error.message}
     }
-    return res;
+    return await res.value();
   }
 
   async invokeAction(action, payload){
@@ -64,7 +63,7 @@ class ThingInterface {
     } catch (error) {
       res = {error: error.message}
     }
-    return res;
+    return await res.value();
   }
 
   _generatePropertyList(properties){
