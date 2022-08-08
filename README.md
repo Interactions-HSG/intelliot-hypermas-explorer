@@ -1,8 +1,5 @@
 # intelliot-hypermas-explorer
-A stub for the Web-based IDE for Hypermedia MAS in the IntellIoT project. 
-
-Allow the dynamic discovery of artifacts and produce [Jason](http://jason.sourceforge.net/wp/) code from a block language powered by [Blockly](https://github.com/google/blockly/)
-Manages the definition of agent source files and the deployment of MAS configurations to a runtime environment implemented by the [MAS REST Runtime](https://github.com/samubura/mas-rest-runtime)
+This Web-based IDE for Hypermedia MAS in the IntellIoT project allows the dynamic discovery of artifacts and production of [Jason](http://jason.sourceforge.net/wp/) code from a block language powered by [Blockly](https://github.com/google/blockly/). It also permits managing the definition of agent source files and the deployment of MAS configurations to a runtime environment implemented by the [MAS REST Runtime](https://github.com/samubura/mas-rest-runtime)
 
 ## Setup
 1. To start using this repository you have open a shell in the root folder and execute the command
