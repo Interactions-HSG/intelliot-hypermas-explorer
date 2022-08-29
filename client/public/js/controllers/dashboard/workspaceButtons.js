@@ -63,7 +63,7 @@ class WorkspaceButtonsController {
       return;
     }
     if(!code){
-      dashboard.showError(`Code for agent ${id} is not well written`);
+      dashboard.showError(`Il codice per l'agente ${id} non è ben scritto`);
       return;
     }
 
@@ -76,18 +76,18 @@ class WorkspaceButtonsController {
     }
     try{
       if(exists){
-        var confirm = await dashboard.waitConfirm("Are you sure? This will overwrite the previously saved code")
+        var confirm = await dashboard.waitConfirm("Sei sicuro? Questo sovrascriverà il codice già salvato.")
         if(confirm){
           await runtimeInterface.updateAgentSource(id, code, xml)
-          dashboard.showSuccess(`Agent ${id} saved`)
+          dashboard.showSuccess(`Agente ${id} salvato`)
         }
       } else {
         await runtimeInterface.createAgentSource(id, code, xml)
-        dashboard.showSuccess(`Agent ${id} saved`)
+        dashboard.showSuccess(`Agente ${id} salvato`)
       }
     }
     catch(error){
-      dashboard.showError(`Unable to save ${id} code`) //TODO better error
+      dashboard.showError(`Impossibile salvare il codice di ${id}`) //TODO better error
     }
   }
 
@@ -98,7 +98,7 @@ class WorkspaceButtonsController {
       dashboard.showError(error)
     }
     if(agentSources.length == 0) {
-      dashboard.showInfo("There are no agents to be loaded")
+      dashboard.showInfo("Non ci sono agenti salvati da caricare")
       return
     }
     var $select = this.$loadModal.find('select')
@@ -129,7 +129,7 @@ class WorkspaceButtonsController {
       dashboard.showError(error)
     }
     if(masIds.length == 0) {
-      dashboard.showInfo("Please first define a runtime configuration")
+      dashboard.showInfo("Perfavore prima definisci una configurazione di runtime")
       return
     }
     var $select = this.$runModal.find('select')

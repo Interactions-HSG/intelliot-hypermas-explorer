@@ -1,7 +1,7 @@
 Blockly.defineBlocksWithJsonArray(
   [{
       "type": "mutator_block_root",
-      "message0": "block %1 %2",
+      "message0": "blocco %1 %2",
       "args0": [{
           "type": "input_dummy"
         },

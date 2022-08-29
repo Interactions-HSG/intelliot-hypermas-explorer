@@ -4,7 +4,7 @@ Blockly.Blocks['belief'] = {
       "inputsInline": true,
       "output": "belief",
       "style": "belief_block_style",
-      "tooltip": "Define a fact which is true in the agent mind",
+      "tooltip": "Questa è una nota mentale dell'agente",
       "helpUrl": "",
     });
     this._atoms = 1;
@@ -21,11 +21,11 @@ Blockly.Blocks['belief'] = {
         value = utils.uncapitalize(value)
         block.setWarningText();
       } else {
-        block.setWarningText("Must not be empty")
+        block.setWarningText("Non può essere vuoto")
       }
       var regex = new RegExp("^[a-zA-Z0-9_]*$", 'g')
       if(!regex.test(value)){
-        block.setWarningText("Not a valid name");
+        block.setWarningText("Non è un nome valido");
         return value;
       }
       block.setWarningText();

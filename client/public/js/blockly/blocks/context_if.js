@@ -1,6 +1,6 @@
 Blockly.defineBlocksWithJsonArray([{
   "type": "context_if",
-  "message0": "only if %1",
+  "message0": "solo se %1",
   "args0": [
     {
       "type": "input_value",
@@ -14,7 +14,7 @@ Blockly.defineBlocksWithJsonArray([{
   "inputsInline": true,
   "output": "context",
   "style": "context_block_style",
-  "tooltip": "Express the context of when a plan is applicable.",
+  "tooltip": "Esprime la condizione per cui un piano è valido",
   "helpUrl": ""
 }]);
 

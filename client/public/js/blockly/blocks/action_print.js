@@ -1,6 +1,6 @@
 Blockly.defineBlocksWithJsonArray([{
   "type": "action_print",
-  "message0": "says %1",
+  "message0": "dice %1",
   "args0": [
     {
       "type": "input_value",
@@ -14,7 +14,7 @@ Blockly.defineBlocksWithJsonArray([{
   "previousStatement": "body_block",
   "nextStatement": "body_block",
   "style": "body_block_style",
-  "tooltip": "Say some text, it can be read from the console to understand what the agent is doing.",
+  "tooltip": "L'agente dice un messaggio in modo da comunicare al programmatore cosa sta facendo",
   "helpUrl": ""
 }]);
 

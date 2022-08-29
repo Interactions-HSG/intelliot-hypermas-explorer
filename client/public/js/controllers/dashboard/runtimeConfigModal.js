@@ -36,17 +36,17 @@ class RuntimeConfigModal {
       this._agentTypes = await runtimeInterface.getAvailableAgents()
       this._agentTypes = this._agentTypes.map(x => x.id)
     } catch(error){
-      dashboard.showError("Unable to retrieve saved agents ")
+      dashboard.showError("Impossibile recuperare gli agenti salvati")
     }
     if(this._agentTypes.length == 0){
-      dashboard.showError("Please save some agents before attempting to run")
+      dashboard.showError("Prima di provare ad eseguire salva degli agenti")
       return
     }
     try{
       //load all mas
       this._masArray = await runtimeInterface.getAvailableMas()
     } catch(error){
-      dashboard.showError("Unable to retrieve saved runtime configurations")
+      dashboard.showError("Impossibile recuperare le configurazioni di esecuzione salvate")
     }
 
     this._setDom(undefined);
@@ -58,7 +58,7 @@ class RuntimeConfigModal {
     //parse the fields to generate mas object
     var id = $('#mas-name').val()
     if(!id){
-      dashboard.showError(`Runtime has no name!`)
+      dashboard.showError(`Il runtime non ha nome!`)
       return
     }
     var agents = []
@@ -70,18 +70,18 @@ class RuntimeConfigModal {
     //validate
     for(const a of agents){
       if(a.name == ""){
-        dashboard.showError("Attempting to create agents with no name")
+        dashboard.showError("Impossible creare un agente senza nome")
         return
       }
       if(a.type == undefined){
-        dashboard.showError(`Agent ${a.name} has no type`)
+        dashboard.showError(`L'agente ${a.name} non ha un tipo`)
         return
       }
     }
     //if overwrite template
     try{
       if(this._masArray.some(x => x.id == id)){
-        var confirm = await dashboard.waitConfirm(`Are you sure? This will overwrite runtime ${id}`)
+        var confirm = await dashboard.waitConfirm(`Sei sicuro? Questo sovrascriverà il runtime ${id}`)
         if(!confirm){
           return
         }
@@ -90,9 +90,9 @@ class RuntimeConfigModal {
         //save mas
         await runtimeInterface.saveMasDefinition(id, agents)
       }
-      dashboard.showSuccess(`Runtime ${id} saved`)
+      dashboard.showSuccess(`Runtime ${id} salvato`)
     } catch (error){
-      dashboard.showError(`Unable to save runtime ${id}`)
+      dashboard.showError(`Impossibile recuperare il runtime ${id}`)
     }
     this._modal.hide()
   }

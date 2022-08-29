@@ -1,16 +1,16 @@
 Blockly.defineBlocksWithJsonArray([{
   "type": "trigger_test_add_remove",
-  "message0": "agent %1 %2 %3",
+  "message0": "l'agente %1 %2 %3",
   "args0": [{
       "type": "field_dropdown",
       "name": "option",
       "options": [
         [
-          "doesn't already know",
+          "non sa già",
           "+?"
         ],
         [
-          "failed to check if it knew",
+          "non è riuscito a trovare",
           "-?"
         ]
       ]

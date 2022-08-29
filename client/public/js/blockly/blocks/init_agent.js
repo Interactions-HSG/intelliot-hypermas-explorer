@@ -1,6 +1,6 @@
 Blockly.defineBlocksWithJsonArray([{
   "type": "init_agent",
-  "message0": "When %1 starts %2 it %3",
+  "message0": "Quando %1 parte %2 %3",
   "args0": [
     {
       "type": "field_label_serializable",
@@ -20,7 +20,7 @@ Blockly.defineBlocksWithJsonArray([{
   ],
   "inputsInline": true,
   "style": "init_block_style",
-  "tooltip": "Configure the initial mental state of an agent",
+  "tooltip": "Imposta lo stato iniziale dell'agente",
   "helpUrl": ""
 }]);
 

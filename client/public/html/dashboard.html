@@ -21,14 +21,14 @@
     <div class="logo-left"><img src="/img/interactions-logo-pure-white.png" alt="Interactions Research Group, University of St.Gallen"/></div>
 
     <div id="settings" style="display: none">
-      <div><label for="workspace-chooser">Select workspace</label></div>
+      <div><label for="workspace-chooser">Seleziona un workspace</label></div>
       <div id="workspace">
         <div>
           <select id="workspace-chooser">
-            <option value="none">No workspaces</option>
+            <option value="none">Nessun workspace</option>
           </select>
         </div>
-        <a id="explore-button" target="_blank" class="btn btn-light" href="#">Explore</a>
+        <a id="explore-button" target="_blank" class="btn btn-light" href="#">Esplora il workspace</a>
       </div>
     </div>
     <!--
@@ -47,7 +47,7 @@
   <div id="loading">
     <img id="loading-logo" src="/img/interactions-logo-reduced.png" alt="Interactions Research Group, University of St.Gallen"/>
     <br/>
-    <p>Loading...</p>
+    <p>Caricamento...</p>
   </div>
 
   <!-- This is the container that hosts all other interface elements -->
@@ -56,16 +56,16 @@
       <div id="blockly-container">
         <div id="blockly-controls">
             <div class="toolbox-title">
-              Toolbox:
+              Blocchi:
             </div>
             <div class="toolbox-tools">
               <div class="blockly-buttons">
                 <button id="debug" type="button" class="btn btn-light">Debug</button>
-                <button id="save-code" type="button" class="btn btn-light">Save</button>
-                <button id="load-code" type="button" class="btn btn-light">Load</button>
-                <button id="define-runtime" type="button" class="btn btn-light">Define Runtime</button>
-                <button id="inspect-runtime" type="button" class="btn btn-light">Inspect Runtime</button>
-                <button id="run-mas" type="button" class="btn btn-primary">Run</button>
+                <button id="save-code" type="button" class="btn btn-light">Salva</button>
+                <button id="load-code" type="button" class="btn btn-light">Carica</button>
+                <button id="define-runtime" type="button" class="btn btn-light">Definisci Runtime</button>
+                <button id="inspect-runtime" type="button" class="btn btn-light">Ispeziona Runtime</button>
+                <button id="run-mas" type="button" class="btn btn-primary">Esegui</button>
               </div>
               <div class="toolbox-tabs">
                 <ul id="tabs" class="nav nav-tabs">
@@ -98,15 +98,15 @@
     <div class="modal-dialog modal-dialog-centered">
       <div class="modal-content">
         <div class="modal-header">
-          <h5 class="modal-title">Load agent code</h5>
+          <h5 class="modal-title">Carica il codice di un agente</h5>
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body">
-          <p>Select the agent that you want to load</p>
+          <p>Seleziona l'agente che vuoi caricare</p>
           <select class="form-select" id="available-agents"></select>
         </div>
         <div class="modal-footer">
-          <button type="button" class="btn btn-primary btn-confirm">Load</button>
+          <button type="button" class="btn btn-primary btn-confirm">Carica</button>
         </div>
       </div>
     </div>
@@ -117,12 +117,12 @@
     <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
       <div class="modal-content">
         <div class="modal-header">
-          <h5 class="modal-title">Configure runtime</h5>
+          <h5 class="modal-title">Configura runtime</h5>
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body"><!--fill by template--></div>
         <div class="modal-footer">
-          <button id="button-save-mas" type="button" class="btn btn-primary btn-confirm">Save</button>
+          <button id="button-save-mas" type="button" class="btn btn-primary btn-confirm">Salva</button>
         </div>
       </div>
     </div>
@@ -133,14 +133,14 @@
     <div class="modal-dialog modal-dialog-centered">
       <div class="modal-content">
         <div class="modal-header">
-          <h5 class="modal-title">Active runtimes</h5>
+          <h5 class="modal-title">Runtime attivi</h5>
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body">
           <!--fill by template-->
         </div>
         <div class="modal-footer">
-          <button type="button" class="btn btn-primary btn-confirm">Done</button>
+          <button type="button" class="btn btn-primary btn-confirm">Fatto</button>
         </div>
       </div>
     </div>
@@ -151,15 +151,15 @@
     <div class="modal-dialog modal-dialog-centered">
       <div class="modal-content">
         <div class="modal-header">
-          <h5 class="modal-title">Run saved configuration</h5>
+          <h5 class="modal-title">Esegui una configurazione salvata</h5>
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body">
-          <p>Select the runtime configuration that you want to deploy</p>
+          <p>Seleziona la configurazione di runtime che vuoi eseguire</p>
           <select class="form-select" id="available-agents"></select>
         </div>
         <div class="modal-footer">
-          <button id='#button-run-mas' type="button" class="btn btn-primary btn-confirm">Run</button>
+          <button id='#button-run-mas' type="button" class="btn btn-primary btn-confirm">Esegui</button>
         </div>
       </div>
     </div>

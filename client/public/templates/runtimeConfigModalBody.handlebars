@@ -1,13 +1,13 @@
 <div>
   <div class="row mb-3">
     <div class="col">
-      <label>Runtime name</label>
+      <label>Nome del Runtime</label>
       <input id="mas-name" type="text" class="form-control" placeholder="Name" {{#if masName }} value="{{masName}}"{{/if}} >
     </div>
   </div>
   <div class="row mb-3">
     <div class="col">
-      <label for="mas-template-select">Load a saved template</label>
+      <label for="mas-template-select">Carica un template salvato</label>
       <select id="mas-template-select" class="form-select">
         <option>-----------</option>
         {{#each masArray}}
@@ -23,11 +23,11 @@
   {{#each agents}}
     <div class="row agent-row mb-3">
       <div class="col-6">
-        <label>Agent name</label>
+        <label>Nome dell'agente</label>
         <input type="text" class="form-control" placeholder="Name" {{#if name}} value="{{name}}" {{/if}}>
       </div>
       <div class="col-6">
-        <label>Agent type</label>
+        <label>Tipo dell'agente</label>
         <select class="form-select">
           {{#each ../agentTypes}}
             {{#if_eq this ../type}}

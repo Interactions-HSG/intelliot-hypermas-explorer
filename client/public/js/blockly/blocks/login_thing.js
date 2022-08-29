@@ -1,7 +1,7 @@
 Blockly.Blocks['login_thing'] = {
   init: function() {
     this.jsonInit({
-      "message0": "authenticates on %1 with %2",
+      "message0": "autentica l'agente con %1 usando %2",
       "args0": [
         {
           "type": "field_label_serializable",

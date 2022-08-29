@@ -1,6 +1,6 @@
 const basic_toolbox_category = {
   "kind": "category",
-  "name": "Values",
+  "name": "Valori di base",
   "toolboxitemid": "Basics",
   "contents": [{
       "kind": "block",

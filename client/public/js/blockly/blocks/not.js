@@ -1,6 +1,6 @@
 Blockly.defineBlocksWithJsonArray([{
   "type": "not",
-  "message0": "not %1",
+  "message0": "%1 è falso",
   "args0": [
     {
       "type": "input_value",

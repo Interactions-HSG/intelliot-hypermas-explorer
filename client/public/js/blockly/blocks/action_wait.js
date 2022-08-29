@@ -1,6 +1,6 @@
 Blockly.defineBlocksWithJsonArray([{
   "type": "action_wait",
-  "message0": "waits %1 seconds",
+  "message0": "aspetta %1 secondi",
   "args0": [
     {
       "type": "input_value",
@@ -11,7 +11,7 @@ Blockly.defineBlocksWithJsonArray([{
   "previousStatement": "body_block",
   "nextStatement": "body_block",
   "style": "body_block_style",
-  "tooltip": "Wait for a number of seconds.",
+  "tooltip": "Aspetta per un tot di secondi",
   "helpUrl": ""
 }]);
 

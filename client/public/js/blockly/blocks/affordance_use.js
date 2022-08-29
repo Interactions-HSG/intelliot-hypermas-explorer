@@ -1,6 +1,6 @@
 Blockly.defineBlocksWithJsonArray([{
   "type": "affordance_use",
-  "message0": "asks thing %1",
+  "message0": "interagisce con l'oggetto %1",
   "args0": [
     {
       "type": "input_value",
@@ -11,7 +11,7 @@ Blockly.defineBlocksWithJsonArray([{
   "previousStatement": "body_block",
   "nextStatement": "body_block",
   "style": "body_block_style",
-  "tooltip": "Invoke the affordance",
+  "tooltip": "Invoca una affordance",
   "helpUrl": ""
 }]);
 

@@ -1,6 +1,6 @@
 const operations_toolbox_category = {
   "kind": "category",
-  "name": "Operations",
+  "name": "Operazioni",
   "toolboxitemid": "Operations",
   "contents": [
     {

@@ -1,9 +1,9 @@
 Blockly.defineBlocksWithJsonArray([{
   "type": "any_variable",
-  "message0": "any",
+  "message0": "qualunque",
   "output": "variable",
   "colour": 0,
-  "tooltip": "A special variable that match with everything and does not store the result"
+  "tooltip": "Una variabile che fa match con qualunque valore"
 }]);
 
 JasonGenerator['any_variable'] = function(block) {

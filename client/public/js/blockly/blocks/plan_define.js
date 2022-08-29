@@ -1,6 +1,6 @@
 Blockly.defineBlocksWithJsonArray([{
   "type": "plan_define",
-  "message0": "When %1 then %2 it %3 then it's done!",
+  "message0": "Ecco un piano per quando %1 Questo piano è valido %2 L'agente %3 e poi ha finito!",
   "args0": [
     {
       "type": "input_value",
@@ -22,7 +22,7 @@ Blockly.defineBlocksWithJsonArray([{
   ],
   "inputsInline": false,
   "style": "body_block_style",
-  "tooltip": "Define a plan that the agent can use when the triggering condition happens, and the context is valid.",
+  "tooltip": "Definisce un piano che viene azionato con l'evento corrispondente quando il contesto è vero.",
   "helpUrl": ""
 }]);
 

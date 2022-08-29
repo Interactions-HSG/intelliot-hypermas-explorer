@@ -1,6 +1,6 @@
 Blockly.defineBlocksWithJsonArray([{
   "type": "assign_variable",
-  "message0": "stores in %1 the value of %2",
+  "message0": "metti nella variabile %1 il valore di %2",
   "args0": [
     {
       "type": "input_value",
@@ -17,7 +17,7 @@ Blockly.defineBlocksWithJsonArray([{
   "previousStatement": "body_block",
   "nextStatement": "body_block",
   "style": "body_block_style",
-  "tooltip": "Assign the result of an operation to a variable",
+  "tooltip": "Assegna il risultato di una operazione ad una variabile",
   "helpUrl": ""
 }]);
 

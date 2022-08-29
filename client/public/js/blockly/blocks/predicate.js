@@ -4,7 +4,7 @@ Blockly.Blocks['predicate'] = {
       "inputsInline": true,
       "output": "predicate",
       "colour": 285,
-      "tooltip": "Define a predicate that can accept both variables to be grounded or atoms",
+      "tooltip": "Definisce un predicato logico",
       "helpUrl": ""
     });
     this._terms = 1;
@@ -21,11 +21,11 @@ Blockly.Blocks['predicate'] = {
         value = utils.uncapitalize(value)
         block.setWarningText();
       } else {
-        block.setWarningText("Must not be empty")
+        block.setWarningText("Non può essere vuoto")
       }
       var regex = new RegExp("^[a-zA-Z0-9_]*$", 'g')
       if(!regex.test(value)){
-        block.setWarningText("Not a valid name");
+        block.setWarningText("Non è un nome valido");
         return value;
       }
       block.setWarningText();

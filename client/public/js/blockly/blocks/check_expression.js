@@ -1,6 +1,6 @@
 Blockly.defineBlocksWithJsonArray([{
   "type": "check_expression",
-  "message0": "continues if %1 otherwise fails",
+  "message0": "continua se %1 è vero, altrimenti fallisci il piano",
   "args0": [
     {
       "type": "input_value",
@@ -12,7 +12,7 @@ Blockly.defineBlocksWithJsonArray([{
   "previousStatement": "body_block",
   "nextStatement": "body_block",
   "style": "body_block_style",
-  "tooltip": "Check a statement and continue the execution of a plan only if it is true ",
+  "tooltip": "Controlla una condizione e continua solo se è vera, altrimenti fallisce il piano",
   "helpUrl": ""
 }]);
 

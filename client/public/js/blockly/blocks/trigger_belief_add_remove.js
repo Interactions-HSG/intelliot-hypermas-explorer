@@ -1,16 +1,16 @@
 Blockly.defineBlocksWithJsonArray([{
   "type": "trigger_belief_add_remove",
-  "message0": "agent %1 %2 note %3",
+  "message0": "l'agente %1 %2 una nota %3",
   "args0": [{
       "type": "field_dropdown",
       "name": "option",
       "options": [
         [
-          "adds",
+          "scrive o aggiorna",
           "+"
         ],
         [
-          "removes",
+          "rimuove",
           "-"
         ]
       ]

@@ -14,8 +14,8 @@ class FileTabsController {
     this._currentStorageKey = undefined
     this._workspace = workspace;
     this.$addTabButton.find('button').click(async e => {
-      var agentName = await dashboard.waitInput("Create a new agent with name:", "new_agent")
-      agentName = agentName ? agentName : "new_agent"
+      var agentName = await dashboard.waitInput("Crea un nuovo agente con nome:", "nuovo agente")
+      agentName = agentName ? agentName : "nuovo_agente"
       this.addTab(agentName)
     })
   }
@@ -42,11 +42,11 @@ class FileTabsController {
           <value name="goal">
             <block type="belief">
               <mutation atoms="1"></mutation>
-              <field name="functor">greet</field>
+              <field name="functor">saluta</field>
               <field name="END">)</field>
               <value name="atom0">
                 <block type="string">
-                  <field name="value">Hello!</field>
+                  <field name="value">Ciao!</field>
                 </block>
               </value>
             </block>
@@ -75,11 +75,11 @@ class FileTabsController {
         <value name="goal">
           <block type="predicate">
             <mutation terms="1"></mutation>
-            <field name="functor">greet</field>
+            <field name="functor">saluta</field>
             <field name="END">)</field>
             <value name="term0">
               <block type="variable">
-                <field name="value">Message</field>
+                <field name="value">Messaggio</field>
               </block>
             </value>
           </block>
@@ -93,7 +93,7 @@ class FileTabsController {
       <block type="action_print">
         <value name="message">
           <block type="variable">
-            <field name="value">Message</field>
+            <field name="value">Messaggio</field>
           </block>
         </value>
       </block>
@@ -115,8 +115,8 @@ class FileTabsController {
   loadTab(agentId, xml){
     var confirm = true;
     if(agentId in this._blockStorage){
-      confirm = dashboard.waitConfirm(`Are you sure to load a new version of ${agentId}?\n
-      This will overwrite your current blocks.`)
+      confirm = dashboard.waitConfirm(`Sei sicuro di voler caricare una nuova versione di ${agentId}?\n
+      Questa operazione sovrascriverà tutti i blocchi.`)
       if(!confirm){return}
       //replace tab
       this._selectTab(agentId)
@@ -178,7 +178,7 @@ class FileTabsController {
 
   async _removeTab(toRemove, isSelected){
     //ask for confirm
-    var res = await dashboard.waitConfirm(`Are you sure to delete ${toRemove}? You will lose all your blocks.`)
+    var res = await dashboard.waitConfirm(`Sei sicuro di chiudere ${toRemove}? Perderai tutti i blocchi.`)
     if(res){
       //reset key and empty storage
       this._currentStorageKey = undefined

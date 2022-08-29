@@ -1,6 +1,6 @@
 const communication_toolbox_category = {
   "kind": "category",
-  "name": "Communication",
+  "name": "Comunicazione",
   "toolboxitemid": "Communication",
   "contents": [{
       "kind": "block",
@@ -8,7 +8,7 @@ const communication_toolbox_category = {
       "<field name='illocutionary_force'>tell</field>"+
       "<value name='message'>"+
         "<block type='predicate'>"+
-        "<field name='functor'>note_name</field>"+
+        "<field name='functor'>nota</field>"+
         "</block>" +
       "</value>"+
       "</block>"
@@ -19,7 +19,7 @@ const communication_toolbox_category = {
       "<field name='illocutionary_force'>achieve</field>"+
       "<value name='message'>"+
       "<block type='predicate'>"+
-      "<field name='functor'>goal_name</field>"+
+      "<field name='functor'>obiettivo</field>"+
       "</block>" +
       "</value>"+
       "</block>"

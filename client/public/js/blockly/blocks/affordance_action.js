@@ -1,7 +1,7 @@
 Blockly.Blocks['affordance_action'] = {
   init: function() {
     this.jsonInit({
-      "message0": "%1 to %2",
+      "message0": "%1 ed ordina di fare l'azione %2",
       "args0": [
         {
           "type": "field_label_serializable",
@@ -17,7 +17,7 @@ Blockly.Blocks['affordance_action'] = {
       ],
       "output": "affordance",
       "style": "action_block_style",
-      "tooltip": "Invoke an action on an artifact and store the result in a variable or object",
+      "tooltip": "Invoca una azione su un artefatto",
       "helpUrl": ""
     })
     this.method = "method"
@@ -54,7 +54,7 @@ Blockly.Blocks['affordance_action'] = {
 
     if(this.hasOutput){
       this.appendValueInput('output')
-            .appendField("Result")
+            .appendField("Risultato")
             .setAlign(Blockly.ALIGN_RIGHT)
             .setCheck(['variable', 'object']);
     }

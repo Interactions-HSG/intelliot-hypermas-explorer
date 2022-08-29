@@ -1,16 +1,16 @@
 Blockly.defineBlocksWithJsonArray([{
   "type": "trigger_goal_add_remove",
-  "message0": "agent %1 %2 to achieve %3",
+  "message0": "l'agente %1 %2 raggiungere l'obiettivo %3",
   "args0": [{
       "type": "field_dropdown",
       "name": "option",
       "options": [
         [
-          "decides",
+          "decide di",
           "+!"
         ],
         [
-          "failed",
+          "fallisce mentre provava a",
           "-!"
         ]
       ]

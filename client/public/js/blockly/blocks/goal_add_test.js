@@ -1,6 +1,6 @@
 Blockly.defineBlocksWithJsonArray([{
   "type": "goal_add_test",
-  "message0": "checks if it already know %1",
+  "message0": "controlla se sa che %1 è vero",
   "args0": [{
     "type": "input_value",
     "name": "goal",
@@ -9,7 +9,7 @@ Blockly.defineBlocksWithJsonArray([{
   "previousStatement": "body_block",
   "nextStatement": "body_block",
   "style": "body_block_style",
-  "tooltip": "Ask the agent to check some information, if possible within the agent notes otherwise trigger an appropriate plan to retrieve the information.",
+  "tooltip": "L'agente controlla se ha una informazione, prima tra le sue note altrimenti prova ad eseguire un piano per trovare l'informazione",
   "helpUrl": ""
 }]);
 

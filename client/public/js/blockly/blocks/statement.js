@@ -16,27 +16,27 @@ Blockly.defineBlocksWithJsonArray([{
       "name": "symbol",
       "options": [
         [
-          "is",
+          "è uguale a",
           "=="
         ],
         [
-          "is not",
+          "è diverso da",
           "\\=="
         ],
         [
-          "is greater than",
+          "è maggiore di",
           ">"
         ],
         [
-          "is less than",
+          "è minore di",
           "<"
         ],
         [
-          "is greater than or equal",
+          "è maggiore o uguale di",
           ">="
         ],
         [
-          "is less than or equal",
+          "è minore o uguale di",
           "<="
         ]
       ]
@@ -58,7 +58,7 @@ Blockly.defineBlocksWithJsonArray([{
   ],
   "output": "statement",
   "colour": 230,
-  "tooltip": "A logic condition between values.",
+  "tooltip": "Condizione logica tra due elementi",
   "helpUrl": ""
 }]);
 

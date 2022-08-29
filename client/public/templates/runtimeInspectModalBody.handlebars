@@ -11,14 +11,14 @@
       </div>
       <div id="inspect-collapse-{{@index}}" class="accordion-collapse collapse">
         <div class="accordion-body">
-          <h5>Current agents</h5>
+          <h5>Agenti in esecuzione</h5>
           <div class="row mb-3">
             <div class="col">
               {{toString agents}}
             </div>
           </div>
           <hr/>
-          <h5>Add agent</h5>
+          <h5>Aggiungi agente</h5>
           <div class="row mb-3" id="add-runtime-agent-{{@index}}">
             <div class="col-4">
               <input type="text" name="name" class="form-control" placeholder="Name">
@@ -31,12 +31,12 @@
               </select>
             </div>
             <div class="col-4">
-             <button class="btn btn-success">Add</button>
+             <button class="btn btn-success">Aggiungi</button>
             </div>
           </div>
           <hr/>
           <div class="row mb-3"  id="remove-runtime-agent-{{@index}}">
-            <h5>Remove agent</h5>
+            <h5>Rimuovi agente</h5>
             <div class="col-8">
               <select class="form-select">
                 {{#each agents}}
@@ -45,13 +45,13 @@
               </select>
             </div>
             <div class="col-4">
-              <button class="btn btn-danger">Remove</button>
+              <button class="btn btn-danger">Rimuovi</button>
             </div>
           </div>
           <hr/>
           <div class="row mb-3">
             <div class="col">
-              Hosted on: {{runtimeURL}}
+              Eseguito su: {{runtimeURL}}
             </div>
           </div>
           <div class="row mb-3">

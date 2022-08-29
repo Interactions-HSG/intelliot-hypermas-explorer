@@ -1,6 +1,6 @@
 Blockly.defineBlocksWithJsonArray([{
   "type": "opposite_init_belief",
-  "message0": "it's false that %1",
+  "message0": "non è vero che %1",
   "args0": [
     {
       "type": "input_value",
@@ -11,7 +11,7 @@ Blockly.defineBlocksWithJsonArray([{
   "inputsInline": true,
   "output": "belief",
   "style": "belief_block_style",
-  "tooltip": "Strongly negate the belief",
+  "tooltip": "Nega in modo forte una nota mentale",
   "helpUrl": ""
 }]);
 

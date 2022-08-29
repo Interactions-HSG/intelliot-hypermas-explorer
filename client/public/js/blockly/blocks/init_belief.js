@@ -1,6 +1,6 @@
 Blockly.defineBlocksWithJsonArray([{
   "type": "init_belief",
-  "message0": "adds a new note: %1 %2",
+  "message0": "scrive una nuova nota: %1 %2",
   "args0": [{
       "type": "input_dummy"
     },
@@ -14,7 +14,7 @@ Blockly.defineBlocksWithJsonArray([{
   "previousStatement": "init_block",
   "nextStatement": "init_block",
   "style": "init_block_style",
-  "tooltip": "Add a note into the agent mind",
+  "tooltip": "Aggiunge una nuova nota mentale",
   "helpUrl": ""
 }]);
 

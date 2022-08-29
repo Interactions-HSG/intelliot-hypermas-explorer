@@ -1,6 +1,6 @@
 Blockly.defineBlocksWithJsonArray([{
     "type": "no_predicate",
-    "message0": "it doesn't know if %1",
+    "message0": "non sa se %1",
     "args0": [
       {
         "type": "input_value",
@@ -11,7 +11,7 @@ Blockly.defineBlocksWithJsonArray([{
     "inputsInline": true,
     "output": "predicate",
     "colour": 285,
-    "tooltip": "Weakly negates the predicate",
+    "tooltip": "Negazione debole di un predicato",
     "helpUrl": ""
 }]);
 

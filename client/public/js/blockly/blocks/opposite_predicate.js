@@ -1,6 +1,6 @@
 Blockly.defineBlocksWithJsonArray([{
   "type": "opposite_predicate",
-  "message0": "it's false that %1",
+  "message0": "non è vero che %1",
   "args0": [
     {
       "type": "input_value",
@@ -11,7 +11,7 @@ Blockly.defineBlocksWithJsonArray([{
   "inputsInline": true,
   "output": "predicate",
   "colour": 285,
-  "tooltip": "Strongly negate the predicate",
+  "tooltip": "Nega in modo forte un predicato",
   "helpUrl": ""
 }]);
 

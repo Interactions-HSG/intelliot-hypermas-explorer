@@ -5,11 +5,11 @@ Blockly.Blocks['string'] = {
       "args0": [{
         "type": "field_input",
         "name": "value",
-        "text": "text"
+        "text": "testo"
       }],
       "output": "atom",
       "colour": 190,
-      "tooltip": "Some text, it can contain spaces.",
+      "tooltip": "Del testo che può comprendere spazi",
       "helpUrl": ""
     });
     this.getField('value').setValidator(function(newValue){

@@ -36,7 +36,7 @@ class Dashboard {
   async handleSelectWorkspaceEvent(workspaceData) {
     var res = true;
     if(!this.blocklyController.isEmpty()){
-      var res = await this.waitConfirm("Are you sure? You will lose all your blocks")
+      var res = await this.waitConfirm("Sei sicuro? Perderai tutti i blocchi.")
     }
     if(res){
       this.blocklyController.clearIDE();

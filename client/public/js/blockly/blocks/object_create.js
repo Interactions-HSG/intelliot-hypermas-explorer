@@ -1,6 +1,6 @@
 Blockly.defineBlocksWithJsonArray([{
   "type": "object_create",
-  "message0": "object %1 %2",
+  "message0": "oggetto: %1 %2",
   "args0": [
     {
       //do not remove
@@ -15,7 +15,7 @@ Blockly.defineBlocksWithJsonArray([{
   "inputsInline": true,
   "output": "object",
   "colour": 165,
-  "tooltip": "",
+  "tooltip": "La radice di un oggetto json",
   "helpUrl": ""
 }]);
 

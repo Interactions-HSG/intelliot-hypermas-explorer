@@ -76,7 +76,7 @@ class ArtifactsController {
       var td = artifact.thingDescription
       if(controller._hasSecurity(td)){
         var def = td.securityDefinitions[td.security]
-        var key = prompt(`Set authentication key.\nScheme: ${def.scheme}\nIn: ${def.in}\nName: ${def.name}`)
+        var key = prompt(`Imposta chiave di autenticazione.\nSchema: ${def.scheme}\nIn: ${def.in}\nNome: ${def.name}`)
         artifact.key = key;
       }
     })
@@ -91,7 +91,7 @@ class ArtifactsController {
     this.selectedArtifact = this.currentArtifacts.find(a => a.id == artifactId);
     var td = this.selectedArtifact.thingDescription
     if(controller._hasSecurity(td) && !this.selectedArtifact.key){
-      alert("You may require to login before using the affordances.")
+      alert("Potrebbe essere necessario effettuare un login per usare queste operazioni.")
     }
     this.selectedThing = new ThingInterface(this.selectedArtifact.thingDescription, this.selectedArtifact.key);
     await this.selectedThing.loadThing();

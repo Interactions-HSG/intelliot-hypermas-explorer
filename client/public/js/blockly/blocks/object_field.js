@@ -1,6 +1,6 @@
 Blockly.defineBlocksWithJsonArray([{
   "type": "object_field",
-  "message0": "%1 as %3 %2",
+  "message0": "%1 di tipo %3 %2",
   "args0": [
     {
       "type": "field_input",
@@ -23,27 +23,27 @@ Blockly.defineBlocksWithJsonArray([{
       "name": "type",
       "options": [
         [
-          "text",
+          "testo",
           "string"
         ],
         [
-          "true/false",
+          "vero/falso",
           "boolean"
         ],
         [
-          "decimal number",
+          "numero decimale",
           "number"
         ],
         [
-          "natural number",
+          "numero intero",
           "integer"
         ],
         [
-          "object",
+          "oggetto",
           "object"
         ],
         [
-          "array",
+          "lista",
           "array"
         ],
         [
@@ -57,7 +57,7 @@ Blockly.defineBlocksWithJsonArray([{
   "previousStatement": "object_field",
   "nextStatement": "object_field",
   "colour": 165,
-  "tooltip": "Define a field of a json object",
+  "tooltip": "Un campo di un oggetto json",
   "helpUrl": ""
 }]);
 

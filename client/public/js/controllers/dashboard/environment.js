@@ -35,10 +35,10 @@ class EnvironmentController {
   }
 
   async fetchWorkspaces() {
-    log.fine("Fetching workspaces in environment " + this.environmentId);
+    log.fine("Carico i workspace nell'environment " + this.environmentId);
     try {
       this.workspaces = await environmentInterface.fetchWorkspaces(this.environmentId)
-      log.fine('Environment ' + this.environmentId + ' contains ' + this.workspaces.length + ' workspace(s)!');
+      log.fine('L\'environment ' + this.environmentId + ' contiene ' + this.workspaces.length + ' workspace(s)!');
       this.updateWorkspaceChooser()
       //trigger event with first workspace
       var event = {
@@ -77,10 +77,10 @@ class EnvironmentController {
   
   async reloadArtifactsFromWorkspace(environmentId, workspaceId) {
     var currentArtifacts = []
-    log.fine(`Fetching artifacts in workspace ${workspaceId}`);
+    log.fine(`Carico gli oggetti nel workspace ${workspaceId}`);
     try {
       var artifacts = await environmentInterface.fetchArtifacts(environmentId, workspaceId);
-      log.fine(`Workspace contained ${artifacts.length} artifact(s)!`);
+      log.fine(`Il workspace contiene ${artifacts.length} oggetti!`);
       for (var artifact of artifacts) {
         try {
           var artifactDescription = await environmentInterface.getArtifactDescription(environmentId, workspaceId, artifact.id)

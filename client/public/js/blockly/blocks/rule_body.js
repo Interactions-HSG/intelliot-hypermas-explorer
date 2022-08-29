@@ -3,7 +3,7 @@ Blockly.Blocks['rule_body'] = {
     this.jsonInit({
       "output": "rule_body",
       "colour": 285,
-      "tooltip": "Define the body of a rule, accept statements as input.",
+      "tooltip": "il corpo di una regola",
       "helpUrl": ""
     });
     this._statements = 2;
@@ -60,7 +60,7 @@ Blockly.Blocks['rule_body'] = {
   },
 
   _updateShape: function(){
-    ComposerUtils.addInputFields(this, 'statement', this._statements, ['statement', 'predicate'], 'and')
+    ComposerUtils.addInputFields(this, 'statement', this._statements, ['statement', 'predicate'], 'e')
   }
 }
 

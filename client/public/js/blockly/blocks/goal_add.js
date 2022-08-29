@@ -1,6 +1,6 @@
 Blockly.defineBlocksWithJsonArray([{
   "type": "goal_add",
-  "message0": "decides to achieve %1 first then continue",
+  "message0": "decide di raggiungere l'obiettivo %1 prima di continuare",
   "args0": [{
     "type": "input_value",
     "name": "goal",
@@ -9,7 +9,7 @@ Blockly.defineBlocksWithJsonArray([{
   "previousStatement": "body_block",
   "nextStatement": "body_block",
   "style": "body_block_style",
-  "tooltip": "Adds a new goal that the agent will try to pursue immediately only to resume the current plan when the goal is reached.",
+  "tooltip": "Aggiunge un nuovo obiettivo che l'agente prova a completare prima di proseguire con il resto del piano",
   "helpUrl": ""
 }]);
 

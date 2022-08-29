@@ -1,6 +1,6 @@
 Blockly.defineBlocksWithJsonArray([{
   "type": "belief_remove",
-  "message0": "removes note: %1",
+  "message0": "rimuove una nota che fa match con %1",
   "args0": [{
     "type": "input_value",
     "name": "belief",
@@ -9,7 +9,7 @@ Blockly.defineBlocksWithJsonArray([{
   "previousStatement": "body_block",
   "nextStatement": "body_block",
   "style": "body_block_style",
-  "tooltip": "Remove a matching note.",
+  "tooltip": "Rimuove una nota che fa match con il template (se esiste)",
   "helpUrl": ""
 }]);
 

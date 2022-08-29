@@ -1,7 +1,7 @@
 const plan_definition_toolbox_category =     
 {
   "kind": "category",
-  "name": "Plan definition",
+  "name": "Definizione dei piani",
   "toolboxitemid": "Agent_Plan_Definition",
   "contents": [{
       "kind": "block",
@@ -10,7 +10,7 @@ const plan_definition_toolbox_category =
         "<block type='trigger_goal_add_remove'>"+
         "<value name='goal'>" +
           "<block type='predicate'>"+
-          "<field name='functor'>goal_name</field>"+
+          "<field name='functor'>obiettivo</field>"+
           "</block>" +
           "</value>"+
         "</block>" +
@@ -26,7 +26,7 @@ const plan_definition_toolbox_category =
         "<field name='option'>+</field>"+
         "<value name='belief'>" +
         "<block type='predicate'>"+
-        "<field name='functor'>note_name</field>"+
+        "<field name='functor'>nota</field>"+
         "</block>" +
         "</value>" +
         "</block>"
@@ -37,7 +37,7 @@ const plan_definition_toolbox_category =
         "<field name='option'>-</field>"+
         "<value name='belief'>" +
         "<block type='predicate'>"+
-        "<field name='functor'>note_name</field>"+
+        "<field name='functor'>nota</field>"+
         "</block>" +
         "</value>" +
         "</block>"
@@ -48,7 +48,7 @@ const plan_definition_toolbox_category =
         "<field name='option'>+!</field>"+
         "<value name='goal'>" +
         "<block type='predicate'>"+
-        "<field name='functor'>goal_name</field>"+
+        "<field name='functor'>obiettivo</field>"+
         "</block>" +
         "</value>" +
         "</block>"
@@ -59,7 +59,7 @@ const plan_definition_toolbox_category =
         "<field name='option'>-!</field>"+
         "<value name='goal'>" +
         "<block type='predicate'>"+
-        "<field name='functor'>goal_name</field>"+
+        "<field name='functor'>obiettivo</field>"+
         "</block>" +
         "</value>" +
         "</block>"
@@ -70,7 +70,7 @@ const plan_definition_toolbox_category =
         "<field name='option'>+?</field>"+
         "<value name='test'>" +
         "<block type='predicate'>"+
-        "<field name='functor'>note_name</field>"+
+        "<field name='functor'>nota</field>"+
         "</block>" +
         "</value>" +
         "</block>"
@@ -81,7 +81,7 @@ const plan_definition_toolbox_category =
         "<field name='option'>-?</field>"+
         "<value name='test'>" +
         "<block type='predicate'>"+
-        "<field name='functor'>note_name</field>"+
+        "<field name='functor'>nota</field>"+
         "</block>" +
         "</value>" +
         "</block>"
@@ -91,7 +91,7 @@ const plan_definition_toolbox_category =
       "blockxml": "<block type='context_if'>" +
         "<value name='context'>" +
         "<block type='predicate'>"+
-        "<field name='functor'>note_name</field>"+
+        "<field name='functor'>nota</field>"+
         "</block>" +
         "</value>" +
         "</block>"

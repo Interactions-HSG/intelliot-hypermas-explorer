@@ -1,6 +1,6 @@
 Blockly.defineBlocksWithJsonArray([{
   "type": "init_goal",
-  "message0": "decides to achieve %1",
+  "message0": "decide di raggiungere l'obiettivo %1",
   "args0": [
     {
       "type": "input_value",
@@ -12,7 +12,7 @@ Blockly.defineBlocksWithJsonArray([{
   "previousStatement": "init_block",
   "nextStatement": "init_block",
   "style": "init_block_style",
-  "tooltip": "Add a goal that the agent wants to achieve as soon as it's started",
+  "tooltip": "Aggiunge un obiettivo che l'agente prova a raggiungere appena parte",
   "helpUrl": ""
 }]);
 

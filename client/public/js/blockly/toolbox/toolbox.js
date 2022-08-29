@@ -13,7 +13,7 @@ const toolboxDefinition = {
     },
     {
       "kind": "toolboxTitle",
-      "text": "Things",
+      "text": "Oggetti",
       "toolboxitemid": "Things"
     },
   ]

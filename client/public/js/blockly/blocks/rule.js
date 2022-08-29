@@ -4,15 +4,15 @@ Blockly.Blocks['rule'] = {
       "inputsInline": true,
       "output": "rule",
       "colour": 285,
-      "tooltip": "Define a rule that the agent can remember to check complex conditions later.",
+      "tooltip": "Definisce una regola che l'agente può usare per dedurre informazioni",
       "helpUrl": ""
     });
     this._variables = 1;
     this.appendValueInput('rule_body')
-      .appendField('when')
+      .appendField('quando')
       .setCheck('rule_body')
     this.appendDummyInput()
-      .appendField(new Blockly.FieldTextInput('rule_name'),'functor')
+      .appendField(new Blockly.FieldTextInput('nome_regola'),'functor')
     this._updateShape();
     this.setMutator(new Blockly.Mutator(['mutator_block_input']));
     var block = this;
@@ -24,11 +24,11 @@ Blockly.Blocks['rule'] = {
         value = utils.uncapitalize(value)
         block.setWarningText();
       } else {
-        block.setWarningText("Must not be empty")
+        block.setWarningText("Non può essere vuoto")
       }
       var regex = new RegExp("^[a-zA-Z0-9_]*$", 'g')
       if(!regex.test(value)){
-        block.setWarningText("Name must be lowercase, no spaces and no special characters allowed (except from _ )");
+        block.setWarningText("Il nome deve iniziare con una minuscola e non contenere caratteri speciali (escluso _)");
         return value;
       }
       block.setWarningText();
@@ -95,7 +95,7 @@ Blockly.Blocks['rule'] = {
       this.removeInput('end')
     }
     ComposerUtils.addInputFields(this, 'variable', this._variables, 'variable')
-    var endMessage = (this._variables ? ')' : '') + ' is true'
+    var endMessage = (this._variables ? ')' : '') + ' è vero'
     this.appendDummyInput('end')
       .appendField(endMessage);
     this.moveInputBefore('rule_body', null)

@@ -7,11 +7,11 @@ Blockly.defineBlocksWithJsonArray([{
       "name": "value",
       "options": [
         [
-          "true",
+          "vero",
           "true"
         ],
         [
-          "false",
+          "falso",
           "false"
         ]
       ]

@@ -28,16 +28,16 @@ class RuntimeInspectModal {
       this._agentsIdArray = await runtimeInterface.getAvailableAgents()
       this._agentsIdArray = this._agentsIdArray.map(x => x.id)
     } catch(error){
-      dashboard.showError("Unable to retrieve saved agents ")
+      dashboard.showError("Impossibile recuperare gli agenti salvati ")
     }
     if(this._agentsIdArray.length == 0){
-      dashboard.showError("There are no saved agents")
+      dashboard.showError("Non ci sono agenti salvati")
     }
     try{
       //load all runtimes
       this._runtimeArray = await runtimeInterface.getRuntimes();
     } catch(error){
-      dashboard.showError("Unable to retrieve runtimes")
+      dashboard.showError("Impossibile recuperare i runtime salvati")
     }
     if(this._runtimeArray.length == 0){
       throw "stop"
@@ -107,7 +107,7 @@ class RuntimeInspectModal {
     try{
       await this._loadMenuData()
     } catch (error){
-      dashboard.showError("No runtimes are running at the moment")
+      dashboard.showError("Non ci sono runtime in esecuzione al momento")
       return;
     }
     //show modal
@@ -115,7 +115,7 @@ class RuntimeInspectModal {
   }
 
   async _stopRuntime(index){
-    console.log("Stopping "+this._runtimeArray[index].id)
+    console.log("Interrompo il runtime "+this._runtimeArray[index].id)
     try {
       await runtimeInterface.stopRuntime(this._runtimeArray[index].id)
       try{
@@ -125,7 +125,7 @@ class RuntimeInspectModal {
       }
 
     } catch(error){
-      dashboard.showError("Unable to stop runtime "+this._runtimeArray[index].id)
+      dashboard.showError("Impossibile interrompere il runtime "+this._runtimeArray[index].id)
     }
   }
 
@@ -140,7 +140,7 @@ class RuntimeInspectModal {
       }
 
     } catch(error){
-      dashboard.showError("Unable to add agent to "+this._runtimeArray[index].id)
+      dashboard.showError("Impossibile aggiungere l'agente al runtime "+this._runtimeArray[index].id)
     }
   }
 
@@ -155,7 +155,7 @@ class RuntimeInspectModal {
       }
 
     } catch(error){
-      dashboard.showError("Unable to remove agent from "+this._runtimeArray[index].id)
+      dashboard.showError("Impossibile rimuovere l'agente dal runtime "+this._runtimeArray[index].id)
     }
   }
 }

@@ -1,22 +1,22 @@
 Blockly.defineBlocksWithJsonArray([{
   "type": "send_agent_message",
-  "message0": "Sends message to %1 : %2 %3",
+  "message0": "Manda un messaggio ad %1 : %2 %3",
   "args0": [
     {
       "type": "field_input",
       "name": "receiver",
-      "text": "agent_name"
+      "text": "nome_agente"
     },
     {
       "type": "field_dropdown",
       "name": "illocutionary_force",
       "options": [
         [
-          "make note",
+          "scrivi una nota",
           "tell"
         ],
         [
-          "achieve",
+          "raggiungi l'obiettivo",
           "achieve"
         ]
       ]
@@ -30,7 +30,7 @@ Blockly.defineBlocksWithJsonArray([{
   "previousStatement": "body_block",
   "nextStatement": "body_block",
   "style": "body_block_style",
-  "tooltip": "Send another agent a message, this can mean ordering the agent to achieve something or share a note with it.",
+  "tooltip": "Manda un messaggio ad un altro agente",
   "helpUrl": ""
 }]);
 

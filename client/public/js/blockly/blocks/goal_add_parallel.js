@@ -1,6 +1,6 @@
 Blockly.defineBlocksWithJsonArray([{
   "type": "goal_add_parallel",
-  "message0": "decides to also achieve %1",
+  "message0": "decide di completare anche l'obiettivo %1",
   "args0": [{
     "type": "input_value",
     "name": "goal",
@@ -9,7 +9,7 @@ Blockly.defineBlocksWithJsonArray([{
   "previousStatement": "body_block",
   "nextStatement": "body_block",
   "style": "body_block_style",
-  "tooltip": "Adds a new goal that the agent will try to pursue in parallel with the current execution of the plan.",
+  "tooltip": "Aggiunge un nuovo goal che l'agente può perseguire in parallelo a quello corrente.",
   "helpUrl": ""
 }]);
 

@@ -1,13 +1,13 @@
 const initialization_toolbox_category =     {
   "kind": "category",
-  "name": "Initialization",
+  "name": "Inizializzazione",
   "toolboxitemid": "Agent_Initialization",
   "contents": [{
       "kind": "block",
       "blockxml": "<block type='init_belief'>" +
         "<value name='belief'>" +
         "<block type='belief'>"+
-          "<field name='functor'>note_name</field>"+
+          "<field name='functor'>nota</field>"+
           "<value name='atom0'>" +
             "<block type='atom'></block>" +
           "</value>" +
@@ -35,7 +35,7 @@ const initialization_toolbox_category =     {
       "blockxml": "<block type='init_goal'>" +
         "<value name='goal'>" +
         "<block type='belief'>"+
-          "<field name='functor'>goal_name</field>"+
+          "<field name='functor'>obiettivo</field>"+
           "<value name='atom0'>" +
             "<block type='atom'></block>" +
           "</value>" +

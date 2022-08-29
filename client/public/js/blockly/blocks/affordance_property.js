@@ -1,7 +1,7 @@
 Blockly.Blocks['affordance_property'] = {
   init: function() {
     this.jsonInit({
-      "message0": "%1 to store the value of its current %2 in %3",
+      "message0": "%1 osservando la proprietà %2 e salva il valore nella variabile %3",
       "args0": [
         {
           "type": "field_label_serializable",
@@ -25,7 +25,7 @@ Blockly.Blocks['affordance_property'] = {
       ],
       "output": "affordance",
       "style": "property_block_style",
-      "tooltip": "Get the current value of a property in the result variable or object",
+      "tooltip": "Ottiene il valore corrente di una proprietà",
       "helpUrl": ""
     }
     )

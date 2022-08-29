@@ -5,11 +5,11 @@ Blockly.Blocks['variable'] = {
       "args0": [{
         "type": "field_input",
         "name": "value",
-        "text": "Variable_Name"
+        "text": "Variabile"
       }],
       "output": "variable",
       "colour": 0,
-      "tooltip": "A variable is a named \"box\" where you can store a value.",
+      "tooltip": "Una variabile è un contenitore di valori con un nome che inizia per maiuscola",
       "helpUrl": ""
     });
     var block = this;
@@ -20,13 +20,13 @@ Blockly.Blocks['variable'] = {
         value = value.replaceAll(" ", "_")
         value = utils.capitalize(value)
         if(!regex.test(value)){
-          block.setWarningText("A variable must not start with a number")
+          block.setWarningText("Una variabile inizia sempre con una lettera maiuscola")
           return value;
         }
         block.setWarningText();
         return value;
       } else {
-        block.setWarningText("A variable name must not be empty")
+        block.setWarningText("Non può essere vuoto")
         return value;
       }
     })

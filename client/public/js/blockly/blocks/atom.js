@@ -5,11 +5,11 @@ Blockly.Blocks['atom'] = {
       "args0": [{
         "type": "field_input",
         "name": "value",
-        "text": "value"
+        "text": "valore"
       }],
       "output": "atom",
       "colour": 190,
-      "tooltip": "An atom is any value that starts with a lowercase letter and no spaces",
+      "tooltip": "Un valore atomico, è un nome che inizia sempre con una lettera minuscola e non ha spazi",
       "helpUrl": ""
     });
     var block = this;
@@ -25,7 +25,7 @@ Blockly.Blocks['atom'] = {
       }
       var regex = new RegExp("^[a-zA-Z0-9_]*$", 'g')
       if(!regex.test(value)){
-        block.setWarningText("Name must be lowercase, no spaces and no special characters allowed (except from _ )");
+        block.setWarningText("Sono ammessi solamente valori che iniziano con una lettera minuscola e non hanno spazi nè caratteri speciali (tranne _ )");
         return value;
       }
       block.setWarningText();

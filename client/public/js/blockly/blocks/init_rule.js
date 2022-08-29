@@ -1,6 +1,6 @@
 Blockly.defineBlocksWithJsonArray([{
   "type": "init_rule",
-  "message0": "knows that %1 %2",
+  "message0": "sa che %1 %2",
   "args0": [
     {
       "type": "input_dummy"
@@ -15,7 +15,7 @@ Blockly.defineBlocksWithJsonArray([{
   "previousStatement": "init_block",
   "nextStatement": "init_block",
   "style": "init_block_style",
-  "tooltip": "Add knowledge of a rule to the agent mind",
+  "tooltip": "Aggiunge una regola per dedurre informazioni",
   "helpUrl": ""
 }]);
 
