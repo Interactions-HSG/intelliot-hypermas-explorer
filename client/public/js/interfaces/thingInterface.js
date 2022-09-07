@@ -46,24 +46,25 @@ class ThingInterface {
 
 
   async readProperty(property){
-    var res;
+    var res
     try {
-      var res = await this._thing.readProperty(property);
+      res = await this._thing.readProperty(property)
     } catch (error) {
       console.log(error)
       res = {error: error.message}
     }
-    return await res.value();
+    return res
   }
 
   async invokeAction(action, payload){
     var res
     try {
-    var res = await this._thing.invokeAction(action, payload)
+      res = await this._thing.invokeAction(action, payload)
     } catch (error) {
+      console.log(error)
       res = {error: error.message}
     }
-    return await res.value();
+    return res
   }
 
   _generatePropertyList(properties){
