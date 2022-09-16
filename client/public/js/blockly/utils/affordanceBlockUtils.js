@@ -144,6 +144,7 @@ const affordanceBlockUtils = {
       </block>`
      
     } else if(schema.type == "array"){
+      //TODO support arrays
       console.error("Array are not supported at the moment")
     }
     
