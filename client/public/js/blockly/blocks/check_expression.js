@@ -1,6 +1,6 @@
 Blockly.defineBlocksWithJsonArray([{
   "type": "check_expression",
-  "message0": "continua se %1 è vero, altrimenti fallisci il piano",
+  "message0": "continua se %1, altrimenti fallisci il piano",
   "args0": [
     {
       "type": "input_value",
