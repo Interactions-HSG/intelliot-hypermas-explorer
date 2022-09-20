@@ -53,7 +53,7 @@ class ThingInterface {
       console.log(error)
       res = {error: error.message}
     }
-    return await res.value();
+    return res
   }
 
   async invokeAction(action, payload){
@@ -63,7 +63,7 @@ class ThingInterface {
     } catch (error) {
       res = {error: error.message}
     }
-    return await res.value();
+    return res
   }
 
   _generatePropertyList(properties){
