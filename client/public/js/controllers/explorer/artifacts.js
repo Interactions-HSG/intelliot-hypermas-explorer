@@ -117,25 +117,26 @@ class ArtifactsController {
 
 
   _addAffordancesTestHandler() {
-    var getSchema = function (rootObj) {
+    var getSchema = function (rootElement) {
       var inputData = {}
-      for (const element of rootObj.find('input, select, div.object-schema')) {
-        if ($(element).is('div')) {
+      for (const element of rootElement.children('div.input-group, div.object-schema')) {
+        if ($(element).is('div.object-schema')) {
           var propName = $(element).children('p.key').text()
           inputData[propName] = {}
-          for (const prop of $(element).children('.properties').children('.input-group')) {
-            var propObj = getSchema($(prop))
-            Object.keys(propObj).forEach(k => {
-              inputData[propName][k] = propObj[k]
-            })
+          var prop = $(element).children('.properties')[0]
+          var propObj = getSchema($(prop))
+          Object.keys(propObj).forEach(k => {
+            inputData[propName][k] = propObj[k]
+          })
+        } else { //input-group
+          for(const field of $(element).children('input, select')){
+            var propName = $(field).attr('name')
+            var propValue = $(field).val()
+            if ($(field).attr('type') == 'number') {
+              propValue = propValue ? Number(propValue) : undefined
+            }
+            inputData[propName] = propValue
           }
-        } else {
-          var propName = $(element).attr('name')
-          var propValue = $(element).val()
-          if ($(element).attr('type') == 'number') {
-            propValue = propValue ? Number(propValue) : undefined
-          }
-          inputData[propName] = propValue
         }
       }
       return inputData;
@@ -148,6 +149,7 @@ class ArtifactsController {
         var id = this.id.split("_")[1]
         var input = getSchema($(this).find('.input-schema'))['Input:']
         var type = this.name
+        console.log(input)
         await controller.testAffordance(id, type, input);
       })
     })
