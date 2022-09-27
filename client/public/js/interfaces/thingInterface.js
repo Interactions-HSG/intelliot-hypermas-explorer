@@ -49,6 +49,7 @@ class ThingInterface {
     var res
     try {
       res = await this._thing.readProperty(property)
+      res = await res.value();
     } catch (error) {
       console.log(error)
       res = {error: error.message}
@@ -60,6 +61,7 @@ class ThingInterface {
     var res
     try {
       res = await this._thing.invokeAction(action, payload)
+      res = await res.value();
     } catch (error) {
       console.log(error)
       res = {error: error.message}
