@@ -33,6 +33,7 @@ exports.startServer = async function(config) {
   //middleware for setting response result
   app.use(function(_, res, next) {
     res.setResult = function(result) {
+	  console.log(result)
       result(this)
     }
     next()

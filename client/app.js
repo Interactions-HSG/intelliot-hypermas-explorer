@@ -20,6 +20,8 @@ exports.startServer = async function(config) {
   const server = require('http').createServer(app)
 
   app.use(cors())
+  
+  console.log("initialization done")
 
   //Set default route
   app.get('/', function (req, res) {
@@ -29,10 +31,14 @@ exports.startServer = async function(config) {
   app.get('/dashboard', function(req, res){
     res.sendFile('dashboard.html', {root: './public/html'})
   })
+  
+  console.log("dashboard loaded")
 
   app.get('/explorer/:env/:workspace', function(req, res){
     res.sendFile('explorer.html', {root: './public/html'})
   })
+  
+  console.log("explorer loaded")
 
   //prevent from navigating path
   app.get('/html*', notFound)
@@ -47,7 +53,8 @@ exports.startServer = async function(config) {
   server.listen(config.port, function() {
     console.log(`Started on port ${config.port}!`)
   })
-
+  
+  console.log("console started listening")
 }
 
 //Start the server
@@ -55,4 +62,8 @@ var args = process.argv.slice(2);
 var configPath = args[0]
 
 const config = require(configPath)
+
+console.log("config retrieved")
 this.startServer(config);
+
+console.log("server started")

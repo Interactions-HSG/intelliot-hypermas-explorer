@@ -13,9 +13,8 @@ function WorkspacesDTO(workspaces){
   return workspaces;
 }
 
-function WorkspaceDto(parentEnvironmentId, parentUri, id, uri, artifacts){
+function WorkspaceDto( id, uri, artifacts){
   return {
-    parent:{id: parentEnvironmentId, type: 'environment', uri: parentUri},
     id,
     uri,
     artifacts: ArtifactsDTO(artifacts)
@@ -48,27 +47,48 @@ exports.getWorkspacesInEnvironment = async function(req) {
   return ok(WorkspacesDTO(workspaces))
 }
 
+exports.getAllWorkspaces = async function(req){
+	console.log("environment service")
+	console.log(environmentService)
+	return environmentService.getAllWorkspaces()
+}
+
 exports.getWorkspaceInfo = async function(req){
-  var envId = req.params.environmentId
+  //var envId = req.params.environmentId
   var id = req.params.workspaceId
-  var artifacts = await environmentService.getArtifactsInWorkspace(envId, id)
-  var parentURI = environmentService.getEnvironmentURI(envId)
-  var uri = environmentService.getWorkspaceURI(envId, id)
-  return ok(WorkspaceDto(envId, parentURI, id, uri, artifacts))
+  var artifacts = await environmentService.getArtifactsInWorkspace(id)
+  //var parentURI = environmentService.getEnvironmentURI(envId)
+  //var uri = environmentService.getWorkspaceURI(envId, id)
+  return ok(WorkspaceDto( id, uri, artifacts))
 }
 
 exports.getArtifactsInWorkspace = async function(req) {
-  var envId = req.params.environmentId
+	console.log("get artifacts in workspace")
+  //var envId = req.params.environmentId
   var id = req.params.workspaceId
-  var artifacts = await environmentService.getArtifactsInWorkspace(envId, id)
+  console.log("workspace id: "+id)
+  var artifacts = await environmentService.getArtifactsInWorkspace(id)
+  console.log("artifacts: "+artifacts)
   return ok(ArtifactsDTO(artifacts))
 }
 
 exports.getArtifact = async function(req){
-  var envId = req.params.environmentId
+  //var envId = req.params.environmentId
   var workId = req.params.workspaceId
   var artifactId = req.params.artifactId
-  var parentUri = environmentService.getWorkspaceURI(envId, workId);
-  var artifactTD = await environmentService.getArtifactTD(envId, workId, artifactId)
-  return ok(ArtifactDto(workId, parentUri, artifactId, artifactTD));
+  //var parentUri = environmentService.getWorkspaceURI(envId, workId);
+  var workspaceUri = environmentService.getWorkspaceURI(workId)
+  var artifactTD = await environmentService.getArtifactTD(workId, artifactId)
+  return ok(ArtifactDto(workId, workspaceUri,  artifactId, artifactTD));
+}
+
+exports.instantiateAgent = async function(req){
+	console.log("instantiate agent")
+	console.log("req: "+JSON.stringify(req.params))
+  var yggdrasilUrl = req.params.yggdrasilUrl
+  yggdrasilUrl = "http://localhost:8080"
+  console.log("yggdrasil url: "+yggdrasilUrl)
+  var agentSource = req.params.agentSource
+  console.log("agent source: "+req.body)
+  return ok(environmentService.instantiateAgent(yggdrasilUrl, req.body))
 }

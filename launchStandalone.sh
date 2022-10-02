@@ -1,5 +1,6 @@
 #!/bin/bash
-./launchMongoDB.sh $1 &
+
+./launchMongoDB.sh &
 
 cd client
 ./launchClientStandalone.sh &

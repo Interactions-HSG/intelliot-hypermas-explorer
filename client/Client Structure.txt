@@ -1,0 +1,11 @@
+Client Structure
+
+html/dasboard uses js/controllers/dashboard and js/blockly and js/interfaces
+html/explorer uses js/controllers/explorer
+¨
+workspaceButtons, runtimeInspectModal, runtimeConfigModal use runtimeInterface
+
+div load-chooser-modal => workspaceButtons
+div mas-config-modal => runtimeConfigModal
+div runtime-inspect-modal => runtimeInspectModal
+div run-chooser-modal => workspacesButtons

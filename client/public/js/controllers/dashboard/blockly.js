@@ -6,7 +6,8 @@ class BlocklyController {
   _flyout = undefined
 
   _tabsController = undefined;
-  _buttonsController = undefined;
+  //_buttonsController = undefined;
+  _yggdrasilController = undefined;
 
   //jquery shortcuts
   $blocklyInjection = $('#blockly-injection')
@@ -28,24 +29,29 @@ class BlocklyController {
       zoom: {
         startScale: 0.8,
         controls: true,
-        //wheel: true
+        wheel: true
       },
       trashcan: true
     }
+	
 
     this._workspace = Blockly.inject(this.$blocklyInjection[0], options);
     this._toolbox = this._workspace.getToolbox();
     this._flyout = this._toolbox.getFlyout();
 
     this._tabsController = new FileTabsController(this._workspace)
-    this._buttonsController = new WorkspaceButtonsController(this._workspace, this._tabsController);
+	console.log("tabsController defined")
+	console.log(this._workspace)
+	console.log(this._tabsController)
+    //this._buttonsController = new WorkspaceButtonsController(this._workspace, this._tabsController);
+	this._yggdrasilController = new YggdrasilController(this._workspace, this._tabsController);
 
     window.addEventListener('resize', this._resizeHandler(this._workspace, this.$blocklyRelative[0], this.$blocklyInjection[0]), false)
   }
 
   loadArtifact(artifact) {
     var td = artifact.thingDescription;
-    if(td.base){
+    /*if(td.base){
       //preparse the thing description completing forms hrefs
       for(const p in td.properties){
         td.properties[p].forms.forEach(f => f.href = td.base + f.href)
@@ -56,7 +62,11 @@ class BlocklyController {
       for(const e in td.events){
         //TODO support events(?)
       }
-    }
+    }*/
+	console.log("td.base is not used\n")
+	for(const a in td.actions){
+        td.actions[a].forms.forEach(f => console.log(f.href))
+      }
     var loginBlock = this._generateLoginBlock(td, artifact.id)
     var propertyBlocks = this._generatePropertyBlocks(td.properties, artifact.id)
     var actionBlocks = this._generateActionBlocks(td.actions, artifact.id)
@@ -126,6 +136,12 @@ class BlocklyController {
   }
   
   _generatePropertyBlocks(properties, artifactId) {
+	  console.log(properties)
+	  if (properties == null || properties == undefined){
+		  properties = []
+	  }
+	  console.log("properties\n")
+	  console.log(properties)
     var blocks = []
     utils.toList(properties).forEach(p => {
       var block = affordanceBlockUtils.definePropertyBlock(p.key, p.value, artifactId)

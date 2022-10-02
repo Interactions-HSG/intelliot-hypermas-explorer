@@ -42,7 +42,7 @@ class Dashboard {
       this.blocklyController.clearIDE();
       this.blocklyController.hideArea();
       try {
-        var artifacts = await this.environmentController.reloadArtifactsFromWorkspace(workspaceData.parent, workspaceData.id);
+        var artifacts = await this.environmentController.reloadArtifactsFromWorkspace(workspaceData.id);
         for(const a of artifacts){
           this.blocklyController.loadArtifact(a)
         }

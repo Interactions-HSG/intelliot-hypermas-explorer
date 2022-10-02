@@ -13,16 +13,17 @@ class ArtifactsController {
   $affordancesContainer = $('#affordances-container')
   $resultsContainer = $('#results-container')
 
-  async reloadArtifactsFromWorkspace(environmentId, workspaceId) {
+  async reloadArtifactsFromWorkspace(workspaceId) {
+	  console.log("artifacts are reloaded from workspace: "+workspaceId)
     this.currentArtifacts = []
     log.fine(`Fetching artifacts in workspace ${workspaceId}`);
     try {
-      var artifacts = await environmentInterface.fetchArtifacts(environmentId, workspaceId);
+      var artifacts = await environmentInterface.fetchArtifacts(workspaceId);
       if(artifacts.length){
         log.fine(`Workspace contained ${artifacts.length} artifact(s)!`);
         for (var artifact of artifacts) {
           try {
-            var artifactDescription = await environmentInterface.getArtifactDescription(environmentId, workspaceId, artifact.id)
+            var artifactDescription = await environmentInterface.getArtifactDescription(workspaceId, artifact.id)
             this.currentArtifacts.push(artifactDescription)
           } catch (error) {
             log.error(error)
@@ -119,7 +120,7 @@ class ArtifactsController {
   _addAffordancesTestHandler() {
     var getSchema = function (rootObj) {
       var inputData = {}
-      for (const element of rootObj.find('input, select, div.object-schema')) {
+      for (const element of rootObj.children('input, select, div.object-schema')) {
         if ($(element).is('div')) {
           var propName = $(element).children('p.key').text()
           inputData[propName] = {}

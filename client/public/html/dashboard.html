@@ -63,9 +63,10 @@
                 <button id="debug" type="button" class="btn btn-light">Debug</button>
                 <button id="save-code" type="button" class="btn btn-light">Save</button>
                 <button id="load-code" type="button" class="btn btn-light">Load</button>
-                <button id="define-runtime" type="button" class="btn btn-light">Define Runtime</button>
-                <button id="inspect-runtime" type="button" class="btn btn-light">Inspect Runtime</button>
-                <button id="run-mas" type="button" class="btn btn-primary">Run</button>
+                <!--button id="define-runtime" type="button" class="btn btn-light">Define Runtime</button-->
+                <!--button id="inspect-runtime" type="button" class="btn btn-light">Inspect Runtime</button-->
+                <!--button id="run-mas" type="button" class="btn btn-primary">Run</button-->
+				<button id="run-agent" type="button" class="btn btn-primary">Run</button>
               </div>
               <div class="toolbox-tabs">
                 <ul id="tabs" class="nav nav-tabs">
@@ -93,7 +94,8 @@
 
   <!--Modals-->
 
-  <!--Load agent-->
+
+  <!--Load agent
   <div id="load-chooser-modal" class="modal fade" tabindex="-1">
     <div class="modal-dialog modal-dialog-centered">
       <div class="modal-content">
@@ -111,8 +113,10 @@
       </div>
     </div>
   </div>
+  
+  -->
 
-  <!--Edit mas config-->
+  <!--Edit mas config
   <div id="mas-config-modal" class="modal fade">
     <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
       <div class="modal-content">
@@ -120,15 +124,17 @@
           <h5 class="modal-title">Configure runtime</h5>
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
-        <div class="modal-body"><!--fill by template--></div>
+        <div class="modal-body"></div>
         <div class="modal-footer">
           <button id="button-save-mas" type="button" class="btn btn-primary btn-confirm">Save</button>
         </div>
       </div>
     </div>
   </div>
+  
+  -->
 
-  <!--Inspect runtime-->
+  <!--Inspect runtime
   <div id="runtime-inspect-modal" class="modal fade" tabindex="-1">
     <div class="modal-dialog modal-dialog-centered">
       <div class="modal-content">
@@ -137,7 +143,6 @@
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body">
-          <!--fill by template-->
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-primary btn-confirm">Done</button>
@@ -145,8 +150,9 @@
       </div>
     </div>
   </div>
+  -->
 
-  <!--Run mas-->
+  <!--Run mas
   <div id="run-chooser-modal" class="modal fade" tabindex="-1">
     <div class="modal-dialog modal-dialog-centered">
       <div class="modal-content">
@@ -164,6 +170,7 @@
       </div>
     </div>
   </div>
+-->
 
   <!-- Script imports and startup call -->
 
@@ -185,7 +192,7 @@
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
 
 
-  <!--Configuration-->
+   <!--Configuration-->
   <script src="/js/interfaces/backendURL.js"></script>
   
   <!-- Precompiled handlebars templates -->
@@ -201,35 +208,48 @@
   <script src="/js/interfaces/runtimeInterface.js"></script>
 
   <!--Blockly-->
+
   <!--Generator-->
   <script src="/js/blockly/generators/jasonGenerator.js"></script>
 
-  <script src="/js/blockly/utils/loginBlockUtils.js"></script>
-  <script src="/js/blockly/utils/affordanceBlockUtils.js"></script>
-
   <!--Blocks-->
-  <script src="/js/blockly/blocks_compressed.js"></script>
+  <script src ="/js/blockly/blocks/basicBlocks.js"></script>
+  <script src ="/js/blockly/blocks/initBlocks.js"></script>
+  <script src ="/js/blockly/blocks/planBlocks.js"></script>
+  <script src ="/js/blockly/blocks/mutatorBlocks.js"></script>
+  <script src ="/js/blockly/blocks/JSONBlocks.js"></script>
 
+  <!--Mutating blocks-->
+  <script src ="/js/blockly/blocks/loginBlocks.js"></script>
+  <script src ="/js/blockly/blocks/affordanceBlocks.js"></script>
+  <script src ="/js/blockly/blocks/beliefBlock.js"></script>
+  <script src ="/js/blockly/blocks/ruleBlock.js"></script>
+  <script src ="/js/blockly/blocks/predicateBlock.js"></script>
+  <script src ="/js/blockly/blocks/jasonStatementBlock.js"></script>
+  <script src ="/js/blockly/blocks/internalActionsBlocks.js"></script>
   
   <!--Theme and Toolbox-->
-  <script src ="/js/blockly/toolbox/basic-category.js"></script>
-  <script src ="/js/blockly/toolbox/operations-category.js"></script>
-  <script src ="/js/blockly/toolbox/initialization-category.js"></script>
-  <script src ="/js/blockly/toolbox/plan-def-category.js"></script>
-  <script src ="/js/blockly/toolbox/plan-body-category.js"></script>
-  <script src ="/js/blockly/toolbox/communication-category.js"></script>
-  <script src ="/js/blockly/toolbox/toolbox.js"></script>
+  <script src ="/js/blockly/toolbox.js"></script>
   <script src="/js/blockly/theme.js"></script>
+  
+  
+
+
+
+  
+
 
 
   <!-- Controllers -->
   <script src="/js/controllers/dashboard/fileTabs.js"></script>
-  <script src="/js/controllers/dashboard/workspaceButtons.js"></script>
-  <script src="/js/controllers/dashboard/runtimeInspectModal.js"></script>
-  <script src="/js/controllers/dashboard/runtimeConfigModal.js"></script>
-  <script src="/js/controllers/dashboard/blockly.js"></script>
+  <script src = "/js/controllers/dashboard/yggdrasilController.js"></script>
+  <!--script src="/js/controllers/dashboard/workspaceButtons.js"></script-->
+  <script src= "/js/controllers/dashboard/blockly.js"></script>
   <script src="/js/controllers/dashboard/environment.js"></script>
   <script src="/js/controllers/dashboard/dashboard.js"></script>
+  
+
+
 
   <!--Main-->
   <script src="/js/controllers/dashboard/main.js"></script>

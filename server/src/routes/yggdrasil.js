@@ -1,14 +1,8 @@
 const { mapControllerRoutes, action } = require('./route-utils')
 
-module.exports = mapControllerRoutes('environment', function (app, controller) {
-
-  /*app.route('/environments/:environmentId')
-  .get(action(controller.getEnvironmentInfo))
-  
-  app.route('/environments/:environmentId/workspaces')
-    .get(action(controller.getWorkspacesInEnvironment))*/
-  
- app.route('/workspaces')
+module.exports = mapControllerRoutes('yggdrasil', function (app, controller) {
+	
+	app.route('/workspaces')
 	.get(action(controller.getAllWorkspaces))
 
   

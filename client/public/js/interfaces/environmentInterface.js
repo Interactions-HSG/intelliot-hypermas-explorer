@@ -12,18 +12,22 @@ class EnvironmentInterface {
     })
   }
 
-  async fetchWorkspaces(environmentId) {
-    var res = await this.client.get(`/environments/${environmentId}/workspaces`);
+  async fetchWorkspaces() {
+    var res = await this.client.get(`/workspaces`);
     return res.data;
   }
 
-  async fetchArtifacts(environmentId, workspaceId) {
-    var res = await this.client.get(`/environments/${environmentId}/workspaces/${workspaceId}/artifacts`)
+  async fetchArtifacts(workspaceId) {
+	console.log("workspace id: "+workspaceId)
+    var res = await this.client.get(`/workspaces/${workspaceId}/artifacts`)
+	console.log("res: "+JSON.stringify(res))
+	console.log("res data: "+res.data)
     return res.data; 
   }
 
-  async getArtifactDescription(environmentId, workspaceId, artifactId){
-    var res = await this.client.get(`/environments/${environmentId}/workspaces/${workspaceId}/artifacts/${artifactId}`)
+  async getArtifactDescription(workspaceId, artifactId){
+    var res = await this.client.get(`/workspaces/${workspaceId}/artifacts/${artifactId}`)
+	console.log("artifact description: "+ JSON.stringify(res.data))
     return res.data; 
   }
 }

@@ -1,41 +1,42 @@
-class WorkspaceButtonsController {
+class YggdrasilController {
 
   _workspace = undefined
   _fileTabController = undefined
 
   $saveButton = $('#save-code')
   $loadButton = $('#load-code')
-  $defineButton = $('#define-runtime')
-  $runButton = $('#run-mas')
-  $inspectButton = $('#inspect-runtime')
+ // $defineButton = $('#define-runtime')
+  //$runButton = $('#run-mas')
+  $runButton = $('#run-agent')
+  //$inspectButton = $('#inspect-runtime')
 
-  $loadModal = $('#load-chooser-modal')
+  /*$loadModal = $('#load-chooser-modal')
   _loadModal = new bootstrap.Modal(document.getElementById('load-chooser-modal'))
 
   $runModal = $('#run-chooser-modal')
-  _runModal = new bootstrap.Modal(document.getElementById('run-chooser-modal'))
+  _runModal = new bootstrap.Modal(document.getElementById('run-chooser-modal'))*/
 
-  _configModalController = undefined;
-  _inspectModalController = undefined;
+  //_configModalController = undefined;
+  //_inspectModalController = undefined;
 
   constructor(workspace, fileTabController){
+	  console.log("start constructor")
     //TODO remove
-    //$('#debug').click(e => console.log(JasonGenerator.generate(this._workspace)))
+    $('#debug').click(e => console.log(JasonGenerator.generate(this._workspace)))
     //$('#debug').click(e => console.log(JasonGenerator.workspaceToCode(this._workspace)))
     //$('#debug').click(e =>console.log(Blockly.Xml.domToPrettyText(Blockly.Xml.workspaceToDom(this._workspace, true))))
-	console.log("start constructor")
     this._workspace = workspace
     this._fileTabController = fileTabController
-    this._configModalController = new RuntimeConfigModal(workspace)
-    this._inspectModalController = new RuntimeInspectModal();
+    //this._configModalController = new RuntimeConfigModal(workspace)
+    //this._inspectModalController = new RuntimeInspectModal();
 
     this.$saveButton.click(e => this.saveCode())
     this.$loadButton.click(e => this.showLoadMenu())
     this.$runButton.click(e => this.showRunMenu())
-    this.$defineButton.click(e => this.showConfigMenu())
-    this.$inspectButton.click(e => this.showInspectMenu());
+    //this.$defineButton.click(e => this.showConfigMenu())
+    //this.$inspectButton.click(e => this.showInspectMenu());
     
-    this._runModal.hide()
+    /*this._runModal.hide()
     this._loadModal.hide()
 
     var $selectLoad = this.$loadModal.find('select')
@@ -46,18 +47,20 @@ class WorkspaceButtonsController {
 
     var $selectRun = this.$runModal.find('select')
     this.$runModal.find('.btn-confirm').click(e => {
-      this._runMas($selectRun.val())
+      //this._runMas($selectRun.val())
+	  this._runAgent($selectRun.val())
       this._runModal.hide()
-    })
+    })*/
   }
 
   async saveCode() {
-
+	console.log("in save code")
     var id = this._fileTabController.getCurrentAgent()
     var xml = Blockly.Xml.domToPrettyText(Blockly.Xml.workspaceToDom(this._workspace, true))
     var code = null
     try{
       code = JasonGenerator.generate(this._workspace)
+	  console.log("code: "+code)
     } catch(error){
       dashboard.showError(error);
       return;
@@ -76,12 +79,14 @@ class WorkspaceButtonsController {
     }
     try{
       if(exists){
+		  console.log("exists")
         var confirm = await dashboard.waitConfirm("Are you sure? This will overwrite the previously saved code")
         if(confirm){
           await runtimeInterface.updateAgentSource(id, code, xml)
           dashboard.showSuccess(`Agent ${id} saved`)
         }
       } else {
+		  console.log("does not exist")
         await runtimeInterface.createAgentSource(id, code, xml)
         dashboard.showSuccess(`Agent ${id} saved`)
       }
@@ -121,7 +126,7 @@ class WorkspaceButtonsController {
     }
   }
 
-  async showRunMenu(){
+  /*async showRunMenu(){
     try{
       var masIds = await runtimeInterface.getAvailableMas();
       masIds = masIds.map(x => x.id)
@@ -141,6 +146,10 @@ class WorkspaceButtonsController {
       }));
     }
     this._runModal.show()
+  }*/
+  
+  async showRunMenu(){
+	  dashboard.showInfo("Before Run")
   }
 
   async _runMas(masId){

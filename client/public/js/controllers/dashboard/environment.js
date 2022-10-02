@@ -35,7 +35,7 @@ class EnvironmentController {
   }
 
   async fetchWorkspaces() {
-    log.fine("Fetching workspaces in environment " + this.environmentId);
+    log.fine("Fetching workspaces in workspace " + this.environmentId);
     try {
       this.workspaces = await environmentInterface.fetchWorkspaces(this.environmentId)
       log.fine('Environment ' + this.environmentId + ' contains ' + this.workspaces.length + ' workspace(s)!');
@@ -68,28 +68,30 @@ class EnvironmentController {
     }
   }
 
-  showExploreButton(envId, workspaceId){
+  showExploreButton(workspaceId){
     this.$exploreButton.show();
     var location = window.location.href.slice(0,window.location.href.lastIndexOf('/'))
-      +'/explorer/'+envId+'/'+workspaceId
+      +'/explorer/'+"intelliot"+'/'+workspaceId
     this.$exploreButton.attr('href', location)
   }
   
-  async reloadArtifactsFromWorkspace(environmentId, workspaceId) {
+  async reloadArtifactsFromWorkspace(workspaceId) {
+	  console.log("dashboard environment reload artifacts from workspace "+ workspaceId)
     var currentArtifacts = []
     log.fine(`Fetching artifacts in workspace ${workspaceId}`);
     try {
-      var artifacts = await environmentInterface.fetchArtifacts(environmentId, workspaceId);
+      var artifacts = await environmentInterface.fetchArtifacts(workspaceId);
       log.fine(`Workspace contained ${artifacts.length} artifact(s)!`);
       for (var artifact of artifacts) {
         try {
-          var artifactDescription = await environmentInterface.getArtifactDescription(environmentId, workspaceId, artifact.id)
+          var artifactDescription = await environmentInterface.getArtifactDescription(workspaceId, artifact.id)
           currentArtifacts.push(artifactDescription)
         } catch (error) {
+			console.log("error detected in artifact descriptions")
           log.error(error)
         }
       }
-      this.showExploreButton(environmentId, workspaceId)
+      this.showExploreButton(workspaceId)
       return Promise.resolve(currentArtifacts);
     } catch (error) {
       return Promise.reject(error);

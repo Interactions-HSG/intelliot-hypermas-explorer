@@ -1,0 +1,9 @@
+Server structure
+
+routes -> controllers
+
+routes/definition defines the urls to interact with mongodb
+
+controllers -> services
+
+launcher: getConfig():config -> app(config)

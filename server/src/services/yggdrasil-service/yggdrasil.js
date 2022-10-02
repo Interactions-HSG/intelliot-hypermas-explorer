@@ -1,3 +1,4 @@
+const { notImplemented, internalServerError, ok } = require("../utils/action-results")
 const axios = require('axios');
 const $rdf = require('rdflib');
 
@@ -16,16 +17,16 @@ class APIYggdrasil {
     })
   }
 
-  getEnvironmentURI(environmentId){
+  /*getEnvironmentURI(environmentId){
     return `${this.baseURL}/environment/${environmentId}`
-  }
+  }*/
 
   getWorkspaceURI(environmentId, workspaceId){
-    return `${this.baseURL}/environments/${environmentId}/workspaces/${workspaceId}`
+    return `${this.baseURL}/workspaces/${workspaceId}`
   }
 
   getArtifactURI(environmentId, workspaceId, artifactId){
-    return `${this.baseURL}/environments/${environmentId}/workspaces/${workspaceId}/artifacts/${artifactId}`
+    return `${this.baseURL}/workspaces/${workspaceId}/artifacts/${artifactId}`
   }
 
 
@@ -39,22 +40,9 @@ class APIYggdrasil {
     }
     return await this._getContainedElements(path, mapper)
   }
-  
-    async getAllWorkspaces(){
-	  console.log("get all workspaces")
-	  var path = `/workspaces`
-	  var mapper = n =>{
-      var uri = n.value;
-      var array = n.value.split("/")
-      var id = array[array.length-1]
-      return {id, uri}
-    }
-    return await this._getContainedElements(path, mapper)
-  }
-
 
   async getArtifactsInWorkspace(environmentId, workspaceId) {
-    var path = `/environments/${environmentId}/workspaces/${workspaceId}`
+    var path = `/workspaces/${workspaceId}`
     var mapper = n =>{
       var uri = n.value;
       var array = n.value.split("/")
@@ -65,7 +53,7 @@ class APIYggdrasil {
   }
 
   async getArtifactTD(environmentId, workspaceId, artifactId) {
-    var path = `/environments/${environmentId}/workspaces/${workspaceId}/artifacts/${artifactId}`
+    var path = `/workspaces/${workspaceId}/artifacts/${artifactId}`
     var res = await this.client.get(path, {headers: {Accept: "application/ld+json"}})
     return res.data;
   }
@@ -77,11 +65,24 @@ class APIYggdrasil {
       var store = $rdf.graph();
       var URI = this.baseURL + path;
       $rdf.parse(res.data, store, URI, contentType);
-      return store.each(store.sym(URI), EVE('contains')).map(x => mapper(x));
+      return ok(store.each(store.sym(URI), EVE('contains')).map(x => mapper(x)));
     } catch (error){
       console.log(error)
-      return []
+      return ok([])
     }
+  }
+  
+  async instantiateAgent(runtimeURL, agentSource) {
+	  const instantiate_agent_client =  axios.create({
+      baseURL: this.baseURL,
+      timeout: 1000,
+	  headers: {'X-Agent-Name': agentSource.id}
+    })
+    var res = await this.client.post(
+      runtimeURL+'/agents/', //Add agentSource.id to header X-Agent-Name
+      agentSource.code
+    )
+    return(res.data);
   }
 
 }
