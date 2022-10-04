@@ -86,7 +86,10 @@ exports.instantiateAgent = async function(req){
 	console.log("instantiate agent")
 	console.log("req: "+JSON.stringify(req.params))
   var yggdrasilUrl = req.params.yggdrasilUrl
+  console.log("first yggdrasil url: "+yggdrasilUrl)
   yggdrasilUrl = "http://localhost:8080"
+  conf = config = require('../../get-config').getConfig()
+  yggdrasilUrl = ""+config.environmentProtocol+"://"+config.environmentHostName+":"+config.environmentPort
   console.log("yggdrasil url: "+yggdrasilUrl)
   var agentSource = req.params.agentSource
   console.log("agent source: "+req.body)
