@@ -15,9 +15,9 @@ services:
       context: ./server
       dockerfile: Dockerfile
     environment:
-      - "MONGO_URL=${MONGO_URL}"
+      - "MONGO_URL=mongodb://mongo:27017/masDB"
     ports:
-      - "${SERVER_PORT}:80"
+      - "8091:80"
     networks:
       - intelliot
     depends_on:
@@ -29,9 +29,9 @@ services:
       context: ./client
       dockerfile: Dockerfile
     environment:
-      - "SERVER_PORT=${SERVER_PORT}"
+      - "SERVER_PORT=8091"
     ports:
-      - "${CLIENT_PORT}:80"
+      - "8090:80"
     networks:
       - intelliot
 
