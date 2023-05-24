@@ -1,6 +1,6 @@
 module.exports = {
   srcDirectory: "../src/",
-  mongoURL: 'mongodb://localhost:27017/masDB',
+  mongoURL: 'mongodb://127.0.0.1:27017/masDB',
   port: 8000,
 
   runtimeProtocol: "http",
