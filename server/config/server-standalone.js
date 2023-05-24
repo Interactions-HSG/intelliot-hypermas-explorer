@@ -4,12 +4,12 @@ module.exports = {
   port: 8000,
 
   runtimeProtocol: "http",
-  runtimeHostname: "localhost",
+  runtimeHostname: "127.0.0.1",
   runtimePort: 8088,
   runtimeMock: false,
 
   environmentProtocol: "http",
-  environmentHostName: "localhost",
+  environmentHostName: "127.0.0.1",
   environmentPort: 3000,
   environmentInterface: "simulator"
 }
