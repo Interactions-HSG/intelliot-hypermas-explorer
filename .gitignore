@@ -95,3 +95,7 @@ lerna-debug.log
 # System Files
 .DS_Store
 Thumbs.db
+
+# Special exceptions
+client/public/templates/templates.js
+client/public/js/blockly/blocks_compressed.js
